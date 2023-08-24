@@ -72,9 +72,9 @@ From now on, the About-screen will change into a "developer-area".
 ## JavaScript Functions
 
 The functions that are provided by this package are documented in the [api-docs](api-docs/modules.md).
-You can add this package to your own app by copying the folder `demo-plugin/src/app/nomo-plugin-kit`.
+You can add this package to your own app by copying the folder [demo-plugin/src/app/nomo-plugin-kit](https://github.com/nomo-app/nomo-plugin-kit/tree/main/demo-plugin/src/app/nomo-plugin-kit).
 
-Take a look at the code of the demo-plugin to see how the package can be used.
+Take a look at the demo-plugin to see how the package can be used.
 
 ## Debugging of Plugins
 

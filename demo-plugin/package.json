@@ -1,0 +1,27 @@
+{
+  "name": "nomo-demo-plugin",
+  "scripts": {
+    "dev": "next dev",
+    "deploy": "rm -f .env.local && npm run build && ./scripts/deploy.sh",
+    "build": "next build && next export",
+    "start": "npx serve@latest out",
+    "lint": "next lint",
+    "generate_docs": "typedoc --plugin typedoc-plugin-markdown --out ../api-docs/ src/app/nomo-plugin-kit/nomo_api.ts && rm ../api-docs/README.md"
+  },
+  "dependencies": {
+    "@types/node": "20.2.3",
+    "@types/react": "18.2.6",
+    "@types/react-dom": "18.2.4",
+    "eslint": "8.41.0",
+    "eslint-config-next": "13.4.3",
+    "next": "13.4.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "typescript": "5.0.4",
+    "ethers": "^5.5.4"
+  },
+  "devDependencies": {
+    "typedoc": "0.24.7",
+    "typedoc-plugin-markdown": "3.15.3"
+  }
+}

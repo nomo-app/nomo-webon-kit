@@ -66,12 +66,12 @@ export default function Home() {
         </div>
         <div style={{ height: "10px" }} />
         <div style={{ width: "100%" }}>
-          <b>zeniq.chat messenger address:</b>{" "}
-          {JSON.stringify(messengerAddress)}
+          <b>Chat messenger address:</b>{" "}
+          {JSON.stringify(messengerAddress).substring(0, 70)}..
         </div>
         <div style={{ height: "10px" }} />
         <div style={{ width: "100%" }}>
-          <b>NOMO theme:</b> {JSON.stringify(theme)}
+          <b>NOMO theme:</b> {JSON.stringify(theme).substring(0, 70)}..
         </div>
 
         <div className={styles.card}>

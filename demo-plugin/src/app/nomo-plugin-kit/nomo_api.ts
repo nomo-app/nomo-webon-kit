@@ -81,10 +81,18 @@ export const nomoConsole = {
   },
 };
 
-console.log = nomoConsole.log;
-console.info = nomoConsole.info;
-console.warn = nomoConsole.warn;
-console.error = nomoConsole.error;
+export let consoleOverwriten: boolean = false;
+function overwriteConsole() {
+  if (!consoleOverwriten) {
+    consoleOverwriten = true;
+    console.log("overwriting console-functions to enable mobile dev mode...");
+    console.log = nomoConsole.log;
+    console.info = nomoConsole.info;
+    console.warn = nomoConsole.warn;
+    console.error = nomoConsole.error;
+  }
+}
+overwriteConsole();
 
 function nomoNativeLog(
   severity: "LOG" | "INFO" | "WARN" | "ERROR",

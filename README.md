@@ -121,6 +121,16 @@ Firstly, the plugin needs to be hosted at a publicly available URL.
 Nomo recommends the usage of a Content Delivery Network (CDN) for hosting plugins.
 By using a decent CDN, Nomo plugins can be made globally available without any scalability concerns.
 
+## Plugin Manifests
+
+In addition to the actual code, every production-plugin needs to host a `nomo_manifest.json`.
+See https://demoplugin.nomo.app/nomo_manifest.json for an example of a `nomo_manifest.json`.
+You can copy-paste this example, but at a minimum you will need to change the following fields:
+
+- `plugin_id`
+- `plugin_name`
+
+
 ## Security Restrictions
 
 For regular users, the NOMO-app only accepts plugins that are hosted at the domain `*.nomo.app`.

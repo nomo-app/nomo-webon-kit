@@ -163,7 +163,7 @@ export default function Home() {
           <h2
             onClick={() => {
               const chatInvitationLink =
-                "https://zeniq.id/@0x6b65b7eadc7544dcf04869136466ba6224e799a2:zeniq.chat";
+                "https://nomo.id/@0x6b65b7eadc7544dcf04869136466ba6224e799a2:zeniq.chat";
               nomo
                 .injectQRCode({
                   qrCode: chatInvitationLink,

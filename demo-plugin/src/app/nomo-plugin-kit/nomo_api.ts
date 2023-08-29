@@ -172,7 +172,7 @@ export async function nomoGetMessengerAddress(): Promise<{
     return {
       messengerAddress: "0x3f0e8cf0c6eb9789348541d9d0ce4ac847277e9b",
       inviteLink:
-        "https://zeniq.id/@0x6b65b7eadc7544dcf04869136466ba6224e799a2:zeniq.chat",
+        "https://nomo.id/@0x6b65b7eadc7544dcf04869136466ba6224e799a2:zeniq.chat",
     };
   }
   return await invokeNomoFunction("nomoGetMessengerAddress", null);
@@ -221,7 +221,7 @@ export async function nomoTakePicture(): Promise<{
 }> {
   if (isFallbackModeActive()) {
     return {
-      path: "/data/user/0/com.zeniq.app.debug/cache/6098a97a-e556-4711-a069-4809d3db0aeb5994719432468143068.jpg",
+      path: "/data/user/0/app.nomo.debug/cache/6098a97a-e556-4711-a069-4809d3db0aeb5994719432468143068.jpg",
       imageBase64: fallbackImage,
     };
   }
@@ -242,7 +242,7 @@ export async function nomoPickFromGallery(): Promise<{
 }> {
   if (isFallbackModeActive()) {
     return {
-      path: "/data/user/0/com.zeniq.app.debug/cache/6098a97a-e556-4711-a069-4809d3db0aeb5994719432468143068.jpg",
+      path: "/data/user/0/app.nomo.debug/cache/6098a97a-e556-4711-a069-4809d3db0aeb5994719432468143068.jpg",
       imageBase64: fallbackImage,
     };
   }

@@ -46,6 +46,8 @@ export const nomo = {
   takePicture: nomoTakePicture,
   pickFromGallery: nomoPickFromGallery,
   getTheme: nomoGetTheme,
+  getDeviceHashes: nomoGetDeviceHashes,
+  getDeviceName: nomoGetDeviceName,
   authHttp: nomoAuthHttp,
   sendAssets: nomoSendAssets,
   nativeLog: nomoNativeLog,
@@ -81,7 +83,7 @@ export const nomoConsole = {
   },
 };
 
-export let consoleOverwriten: boolean = false;
+let consoleOverwriten: boolean = false;
 function overwriteConsole() {
   if (!consoleOverwriten) {
     consoleOverwriten = true;
@@ -303,6 +305,36 @@ export async function nomoGetTheme(): Promise<{
     };
   }
   return await invokeNomoFunction("nomoGetTheme", null);
+}
+
+/**
+ * Returns a comma-separated list of device hashes.
+ * Can be used for fingerprinting devices.
+ */
+export async function nomoGetDeviceHashes(): Promise<{
+  deviceHashes: string;
+}> {
+  if (isFallbackModeActive()) {
+    return {
+      deviceHashes:
+        "b6Qz6EEKg,m2wAyKypQ,d67rq8zvw,pHcGGpnD5,iBFGnwEoE,vBhmQwyos,aGGJKq2QG,o9q6MhCeA,s9KLx6CVa,f7nin76st,rF3JVtwjV,u3txrGJEW",
+    };
+  }
+  return await invokeNomoFunction("nomoGetDeviceHashes", null);
+}
+
+/**
+ * Returns a human-readable name of the device.
+ */
+export async function nomoGetDeviceName(): Promise<{
+  deviceName: string;
+}> {
+  if (isFallbackModeActive()) {
+    return {
+      deviceName: "Browser fallback mode: No device name outside of Nomo app",
+    };
+  }
+  return await invokeNomoFunction("nomoGetDeviceName", null);
 }
 
 /**

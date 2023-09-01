@@ -130,7 +130,6 @@ You can copy-paste this example, but at a minimum you will need to change the fo
 - `plugin_id`
 - `plugin_name`
 
-
 ## Security Restrictions
 
 For regular users, the NOMO-app only accepts plugins that are hosted at the domain `*.nomo.app`.
@@ -153,7 +152,7 @@ https://demoplugin.nomo.app/?t=nomo
 ### Deeplinkable QRCodes
 
 The advantage of deeplinks is that they allow plugin-installations on smartphones without even scanning a QRCode.
-Deeplinkable QRCodes can be constructed by prepending `https://nomo.app/` to the hosting-domain.
+Deeplinkable QRCodes can be constructed by prepending `https://nomo.app/pluginv1/` to the hosting-domain.
 For example, the following URL is a functional QRCode:
 
-https://nomo.app/demoplugin.nomo.app
+https://nomo.app/pluginv1/demoplugin.nomo.app

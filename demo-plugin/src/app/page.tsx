@@ -13,6 +13,7 @@ export default function Home() {
   const platformInfo = useNomoState(nomo.getPlatformInfo);
   const walletAddresses = useNomoState(nomo.getWalletAddresses);
   const messengerAddress = useNomoState(nomo.getMessengerAddress);
+  const deviceName = useNomoState(nomo.getDeviceName);
   const theme = useNomoState(nomo.getTheme);
   useEffect(() => {
     console.log("test console log");
@@ -29,6 +30,7 @@ export default function Home() {
     nomo.localStorage.getItem("foo").then((value) => {
       console.log("Got value from nomoLocalStorage: " + value);
     });
+    nomo.getDeviceHashes().then(console.log).catch(console.error);
   }, []);
 
   const openDialog = (content: DialogContent) => {
@@ -72,6 +74,10 @@ export default function Home() {
         <div style={{ height: "10px" }} />
         <div style={{ width: "100%" }}>
           <b>NOMO theme:</b> {JSON.stringify(theme).substring(0, 70)}..
+        </div>
+        <div style={{ height: "10px" }} />
+        <div style={{ width: "100%" }}>
+          <b>Device name:</b> {JSON.stringify(deviceName)}
         </div>
 
         <div className={styles.card}>

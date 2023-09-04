@@ -1,0 +1,20 @@
+{
+    "name": "nomo-plugin-kit",
+    "version": "0.0.1",
+    "description": "Nomo-Plugin-Kit for the Nomo App",
+    "main": "nomo_api.ts",
+    "scripts": {
+        "build": "rm -rf dist && tsc",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/nomo-app/nomo-plugin-kit.git"
+    },
+    "keywords": [],
+    "author": "dev2@nomo.app",
+    "license": "ISC",
+    "devDependencies": {
+        "typescript": "^5.2.2"
+    }
+}

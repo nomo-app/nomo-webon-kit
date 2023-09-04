@@ -1,8 +1,8 @@
 {
     "name": "nomo-plugin-kit",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "description": "Nomo-Plugin-Kit for the Nomo App",
-    "main": "nomo_api.ts",
+    "main": "dist",
     "scripts": {
         "build": "rm -rf dist && tsc",
         "test": "echo \"Error: no test specified\" && exit 1"

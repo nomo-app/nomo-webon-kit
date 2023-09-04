@@ -3,9 +3,9 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Dialog, { DialogContent } from "./components/dialog";
 import { useNomoState } from "./hooks/custom_hooks";
-import { nomo } from "./nomo-plugin-kit/nomo_api";
+import { nomo } from "nomo-plugin-kit/dist/nomo_api";
 import styles from "./page.module.css";
-import "./nomo-plugin-kit/nomo.css";
+import "./nomo.css";
 import { sendDemoTransaction } from "./evm/ethersjs_provider";
 
 export default function Home() {

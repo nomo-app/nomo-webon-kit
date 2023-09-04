@@ -9,6 +9,7 @@
     "generate_docs": "typedoc --plugin typedoc-plugin-markdown --out ../api-docs/ src/app/nomo-plugin-kit/nomo_api.ts && rm ../api-docs/README.md"
   },
   "dependencies": {
+    "nomo-plugin-kit": "0.0.3",
     "@types/node": "20.2.3",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
@@ -22,7 +23,6 @@
   },
   "devDependencies": {
     "typedoc": "0.24.7",
-    "typedoc-plugin-markdown": "3.15.3",
-    "nomo-plugin-kit": "0.0.3"
+    "typedoc-plugin-markdown": "3.15.3"
   }
 }

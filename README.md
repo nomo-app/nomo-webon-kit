@@ -24,12 +24,12 @@ Before going into more details, we explain a few quick steps for getting the dem
 
 ## Step 1: Download the NOMO-app
 
-Goto https://nomo.app/.  
+Goto <https://nomo.app/>.  
 Download the NOMO-app and create a wallet with it.
 
 ## Step 2: Launch the demo-plugin locally
 
-> You can skip step 2 and step 3 if you use the following hosted plugin URL: https://demoplugin.nomo.app/?t=nomo
+> You can skip step 2 and step 3 if you use the following hosted plugin URL: <https://demoplugin.nomo.app/?t=nomo>
 
 Clone this repo, then launch the demo-plugin with:
 
@@ -37,7 +37,7 @@ Clone this repo, then launch the demo-plugin with:
 `npm i`  
 `npm run dev`
 
-Then the demo-plugin should run at http://localhost:3000/.
+Then the demo-plugin should run at <http://localhost:3000/>.
 
 ## Step 3: Launch ngrok tunnel
 
@@ -46,7 +46,7 @@ Then the demo-plugin should run at http://localhost:3000/.
 
 `ngrok` is a useful tool for exposing your localhost to the Internet.
 By using `ngrok`, the NOMO-app can easily access the demo-plugin regardless of which network your phone is connected to.
-First, download `ngrok` from https://ngrok.com/.
+First, download `ngrok` from <https://ngrok.com/>.
 
 Further, we assume that the demo-plugin is running locally on port 3000.
 Run the following command to expose the demo-plugin to the Internet:
@@ -55,7 +55,7 @@ Run the following command to expose the demo-plugin to the Internet:
 
 With this command, `ngrok` should give you an https-URL that looks something like this:
 
-https://56b1-212-186-68-152.ngrok-free.app
+<https://56b1-212-186-68-152.ngrok-free.app>
 
 You will need this URL in the next step.
 
@@ -72,7 +72,8 @@ From now on, the About-screen will change into a "developer-area".
 # JavaScript API
 
 The functions that are provided by this package are documented in the [api-docs](api-docs/modules.md).
-You can add this package to your own app by copying the folder [demo-plugin/src/app/nomo-plugin-kit](https://github.com/nomo-app/nomo-plugin-kit/tree/main/demo-plugin/src/app/nomo-plugin-kit).
+
+You can add this package to your project with: `npm install nomo-plugin-kit`.
 
 Take a look at the demo-plugin to see how the package can be used.
 
@@ -105,11 +106,11 @@ The following steps are recommended to use Chrome DevTools for Android remote de
 - Install Android Studio
 - Connect your phone via USB
 - Launch Android Studio to see if the connected phone can be found
-- Download and install a debug-version of the Nomo-app from https://nomo.app/downloads/app-debug.apk (if you already have a release-version, then your phone will have two different Nomo-apps installed)
+- Download and install a debug-version of the Nomo-app from <https://nomo.app/downloads/app-debug.apk> (if you already have a release-version, then your phone will have two different Nomo-apps installed)
 - Use the debug-version to launch a plugin as described in the usage guide above
 - Open `chrome://inspect/#devices` within Chrome for initiating a remote-debugging session with the plugin
 
-See https://developer.chrome.com/docs/devtools/remote-debugging/webviews/ for more details.
+See <https://developer.chrome.com/docs/devtools/remote-debugging/webviews/> for more details.
 
 # Release of Plugins
 
@@ -124,7 +125,7 @@ By using a decent CDN, Nomo plugins can be made globally available without any s
 ## Plugin Manifests
 
 In addition to the actual code, every production-plugin needs to host a `nomo_manifest.json`.
-See https://demoplugin.nomo.app/nomo_manifest.json for an example of a `nomo_manifest.json`.
+See <https://demoplugin.nomo.app/nomo_manifest.json> for an example of a `nomo_manifest.json`.
 You can copy-paste this example, but at a minimum you will need to change the following fields:
 
 - `plugin_id`
@@ -140,14 +141,14 @@ This is a security-restriction that may be lifted in future version of the NOMO-
 
 Once a plugin is hosted, you can construct a QRCode for installing the plugin.
 You can choose between two types of QRCodes: Browsable QRCodes and Deeplinkable QRCodes.
-For example, let's assume that the hosting-URL of a plugin is https://demoplugin.nomo.app.
+For example, let's assume that the hosting-URL of a plugin is <https://demoplugin.nomo.app>.
 
 ### Browsable QRCodes
 
 Browsable QRCodes can be constructed by appending `?t=nomo` to the hosting-URL.
 For example, the following URL is a functional QRCode:
 
-https://demoplugin.nomo.app/?t=nomo
+<https://demoplugin.nomo.app/?t=nomo>
 
 ### Deeplinkable QRCodes
 
@@ -155,4 +156,4 @@ The advantage of deeplinks is that they allow plugin-installations on smartphone
 Deeplinkable QRCodes can be constructed by prepending `https://nomo.app/pluginv1/` to the hosting-domain.
 For example, the following URL is a functional QRCode:
 
-https://nomo.app/pluginv1/demoplugin.nomo.app
+<https://nomo.app/pluginv1/demoplugin.nomo.app>

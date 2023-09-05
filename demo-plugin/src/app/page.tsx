@@ -6,7 +6,7 @@ import { useNomoState } from "./hooks/custom_hooks";
 import { nomo } from "nomo-plugin-kit/dist/nomo_api";
 import styles from "./page.module.css";
 import "./nomo.css";
-import { sendDemoTransaction } from "./evm/ethersjs_provider";
+import { sendDemoTransaction } from "ethersjs-nomo-plugins/dist/ethersjs_provider";
 
 export default function Home() {
   const [dialog, setDialog] = useState<DialogContent | null>(null);

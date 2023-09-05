@@ -47,6 +47,7 @@ function signTxDevWallet(
 
 let cachedAddress: string | null = null;
 
+
 export class EthersjsNomoSigner extends Signer {
   constructor(provider: Provider) {
     super();

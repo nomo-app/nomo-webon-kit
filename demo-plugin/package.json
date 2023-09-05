@@ -9,17 +9,18 @@
     "generate_docs": "typedoc --plugin typedoc-plugin-markdown --out ../api-docs/ src/app/nomo-plugin-kit/nomo_api.ts && rm ../api-docs/README.md"
   },
   "dependencies": {
-    "nomo-plugin-kit": "0.0.3",
     "@types/node": "20.2.3",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
+    "ethers": "^5.5.4",
+    "ethersjs-nomo-plugins": "0.0.1",
     "next": "13.4.3",
+    "nomo-plugin-kit": "0.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "5.0.4",
-    "ethers": "^5.5.4"
+    "typescript": "5.0.4"
   },
   "devDependencies": {
     "typedoc": "0.24.7",

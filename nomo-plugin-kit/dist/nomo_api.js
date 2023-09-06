@@ -1,12 +1,3 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 import { invokeNomoFunction, isFallbackModeActive } from "./dart_interface";
 /**
  * nomoLocalStorage provides a mechanism for sharing data between plugins.
@@ -14,32 +5,26 @@ import { invokeNomoFunction, isFallbackModeActive } from "./dart_interface";
  * nomoLocalStorage can also be used as an alternative to the regular localStorage.
  */
 export const nomoLocalStorage = {
-    getItem: function (key, options) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (isFallbackModeActive()) {
-                return localStorage.getItem(key);
-            }
-            const rawResult = yield invokeNomoFunction("nomoGetItem", { key, options });
-            return rawResult.value;
-        });
+    getItem: async function (key, options) {
+        if (isFallbackModeActive()) {
+            return localStorage.getItem(key);
+        }
+        const rawResult = await invokeNomoFunction("nomoGetItem", { key, options });
+        return rawResult.value;
     },
-    setItem: function (key, value) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (isFallbackModeActive()) {
-                localStorage.setItem(key, value);
-                return;
-            }
-            yield invokeNomoFunction("nomoSetItem", { key, value });
-        });
+    setItem: async function (key, value) {
+        if (isFallbackModeActive()) {
+            localStorage.setItem(key, value);
+            return;
+        }
+        await invokeNomoFunction("nomoSetItem", { key, value });
     },
-    removeItem: function (key) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (isFallbackModeActive()) {
-                localStorage.removeItem(key);
-                return;
-            }
-            yield invokeNomoFunction("nomoRemoveItem", { key });
-        });
+    removeItem: async function (key) {
+        if (isFallbackModeActive()) {
+            localStorage.removeItem(key);
+            return;
+        }
+        await invokeNomoFunction("nomoRemoveItem", { key });
     },
 };
 /**
@@ -118,85 +103,73 @@ function nomoNativeLog(severity, args) {
  * Creates a signature for an EVM-based transaction.
  * See EthersjsNomoSigner for an example on how to use this function.
  */
-export function nomoSignEvmTransaction(args) {
-    return __awaiter(this, void 0, void 0, function* () {
-        // a fallback mode is implemented in EthersjsNomoSigner
-        return yield invokeNomoFunction("nomoSignEvmTransaction", args);
-    });
+export async function nomoSignEvmTransaction(args) {
+    // a fallback mode is implemented in EthersjsNomoSigner
+    return await invokeNomoFunction("nomoSignEvmTransaction", args);
 }
 /**
  * Creates an Ethereum-styled message signature.
  * The resulting signature is not usable for submitting transactions,
  * but it can be used as a proof that the user controls a wallet.
  */
-export function nomoSignEvmMessage(args) {
-    return __awaiter(this, void 0, void 0, function* () {
-        if (isFallbackModeActive()) {
-            return {
-                sigHex: "0x1e8fccc1f75eda4ee82adb9b3b0ae8243b418bd8810873b6df696d240267a223105e265189bd2ea0677bfa42f5d9cbba50622d91ef4e4805cd81f9f8715e38101b",
-            };
-        }
-        return yield invokeNomoFunction("nomoSignEvmMessage", args);
-    });
+export async function nomoSignEvmMessage(args) {
+    if (isFallbackModeActive()) {
+        return {
+            sigHex: "0x1e8fccc1f75eda4ee82adb9b3b0ae8243b418bd8810873b6df696d240267a223105e265189bd2ea0677bfa42f5d9cbba50622d91ef4e4805cd81f9f8715e38101b",
+        };
+    }
+    return await invokeNomoFunction("nomoSignEvmMessage", args);
 }
 /**
  * Returns both the NOMO-version and the operating system where the plugin runs.
  * Can be used for implementing platform-specific functionality.
  * See https://nomo.app/ for an overview of supported platforms.
  */
-export function nomoGetPlatformInfo() {
-    return __awaiter(this, void 0, void 0, function* () {
-        if (isFallbackModeActive()) {
-            return {
-                version: "0.2.0",
-                buildNumber: "123400",
-                appName: "Not in Nomo app!",
-                clientName: "Not in Nomo app!",
-                operatingSystem: "unknown",
-            };
-        }
-        return yield invokeNomoFunction("nomoGetPlatformInfo", null);
-    });
+export async function nomoGetPlatformInfo() {
+    if (isFallbackModeActive()) {
+        return {
+            version: "0.2.0",
+            buildNumber: "123400",
+            appName: "Not in Nomo app!",
+            clientName: "Not in Nomo app!",
+            operatingSystem: "unknown",
+        };
+    }
+    return await invokeNomoFunction("nomoGetPlatformInfo", null);
 }
 /**
  * Can be used for chatting with other NOMO-users, but also for push-notifications or chat-bots.
  */
-export function nomoGetMessengerAddress() {
-    return __awaiter(this, void 0, void 0, function* () {
-        if (isFallbackModeActive()) {
-            return {
-                messengerAddress: "0x3f0e8cf0c6eb9789348541d9d0ce4ac847277e9b",
-                inviteLink: "https://nomo.id/@0x6b65b7eadc7544dcf04869136466ba6224e799a2:zeniq.chat",
-            };
-        }
-        return yield invokeNomoFunction("nomoGetMessengerAddress", null);
-    });
+export async function nomoGetMessengerAddress() {
+    if (isFallbackModeActive()) {
+        return {
+            messengerAddress: "0x3f0e8cf0c6eb9789348541d9d0ce4ac847277e9b",
+            inviteLink: "https://nomo.id/@0x6b65b7eadc7544dcf04869136466ba6224e799a2:zeniq.chat",
+        };
+    }
+    return await invokeNomoFunction("nomoGetMessengerAddress", null);
 }
 /**
  * Returns blockchain-addresses of the NOMO-user.
  */
-export function nomoGetWalletAddresses() {
-    return __awaiter(this, void 0, void 0, function* () {
-        if (isFallbackModeActive()) {
-            return {
-                walletAddresses: {
-                    ETH: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",
-                    ZENIQ: "meXd5DAdJYadrgssPVY9sTu1Z1YNJGH9R3",
-                },
-            };
-        }
-        return yield invokeNomoFunction("nomoGetWalletAddresses", null);
-    });
+export async function nomoGetWalletAddresses() {
+    if (isFallbackModeActive()) {
+        return {
+            walletAddresses: {
+                ETH: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",
+                ZENIQ: "meXd5DAdJYadrgssPVY9sTu1Z1YNJGH9R3",
+            },
+        };
+    }
+    return await invokeNomoFunction("nomoGetWalletAddresses", null);
 }
 /**
  * Injecting QRCodes is useful for multiple purposes.
  * For example, new chats can be opened by injecting a chat-invitation-link.
  * Also the NOMO-ID protocol works by injecting QRCodes.
  */
-export function nomoInjectQRCode(args) {
-    return __awaiter(this, void 0, void 0, function* () {
-        return yield invokeNomoFunction("nomoInjectQRCode", args);
-    });
+export async function nomoInjectQRCode(args) {
+    return await invokeNomoFunction("nomoInjectQRCode", args);
 }
 const imagePrefix = "data:image/png;base64,";
 const fallbackImage = imagePrefix +
@@ -205,133 +178,121 @@ const fallbackImage = imagePrefix +
  * Opens the camera and returns a picture in base64-encoding.
  * The promise rejects if the user chooses to cancel.
  */
-export function nomoTakePicture() {
-    return __awaiter(this, void 0, void 0, function* () {
-        if (isFallbackModeActive()) {
-            return {
-                path: "/data/user/0/app.nomo.debug/cache/6098a97a-e556-4711-a069-4809d3db0aeb5994719432468143068.jpg",
-                imageBase64: fallbackImage,
-            };
-        }
-        const rawRes = yield invokeNomoFunction("nomoTakePicture", null);
-        return Object.assign(Object.assign({}, rawRes), { imageBase64: imagePrefix + rawRes.imageBase64 });
-    });
+export async function nomoTakePicture() {
+    if (isFallbackModeActive()) {
+        return {
+            path: "/data/user/0/app.nomo.debug/cache/6098a97a-e556-4711-a069-4809d3db0aeb5994719432468143068.jpg",
+            imageBase64: fallbackImage,
+        };
+    }
+    const rawRes = await invokeNomoFunction("nomoTakePicture", null);
+    return Object.assign(Object.assign({}, rawRes), { imageBase64: imagePrefix + rawRes.imageBase64 });
 }
 /**
  * Opens an image-picker and returns an image in base64-encoding.
  * The promise rejects if the user chooses to cancel.
  */
-export function nomoPickFromGallery() {
-    return __awaiter(this, void 0, void 0, function* () {
-        if (isFallbackModeActive()) {
-            return {
-                path: "/data/user/0/app.nomo.debug/cache/6098a97a-e556-4711-a069-4809d3db0aeb5994719432468143068.jpg",
-                imageBase64: fallbackImage,
-            };
-        }
-        const rawRes = yield invokeNomoFunction("nomoPickFromGallery", null);
-        return Object.assign(Object.assign({}, rawRes), { imageBase64: imagePrefix + rawRes.imageBase64 });
-    });
+export async function nomoPickFromGallery() {
+    if (isFallbackModeActive()) {
+        return {
+            path: "/data/user/0/app.nomo.debug/cache/6098a97a-e556-4711-a069-4809d3db0aeb5994719432468143068.jpg",
+            imageBase64: fallbackImage,
+        };
+    }
+    const rawRes = await invokeNomoFunction("nomoPickFromGallery", null);
+    return Object.assign(Object.assign({}, rawRes), { imageBase64: imagePrefix + rawRes.imageBase64 });
 }
 /**
  * Returns the current theme of the NOMO app.
  */
-export function nomoGetTheme() {
-    return __awaiter(this, void 0, void 0, function* () {
-        if (isFallbackModeActive()) {
-            return {
-                name: "LIGHT",
-                displayName: "Nomo Light",
-                colors: {
-                    primary: "0xffbca570",
-                    onPrimary: "0xffffffff",
-                    primaryContainer: "0xfffcfaf7",
-                    secondary: "0xffd1af72",
-                    onSecondary: "0xff000000",
-                    secondaryContainer: "0xffe6d0a3",
-                    background: "0xfff5f5f5",
-                    surface: "0xffffffff",
-                    foreground1: "0xcf000000",
-                    foreground2: "0xdf000000",
-                    foreground3: "0xef000000",
-                    snackBarColor: "0xfffff7e5",
-                    disabledColor: "0xffe0e0e0",
-                    error: "0xffff5252",
-                    settingsTileColor: "0xffffffff",
-                    settingsColumnColor: "0xffededed",
-                },
-            };
-        }
-        return yield invokeNomoFunction("nomoGetTheme", null);
-    });
+export async function nomoGetTheme() {
+    if (isFallbackModeActive()) {
+        return {
+            name: "LIGHT",
+            displayName: "Nomo Light",
+            colors: {
+                primary: "0xffbca570",
+                onPrimary: "0xffffffff",
+                primaryContainer: "0xfffcfaf7",
+                secondary: "0xffd1af72",
+                onSecondary: "0xff000000",
+                secondaryContainer: "0xffe6d0a3",
+                background: "0xfff5f5f5",
+                surface: "0xffffffff",
+                foreground1: "0xcf000000",
+                foreground2: "0xdf000000",
+                foreground3: "0xef000000",
+                snackBarColor: "0xfffff7e5",
+                disabledColor: "0xffe0e0e0",
+                error: "0xffff5252",
+                settingsTileColor: "0xffffffff",
+                settingsColumnColor: "0xffededed",
+            },
+        };
+    }
+    return await invokeNomoFunction("nomoGetTheme", null);
 }
 /**
  * Returns a comma-separated list of device hashes.
  * Can be used for fingerprinting devices.
  */
-export function nomoGetDeviceHashes() {
-    return __awaiter(this, void 0, void 0, function* () {
-        if (isFallbackModeActive()) {
-            return {
-                deviceHashes: "b6Qz6EEKg,m2wAyKypQ,d67rq8zvw,pHcGGpnD5,iBFGnwEoE,vBhmQwyos,aGGJKq2QG,o9q6MhCeA,s9KLx6CVa,f7nin76st,rF3JVtwjV,u3txrGJEW",
-            };
-        }
-        return yield invokeNomoFunction("nomoGetDeviceHashes", null);
-    });
+export async function nomoGetDeviceHashes() {
+    if (isFallbackModeActive()) {
+        return {
+            deviceHashes: "b6Qz6EEKg,m2wAyKypQ,d67rq8zvw,pHcGGpnD5,iBFGnwEoE,vBhmQwyos,aGGJKq2QG,o9q6MhCeA,s9KLx6CVa,f7nin76st,rF3JVtwjV,u3txrGJEW",
+        };
+    }
+    return await invokeNomoFunction("nomoGetDeviceHashes", null);
 }
 /**
  * Returns a human-readable name of the device.
  */
-export function nomoGetDeviceName() {
-    return __awaiter(this, void 0, void 0, function* () {
-        if (isFallbackModeActive()) {
-            return {
-                deviceName: "Browser fallback mode: No device name outside of Nomo app",
-            };
-        }
-        return yield invokeNomoFunction("nomoGetDeviceName", null);
-    });
+export async function nomoGetDeviceName() {
+    if (isFallbackModeActive()) {
+        return {
+            deviceName: "Browser fallback mode: No device name outside of Nomo app",
+        };
+    }
+    return await invokeNomoFunction("nomoGetDeviceName", null);
 }
 /**
  * This is a client-simulation of what the Nomo-app will do.
  * See the repo nomo-plugins/nomo-auth-backend-example for a server-example.
  */
-function simulateNomoAuthHttp(args) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const injectedHeaders = {
-            "nomo-auth-version": "1.0.0",
-            "nomo-auth-addr": "cNpBzxornzED1MsBKDupMbwqZnkFtoUVGD",
-        };
-        let res = yield fetch(args.url, {
+async function simulateNomoAuthHttp(args) {
+    const injectedHeaders = {
+        "nomo-auth-version": "1.0.0",
+        "nomo-auth-addr": "cNpBzxornzED1MsBKDupMbwqZnkFtoUVGD",
+    };
+    let res = await fetch(args.url, {
+        method: args.method,
+        headers: Object.assign(Object.assign({}, injectedHeaders), args.headers),
+        body: args.body,
+    });
+    let statusCode = res.status;
+    let resBody = await res.json();
+    if (statusCode === 403) {
+        // 403-case: special statusCode for NOMO-Auth protocol
+        // repeat the request with even more injected headers
+        const jwt = resBody.jwt;
+        if (!jwt) {
+            return Promise.reject("got 403 but missing JWT");
+        }
+        injectedHeaders["Authorization"] = "Bearer " + jwt;
+        injectedHeaders["nomo-sig"] =
+            "HCaJ9SEvzyRXGbtDmtvZxErBLgyiOGWtAjBwavyWqhaBFsQB4MzjiHgaF9Ia2MA9IOfZ5W/fUC56UXzE96IN6nk=";
+        res = await fetch(args.url, {
             method: args.method,
             headers: Object.assign(Object.assign({}, injectedHeaders), args.headers),
             body: args.body,
         });
-        let statusCode = res.status;
-        let resBody = yield res.json();
-        if (statusCode === 403) {
-            // 403-case: special statusCode for NOMO-Auth protocol
-            // repeat the request with even more injected headers
-            const jwt = resBody.jwt;
-            if (!jwt) {
-                return Promise.reject("got 403 but missing JWT");
-            }
-            injectedHeaders["Authorization"] = "Bearer " + jwt;
-            injectedHeaders["nomo-sig"] =
-                "HCaJ9SEvzyRXGbtDmtvZxErBLgyiOGWtAjBwavyWqhaBFsQB4MzjiHgaF9Ia2MA9IOfZ5W/fUC56UXzE96IN6nk=";
-            res = yield fetch(args.url, {
-                method: args.method,
-                headers: Object.assign(Object.assign({}, injectedHeaders), args.headers),
-                body: args.body,
-            });
-            statusCode = res.status;
-            resBody = yield res.json();
-        }
-        return {
-            statusCode,
-            response: JSON.stringify(resBody),
-        };
-    });
+        statusCode = res.status;
+        resBody = await res.json();
+    }
+    return {
+        statusCode,
+        response: JSON.stringify(resBody),
+    };
 }
 /**
  * A special http-function that implements the NOMO-Auth-Protocol.
@@ -343,29 +304,25 @@ function simulateNomoAuthHttp(args) {
  * nomo-auth-addr: "an address derived by the NOMO-wallet"
  * nomo-auth-version: "version of NOMO-Auth"
  */
-export function nomoAuthHttp(args) {
-    return __awaiter(this, void 0, void 0, function* () {
-        if (typeof args === "string") {
-            args = { url: args };
-        }
-        if (!args.method) {
-            args.method = "GET";
-        }
-        if (!args.headers) {
-            args.headers = {};
-        }
-        if (isFallbackModeActive()) {
-            return yield simulateNomoAuthHttp(args);
-        }
-        return yield invokeNomoFunction("nomoAuthHttp", args);
-    });
+export async function nomoAuthHttp(args) {
+    if (typeof args === "string") {
+        args = { url: args };
+    }
+    if (!args.method) {
+        args.method = "GET";
+    }
+    if (!args.headers) {
+        args.headers = {};
+    }
+    if (isFallbackModeActive()) {
+        return await simulateNomoAuthHttp(args);
+    }
+    return await invokeNomoFunction("nomoAuthHttp", args);
 }
 /**
  * Opens a confirmation-dialog to send assets away from the NOMO-wallet.
  * Assets are only sent if the user confirms the dialog.
  */
-export function nomoSendAssets(args) {
-    return __awaiter(this, void 0, void 0, function* () {
-        return yield invokeNomoFunction("nomoSendAssets", args);
-    });
+export async function nomoSendAssets(args) {
+    return await invokeNomoFunction("nomoSendAssets", args);
 }

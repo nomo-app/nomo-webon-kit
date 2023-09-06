@@ -1,12 +1,3 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 import { decodeBase64UTF16 } from "./util";
 export function isFallbackModeActive() {
     return !getDartBridge();
@@ -32,35 +23,33 @@ function getDartBridge() {
         return null; // fallback mode
     }
 }
-export function invokeNomoFunction(functionName, args) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const callDate = new Date();
-        const invocationID = functionName + "_" + callDate.toISOString() + "_" + Math.random();
-        const payload = JSON.stringify({
-            functionName,
-            invocationID,
-            args,
-        });
-        // first create a Promise
-        const promise = new Promise(function (resolve, reject) {
-            pendingPromisesResolve[invocationID] = resolve;
-            pendingPromisesReject[invocationID] = reject;
-        });
-        try {
-            const dartBridge = getDartBridge();
-            if (dartBridge) {
-                dartBridge(payload);
-            }
-            else {
-                return Promise.reject(`the function ${functionName} does not work outside of the NOMO-app.`);
-            }
-        }
-        catch (e) {
-            // @ts-ignore
-            return Promise.reject(e.message);
-        }
-        return promise;
+export async function invokeNomoFunction(functionName, args) {
+    const callDate = new Date();
+    const invocationID = functionName + "_" + callDate.toISOString() + "_" + Math.random();
+    const payload = JSON.stringify({
+        functionName,
+        invocationID,
+        args,
     });
+    // first create a Promise
+    const promise = new Promise(function (resolve, reject) {
+        pendingPromisesResolve[invocationID] = resolve;
+        pendingPromisesReject[invocationID] = reject;
+    });
+    try {
+        const dartBridge = getDartBridge();
+        if (dartBridge) {
+            dartBridge(payload);
+        }
+        else {
+            return Promise.reject(`the function ${functionName} does not work outside of the NOMO-app.`);
+        }
+    }
+    catch (e) {
+        // @ts-ignore
+        return Promise.reject(e.message);
+    }
+    return promise;
 }
 const pendingPromisesResolve = {};
 const pendingPromisesReject = {};

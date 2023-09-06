@@ -1,4 +1,4 @@
-import { decodeBase64UTF16 } from "./util";
+import { decodeBase64UTF16 } from "../util";
 
 declare global {
   interface Window {

@@ -7,17 +7,25 @@ declare global {
 }
 
 export function isFallbackModeActive(): boolean {
-  if (window.webkit?.messageHandlers?.NOMOJSChannel) {
+  return !getDartBridge();
+}
+
+/**
+ * A low-level function that aims to be compatible with multiple webviews
+ */
+function getDartBridge() {
+  if (window.webkit) {
     // macOS
-    return false;
+    return (payload: string) =>
+      window.webkit.messageHandlers.NOMOJSChannel.postMessage(payload);
   } else if (window.NOMOJSChannel) {
     // mobile
-    return false;
-  } else if (window.chrome?.webview?.postMessage) {
+    return (payload: string) => window.NOMOJSChannel.postMessage(payload);
+  } else if (window.chrome?.webview) {
     //windows
-    return false;
+    return (payload: string) => window.chrome.webview.postMessage(payload);
   } else {
-    return true;
+    return null; // fallback mode
   }
 }
 
@@ -44,15 +52,9 @@ export async function invokeNomoFunction(
   });
 
   try {
-    if (window.webkit) {
-      // macOS
-      window.webkit.messageHandlers.NOMOJSChannel.postMessage(payload);
-    } else if (window.NOMOJSChannel) {
-      // mobile
-      window.NOMOJSChannel.postMessage(payload);
-    } else if (window.chrome?.webview) {
-      //windows
-      window.chrome.webview.postMessage(payload);
+    const dartBridge = getDartBridge();
+    if (dartBridge) {
+      dartBridge(payload);
     } else {
       return Promise.reject(
         `the function ${functionName} does not work outside of the NOMO-app.`

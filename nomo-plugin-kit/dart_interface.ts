@@ -6,10 +6,19 @@ declare global {
   }
 }
 
-let fallbackMode: boolean = false;
-
 export function isFallbackModeActive(): boolean {
-  return fallbackMode;
+  if (window.webkit?.messageHandlers?.NOMOJSChannel) {
+    // macOS
+    return false;
+  } else if (window.NOMOJSChannel) {
+    // mobile
+    return false;
+  } else if (window.chrome?.webview?.postMessage) {
+    //windows
+    return false;
+  } else {
+    return true;
+  }
 }
 
 export async function invokeNomoFunction(
@@ -45,9 +54,8 @@ export async function invokeNomoFunction(
       //windows
       window.chrome.webview.postMessage(payload);
     } else {
-      fallbackMode = true;
       return Promise.reject(
-        `the function ${functionName} does not work outside of the NOMO-app. The fallback-mode will be activated from now on.`
+        `the function ${functionName} does not work outside of the NOMO-app.`
       );
     }
   } catch (e) {

@@ -13,7 +13,7 @@ export function isFallbackModeActive(): boolean {
 /**
  * A low-level function that aims to be compatible with multiple webviews
  */
-function getDartBridge() {
+function getDartBridge(): ((arg0: string) => void) | null {
   if (window.webkit) {
     // macOS
     return (payload: string) =>

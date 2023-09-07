@@ -77,6 +77,11 @@ You can add this package to your project with: `npm install nomo-plugin-kit`.
 
 Take a look at the demo-plugin to see how the package can be used.
 
+## Interacting with EVM blockchains
+
+If you want to port a decentralized application, then we recommend the package https://www.npmjs.com/package/ethersjs-nomo-plugins.
+This package has a ready-made provider that utilizes the Nomo App for signing transactions.
+
 # Debugging of Plugins
 
 In the following sections, we describe multiple ways for debugging Nomo plugins.

@@ -1,25 +1,25 @@
 {
-    "name": "ethersjs-nomo-plugins",
-    "version": "0.0.1",
-    "description": "ethersjs-nomo-plugins for nomo",
-    "main": "dist",
-    "scripts": {
-        "build": "rm -rf dist && tsc",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/nomo-app/nomo-plugin-kit.git"
-    },
-    "dependencies": {
-        "ethers": "^5.5.4",
-        "typescript": "5.0.4",
-        "@types/node": "^20.5.9"
-    },
-    "peerDependencies": {
-        "nomo-plugin-kit": "^0.0.3"
-    },
-    "keywords": [],
-    "author": "dev2@nomo.app",
-    "license": "ISC"
+  "name": "ethersjs-nomo-plugins",
+  "version": "0.0.2",
+  "description": "ethersjs-nomo-plugins for nomo",
+  "main": "dist",
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nomo-app/nomo-plugin-kit.git"
+  },
+  "dependencies": {
+    "ethers": "^5.7.2",
+    "typescript": "5.0.4",
+    "@types/node": "^20.5.9"
+  },
+  "peerDependencies": {
+    "nomo-plugin-kit": "^0.0.5"
+  },
+  "keywords": [],
+  "author": "dev2@nomo.app",
+  "license": "ISC"
 }

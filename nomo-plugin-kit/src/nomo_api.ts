@@ -1,4 +1,5 @@
 import { invokeNomoFunction, isFallbackModeActive } from "./dart_interface";
+import { nomoAuthFetch } from "./nomo_auth";
 
 /**
  * nomoLocalStorage provides a mechanism for sharing data between plugins.
@@ -338,51 +339,6 @@ export async function nomoGetDeviceName(): Promise<{
 }
 
 /**
- * This is a client-simulation of what the Nomo-app will do.
- * See the repo nomo-plugins/nomo-auth-backend-example for a server-example.
- */
-async function simulateNomoAuthHttp(args: {
-  url: string;
-  method?: "GET" | "POST";
-  headers?: { [key: string]: string };
-  body?: string;
-}) {
-  const injectedHeaders: { [key: string]: string } = {
-    "nomo-auth-version": "1.0.0",
-    "nomo-auth-addr": "cNpBzxornzED1MsBKDupMbwqZnkFtoUVGD",
-  };
-  let res = await fetch(args.url, {
-    method: args.method,
-    headers: { ...injectedHeaders, ...args.headers },
-    body: args.body,
-  });
-  let statusCode = res.status;
-  let resBody = await res.json();
-  if (statusCode === 403) {
-    // 403-case: special statusCode for NOMO-Auth protocol
-    // repeat the request with even more injected headers
-    const jwt = resBody.jwt;
-    if (!jwt) {
-      return Promise.reject("got 403 but missing JWT");
-    }
-    injectedHeaders["Authorization"] = "Bearer " + jwt;
-    injectedHeaders["nomo-sig"] =
-      "HCaJ9SEvzyRXGbtDmtvZxErBLgyiOGWtAjBwavyWqhaBFsQB4MzjiHgaF9Ia2MA9IOfZ5W/fUC56UXzE96IN6nk=";
-    res = await fetch(args.url, {
-      method: args.method,
-      headers: { ...injectedHeaders, ...args.headers },
-      body: args.body,
-    });
-    statusCode = res.status;
-    resBody = await res.json();
-  }
-  return {
-    statusCode,
-    response: JSON.stringify(resBody),
-  };
-}
-
-/**
  * A special http-function that implements the NOMO-Auth-Protocol.
  * NOMO-Auth allows a seamless authentication for supported backends.
  * Moreover, even if you do not use NOMO-Auth, you can still use this function for bypassing CORS/Same-Origin-Policy.
@@ -405,19 +361,7 @@ export async function nomoAuthHttp(
   statusCode: number;
   response: string;
 }> {
-  if (typeof args === "string") {
-    args = { url: args };
-  }
-  if (!args.method) {
-    args.method = "GET";
-  }
-  if (!args.headers) {
-    args.headers = {};
-  }
-  if (isFallbackModeActive()) {
-    return await simulateNomoAuthHttp(args);
-  }
-  return await invokeNomoFunction("nomoAuthHttp", args);
+  return await nomoAuthFetch(args);
 }
 
 /**

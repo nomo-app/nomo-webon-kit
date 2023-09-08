@@ -218,7 +218,11 @@ const fallbackImage =
  * Opens the camera and returns a picture in base64-encoding.
  * The promise rejects if the user chooses to cancel.
  */
-export async function nomoTakePicture(): Promise<{
+export async function nomoTakePicture(args?: {
+  maxWidth?: number;
+  maxHeight?: number;
+  imageQuality?: number;
+}): Promise<{
   path: string;
   imageBase64: string;
 }> {
@@ -228,7 +232,7 @@ export async function nomoTakePicture(): Promise<{
       imageBase64: fallbackImage,
     };
   }
-  const rawRes = await invokeNomoFunction("nomoTakePicture", null);
+  const rawRes = await invokeNomoFunction("nomoTakePicture", args ?? null);
   return {
     ...rawRes,
     imageBase64: imagePrefix + rawRes.imageBase64,
@@ -239,7 +243,11 @@ export async function nomoTakePicture(): Promise<{
  * Opens an image-picker and returns an image in base64-encoding.
  * The promise rejects if the user chooses to cancel.
  */
-export async function nomoPickFromGallery(): Promise<{
+export async function nomoPickFromGallery(args?: {
+  maxWidth?: number;
+  maxHeight?: number;
+  imageQuality?: number;
+}): Promise<{
   path: string;
   imageBase64: string;
 }> {
@@ -249,7 +257,7 @@ export async function nomoPickFromGallery(): Promise<{
       imageBase64: fallbackImage,
     };
   }
-  const rawRes = await invokeNomoFunction("nomoPickFromGallery", null);
+  const rawRes = await invokeNomoFunction("nomoPickFromGallery", args ?? null);
   return {
     ...rawRes,
     imageBase64: imagePrefix + rawRes.imageBase64,

@@ -179,28 +179,28 @@ const fallbackImage = imagePrefix +
  * Opens the camera and returns a picture in base64-encoding.
  * The promise rejects if the user chooses to cancel.
  */
-export async function nomoTakePicture() {
+export async function nomoTakePicture(args) {
     if (isFallbackModeActive()) {
         return {
             path: "/data/user/0/app.nomo.debug/cache/6098a97a-e556-4711-a069-4809d3db0aeb5994719432468143068.jpg",
             imageBase64: fallbackImage,
         };
     }
-    const rawRes = await invokeNomoFunction("nomoTakePicture", null);
+    const rawRes = await invokeNomoFunction("nomoTakePicture", args !== null && args !== void 0 ? args : null);
     return Object.assign(Object.assign({}, rawRes), { imageBase64: imagePrefix + rawRes.imageBase64 });
 }
 /**
  * Opens an image-picker and returns an image in base64-encoding.
  * The promise rejects if the user chooses to cancel.
  */
-export async function nomoPickFromGallery() {
+export async function nomoPickFromGallery(args) {
     if (isFallbackModeActive()) {
         return {
             path: "/data/user/0/app.nomo.debug/cache/6098a97a-e556-4711-a069-4809d3db0aeb5994719432468143068.jpg",
             imageBase64: fallbackImage,
         };
     }
-    const rawRes = await invokeNomoFunction("nomoPickFromGallery", null);
+    const rawRes = await invokeNomoFunction("nomoPickFromGallery", args !== null && args !== void 0 ? args : null);
     return Object.assign(Object.assign({}, rawRes), { imageBase64: imagePrefix + rawRes.imageBase64 });
 }
 /**

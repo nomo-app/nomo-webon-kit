@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -19,6 +20,12 @@ export default function Home() {
   const messengerAddress = useNomoState(nomo.getMessengerAddress);
   const deviceName = useNomoState(nomo.getDeviceName);
   const theme = useNomoState(getCurrentNomoTheme);
+  const [pictureFromCamera, setPictureFromCamera] = useState<string | null>(
+    null
+  );
+  const [pictureFromGallery, setPictureFromGallery] = useState<string | null>(
+    null
+  );
   useEffect(() => {
     console.log("test console log");
     console.warn("test console warning");
@@ -121,14 +128,7 @@ export default function Home() {
                   maxHeight: 800,
                 })
                 .then((res) => {
-                  openDialog({
-                    title: "Picture taken!",
-                    content:
-                      "Took a base64-picture with path " +
-                      res.path +
-                      " and size " +
-                      res.imageBase64.length,
-                  });
+                  setPictureFromCamera(res.imageBase64);
                 })
                 .catch((e) => {
                   console.error(e);
@@ -143,24 +143,26 @@ export default function Home() {
           </h2>
           <p>Use the NOMO-app for getting a picture into the plugin.</p>
         </div>
+        {!!pictureFromCamera ? (
+          <img
+            src={pictureFromCamera}
+            alt=""
+            style={{ maxWidth: "100%" }}
+          ></img>
+        ) : (
+          <div>Your camera image will be shown here</div>
+        )}
 
         <div className={styles.card}>
           <h2
             onClick={() => {
               nomo
                 .pickFromGallery({
-                  maxWidth: 2000,
-                  maxHeight: 2000,
+                  maxWidth: 1000,
+                  maxHeight: 1000,
                 })
                 .then((res) => {
-                  openDialog({
-                    title: "Image from gallery chosen!",
-                    content:
-                      "Received a base64-image with path " +
-                      res.path +
-                      " and size " +
-                      res.imageBase64.length,
-                  });
+                  setPictureFromGallery(res.imageBase64);
                 })
                 .catch((e) => {
                   console.error(e);
@@ -175,6 +177,15 @@ export default function Home() {
           </h2>
           <p>Upload documents or images from a NOMO-plugin.</p>
         </div>
+        {!!pictureFromGallery ? (
+          <img
+            src={pictureFromGallery}
+            alt=""
+            style={{ maxWidth: "100%" }}
+          ></img>
+        ) : (
+          <div>Your gallery image will be shown here</div>
+        )}
 
         <div className={styles.card}>
           <h2

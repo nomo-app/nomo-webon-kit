@@ -106,7 +106,11 @@ export declare function nomoInjectQRCode(args: {
  * Opens the camera and returns a picture in base64-encoding.
  * The promise rejects if the user chooses to cancel.
  */
-export declare function nomoTakePicture(): Promise<{
+export declare function nomoTakePicture(args?: {
+    maxWidth?: number;
+    maxHeight?: number;
+    imageQuality?: number;
+}): Promise<{
     path: string;
     imageBase64: string;
 }>;
@@ -114,7 +118,11 @@ export declare function nomoTakePicture(): Promise<{
  * Opens an image-picker and returns an image in base64-encoding.
  * The promise rejects if the user chooses to cancel.
  */
-export declare function nomoPickFromGallery(): Promise<{
+export declare function nomoPickFromGallery(args?: {
+    maxWidth?: number;
+    maxHeight?: number;
+    imageQuality?: number;
+}): Promise<{
     path: string;
     imageBase64: string;
 }>;

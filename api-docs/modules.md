@@ -52,15 +52,15 @@ The nomo-object can be used with only one import and supports the auto-completio
 | `localStorage.removeItem` | (`key`: `string`) => `Promise`<`void`\> |
 | `localStorage.setItem` | (`key`: `string`, `value`: `string`) => `Promise`<`void`\> |
 | `nativeLog` | (`severity`: ``"LOG"`` \| ``"INFO"`` \| ``"WARN"`` \| ``"ERROR"``, `args`: `any`[]) => `void` |
-| `pickFromGallery` | () => `Promise`<{ `imageBase64`: `string` ; `path`: `string`  }\> |
+| `pickFromGallery` | (`args?`: { `imageQuality?`: `number` ; `maxHeight?`: `number` ; `maxWidth?`: `number`  }) => `Promise`<{ `imageBase64`: `string` ; `path`: `string`  }\> |
 | `sendAssets` | (`args`: { `amount`: `string` ; `assetSymbol`: `string` ; `targetAddress`: `string`  }) => `Promise`<`any`\> |
 | `signEvmMessage` | (`args`: { `message`: `string`  }) => `Promise`<{ `sigHex`: `string`  }\> |
 | `signEvmTransaction` | (`args`: { `messageHex`: `string`  }) => `Promise`<{ `sigHex`: `string`  }\> |
-| `takePicture` | () => `Promise`<{ `imageBase64`: `string` ; `path`: `string`  }\> |
+| `takePicture` | (`args?`: { `imageQuality?`: `number` ; `maxHeight?`: `number` ; `maxWidth?`: `number`  }) => `Promise`<{ `imageBase64`: `string` ; `path`: `string`  }\> |
 
 #### Defined in
 
-[nomo_api.ts:40](https://github.com/nomo-app/nomo-plugin-kit/blob/a1cf47a/nomo-plugin-kit/src/nomo_api.ts#L40)
+[nomo_api.ts:40](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L40)
 
 ___
 
@@ -83,7 +83,7 @@ console.log/console.error/console.warn/console.info.
 
 #### Defined in
 
-[nomo_api.ts:68](https://github.com/nomo-app/nomo-plugin-kit/blob/a1cf47a/nomo-plugin-kit/src/nomo_api.ts#L68)
+[nomo_api.ts:68](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L68)
 
 ___
 
@@ -105,7 +105,7 @@ nomoLocalStorage can also be used as an alternative to the regular localStorage.
 
 #### Defined in
 
-[nomo_api.ts:9](https://github.com/nomo-app/nomo-plugin-kit/blob/a1cf47a/nomo-plugin-kit/src/nomo_api.ts#L9)
+[nomo_api.ts:9](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L9)
 
 ## Functions
 
@@ -134,7 +134,7 @@ nomo-auth-version: "version of NOMO-Auth"
 
 #### Defined in
 
-[nomo_api.ts:351](https://github.com/nomo-app/nomo-plugin-kit/blob/a1cf47a/nomo-plugin-kit/src/nomo_api.ts#L351)
+[nomo_api.ts:359](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L359)
 
 ___
 
@@ -151,7 +151,7 @@ Can be used for fingerprinting devices.
 
 #### Defined in
 
-[nomo_api.ts:315](https://github.com/nomo-app/nomo-plugin-kit/blob/a1cf47a/nomo-plugin-kit/src/nomo_api.ts#L315)
+[nomo_api.ts:323](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L323)
 
 ___
 
@@ -167,7 +167,7 @@ Returns a human-readable name of the device.
 
 #### Defined in
 
-[nomo_api.ts:330](https://github.com/nomo-app/nomo-plugin-kit/blob/a1cf47a/nomo-plugin-kit/src/nomo_api.ts#L330)
+[nomo_api.ts:338](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L338)
 
 ___
 
@@ -183,7 +183,7 @@ Can be used for chatting with other NOMO-users, but also for push-notifications 
 
 #### Defined in
 
-[nomo_api.ts:170](https://github.com/nomo-app/nomo-plugin-kit/blob/a1cf47a/nomo-plugin-kit/src/nomo_api.ts#L170)
+[nomo_api.ts:170](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L170)
 
 ___
 
@@ -201,7 +201,7 @@ See https://nomo.app/ for an overview of supported platforms.
 
 #### Defined in
 
-[nomo_api.ts:148](https://github.com/nomo-app/nomo-plugin-kit/blob/a1cf47a/nomo-plugin-kit/src/nomo_api.ts#L148)
+[nomo_api.ts:148](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L148)
 
 ___
 
@@ -217,7 +217,7 @@ This is a low-level function that should not be called directly. Instead, the fu
 
 #### Defined in
 
-[nomo_api.ts:262](https://github.com/nomo-app/nomo-plugin-kit/blob/a1cf47a/nomo-plugin-kit/src/nomo_api.ts#L262)
+[nomo_api.ts:270](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L270)
 
 ___
 
@@ -233,7 +233,7 @@ Returns blockchain-addresses of the NOMO-user.
 
 #### Defined in
 
-[nomo_api.ts:187](https://github.com/nomo-app/nomo-plugin-kit/blob/a1cf47a/nomo-plugin-kit/src/nomo_api.ts#L187)
+[nomo_api.ts:187](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L187)
 
 ___
 
@@ -259,16 +259,25 @@ Also the NOMO-ID protocol works by injecting QRCodes.
 
 #### Defined in
 
-[nomo_api.ts:206](https://github.com/nomo-app/nomo-plugin-kit/blob/a1cf47a/nomo-plugin-kit/src/nomo_api.ts#L206)
+[nomo_api.ts:206](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L206)
 
 ___
 
 ### nomoPickFromGallery
 
-▸ **nomoPickFromGallery**(): `Promise`<{ `imageBase64`: `string` ; `path`: `string`  }\>
+▸ **nomoPickFromGallery**(`args?`): `Promise`<{ `imageBase64`: `string` ; `path`: `string`  }\>
 
 Opens an image-picker and returns an image in base64-encoding.
 The promise rejects if the user chooses to cancel.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `args?` | `Object` |
+| `args.imageQuality?` | `number` |
+| `args.maxHeight?` | `number` |
+| `args.maxWidth?` | `number` |
 
 #### Returns
 
@@ -276,7 +285,7 @@ The promise rejects if the user chooses to cancel.
 
 #### Defined in
 
-[nomo_api.ts:242](https://github.com/nomo-app/nomo-plugin-kit/blob/a1cf47a/nomo-plugin-kit/src/nomo_api.ts#L242)
+[nomo_api.ts:246](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L246)
 
 ___
 
@@ -302,7 +311,7 @@ Assets are only sent if the user confirms the dialog.
 
 #### Defined in
 
-[nomo_api.ts:371](https://github.com/nomo-app/nomo-plugin-kit/blob/a1cf47a/nomo-plugin-kit/src/nomo_api.ts#L371)
+[nomo_api.ts:379](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L379)
 
 ___
 
@@ -327,7 +336,7 @@ but it can be used as a proof that the user controls a wallet.
 
 #### Defined in
 
-[nomo_api.ts:131](https://github.com/nomo-app/nomo-plugin-kit/blob/a1cf47a/nomo-plugin-kit/src/nomo_api.ts#L131)
+[nomo_api.ts:131](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L131)
 
 ___
 
@@ -351,16 +360,25 @@ See EthersjsNomoSigner for an example on how to use this function.
 
 #### Defined in
 
-[nomo_api.ts:119](https://github.com/nomo-app/nomo-plugin-kit/blob/a1cf47a/nomo-plugin-kit/src/nomo_api.ts#L119)
+[nomo_api.ts:119](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L119)
 
 ___
 
 ### nomoTakePicture
 
-▸ **nomoTakePicture**(): `Promise`<{ `imageBase64`: `string` ; `path`: `string`  }\>
+▸ **nomoTakePicture**(`args?`): `Promise`<{ `imageBase64`: `string` ; `path`: `string`  }\>
 
 Opens the camera and returns a picture in base64-encoding.
 The promise rejects if the user chooses to cancel.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `args?` | `Object` |
+| `args.imageQuality?` | `number` |
+| `args.maxHeight?` | `number` |
+| `args.maxWidth?` | `number` |
 
 #### Returns
 
@@ -368,4 +386,4 @@ The promise rejects if the user chooses to cancel.
 
 #### Defined in
 
-[nomo_api.ts:221](https://github.com/nomo-app/nomo-plugin-kit/blob/a1cf47a/nomo-plugin-kit/src/nomo_api.ts#L221)
+[nomo_api.ts:221](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L221)

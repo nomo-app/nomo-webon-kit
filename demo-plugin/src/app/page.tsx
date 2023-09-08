@@ -116,7 +116,10 @@ export default function Home() {
           <h2
             onClick={() => {
               nomo
-                .takePicture()
+                .takePicture({
+                  maxWidth: 800,
+                  maxHeight: 800,
+                })
                 .then((res) => {
                   openDialog({
                     title: "Picture taken!",
@@ -145,7 +148,10 @@ export default function Home() {
           <h2
             onClick={() => {
               nomo
-                .pickFromGallery()
+                .pickFromGallery({
+                  maxWidth: 2000,
+                  maxHeight: 2000,
+                })
                 .then((res) => {
                   openDialog({
                     title: "Image from gallery chosen!",

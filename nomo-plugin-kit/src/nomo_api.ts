@@ -257,7 +257,7 @@ export async function nomoPickFromGallery(): Promise<{
 }
 
 /**
- * Returns the current theme of the NOMO app.
+ * This is a low-level function that should not be called directly. Instead, the functions in "nomo_theming" should be used.
  */
 export async function nomoGetTheme(): Promise<{
   name: string;

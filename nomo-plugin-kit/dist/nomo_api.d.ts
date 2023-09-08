@@ -119,7 +119,7 @@ export declare function nomoPickFromGallery(): Promise<{
     imageBase64: string;
 }>;
 /**
- * Returns the current theme of the NOMO app.
+ * This is a low-level function that should not be called directly. Instead, the functions in "nomo_theming" should be used.
  */
 export declare function nomoGetTheme(): Promise<{
     name: string;

@@ -4,6 +4,10 @@ import { useEffect, useState } from "react";
 import Dialog, { DialogContent } from "./components/dialog";
 import { useNomoState } from "./hooks/custom_hooks";
 import { nomo } from "nomo-plugin-kit/dist/nomo_api";
+import {
+  getCurrentNomoTheme,
+  injectNomoCSSVariables,
+} from "nomo-plugin-kit/dist/nomo_theming";
 import styles from "./page.module.css";
 import "./nomo.css";
 import { sendDemoTransaction } from "ethersjs-nomo-plugins/dist/ethersjs_provider";
@@ -14,7 +18,7 @@ export default function Home() {
   const walletAddresses = useNomoState(nomo.getWalletAddresses);
   const messengerAddress = useNomoState(nomo.getMessengerAddress);
   const deviceName = useNomoState(nomo.getDeviceName);
-  const theme = useNomoState(nomo.getTheme);
+  const theme = useNomoState(getCurrentNomoTheme);
   useEffect(() => {
     console.log("test console log");
     console.warn("test console warning");
@@ -31,6 +35,7 @@ export default function Home() {
       console.log("Got value from nomoLocalStorage: " + value);
     });
     nomo.getDeviceHashes().then(console.log).catch(console.error);
+    injectNomoCSSVariables();
   }, []);
 
   const openDialog = (content: DialogContent) => {

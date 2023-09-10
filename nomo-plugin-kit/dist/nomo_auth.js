@@ -24,6 +24,7 @@ export async function simulateNomoAuthHttp(args) {
     const injectedHeaders = {
         "nomo-auth-version": "1.0.0",
         "nomo-auth-addr": "cNpBzxornzED1MsBKDupMbwqZnkFtoUVGD",
+        "nomo-plugin": "PluginName/PluginVersion",
     };
     let res = await fetch(args.url, {
         method: args.method,

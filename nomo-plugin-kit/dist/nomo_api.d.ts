@@ -36,6 +36,7 @@ export declare const nomo: {
         setItem: (key: string, value: string) => Promise<void>;
         removeItem: (key: string) => Promise<void>;
     };
+    enableMobileConsoleDebugging: typeof nomoEnableMobileConsoleDebugging;
 };
 /**
  * A set of logging-functions to enable debugging with the Nomo dev mode.
@@ -48,6 +49,11 @@ export declare const nomoConsole: {
     warn: (...args: any[]) => void;
     error: (...args: any[]) => void;
 };
+/**
+ * After calling this function, console logs are visible in the
+ * mobile dev mode of the Nomo App.
+ */
+export declare function nomoEnableMobileConsoleDebugging(): void;
 declare function nomoNativeLog(severity: "LOG" | "INFO" | "WARN" | "ERROR", args: any[]): void;
 /**
  * Creates a signature for an EVM-based transaction.

@@ -27,6 +27,7 @@ export default function Home() {
     null
   );
   useEffect(() => {
+    nomo.enableMobileConsoleDebugging();
     console.log("test console log");
     console.warn("test console warning");
     console.info("test console info");

@@ -13,6 +13,7 @@
 ### Functions
 
 - [nomoAuthHttp](modules.md#nomoauthhttp)
+- [nomoEnableMobileConsoleDebugging](modules.md#nomoenablemobileconsoledebugging)
 - [nomoGetDeviceHashes](modules.md#nomogetdevicehashes)
 - [nomoGetDeviceName](modules.md#nomogetdevicename)
 - [nomoGetMessengerAddress](modules.md#nomogetmessengeraddress)
@@ -40,6 +41,7 @@ The nomo-object can be used with only one import and supports the auto-completio
 | Name | Type |
 | :------ | :------ |
 | `authHttp` | (`args`: `string` \| { `body?`: `string` ; `headers?`: { `[key: string]`: `string`;  } ; `method?`: ``"GET"`` \| ``"POST"`` ; `url`: `string`  }) => `Promise`<{ `response`: `string` ; `statusCode`: `number`  }\> |
+| `enableMobileConsoleDebugging` | () => `void` |
 | `getDeviceHashes` | () => `Promise`<{ `deviceHashes`: `string`  }\> |
 | `getDeviceName` | () => `Promise`<{ `deviceName`: `string`  }\> |
 | `getMessengerAddress` | () => `Promise`<{ `inviteLink`: `string` ; `messengerAddress`: `string`  }\> |
@@ -60,7 +62,7 @@ The nomo-object can be used with only one import and supports the auto-completio
 
 #### Defined in
 
-[nomo_api.ts:40](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L40)
+[nomo_api.ts:40](https://github.com/nomo-app/nomo-plugin-kit/blob/152a936/nomo-plugin-kit/src/nomo_api.ts#L40)
 
 ___
 
@@ -83,7 +85,7 @@ console.log/console.error/console.warn/console.info.
 
 #### Defined in
 
-[nomo_api.ts:68](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L68)
+[nomo_api.ts:69](https://github.com/nomo-app/nomo-plugin-kit/blob/152a936/nomo-plugin-kit/src/nomo_api.ts#L69)
 
 ___
 
@@ -105,7 +107,7 @@ nomoLocalStorage can also be used as an alternative to the regular localStorage.
 
 #### Defined in
 
-[nomo_api.ts:9](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L9)
+[nomo_api.ts:9](https://github.com/nomo-app/nomo-plugin-kit/blob/152a936/nomo-plugin-kit/src/nomo_api.ts#L9)
 
 ## Functions
 
@@ -134,7 +136,24 @@ nomo-auth-version: "version of NOMO-Auth"
 
 #### Defined in
 
-[nomo_api.ts:359](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L359)
+[nomo_api.ts:364](https://github.com/nomo-app/nomo-plugin-kit/blob/152a936/nomo-plugin-kit/src/nomo_api.ts#L364)
+
+___
+
+### nomoEnableMobileConsoleDebugging
+
+▸ **nomoEnableMobileConsoleDebugging**(): `void`
+
+After calling this function, console logs are visible in the
+mobile dev mode of the Nomo App.
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[nomo_api.ts:94](https://github.com/nomo-app/nomo-plugin-kit/blob/152a936/nomo-plugin-kit/src/nomo_api.ts#L94)
 
 ___
 
@@ -151,7 +170,7 @@ Can be used for fingerprinting devices.
 
 #### Defined in
 
-[nomo_api.ts:323](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L323)
+[nomo_api.ts:328](https://github.com/nomo-app/nomo-plugin-kit/blob/152a936/nomo-plugin-kit/src/nomo_api.ts#L328)
 
 ___
 
@@ -167,7 +186,7 @@ Returns a human-readable name of the device.
 
 #### Defined in
 
-[nomo_api.ts:338](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L338)
+[nomo_api.ts:343](https://github.com/nomo-app/nomo-plugin-kit/blob/152a936/nomo-plugin-kit/src/nomo_api.ts#L343)
 
 ___
 
@@ -183,7 +202,7 @@ Can be used for chatting with other NOMO-users, but also for push-notifications 
 
 #### Defined in
 
-[nomo_api.ts:170](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L170)
+[nomo_api.ts:175](https://github.com/nomo-app/nomo-plugin-kit/blob/152a936/nomo-plugin-kit/src/nomo_api.ts#L175)
 
 ___
 
@@ -201,7 +220,7 @@ See https://nomo.app/ for an overview of supported platforms.
 
 #### Defined in
 
-[nomo_api.ts:148](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L148)
+[nomo_api.ts:153](https://github.com/nomo-app/nomo-plugin-kit/blob/152a936/nomo-plugin-kit/src/nomo_api.ts#L153)
 
 ___
 
@@ -217,7 +236,7 @@ This is a low-level function that should not be called directly. Instead, the fu
 
 #### Defined in
 
-[nomo_api.ts:270](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L270)
+[nomo_api.ts:275](https://github.com/nomo-app/nomo-plugin-kit/blob/152a936/nomo-plugin-kit/src/nomo_api.ts#L275)
 
 ___
 
@@ -233,7 +252,7 @@ Returns blockchain-addresses of the NOMO-user.
 
 #### Defined in
 
-[nomo_api.ts:187](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L187)
+[nomo_api.ts:192](https://github.com/nomo-app/nomo-plugin-kit/blob/152a936/nomo-plugin-kit/src/nomo_api.ts#L192)
 
 ___
 
@@ -259,7 +278,7 @@ Also the NOMO-ID protocol works by injecting QRCodes.
 
 #### Defined in
 
-[nomo_api.ts:206](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L206)
+[nomo_api.ts:211](https://github.com/nomo-app/nomo-plugin-kit/blob/152a936/nomo-plugin-kit/src/nomo_api.ts#L211)
 
 ___
 
@@ -285,7 +304,7 @@ The promise rejects if the user chooses to cancel.
 
 #### Defined in
 
-[nomo_api.ts:246](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L246)
+[nomo_api.ts:251](https://github.com/nomo-app/nomo-plugin-kit/blob/152a936/nomo-plugin-kit/src/nomo_api.ts#L251)
 
 ___
 
@@ -311,7 +330,7 @@ Assets are only sent if the user confirms the dialog.
 
 #### Defined in
 
-[nomo_api.ts:379](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L379)
+[nomo_api.ts:384](https://github.com/nomo-app/nomo-plugin-kit/blob/152a936/nomo-plugin-kit/src/nomo_api.ts#L384)
 
 ___
 
@@ -336,7 +355,7 @@ but it can be used as a proof that the user controls a wallet.
 
 #### Defined in
 
-[nomo_api.ts:131](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L131)
+[nomo_api.ts:136](https://github.com/nomo-app/nomo-plugin-kit/blob/152a936/nomo-plugin-kit/src/nomo_api.ts#L136)
 
 ___
 
@@ -360,7 +379,7 @@ See EthersjsNomoSigner for an example on how to use this function.
 
 #### Defined in
 
-[nomo_api.ts:119](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L119)
+[nomo_api.ts:124](https://github.com/nomo-app/nomo-plugin-kit/blob/152a936/nomo-plugin-kit/src/nomo_api.ts#L124)
 
 ___
 
@@ -386,4 +405,4 @@ The promise rejects if the user chooses to cancel.
 
 #### Defined in
 
-[nomo_api.ts:221](https://github.com/nomo-app/nomo-plugin-kit/blob/04196b7/nomo-plugin-kit/src/nomo_api.ts#L221)
+[nomo_api.ts:226](https://github.com/nomo-app/nomo-plugin-kit/blob/152a936/nomo-plugin-kit/src/nomo_api.ts#L226)

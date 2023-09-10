@@ -53,6 +53,7 @@ export const nomo = {
   sendAssets: nomoSendAssets,
   nativeLog: nomoNativeLog,
   localStorage: nomoLocalStorage,
+  enableMobileConsoleDebugging: nomoEnableMobileConsoleDebugging,
 };
 
 const originalConsoleLog = console.log;
@@ -85,7 +86,12 @@ export const nomoConsole = {
 };
 
 let consoleOverwriten: boolean = false;
-function overwriteConsole() {
+
+/**
+ * After calling this function, console logs are visible in the
+ * mobile dev mode of the Nomo App.
+ */
+export function nomoEnableMobileConsoleDebugging() {
   if (!consoleOverwriten) {
     consoleOverwriten = true;
     console.log("overwriting console-functions to enable mobile dev mode...");
@@ -95,7 +101,6 @@ function overwriteConsole() {
     console.error = nomoConsole.error;
   }
 }
-overwriteConsole();
 
 function nomoNativeLog(
   severity: "LOG" | "INFO" | "WARN" | "ERROR",

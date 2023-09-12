@@ -6,5 +6,6 @@ export declare class EthersjsNomoSigner extends Signer {
     connect(_provider: Provider): Signer;
     getAddress(): Promise<string>;
     signMessage(_message: Bytes | string): Promise<string>;
+    resolveSig(sigHex: string): bigint[];
     signTransaction(txRequest: Deferrable<TransactionRequest>): Promise<string>;
 }

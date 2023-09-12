@@ -11,7 +11,8 @@ import {
 } from "nomo-plugin-kit/dist/nomo_theming";
 import styles from "./page.module.css";
 import "./nomo.css";
-import { sendDemoTransaction } from "ethersjs-nomo-plugins/dist/ethersjs_provider";
+//import { sendDemoTransaction } from "ethersjs-nomo-plugins/dist/ethersjs_provider";
+import { sendTransaction } from "web3js-nomo-plugins/dist/web3js_provider";
 
 export default function Home() {
   const [dialog, setDialog] = useState<DialogContent | null>(null);
@@ -96,7 +97,7 @@ export default function Home() {
         <div className={styles.card}>
           <h2
             onClick={() => {
-              sendDemoTransaction()
+              sendTransaction()
                 .then((res) => {
                   openDialog({
                     title: "Transaction submitted to the ZENIQ Smartchain!",

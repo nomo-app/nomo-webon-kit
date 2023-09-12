@@ -57,6 +57,12 @@ export class EthersjsNomoSigner extends Signer {
     signMessage(_message) {
         return Promise.reject("signMessage not implemented");
     }
+    resolveSig(sigHex) {
+        const r = BigInt(parseInt(sigHex.slice(0, 64), 16));
+        const s = BigInt(parseInt(sigHex.slice(64, 128), 16));
+        const v = BigInt(parseInt(sigHex.slice(128, 130), 16));
+        return [v, r, s];
+    }
     signTransaction(txRequest) {
         if (isFallbackModeActive()) {
             return signTxDevWallet(txRequest);
@@ -76,9 +82,12 @@ export class EthersjsNomoSigner extends Signer {
             unsignedTx[key] = txRequest[key];
         }
         const unsignedRawTx = utils.serializeTransaction(unsignedTx);
+        console.log("unsignedTx", unsignedTx);
+        console.log("unsignedRawTx", unsignedRawTx);
         return new Promise((resolve, reject) => {
             nomoSignEvmTransaction({ messageHex: unsignedRawTx })
                 .then((res) => {
+                console.log("resFromNomo", this.resolveSig(res.sigHex));
                 const signedRawTx = appendSignatureToTx(unsignedTx, res.sigHex);
                 resolve(signedRawTx);
             })

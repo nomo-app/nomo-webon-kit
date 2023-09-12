@@ -18,6 +18,9 @@ export async function sendDemoTransaction(): Promise<providers.TransactionRespon
     value,
     gasLimit: 21000,
   };
+
+  console.log("tx", tx);
+
   const res = await zscSigner.sendTransaction(tx);
   return res;
 }

@@ -58,12 +58,6 @@ export class EthersjsNomoSigner extends Signer {
         return Promise.reject("signMessage not implemented");
     }
     resolveSig(sigHex) {
-        const rBigInt = BigInt(parseInt(sigHex.slice(0, 64), 16));
-        console.log("rBigInt", rBigInt);
-        const sBigInt = BigInt(parseInt(sigHex.slice(64, 128), 16));
-        console.log("sBigInt", sBigInt);
-        const vBigInt = BigInt(parseInt(sigHex.slice(128, 130), 16));
-        console.log("vBigInt", vBigInt);
         const r = BigNumber.from("0x" + sigHex.slice(0, 64)).toBigInt();
         const s = BigNumber.from("0x" + sigHex.slice(64, 128)).toBigInt();
         const v = BigNumber.from("0x" + sigHex.slice(128, 130)).toBigInt();

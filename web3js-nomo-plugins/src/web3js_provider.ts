@@ -1,7 +1,10 @@
-import { Web3 } from "web3";
+import { HexString, Web3, utils } from "web3";
 import { nomoGetWalletAddresses, nomoSignEvmTransaction } from "nomo-plugin-kit/dist/nomo_api";
-import { Transaction, Common } from "web3-eth-accounts";
-
+//import { Transaction } from "web3-eth-accounts";
+import { LegacyTransaction } from "@ethereumjs/tx";
+import { Common } from "@ethereumjs/common";
+import { RLP } from "@ethereumjs/rlp";
+import { bytesToHex } from '@ethereumjs/util'
 
 
 const rpcUrlZeniqSmartChain = "https://smart.zeniq.network:9545";
@@ -32,89 +35,181 @@ export async function getAddresses(): Promise<string> {
     });
 }
 
-export function resolveSig(sigHex: string): bigint[] {
+// export function resolveSig(sigHex: string): bigint[] {
+//     console.log("rHex", "0x" + sigHex.slice(0, 64));
+//     console.log("sHex", "0x" + sigHex.slice(64, 128));
+//     console.log("vHex", "0x" + sigHex.slice(128, 130));
+
+//     const r = web3.utils.toBigInt("0x" + sigHex.slice(0, 64));
+//     const s = web3.utils.toBigInt("0x" + sigHex.slice(64, 128));
+//     const v = web3.utils.toBigInt("0x" + sigHex.slice(128, 130));
+
+//     return [v, r, s];
+// }
+
+export function resolveSig(sigHex: string): string[] {
     console.log("rHex", "0x" + sigHex.slice(0, 64));
     console.log("sHex", "0x" + sigHex.slice(64, 128));
     console.log("vHex", "0x" + sigHex.slice(128, 130));
 
-    const r = web3.utils.toBigInt("0x" + sigHex.slice(0, 64));
-    const s = web3.utils.toBigInt("0x" + sigHex.slice(64, 128));
-    const v = web3.utils.toBigInt("0x" + sigHex.slice(128, 130));
+    const r = "0x" + sigHex.slice(0, 64);
+    const s = "0x" + sigHex.slice(64, 128);
+    const v = "0x" + sigHex.slice(128, 130);
 
     return [v, r, s];
 }
 
-export async function signTransactionWithSigHex(txRequest: Transaction): Promise<Transaction> {
-    const unsignedSerialiedTx = txRequest.getMessageToSign();
-    console.log("unsignedSerialiedTx", unsignedSerialiedTx);
+export async function sendDemoTransaction() {
+    const ownAddress = await getAddresses();
+    console.log("ownAddress", ownAddress);
 
-    const serializedHexTx = web3.utils.bytesToHex(unsignedSerialiedTx);
+    const value = web3.utils.toWei("0.1", "ether");
+    const nonce = await web3.eth.getTransactionCount(ownAddress);
+    const gasPrice = await web3.eth.getGasPrice();
+    const gasLimit = 21000;
 
-    console.log("serializedHexTx", serializedHexTx);
-    console.log("length of unsignedRawTx", serializedHexTx.length);
+    const txObject = {
+        nonce: web3.utils.toHex(nonce),
+        to: ownAddress, // send ZENIQ to ourselves
+        value: web3.utils.toHex(value),
+        gasLimit: web3.utils.toHex(gasLimit),
+        gasPrice: web3.utils.toHex(gasPrice),
+    };
+    const common = Common.custom(
+        {
 
+            chainId: chainIdZeniqSmartChain,
+        },
+
+    );
+    const tx = LegacyTransaction.fromTxData(txObject, { common });
+    console.log("tx", tx);
+    const unsignedTx = tx.getMessageToSign();
+    const unsignedTXRLP = RLP.encode(unsignedTx);
+    const txHash = web3.utils.sha3Raw(unsignedTXRLP);
+    console.log("unsignedSerializedTxHash", txHash);
+    const signature = await signTransaction(txHash);
+    console.log("signature", signature);
+    const rsv = resolveSig(signature);
+    const txData = {
+        nonce: web3.utils.toHex(nonce),
+        to: ownAddress, // send ZENIQ to ourselves
+        value: web3.utils.toHex(value),
+        gasLimit: web3.utils.toHex(gasLimit),
+        gasPrice: web3.utils.toHex(gasPrice),
+        r: rsv[1],
+        s: rsv[2],
+        v: rsv[0],
+    };
+    const signedTx = LegacyTransaction.fromTxData(txData, { common });
+    console.log("signedTx", signedTx);
+    const serializedSignedTx = signedTx.serialize();
+
+
+    const txReciept = await web3.eth.sendSignedTransaction(serializedSignedTx);
+    return txReciept;
+
+}
+
+
+export async function signTransaction(txHash: string): Promise<string> {
     return new Promise((resolve, reject) => {
-        nomoSignEvmTransaction({ messageHex: serializedHexTx })
+        nomoSignEvmTransaction({ messageHex: txHash })
             .then((res) => {
-                console.log("resFromNomo", res.sigHex);
-                const sig = resolveSig(res.sigHex);
-                const signedTxData = {
-                    nonce: txRequest.nonce,
-                    gasLimit: txRequest.gasLimit,
-                    gasPrice: txRequest.gasPrice,
-                    to: txRequest.to,
-                    value: txRequest.value,
-                    r: sig[1],
-                    s: sig[2],
-                    v: sig[0],
-                };
-                console.log("signedTxData", signedTxData);
-                const signedTx = Transaction.fromTxData(signedTxData);
-                console.log("signedTx", signedTx);
-
-                resolve(signedTx);
+                resolve(res.sigHex);
             })
             .catch((err: any) => {
                 reject(err);
             });
     });
-}
-
-export async function sendTransaction() {
-
-    const ownAddress = await getAddresses();
-    console.log("ownAddress", ownAddress);
-    const value = web3.utils.toWei("0.1", "ether");
-    const nonce = await web3.eth.getTransactionCount(ownAddress);
-    const gasPrice = await web3.eth.getGasPrice();
-
-
-    const txData = {
-        nonce: nonce,
-        to: ownAddress, // send ZENIQ to ourselves
-        value: web3.utils.toBigInt(value),
-        gasLimit: 21000,
-        gasPrice: gasPrice,
-    };
-
-
-    const transaction: Transaction = Transaction.fromTxData(txData);
-    console.log("transaction", transaction);
-    const singedTx = await signTransactionWithSigHex(transaction);
-    const serializedTx = singedTx.serialize();
-    console.log("serialized", serializedTx);
-    console.log("isSigned", singedTx.isSigned());
-    console.log("isVerifySigned", singedTx.verifySignature());
-
-    const txhash = web3.utils.bytesToHex(singedTx.serialize());
-    console.log("txHash", txhash);
-
-
-    const res = await web3.eth.sendSignedTransaction(serializedTx);
-
-    //const res = await web3.eth.sendTransaction(tx);
-    console.log("res", res);
-    return res;
 
 }
+
+// export async function signTransactionWithSigHex(txRequest: Transaction): Promise<Transaction> {
+//     const unsignedRawTx = txRequest.getMessageToSign(false);
+//     console.log("unsignedSerialiedTx", unsignedRawTx);
+//     const unsignedSerialiedTx = RLP.encode(unsignedRawTx);
+
+//     const test = txRequest.serialize();
+//     const test2 = web3.utils.sha3Raw(test);
+//     console.log("test2", test2);
+//     console.log("test2.length", test2.length);
+//     const serializedHexTx = web3.utils.sha3Raw(unsignedSerialiedTx);
+
+//     console.log("serializedHexTx", serializedHexTx);
+//     console.log("length of unsignedRawTx", serializedHexTx.length);
+
+//     return new Promise((resolve, reject) => {
+//         nomoSignEvmTransaction({ messageHex: test2 })
+//             .then((res) => {
+//                 console.log("resFromNomo", res.sigHex);
+//                 const sig = resolveSig(res.sigHex);
+//                 const signedTxData = {
+//                     nonce: txRequest.nonce,
+//                     gasLimit: txRequest.gasLimit,
+//                     gasPrice: txRequest.gasPrice,
+//                     to: txRequest.to,
+//                     value: txRequest.value,
+//                     r: sig[1],
+//                     s: sig[2],
+//                     v: sig[0],
+//                 };
+//                 console.log("signedTxData", signedTxData);
+//                 const signedTx = Transaction.fromTxData(signedTxData);
+//                 console.log("signedTx", signedTx);
+
+//                 resolve(signedTx);
+//             })
+//             .catch((err: any) => {
+//                 reject(err);
+//             });
+//     });
+// }
+
+
+
+// export async function sendTransaction() {
+
+//     const ownAddress = await getAddresses();
+//     console.log("ownAddress", ownAddress);
+
+//     const value = web3.utils.toWei("0.1", "ether");
+//     const nonce = await web3.eth.getTransactionCount(ownAddress);
+//     const gasPrice = await web3.eth.getGasPrice();
+
+
+//     const txData = {
+//         nonce: nonce,
+//         to: ownAddress, // send ZENIQ to ourselves
+//         value: web3.utils.toBigInt(value),
+//         gasLimit: 21000n,
+//         gasPrice: gasPrice,
+//     };
+
+//     const transaction: Transaction = Transaction.fromTxData(txData);
+//     console.log("transaction", transaction);
+
+//     const singedTx = await signTransactionWithSigHex(transaction);
+//     // const serializedTx = singedTx.serialize();
+//     // console.log("serialized", serializedTx);
+//     // console.log("isSigned", singedTx.isSigned());
+//     // console.log("isVerifySigned", singedTx.verifySignature());
+
+//     // const txhash = web3.utils.sha3Raw(singedTx.serialize());
+//     // console.log("txHash", txhash);
+//     const signedSerialiedTx = singedTx.serialize();
+//     console.log("signedSerialiedTx", web3.utils.sha3Raw(signedSerialiedTx));
+//     console.log("signedSerialiedTx", signedSerialiedTx);
+//     console.log("isSigned", singedTx.isSigned());
+//     console.log("isVerifySigned", singedTx.verifySignature());
+//     const res = await web3.eth.sendSignedTransaction(signedSerialiedTx).then((receipt) => {
+//         console.log("receipt", receipt);
+//     }).catch((err) => {
+//         console.log("err", err);
+//     });
+
+//     console.log("res", res);
+//     return res;
+
+// }
 

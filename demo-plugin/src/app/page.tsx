@@ -12,7 +12,7 @@ import {
 import styles from "./page.module.css";
 import "./nomo.css";
 //import { sendDemoTransaction } from "ethersjs-nomo-plugins/dist/ethersjs_provider";
-import { sendTransaction } from "web3js-nomo-plugins/dist/web3js_provider";
+import { sendDemoTransaction } from "web3js-nomo-plugins/dist/web3js_provider";
 import { testSigning } from "../../test/web3_signing_test";
 
 export default function Home() {
@@ -98,7 +98,7 @@ export default function Home() {
         <div className={styles.card}>
           <h2
             onClick={() => {
-              sendTransaction()
+              sendDemoTransaction()
                 .then((res) => {
                   openDialog({
                     title: "Transaction submitted to the ZENIQ Smartchain!",

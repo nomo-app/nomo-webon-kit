@@ -14,11 +14,13 @@
         "url": "https://github.com/nomo-app/nomo-plugin-kit.git"
     },
     "dependencies": {
+        "@ethereumjs/common": "^4.0.0",
+        "@ethereumjs/tx": "^5.0.0",
         "web3": "^4.1.1"
     },
     "devDependencies": {
-        "typescript": "5.0.4",
-        "@types/node": "^20.5.9"
+        "@types/node": "^20.5.9",
+        "typescript": "5.0.4"
     },
     "peerDependencies": {
         "nomo-plugin-kit": "^0.1.2"

@@ -13,6 +13,7 @@ import styles from "./page.module.css";
 import "./nomo.css";
 //import { sendDemoTransaction } from "ethersjs-nomo-plugins/dist/ethersjs_provider";
 import { sendTransaction } from "web3js-nomo-plugins/dist/web3js_provider";
+import { testSigning } from "../../test/web3_signing_test";
 
 export default function Home() {
   const [dialog, setDialog] = useState<DialogContent | null>(null);
@@ -335,6 +336,32 @@ export default function Home() {
           <p>
             With consent from the user, plugins can sign messages to prove that
             the user controls a specific wallet.
+          </p>
+        </div>
+        <div className={styles.card}>
+          <h2
+            onClick={() => {
+              testSigning()
+                .then((res) => {
+                  openDialog({
+                    title: "Unittest Result",
+                    content: JSON.stringify(res),
+                  });
+                })
+                .catch((e) => {
+                  console.error(e);
+                  openDialog({
+                    title: "sign transaction failed",
+                    content:
+                      e instanceof Error ? e.toString() : JSON.stringify(e),
+                  });
+                });
+            }}
+          >
+            Unittest transaction signing <span>-&gt;</span>
+          </h2>
+          <p>
+            Unittest for signing a transaction with the Nomo app.
           </p>
         </div>
       </div>

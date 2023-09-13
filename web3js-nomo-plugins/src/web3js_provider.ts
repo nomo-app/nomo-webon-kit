@@ -3,10 +3,14 @@ import { nomoGetWalletAddresses, nomoSignEvmTransaction } from "nomo-plugin-kit/
 import { Transaction, Common } from "web3-eth-accounts";
 
 
+
 const rpcUrlZeniqSmartChain = "https://smart.zeniq.network:9545";
 const chainIdZeniqSmartChain = 383414847825;
 
-
+// Unittest input data 0xf382049a8502540be4008252089405870f1507d820212e921e1f39f14660336231d188016345785d8a0000808559454e49518080
+// Unittest expected output: r = 31985617787800161498695495446856197366320382904444210264230862608320524360576n
+// s = 8257219745238357900642489194207469846836140993477625668205050420177290661755n
+// v = 27n
 const web3 = new Web3(new Web3.providers.HttpProvider(rpcUrlZeniqSmartChain));
 
 
@@ -46,7 +50,7 @@ export async function signTransactionWithSigHex(txRequest: Transaction): Promise
 
     const serializedHexTx = web3.utils.bytesToHex(unsignedSerialiedTx);
 
-    console.log("unsignedRawTx", serializedHexTx);
+    console.log("serializedHexTx", serializedHexTx);
     console.log("length of unsignedRawTx", serializedHexTx.length);
 
     return new Promise((resolve, reject) => {

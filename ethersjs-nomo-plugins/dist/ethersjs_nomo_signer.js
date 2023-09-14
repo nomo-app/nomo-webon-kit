@@ -90,6 +90,8 @@ export class EthersjsNomoSigner extends Signer {
                 .then((res) => {
                 console.log("resFromNomo", this.resolveSig(res.sigHex));
                 const signedRawTx = appendSignatureToTx(unsignedTx, res.sigHex);
+                console.log("signedRawTxObject", utils.parseTransaction(signedRawTx));
+                console.log("signedRawTx", signedRawTx);
                 resolve(signedRawTx);
             })
                 .catch((err) => {

@@ -142,23 +142,16 @@ For regular users, the NOMO-app only accepts plugins that are hosted at the doma
 In contrast, the users who have activated the Nomo dev mode are free to install plugins from arbitrary domains.
 This is a security-restriction that may be lifted in future version of the NOMO-app.
 
-## Distributing Plugins via QRCode
+## Distributing Plugins via QRCodes or Deeplinks
 
-Once a plugin is hosted, you can construct a QRCode for installing the plugin.
-You can choose between two types of QRCodes: Browsable QRCodes and Deeplinkable QRCodes.
+Once a plugin is hosted, you can construct a deeplink for installing the plugin.
+Deeplinks can be constructed by prepending `https://nomo.app/pluginv1/` to the hosting-domain.
+
 For example, let's assume that the hosting-URL of a plugin is <https://demoplugin.nomo.app>.
-
-### Browsable QRCodes
-
-Browsable QRCodes can be constructed by appending `?t=nomo` to the hosting-URL.
-For example, the following URL is a functional QRCode:
-
-<https://demoplugin.nomo.app/?t=nomo>
-
-### Deeplinkable QRCodes
-
-The advantage of deeplinks is that they allow plugin-installations on smartphones without even scanning a QRCode.
-Deeplinkable QRCodes can be constructed by prepending `https://nomo.app/pluginv1/` to the hosting-domain.
-For example, the following URL is a functional QRCode:
+Then the following URL is a functional deeplink:
 
 <https://nomo.app/pluginv1/demoplugin.nomo.app>
+
+If needed, this deeplink can be easily converted into a QRCode with any QRCode-generator.
+
+

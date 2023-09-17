@@ -29,7 +29,7 @@ Download the NOMO-app and create a wallet with it.
 
 ## Step 2: Launch the demo-plugin locally
 
-> You can skip step 2 and step 3 if you use the following hosted plugin URL: <https://demoplugin.nomo.app/?t=nomo>
+> You can skip step 2 and step 3 if you use the following hosted plugin URL: <https://demoplugin.nomo.app>
 
 Clone this repo, then launch the demo-plugin with:
 
@@ -55,7 +55,7 @@ Run the following command to expose the demo-plugin to the Internet:
 
 With this command, `ngrok` should give you an https-URL that looks something like this:
 
-<https://56b1-212-186-68-152.ngrok-free.app>
+<https://56b1.ngrok-free.app>
 
 You will need this URL in the next step.
 

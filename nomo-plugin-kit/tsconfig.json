@@ -1,10 +1,10 @@
 {
     "compilerOptions": {
+        "outDir": "./dist",
         "target": "ES2017",
         "module": "esnext",
         "declaration": true,
-        "outDir": "./dist",
-        "strict": true
+        "strict": true,
     },
     "exclude": [
         "node_modules",

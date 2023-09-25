@@ -105,4 +105,4 @@ const fulfillPromiseFromFlutter = function (base64FromFlutter: string) {
 };
 try {
   window.fulfillPromiseFromFlutter = fulfillPromiseFromFlutter;
-} catch (e) {}
+} catch (e) { }

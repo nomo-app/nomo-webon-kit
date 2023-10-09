@@ -342,7 +342,10 @@ export default function Home() {
               nomo
               .qrScan()
               .then((res) => {
-                console.log(res);
+                openDialog({
+                  title: "QrScan successful!",
+                  content: JSON.stringify(res),
+                });
               })
               .catch((e) => {
                 console.error(e);

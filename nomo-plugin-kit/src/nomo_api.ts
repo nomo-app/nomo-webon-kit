@@ -55,6 +55,7 @@ export const nomo = {
   localStorage: nomoLocalStorage,
   enableMobileConsoleDebugging: nomoEnableMobileConsoleDebugging,
   qrScan: nomoQrScan,
+  injectIntoPlugin: nomoInjectIntoPlugin,
 };
 
 const originalConsoleLog = console.log;
@@ -219,6 +220,12 @@ export async function nomoInjectQRCode(args: {
   navigateBack: boolean;
 }): Promise<void> {
   return await invokeNomoFunction("nomoInjectQRCode", args);
+}
+
+export async function nomoInjectIntoPlugin(args: {
+  qrCode: string;
+}): Promise<void> {
+  return await invokeNomoFunction("nomoInjectIntoPlugin", args);
 }
 
 const imagePrefix = "data:image/png;base64,";

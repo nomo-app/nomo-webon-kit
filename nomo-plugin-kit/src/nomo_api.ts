@@ -54,6 +54,7 @@ export const nomo = {
   nativeLog: nomoNativeLog,
   localStorage: nomoLocalStorage,
   enableMobileConsoleDebugging: nomoEnableMobileConsoleDebugging,
+  qrScan: nomoQrScan,
 };
 
 const originalConsoleLog = console.log;
@@ -101,6 +102,11 @@ export function nomoEnableMobileConsoleDebugging() {
     console.error = nomoConsole.error;
   }
 }
+
+export async function nomoQrScan(): Promise<{ qrCode: string }> {
+  return await invokeNomoFunction("nomoQrScan", {});
+}
+
 
 function nomoNativeLog(
   severity: "LOG" | "INFO" | "WARN" | "ERROR",

@@ -336,7 +336,28 @@ export default function Home() {
             the user controls a specific wallet.
           </p>
         </div>
+        <div className={styles.card}>
+          <h2
+            onClick={() => {
+              nomo
+              .qrScan()
+              .then((res) => {
+                console.log(res);
+              })
+              .catch((e) => {
+                console.error(e);
+                // Handle any errors here
+              });
+            }}
+          >
+            QR-Scanner<span>-&gt;</span>
+          </h2>
+          <p>
+            Scan a QrCode.
+          </p>
+        </div>
       </div>
     </main>
   );
+  
 }

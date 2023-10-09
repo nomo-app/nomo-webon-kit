@@ -37,6 +37,7 @@ export declare const nomo: {
         removeItem: (key: string) => Promise<void>;
     };
     enableMobileConsoleDebugging: typeof nomoEnableMobileConsoleDebugging;
+    qrScan: typeof nomoQrScan;
 };
 /**
  * A set of logging-functions to enable debugging with the Nomo dev mode.
@@ -54,6 +55,9 @@ export declare const nomoConsole: {
  * mobile dev mode of the Nomo App.
  */
 export declare function nomoEnableMobileConsoleDebugging(): void;
+export declare function nomoQrScan(): Promise<{
+    qrCode: string;
+}>;
 declare function nomoNativeLog(severity: "LOG" | "INFO" | "WARN" | "ERROR", args: any[]): void;
 /**
  * Creates a signature for an EVM-based transaction.

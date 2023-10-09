@@ -49,6 +49,7 @@ export const nomo = {
     nativeLog: nomoNativeLog,
     localStorage: nomoLocalStorage,
     enableMobileConsoleDebugging: nomoEnableMobileConsoleDebugging,
+    qrScan: nomoQrScan,
 };
 const originalConsoleLog = console.log;
 const originalConsoleInfo = console.info;
@@ -91,6 +92,9 @@ export function nomoEnableMobileConsoleDebugging() {
         console.warn = nomoConsole.warn;
         console.error = nomoConsole.error;
     }
+}
+export async function nomoQrScan() {
+    return await invokeNomoFunction("nomoQrScan", {});
 }
 function nomoNativeLog(severity, args) {
     if (isFallbackModeActive()) {

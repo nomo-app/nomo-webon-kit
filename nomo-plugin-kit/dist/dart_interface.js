@@ -8,11 +8,11 @@ export function isFallbackModeActive() {
 function getDartBridge() {
     var _a;
     if (window.webkit) {
-        // macOS
+        // legacy macOS
         return (payload) => window.webkit.messageHandlers.NOMOJSChannel.postMessage(payload);
     }
     else if (window.NOMOJSChannel) {
-        // mobile
+        // mobile + macos
         return (payload) => window.NOMOJSChannel.postMessage(payload);
     }
     else if ((_a = window.chrome) === null || _a === void 0 ? void 0 : _a.webview) {

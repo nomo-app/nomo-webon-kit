@@ -39,6 +39,7 @@ export declare const nomo: {
     enableMobileConsoleDebugging: typeof nomoEnableMobileConsoleDebugging;
     qrScan: typeof nomoQrScan;
     injectIntoPlugin: typeof nomoInjectIntoPlugin;
+    mnemonicBackupExisted: typeof nomoMnemonicBackupExisted;
 };
 /**
  * A set of logging-functions to enable debugging with the Nomo dev mode.
@@ -113,7 +114,6 @@ export declare function nomoInjectQRCode(args: {
     qrCode: string;
     navigateBack: boolean;
 }): Promise<void>;
-
 export declare function nomoInjectIntoPlugin(args: {
     payload: string;
     pluginId: string;
@@ -210,4 +210,11 @@ export declare function nomoSendAssets(args: {
     targetAddress: string;
     amount: string;
 }): Promise<any>;
-export { };
+/**
+ * If true, then the user has made a backup of their 12 words (at some point in the past).
+ * If false, then there exists no backup and the 12 words will get lost with a high probability.
+ */
+export declare function nomoMnemonicBackupExisted(): Promise<{
+    mnemonicBackupExisted: boolean;
+}>;
+export {};

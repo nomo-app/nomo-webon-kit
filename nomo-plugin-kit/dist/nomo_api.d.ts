@@ -38,6 +38,7 @@ export declare const nomo: {
     };
     enableMobileConsoleDebugging: typeof nomoEnableMobileConsoleDebugging;
     qrScan: typeof nomoQrScan;
+    injectIntoPlugin: typeof nomoInjectIntoPlugin;
 };
 /**
  * A set of logging-functions to enable debugging with the Nomo dev mode.
@@ -111,6 +112,11 @@ export declare function nomoGetWalletAddresses(): Promise<{
 export declare function nomoInjectQRCode(args: {
     qrCode: string;
     navigateBack: boolean;
+}): Promise<void>;
+
+export declare function nomoInjectIntoPlugin(args: {
+    payload: string;
+    pluginId: string;
 }): Promise<void>;
 /**
  * Opens the camera and returns a picture in base64-encoding.
@@ -204,4 +210,4 @@ export declare function nomoSendAssets(args: {
     targetAddress: string;
     amount: string;
 }): Promise<any>;
-export {};
+export { };

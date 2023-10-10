@@ -55,6 +55,7 @@ export const nomo = {
   localStorage: nomoLocalStorage,
   enableMobileConsoleDebugging: nomoEnableMobileConsoleDebugging,
   qrScan: nomoQrScan,
+  injectIntoPlugin: nomoInjectIntoPlugin,
 };
 
 const originalConsoleLog = console.log;
@@ -221,6 +222,13 @@ export async function nomoInjectQRCode(args: {
   return await invokeNomoFunction("nomoInjectQRCode", args);
 }
 
+export async function nomoInjectIntoPlugin(args: {
+  payload: string;
+  pluginId: string;
+}): Promise<void> {
+  return await invokeNomoFunction("nomoInjectIntoPlugin", args);
+}
+
 const imagePrefix = "data:image/png;base64,";
 const fallbackImage =
   imagePrefix +
@@ -370,11 +378,11 @@ export async function nomoGetDeviceName(): Promise<{
 export async function nomoAuthHttp(
   args:
     | {
-        url: string;
-        method?: "GET" | "POST";
-        headers?: { [key: string]: string };
-        body?: string;
-      }
+      url: string;
+      method?: "GET" | "POST";
+      headers?: { [key: string]: string };
+      body?: string;
+    }
     | string
 ): Promise<{
   statusCode: number;

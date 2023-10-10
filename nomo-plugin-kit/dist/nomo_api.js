@@ -51,6 +51,7 @@ export const nomo = {
     enableMobileConsoleDebugging: nomoEnableMobileConsoleDebugging,
     qrScan: nomoQrScan,
     injectIntoPlugin: nomoInjectIntoPlugin,
+    mnemonicBackupExisted: nomoMnemonicBackupExisted,
 };
 const originalConsoleLog = console.log;
 const originalConsoleInfo = console.info;
@@ -287,4 +288,14 @@ export async function nomoAuthHttp(args) {
  */
 export async function nomoSendAssets(args) {
     return await invokeNomoFunction("nomoSendAssets", args);
+}
+/**
+ * If true, then the user has made a backup of their 12 words (at some point in the past).
+ * If false, then there exists no backup and the 12 words will get lost with a high probability.
+ */
+export async function nomoMnemonicBackupExisted() {
+    if (isFallbackModeActive()) {
+        return { mnemonicBackupExisted: false };
+    }
+    return await invokeNomoFunction("nomoMnemonicBackupExisted", {});
 }

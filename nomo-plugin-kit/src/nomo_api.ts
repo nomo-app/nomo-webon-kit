@@ -56,6 +56,7 @@ export const nomo = {
   enableMobileConsoleDebugging: nomoEnableMobileConsoleDebugging,
   qrScan: nomoQrScan,
   injectIntoPlugin: nomoInjectIntoPlugin,
+  mnemonicBackupExisted: nomoMnemonicBackupExisted,
 };
 
 const originalConsoleLog = console.log;
@@ -107,7 +108,6 @@ export function nomoEnableMobileConsoleDebugging() {
 export async function nomoQrScan(): Promise<{ qrCode: string }> {
   return await invokeNomoFunction("nomoQrScan", {});
 }
-
 
 function nomoNativeLog(
   severity: "LOG" | "INFO" | "WARN" | "ERROR",
@@ -378,11 +378,11 @@ export async function nomoGetDeviceName(): Promise<{
 export async function nomoAuthHttp(
   args:
     | {
-      url: string;
-      method?: "GET" | "POST";
-      headers?: { [key: string]: string };
-      body?: string;
-    }
+        url: string;
+        method?: "GET" | "POST";
+        headers?: { [key: string]: string };
+        body?: string;
+      }
     | string
 ): Promise<{
   statusCode: number;
@@ -401,4 +401,17 @@ export async function nomoSendAssets(args: {
   amount: string;
 }) {
   return await invokeNomoFunction("nomoSendAssets", args);
+}
+
+/**
+ * If true, then the user has made a backup of their 12 words (at some point in the past).
+ * If false, then there exists no backup and the 12 words will get lost with a high probability.
+ */
+export async function nomoMnemonicBackupExisted(): Promise<{
+  mnemonicBackupExisted: boolean;
+}> {
+  if (isFallbackModeActive()) {
+    return { mnemonicBackupExisted: false };
+  }
+  return await invokeNomoFunction("nomoMnemonicBackupExisted", {});
 }

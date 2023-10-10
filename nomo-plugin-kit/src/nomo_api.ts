@@ -223,7 +223,8 @@ export async function nomoInjectQRCode(args: {
 }
 
 export async function nomoInjectIntoPlugin(args: {
-  qrCode: string;
+  payload: string;
+  pluginId: string;
 }): Promise<void> {
   return await invokeNomoFunction("nomoInjectIntoPlugin", args);
 }
@@ -377,11 +378,11 @@ export async function nomoGetDeviceName(): Promise<{
 export async function nomoAuthHttp(
   args:
     | {
-        url: string;
-        method?: "GET" | "POST";
-        headers?: { [key: string]: string };
-        body?: string;
-      }
+      url: string;
+      method?: "GET" | "POST";
+      headers?: { [key: string]: string };
+      body?: string;
+    }
     | string
 ): Promise<{
   statusCode: number;

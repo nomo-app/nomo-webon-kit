@@ -50,6 +50,7 @@ export const nomo = {
     localStorage: nomoLocalStorage,
     enableMobileConsoleDebugging: nomoEnableMobileConsoleDebugging,
     qrScan: nomoQrScan,
+    injectIntoPlugin: nomoInjectIntoPlugin,
 };
 const originalConsoleLog = console.log;
 const originalConsoleInfo = console.info;
@@ -179,6 +180,9 @@ export async function nomoGetWalletAddresses() {
  */
 export async function nomoInjectQRCode(args) {
     return await invokeNomoFunction("nomoInjectQRCode", args);
+}
+export async function nomoInjectIntoPlugin(args) {
+    return await invokeNomoFunction("nomoInjectIntoPlugin", args);
 }
 const imagePrefix = "data:image/png;base64,";
 const fallbackImage = imagePrefix +

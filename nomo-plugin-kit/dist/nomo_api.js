@@ -297,5 +297,5 @@ export async function nomoMnemonicBackupExisted() {
     if (isFallbackModeActive()) {
         return { mnemonicBackupExisted: false };
     }
-    return await invokeNomoFunction("nomoMnemonicBackupExists", {});
+    return await invokeNomoFunction("nomoMnemonicBackupExisted", {});
 }

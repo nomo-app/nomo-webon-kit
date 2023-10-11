@@ -57,6 +57,7 @@ export const nomo = {
   qrScan: nomoQrScan,
   injectIntoPlugin: nomoInjectIntoPlugin,
   mnemonicBackupExisted: nomoMnemonicBackupExisted,
+  registerOnPluginVisible: nomoRegisterOnPluginVisible,
 };
 
 const originalConsoleLog = console.log;
@@ -414,4 +415,18 @@ export async function nomoMnemonicBackupExisted(): Promise<{
     return { mnemonicBackupExisted: false };
   }
   return await invokeNomoFunction("nomoMnemonicBackupExisted", {});
+}
+
+/**
+ * Registers a callback that will be called every time when the plugin gets visible within the Nomo App.
+ * For example, this can be used to refresh data when re-opening a plugin after a long pause.
+ */
+export async function nomoRegisterOnPluginVisible(
+  callback: () => void
+): Promise<void> {
+  window.onPluginVisible = callback;
+  if (isFallbackModeActive()) {
+    return;
+  }
+  return await invokeNomoFunction("nomoEnableOnPluginVisible", {});
 }

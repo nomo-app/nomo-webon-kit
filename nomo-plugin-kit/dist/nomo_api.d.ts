@@ -40,6 +40,7 @@ export declare const nomo: {
     qrScan: typeof nomoQrScan;
     injectIntoPlugin: typeof nomoInjectIntoPlugin;
     mnemonicBackupExisted: typeof nomoMnemonicBackupExisted;
+    registerOnPluginVisible: typeof nomoRegisterOnPluginVisible;
 };
 /**
  * A set of logging-functions to enable debugging with the Nomo dev mode.
@@ -217,4 +218,9 @@ export declare function nomoSendAssets(args: {
 export declare function nomoMnemonicBackupExisted(): Promise<{
     mnemonicBackupExisted: boolean;
 }>;
+/**
+ * Registers a callback that will be called every time when the plugin gets visible within the Nomo App.
+ * For example, this can be used to refresh data when re-opening a plugin after a long pause.
+ */
+export declare function nomoRegisterOnPluginVisible(callback: () => void): Promise<void>;
 export {};

@@ -346,7 +346,7 @@ export default function Home() {
             the user controls a specific wallet.
           </p>
         </div>
-        <div className={styles.card}>
+        {/* <div className={styles.card}>
           <h2
             onClick={() => {
               nomo
@@ -366,8 +366,8 @@ export default function Home() {
             QR-Scanner<span>-&gt;</span>
           </h2>
           <p>Scan a QrCode.</p>
-        </div>
-        <div className={styles.card}>
+        </div> */}
+        {/* <div className={styles.card}>
           <h2
             onClick={() => {
               nomo
@@ -395,7 +395,7 @@ export default function Home() {
             Inject payload into Plugin.<span>-&gt;</span>
           </h2>
           <p>Scan a QrCode.</p>
-        </div>
+        </div> */}
         <div className={styles.card}>
           <h2
             onClick={() => {

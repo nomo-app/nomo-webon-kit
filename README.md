@@ -41,8 +41,9 @@ Then the demo-plugin should run at <http://localhost:3000/>.
 
 ## Step 3: Launch ngrok tunnel
 
+> Launching an `ngrok` https-tunnel is only needed for Android/iOS.
 > You can skip this step if you are using a Desktop-version of the NOMO-app.
-> Typically, launching an `ngrok` tunnel is only needed for Android/iOS.
+> Without an https-tool like `ngrok`, you might get an error because Android rejects plugins that run over unsecure http.
 
 `ngrok` is a useful tool for exposing your localhost to the Internet.
 By using `ngrok`, the NOMO-app can easily access the demo-plugin regardless of which network your phone is connected to.

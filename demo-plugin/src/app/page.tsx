@@ -100,9 +100,17 @@ export default function Home() {
             onClick={() => {
               sendDemoTransaction()
                 .then((res) => {
+                  function replacer(key: string, value: any) {
+                    // JSON.stringify does not know how to serialize BigInts, so we add this replacer function
+                    if (typeof value === "bigint") {
+                      return value.toString(); // Convert BigInt to string
+                    }
+                    return value; // Return other values as is
+                  }
+                  const resJson = JSON.stringify(res, replacer, 2);
                   openDialog({
                     title: "Transaction submitted to the ZENIQ Smartchain!",
-                    content: JSON.stringify(res),
+                    content: resJson,
                   });
                 })
                 .catch((e) => {
@@ -411,12 +419,9 @@ export default function Home() {
           >
             Unittest transaction signing <span>-&gt;</span>
           </h2>
-          <p>
-            Unittest for signing a transaction with the Nomo app.
-          </p>
+          <p>Unittest for signing a transaction with the Nomo app.</p>
         </div>
       </div>
     </main>
   );
-
 }

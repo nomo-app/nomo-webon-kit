@@ -53,6 +53,7 @@ export const nomo = {
     injectIntoPlugin: nomoInjectIntoPlugin,
     mnemonicBackupExisted: nomoMnemonicBackupExisted,
     registerOnPluginVisible: nomoRegisterOnPluginVisible,
+    getLanguage: nomoGetLanguage,
 };
 const originalConsoleLog = console.log;
 const originalConsoleInfo = console.info;
@@ -321,4 +322,13 @@ export async function nomoRegisterOnPluginVisible(callback) {
         return;
     }
     return await invokeNomoFunction("nomoEnableOnPluginVisible", {});
+}
+/**
+ * Returns the currently selected language of the Nomo App.
+ */
+export async function nomoGetLanguage() {
+    if (isFallbackModeActive()) {
+        return { language: "en" };
+    }
+    return await invokeNomoFunction("nomoGetLanguage", {});
 }

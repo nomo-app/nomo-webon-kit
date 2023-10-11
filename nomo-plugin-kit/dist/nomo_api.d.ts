@@ -41,6 +41,7 @@ export declare const nomo: {
     injectIntoPlugin: typeof nomoInjectIntoPlugin;
     mnemonicBackupExisted: typeof nomoMnemonicBackupExisted;
     registerOnPluginVisible: typeof nomoRegisterOnPluginVisible;
+    getLanguage: typeof nomoGetLanguage;
 };
 /**
  * A set of logging-functions to enable debugging with the Nomo dev mode.
@@ -234,4 +235,10 @@ export declare function nomoMnemonicBackupExisted(): Promise<{
  * For example, this can be used to refresh data when re-opening a plugin after a long pause.
  */
 export declare function nomoRegisterOnPluginVisible(callback: () => void): Promise<void>;
+/**
+ * Returns the currently selected language of the Nomo App.
+ */
+export declare function nomoGetLanguage(): Promise<{
+    language: string;
+}>;
 export {};

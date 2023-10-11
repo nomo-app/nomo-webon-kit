@@ -1,6 +1,6 @@
 {
   "name": "web3js-nomo-plugins",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "web3js-nomo-plugins for nomo",
   "main": "dist/web3js_provider.js",
   "type": "module",

@@ -1,5 +1,7 @@
 # Nomo Plugin Kit
 
+> See [api-docs](api-docs/modules.md) for a list of individual functions.
+
 This package is designed for developers to develop _plugins_ for the [NOMO-app](https://nomo.app).
 A plugin is a web-application that runs within the NOMO-app.
 Plugins are a powerful capability of the NOMO-app that unlock the following features in an easy-to-use way:

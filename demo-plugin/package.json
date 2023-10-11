@@ -6,7 +6,7 @@
     "build": "next build && next export",
     "start": "npx serve@latest out",
     "lint": "next lint",
-    "prepare_internal_dev": "npm i ../nomo-plugin-kit/ && npm i ../ethersjs-nomo-plugins/ && npm i ../web3js-nomo-plugins/"
+    "prepare_internal_dev": "npm i ../nomo-plugin-kit/ && npm i ../ethersjs-nomo-plugins/ && npm i ../web3js-nomo-plugins/ && (cd ../ethersjs-nomo-plugins/ && npm i ../nomo-plugin-kit/)"
   },
   "dependencies": {
     "@types/node": "20.2.3",

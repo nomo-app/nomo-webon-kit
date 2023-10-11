@@ -15,11 +15,11 @@ export function isFallbackModeActive(): boolean {
  */
 function getDartBridge(): ((arg0: string) => void) | null {
   if (window.webkit) {
-    // macOS
+    // legacy macOS
     return (payload: string) =>
       window.webkit.messageHandlers.NOMOJSChannel.postMessage(payload);
   } else if (window.NOMOJSChannel) {
-    // mobile
+    // mobile + macos
     return (payload: string) => window.NOMOJSChannel.postMessage(payload);
   } else if (window.chrome?.webview) {
     //windows

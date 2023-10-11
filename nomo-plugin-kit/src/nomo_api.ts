@@ -106,6 +106,10 @@ export function nomoEnableMobileConsoleDebugging() {
   }
 }
 
+/**
+ * Opens the camera to scan a qrCode.
+ * Returns a raw qrCode or a list of comma-separated qrCodes.
+ */
 export async function nomoQrScan(): Promise<{ qrCode: string }> {
   return await invokeNomoFunction("nomoQrScan", {});
 }

@@ -58,6 +58,10 @@ export declare const nomoConsole: {
  * mobile dev mode of the Nomo App.
  */
 export declare function nomoEnableMobileConsoleDebugging(): void;
+/**
+ * Opens the camera to scan a qrCode.
+ * Returns a raw qrCode or a list of comma-separated qrCodes.
+ */
 export declare function nomoQrScan(): Promise<{
     qrCode: string;
 }>;

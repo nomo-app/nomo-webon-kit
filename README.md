@@ -1,6 +1,6 @@
 # Nomo Plugin Kit
 
-> See [api-docs](api-docs/modules.md) for a list of individual functions.
+See the [api-docs](api-docs/modules.md) for a list of individual functions.
 
 This package is designed for developers to develop _plugins_ for the [NOMO-app](https://nomo.app).
 A plugin is a web-application that runs within the NOMO-app.
@@ -72,9 +72,7 @@ Paste the URL from the previous steps, then the NOMO-app should launch the demo-
 You are now free to make changes to the demo-plugin or experiment with the features.  
 From now on, the About-screen will change into a "developer-area".
 
-# JavaScript API
-
-The functions that are provided by this package are documented in the [api-docs](api-docs/modules.md).
+# Installation
 
 You can add this package to your project with: `npm install nomo-plugin-kit`.
 
@@ -156,5 +154,3 @@ Then the following URL is a functional deeplink:
 <https://nomo.app/pluginv1/demoplugin.nomo.app>
 
 If needed, this deeplink can be easily converted into a QRCode with any QRCode-generator.
-
-

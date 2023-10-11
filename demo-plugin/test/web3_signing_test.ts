@@ -1,13 +1,12 @@
-import { BigNumber } from "ethers/lib/ethers";
 import {
   nomoGetWalletAddresses,
   nomoSignEvmTransaction,
 } from "nomo-plugin-kit/dist/nomo_api";
 
 function resolveSig(sigHex: string) {
-  const r = BigNumber.from("0x" + sigHex.slice(0, 64)).toBigInt();
-  const s = BigNumber.from("0x" + sigHex.slice(64, 128)).toBigInt();
-  const v = BigNumber.from("0x" + sigHex.slice(128, 130)).toBigInt();
+  const r = BigInt("0x" + sigHex.slice(0, 64));
+  const s = BigInt("0x" + sigHex.slice(64, 128));
+  const v = BigInt("0x" + sigHex.slice(128, 130));
   return { v, r, s };
 }
 

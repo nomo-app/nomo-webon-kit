@@ -52,6 +52,7 @@ export const nomo = {
     qrScan: nomoQrScan,
     injectIntoPlugin: nomoInjectIntoPlugin,
     mnemonicBackupExisted: nomoMnemonicBackupExisted,
+    registerOnPluginVisible: nomoRegisterOnPluginVisible,
 };
 const originalConsoleLog = console.log;
 const originalConsoleInfo = console.info;
@@ -95,6 +96,10 @@ export function nomoEnableMobileConsoleDebugging() {
         console.error = nomoConsole.error;
     }
 }
+/**
+ * Opens the camera to scan a qrCode.
+ * Returns a raw qrCode or a list of comma-separated qrCodes.
+ */
 export async function nomoQrScan() {
     return await invokeNomoFunction("nomoQrScan", {});
 }
@@ -182,6 +187,13 @@ export async function nomoGetWalletAddresses() {
 export async function nomoInjectQRCode(args) {
     return await invokeNomoFunction("nomoInjectQRCode", args);
 }
+/**
+ * Opens another plugin on top of the current plugin.
+ * If the plugin is not yet running, the plugin will be launched.
+ * If the plugin is not yet installed, an error is thrown.
+ * A payload can be passed to the plugin.
+ * Afterwards, the user may navigate back to the current plugin by pressing the back button.
+ */
 export async function nomoInjectIntoPlugin(args) {
     return await invokeNomoFunction("nomoInjectIntoPlugin", args);
 }
@@ -298,4 +310,15 @@ export async function nomoMnemonicBackupExisted() {
         return { mnemonicBackupExisted: false };
     }
     return await invokeNomoFunction("nomoMnemonicBackupExisted", {});
+}
+/**
+ * Registers a callback that will be called every time when the plugin gets visible within the Nomo App.
+ * For example, this can be used to refresh data when re-opening a plugin after a long pause.
+ */
+export async function nomoRegisterOnPluginVisible(callback) {
+    window.onPluginVisible = callback;
+    if (isFallbackModeActive()) {
+        return;
+    }
+    return await invokeNomoFunction("nomoEnableOnPluginVisible", {});
 }

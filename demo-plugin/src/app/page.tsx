@@ -30,7 +30,6 @@ export default function Home() {
   );
   useEffect(() => {
     nomo.enableMobileConsoleDebugging();
-    console.log("test console log");
     console.warn("test console warning");
     console.info("test console info");
     console.log(
@@ -46,6 +45,9 @@ export default function Home() {
     });
     nomo.getDeviceHashes().then(console.log).catch(console.error);
     injectNomoCSSVariables();
+    nomo.registerOnPluginVisible(() => {
+      console.log("onPluginVisible called");
+    });
   }, []);
 
   const openDialog = (content: DialogContent) => {

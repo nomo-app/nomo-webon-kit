@@ -346,7 +346,7 @@ export default function Home() {
             the user controls a specific wallet.
           </p>
         </div>
-        {/* <div className={styles.card}>
+        <div className={styles.card}>
           <h2
             onClick={() => {
               nomo
@@ -365,25 +365,26 @@ export default function Home() {
           >
             QR-Scanner<span>-&gt;</span>
           </h2>
-          <p>
-            Scan a QrCode.
-          </p>
+          <p>Scan a QrCode.</p>
         </div>
         <div className={styles.card}>
           <h2
             onClick={() => {
               nomo
                 .injectIntoPlugin({
-                  payload: "https://example.com/api/resource?key1=value1&key2=value2&key3=value3",
+                  payload:
+                    "https://example.com/api/resource?key1=value1&key2=value2&key3=value3",
                   pluginId: "app.nomo.demoplugin",
                 })
                 .then((res) => {
-                  nomo.localStorage.getItem("app.nomo.demoplugin").then((res) => {
-                    openDialog({
-                      title: "Injection successful!",
-                      content: JSON.stringify(res),
+                  nomo.localStorage
+                    .getItem("app.nomo.demoplugin")
+                    .then((res) => {
+                      openDialog({
+                        title: "Injection successful!",
+                        content: JSON.stringify(res),
+                      });
                     });
-                  });
                 })
                 .catch((e) => {
                   console.error(e);
@@ -393,10 +394,8 @@ export default function Home() {
           >
             Inject payload into Plugin.<span>-&gt;</span>
           </h2>
-          <p>
-            Scan a QrCode.
-          </p>
-        </div> */}
+          <p>Scan a QrCode.</p>
+        </div>
         <div className={styles.card}>
           <h2
             onClick={() => {

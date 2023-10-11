@@ -11,8 +11,8 @@ import {
 } from "nomo-plugin-kit/dist/nomo_theming";
 import styles from "./page.module.css";
 import "./nomo.css";
-//import { sendDemoTransaction } from "ethersjs-nomo-plugins/dist/ethersjs_provider";
-import { sendDemoTransaction } from "web3js-nomo-plugins/dist/web3js_provider";
+import { sendDemoTransaction } from "ethersjs-nomo-plugins/dist/ethersjs_provider";
+// import { sendDemoTransaction } from "web3js-nomo-plugins/dist/web3js_provider";
 import { testSigning } from "../../test/web3_signing_test";
 
 export default function Home() {
@@ -411,8 +411,7 @@ export default function Home() {
                   console.error(e);
                   openDialog({
                     title: "sign transaction failed",
-                    content:
-                      e instanceof Error ? e.toString() : JSON.stringify(e),
+                    content: e.toString(),
                   });
                 });
             }}

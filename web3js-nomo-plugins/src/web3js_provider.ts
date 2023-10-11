@@ -103,19 +103,18 @@ export async function sendDemoTransaction() {
     const ownAddress = await getAddresses();
     console.log("ownAddress", ownAddress);
     const value = web3.utils.toWei("0.1", "ether");
-    const nonce = await web3.eth.getTransactionCount(ownAddress);
+    const nonce = 1178;
     const gasPrice = await web3.eth.getGasPrice();
     const data = web3.utils.bytesToUint8Array("0x");
 
-    const balance = await web3.eth.getBalance(ownAddress);
-    console.log("balance", balance);
+
 
     const txData = {
         nonce: nonce,
         to: ownAddress, // send ZENIQ to ourselves
         value: web3.utils.toBigInt(value),
         gasLimit: 21000n,
-        gasPrice: gasPrice,
+        gasPrice: 10000000000,
         data: data,
     };
 

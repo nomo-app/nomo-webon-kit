@@ -1,4 +1,4 @@
-import { BigNumber, ethers, Signer, utils } from "ethers";
+import { ethers, Signer, utils } from "ethers";
 import { defineReadOnly } from "@ethersproject/properties";
 import { isFallbackModeActive } from "nomo-plugin-kit/dist/dart_interface";
 import { nomoGetWalletAddresses, nomoSignEvmTransaction, } from "nomo-plugin-kit/dist/nomo_api";
@@ -57,12 +57,6 @@ export class EthersjsNomoSigner extends Signer {
     signMessage(_message) {
         return Promise.reject("signMessage not implemented");
     }
-    resolveSig(sigHex) {
-        const r = BigNumber.from("0x" + sigHex.slice(0, 64)).toBigInt();
-        const s = BigNumber.from("0x" + sigHex.slice(64, 128)).toBigInt();
-        const v = BigNumber.from("0x" + sigHex.slice(128, 130)).toBigInt();
-        return [v, r, s];
-    }
     signTransaction(txRequest) {
         if (isFallbackModeActive()) {
             return signTxDevWallet(txRequest);
@@ -81,17 +75,11 @@ export class EthersjsNomoSigner extends Signer {
         for (const key of Object.keys(allowedTransactionKeys)) {
             unsignedTx[key] = txRequest[key];
         }
-        unsignedTx["nonce"] = 1178;
         const unsignedRawTx = utils.serializeTransaction(unsignedTx);
-        console.log("unsignedTx", unsignedTx);
-        console.log("unsignedRawTx", unsignedRawTx);
         return new Promise((resolve, reject) => {
             nomoSignEvmTransaction({ messageHex: unsignedRawTx })
                 .then((res) => {
-                console.log("resFromNomo", this.resolveSig(res.sigHex));
                 const signedRawTx = appendSignatureToTx(unsignedTx, res.sigHex);
-                console.log("signedRawTxObject", utils.parseTransaction(signedRawTx));
-                console.log("signedRawTx", signedRawTx);
                 resolve(signedRawTx);
             })
                 .catch((err) => {

@@ -14,15 +14,10 @@ export async function sendDemoTransaction(): Promise<providers.TransactionRespon
   const ownAddress = await zscSigner.getAddress();
   const value: BigNumber = ethers.utils.parseUnits("0.1", 18);
   const tx: providers.TransactionRequest = {
-    nonce: 1178,
     to: ownAddress, // send ZENIQ to ourselves
     value,
-    gasPrice: 10000000000,
     gasLimit: 21000,
   };
-
-  console.log("tx", tx);
-
   const res = await zscSigner.sendTransaction(tx);
   return res;
 }

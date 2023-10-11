@@ -119,6 +119,13 @@ export declare function nomoInjectQRCode(args: {
     qrCode: string;
     navigateBack: boolean;
 }): Promise<void>;
+/**
+ * Opens another plugin on top of the current plugin.
+ * If the plugin is not yet running, the plugin will be launched.
+ * If the plugin is not yet installed, an error is thrown.
+ * A payload can be passed to the plugin.
+ * Afterwards, the user may navigate back to the current plugin by pressing the back button.
+ */
 export declare function nomoInjectIntoPlugin(args: {
     payload: string;
     pluginId: string;

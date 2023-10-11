@@ -187,6 +187,13 @@ export async function nomoGetWalletAddresses() {
 export async function nomoInjectQRCode(args) {
     return await invokeNomoFunction("nomoInjectQRCode", args);
 }
+/**
+ * Opens another plugin on top of the current plugin.
+ * If the plugin is not yet running, the plugin will be launched.
+ * If the plugin is not yet installed, an error is thrown.
+ * A payload can be passed to the plugin.
+ * Afterwards, the user may navigate back to the current plugin by pressing the back button.
+ */
 export async function nomoInjectIntoPlugin(args) {
     return await invokeNomoFunction("nomoInjectIntoPlugin", args);
 }

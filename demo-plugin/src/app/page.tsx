@@ -341,6 +341,57 @@ export default function Home() {
         <div className={styles.card}>
           <h2
             onClick={() => {
+              nomo
+                .qrScan()
+                .then((res) => {
+                  openDialog({
+                    title: "QrScan successful!",
+                    content: JSON.stringify(res),
+                  });
+                })
+                .catch((e) => {
+                  console.error(e);
+                  // Handle any errors here
+                });
+            }}
+          >
+            QR-Scanner<span>-&gt;</span>
+          </h2>
+          <p>
+            Scan a QrCode.
+          </p>
+        </div>
+        <div className={styles.card}>
+          <h2
+            onClick={() => {
+              nomo
+                .injectIntoPlugin({
+                  payload: "https://example.com/api/resource?key1=value1&key2=value2&key3=value3",
+                  pluginId: "app.nomo.demoplugin",
+                })
+                .then((res) => {
+                  nomo.localStorage.getItem("app.nomo.demoplugin").then((res) => {
+                    openDialog({
+                      title: "Injection successful!",
+                      content: JSON.stringify(res),
+                    });
+                  });
+                })
+                .catch((e) => {
+                  console.error(e);
+                  // Handle any errors here
+                });
+            }}
+          >
+            Inject payload into Plugin.<span>-&gt;</span>
+          </h2>
+          <p>
+            Scan a QrCode.
+          </p>
+        </div>
+        <div className={styles.card}>
+          <h2
+            onClick={() => {
               testSigning()
                 .then((res) => {
                   openDialog({
@@ -367,4 +418,5 @@ export default function Home() {
       </div>
     </main>
   );
+
 }

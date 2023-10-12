@@ -3,6 +3,7 @@
   "plugin_id": "app.nomo.demoplugin",
   "plugin_name": "Demo Plugin",
   "plugin_version": "1.0.0",
+  "min_nomo_version": "0.3.1",
   "dependencies": [],
   "permissions": [
     "nomo.permission.CAMERA",

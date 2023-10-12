@@ -56,6 +56,7 @@ export const nomo = {
     getLanguage: nomoGetLanguage,
     addCustomToken: nomoAddCustomToken,
     getVisibleAssets: nomoGetVisibleAssets,
+    getEvmAddress: nomoGetEvmAddress,
 };
 const originalConsoleLog = console.log;
 const originalConsoleInfo = console.info;
@@ -358,4 +359,16 @@ export async function nomoGetVisibleAssets() {
         };
     }
     return await invokeNomoFunction("nomoGetVisibleAssets", {});
+}
+let cachedEvmAddress = null;
+/**
+ * A convenience function to get the Smartchain address of the Nomo Wallet.
+ * Internally, it calls "nomoGetWalletAddresses" and caches the result.
+ */
+export async function nomoGetEvmAddress() {
+    if (!cachedEvmAddress) {
+        const res = await nomoGetWalletAddresses();
+        cachedEvmAddress = res.walletAddresses["ETH"];
+    }
+    return cachedEvmAddress;
 }

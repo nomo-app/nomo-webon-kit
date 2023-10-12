@@ -44,6 +44,7 @@ export declare const nomo: {
     getLanguage: typeof nomoGetLanguage;
     addCustomToken: typeof nomoAddCustomToken;
     getVisibleAssets: typeof nomoGetVisibleAssets;
+    getEvmAddress: typeof nomoGetEvmAddress;
 };
 /**
  * A set of logging-functions to enable debugging with the Nomo dev mode.
@@ -262,4 +263,9 @@ export declare function nomoGetVisibleAssets(): Promise<{
         contractAddress?: string;
     }>;
 }>;
+/**
+ * A convenience function to get the Smartchain address of the Nomo Wallet.
+ * Internally, it calls "nomoGetWalletAddresses" and caches the result.
+ */
+export declare function nomoGetEvmAddress(): Promise<string>;
 export {};

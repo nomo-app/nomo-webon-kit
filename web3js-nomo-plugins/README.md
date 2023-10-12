@@ -16,7 +16,7 @@ This library provides a function **signTransactionWithSigHex** to sign EVM trans
 It uses the **nomoSignEvmTransaction** function from the **nomo-plugin-kit** to sign transactions.
 
 ```typescript
-import { signTransactionWithSigHex } from "web3js-nomo-plugins";
+import { signWeb3JsTransactionWithNomo } from "web3js-nomo-plugins";
 import { Transaction } from "web3-eth-accounts";
 
 const transaction = new Transaction({
@@ -24,7 +24,7 @@ const transaction = new Transaction({
 });
 const ownAddress = "Your Ethereum Address";
 
-const signedTransaction = await signTransactionWithSigHex(
+const signedTransaction = await signWeb3JsTransactionWithNomo(
   transaction,
   ownAddress
 );

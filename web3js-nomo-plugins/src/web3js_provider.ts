@@ -1,7 +1,7 @@
 import { Web3 } from "web3";
 import {
-  nomoGetWalletAddresses,
   nomoSignEvmTransaction,
+  nomoGetEvmAddress,
 } from "nomo-plugin-kit/dist/nomo_api";
 import { Transaction, Common } from "web3-eth-accounts";
 import { BigNumber } from "ethers";
@@ -18,26 +18,7 @@ const common = Common.custom({
   url: rpcUrlZeniqSmartChain,
 });
 
-
 const web3 = new Web3(new Web3.providers.HttpProvider(rpcUrlZeniqSmartChain));
-
-let cachedAddress: string | null = null;
-
-export async function getAddresses(): Promise<string> {
-  if (cachedAddress) {
-    return Promise.resolve(cachedAddress);
-  }
-  return new Promise((resolve, reject) => {
-    nomoGetWalletAddresses()
-      .then((res) => {
-        cachedAddress = res.walletAddresses["ETH"];
-        resolve(cachedAddress);
-      })
-      .catch((err: any) => {
-        reject(err);
-      });
-  });
-}
 
 export function rlpEncodeTx(data: Uint8Array[]): string {
   const unsignedSerialiedTx = RLP.encode(data);
@@ -130,7 +111,7 @@ export async function signTransactionWithSigHex(
 }
 
 export async function sendDemoTransaction() {
-  const ownAddress = await getAddresses();
+  const ownAddress = await nomoGetEvmAddress();
   console.log("ownAddress", ownAddress);
   const value = web3.utils.toWei("0.1", "ether");
   const nonce = await web3.eth.getTransactionCount(ownAddress);

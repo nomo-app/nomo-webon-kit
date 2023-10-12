@@ -10,17 +10,6 @@ To use this library, you can install it via npm:
 npm install web3js-nomo-plugins
 ```
 
-## Getting Wallet Addresses
-
-You can fetch wallet addresses by calling the **getAddresses** function. It uses the **nomo-plugin-kit** to retrieve wallet addresses.
-
-```typescript
-import { getAddresses } from "web3js-nomo-plugins";
-
-const address = await getAddresses();
-console.log("Wallet Address: ", address);
-```
-
 ## Signing EVM Transactions
 
 This library provides a function **signTransactionWithSigHex** to sign EVM transactions.
@@ -30,10 +19,15 @@ It uses the **nomoSignEvmTransaction** function from the **nomo-plugin-kit** to 
 import { signTransactionWithSigHex } from "web3js-nomo-plugins";
 import { Transaction } from "web3-eth-accounts";
 
-const transaction = new Transaction({ /*Transaction details*/ });
+const transaction = new Transaction({
+  /*Transaction details*/
+});
 const ownAddress = "Your Ethereum Address";
 
-const signedTransaction = await signTransactionWithSigHex(transaction, ownAddress);
+const signedTransaction = await signTransactionWithSigHex(
+  transaction,
+  ownAddress
+);
 console.log("Signed Transaction: ", signedTransaction);
 ```
 

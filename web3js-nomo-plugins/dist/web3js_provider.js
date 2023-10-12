@@ -1,5 +1,5 @@
 import { Web3 } from "web3";
-import { nomoGetWalletAddresses, nomoSignEvmTransaction, } from "nomo-plugin-kit/dist/nomo_api";
+import { nomoSignEvmTransaction, nomoGetEvmAddress, } from "nomo-plugin-kit/dist/nomo_api";
 import { Transaction, Common } from "web3-eth-accounts";
 import { BigNumber } from "ethers";
 import { RLP } from "@ethereumjs/rlp";
@@ -12,27 +12,7 @@ const common = Common.custom({
     chainId: chainIdZeniqSmartChain,
     url: rpcUrlZeniqSmartChain,
 });
-// Unittest input data 0xf382049a8502540be4008252089405870f1507d820212e921e1f39f14660336231d188016345785d8a0000808559454e49518080
-// Unittest expected output: r = 31985617787800161498695495446856197366320382904444210264230862608320524360576n
-// s = 8257219745238357900642489194207469846836140993477625668205050420177290661755n
-// v = 27n
 const web3 = new Web3(new Web3.providers.HttpProvider(rpcUrlZeniqSmartChain));
-let cachedAddress = null;
-export async function getAddresses() {
-    if (cachedAddress) {
-        return Promise.resolve(cachedAddress);
-    }
-    return new Promise((resolve, reject) => {
-        nomoGetWalletAddresses()
-            .then((res) => {
-            cachedAddress = res.walletAddresses["ETH"];
-            resolve(cachedAddress);
-        })
-            .catch((err) => {
-            reject(err);
-        });
-    });
-}
 export function rlpEncodeTx(data) {
     const unsignedSerialiedTx = RLP.encode(data);
     const usingnedTxBuffer = Buffer.from(unsignedSerialiedTx);
@@ -102,11 +82,10 @@ export async function signTransactionWithSigHex(txRequest, ownAddress) {
     });
 }
 export async function sendDemoTransaction() {
-    const ownAddress = await getAddresses();
+    const ownAddress = await nomoGetEvmAddress();
     console.log("ownAddress", ownAddress);
     const value = web3.utils.toWei("0.1", "ether");
     const nonce = await web3.eth.getTransactionCount(ownAddress);
-    //const gasPrice = await web3.eth.getGasPrice();
     const txData = {
         nonce: nonce,
         to: ownAddress,

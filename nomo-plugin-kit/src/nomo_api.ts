@@ -59,6 +59,8 @@ export const nomo = {
   mnemonicBackupExisted: nomoMnemonicBackupExisted,
   registerOnPluginVisible: nomoRegisterOnPluginVisible,
   getLanguage: nomoGetLanguage,
+  addCustomToken: nomoAddCustomToken,
+  getVisibleAssets: nomoGetVisibleAssets,
 };
 
 const originalConsoleLog = console.log;
@@ -451,4 +453,41 @@ export async function nomoGetLanguage(): Promise<{ language: string }> {
     return { language: "en" };
   }
   return await invokeNomoFunction("nomoGetLanguage", {});
+}
+
+/**
+ * Adds a custom token to the list of visible assets in the Nomo Wallet.
+ * Before that, it opens a dialog for the user to confirm.
+ */
+export async function nomoAddCustomToken(args: {
+  contractAddress: string;
+  network: string;
+}): Promise<void> {
+  return await invokeNomoFunction("nomoAddCustomToken", args);
+}
+
+/**
+ * Returns a list of assets that are currently visible in the Nomo Wallet.
+ */
+export async function nomoGetVisibleAssets(): Promise<{
+  visibleAssets: Array<{
+    name: string;
+    symbol: string;
+    decimals: number;
+    contractAddress?: string;
+  }>;
+}> {
+  if (isFallbackModeActive()) {
+    return {
+      visibleAssets: [
+        {
+          name: "AVINOC",
+          symbol: "AVINOC ZEN20",
+          decimals: 18,
+          contractAddress: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",
+        },
+      ],
+    };
+  }
+  return await invokeNomoFunction("nomoGetVisibleAssets", {});
 }

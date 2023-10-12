@@ -48,6 +48,7 @@ export default function Home() {
     nomo.registerOnPluginVisible(() => {
       console.log("onPluginVisible called");
     });
+    nomo.getVisibleAssets().then(console.log).catch(console.error);
   }, []);
 
   const openDialog = (content: DialogContent) => {
@@ -398,6 +399,21 @@ export default function Home() {
           </h2>
           <p>Scan a QrCode.</p>
         </div> */}
+        <div className={styles.card}>
+          <h2
+            onClick={() => {
+              nomo
+                .addCustomToken({
+                  contractAddress: "0x83B58BC6CB9653117c206DDAFA3018b9344F8070",
+                  network: "zeniqSmartChain",
+                })
+                .catch(console.error);
+            }}
+          >
+            Add custom token<span>-&gt;</span>
+          </h2>
+          <p>Plugins can expand the list of tokens</p>
+        </div>
         <div className={styles.card}>
           <h2
             onClick={() => {

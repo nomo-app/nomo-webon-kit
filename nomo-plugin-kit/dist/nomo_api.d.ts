@@ -42,6 +42,8 @@ export declare const nomo: {
     mnemonicBackupExisted: typeof nomoMnemonicBackupExisted;
     registerOnPluginVisible: typeof nomoRegisterOnPluginVisible;
     getLanguage: typeof nomoGetLanguage;
+    addCustomToken: typeof nomoAddCustomToken;
+    getVisibleAssets: typeof nomoGetVisibleAssets;
 };
 /**
  * A set of logging-functions to enable debugging with the Nomo dev mode.
@@ -240,5 +242,24 @@ export declare function nomoRegisterOnPluginVisible(callback: () => void): Promi
  */
 export declare function nomoGetLanguage(): Promise<{
     language: string;
+}>;
+/**
+ * Adds a custom token to the list of visible assets in the Nomo Wallet.
+ * Before that, it opens a dialog for the user to confirm.
+ */
+export declare function nomoAddCustomToken(args: {
+    contractAddress: string;
+    network: string;
+}): Promise<void>;
+/**
+ * Returns a list of assets that are currently visible in the Nomo Wallet.
+ */
+export declare function nomoGetVisibleAssets(): Promise<{
+    visibleAssets: Array<{
+        name: string;
+        symbol: string;
+        decimals: number;
+        contractAddress?: string;
+    }>;
 }>;
 export {};

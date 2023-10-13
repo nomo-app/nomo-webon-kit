@@ -27,7 +27,7 @@ export function rlpEncodeTx(data: Uint8Array[]): string {
   return serializedHexTx;
 }
 
-function appendSignatureToTxFromWebJs(
+export function appendSignatureToTxFromWebJs(
   txRequestFromWeb3Js: Record<string, any>,
   sigHexFromNative: string,
   ownAddress: string

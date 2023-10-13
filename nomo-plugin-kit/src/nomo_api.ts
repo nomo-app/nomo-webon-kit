@@ -62,6 +62,7 @@ export const nomo = {
   addCustomToken: nomoAddCustomToken,
   getVisibleAssets: nomoGetVisibleAssets,
   getEvmAddress: nomoGetEvmAddress,
+  selectAssetFromDialog: nomoSelectAssetFromDialog,
 };
 
 const originalConsoleLog = console.log;
@@ -505,4 +506,30 @@ export async function nomoGetEvmAddress(): Promise<string> {
     cachedEvmAddress = res.walletAddresses["ETH"];
   }
   return cachedEvmAddress;
+}
+
+/**
+ * Opens a dialog for the user to select an asset.
+ * If the dialog does not look "correct", plugins are free to call "nomoGetVisibleAssets" and implement their own dialog.
+ */
+export async function nomoSelectAssetFromDialog(): Promise<{
+  selectedAsset: {
+    name: string;
+    symbol: string;
+    decimals: number;
+    contractAddress?: string;
+  };
+}> {
+  if (isFallbackModeActive()) {
+    return {
+      selectedAsset: 
+        {
+          name: "AVINOC",
+          symbol: "AVINOC ZEN20",
+          decimals: 18,
+          contractAddress: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",
+        },
+    };
+  }
+  return await invokeNomoFunction("nomoSelectAssetFromDialog", {});
 }

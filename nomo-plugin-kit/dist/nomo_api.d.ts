@@ -45,6 +45,7 @@ export declare const nomo: {
     addCustomToken: typeof nomoAddCustomToken;
     getVisibleAssets: typeof nomoGetVisibleAssets;
     getEvmAddress: typeof nomoGetEvmAddress;
+    selectAssetFromDialog: typeof nomoSelectAssetFromDialog;
 };
 /**
  * A set of logging-functions to enable debugging with the Nomo dev mode.
@@ -268,4 +269,16 @@ export declare function nomoGetVisibleAssets(): Promise<{
  * Internally, it calls "nomoGetWalletAddresses" and caches the result.
  */
 export declare function nomoGetEvmAddress(): Promise<string>;
+/**
+ * Opens a dialog for the user to select an asset.
+ * If the dialog does not look "correct", plugins are free to call "nomoGetVisibleAssets" and implement their own dialog.
+ */
+export declare function nomoSelectAssetFromDialog(): Promise<{
+    selectedAsset: {
+        name: string;
+        symbol: string;
+        decimals: number;
+        contractAddress?: string;
+    };
+}>;
 export {};

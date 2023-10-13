@@ -19,7 +19,7 @@ export function rlpEncodeTx(data) {
     const serializedHexTx = "0x" + usingnedTxBuffer.toString("hex");
     return serializedHexTx;
 }
-function appendSignatureToTxFromWebJs(txRequestFromWeb3Js, sigHexFromNative, ownAddress) {
+export function appendSignatureToTxFromWebJs(txRequestFromWeb3Js, sigHexFromNative, ownAddress) {
     // in this case, we use ethers.js only for serialization of transactions, everything else is done by web3.js
     if (sigHexFromNative.length !== 130) {
         throw Error("unexpected sigHexFromNative length");
@@ -65,7 +65,7 @@ function appendSignatureToTxFromWebJs(txRequestFromWeb3Js, sigHexFromNative, own
     Object.freeze(unsignedTxEthersjs);
     return utils.serializeTransaction(unsignedTxEthersjs, sigHex);
 }
-export async function signTransactionWithSigHex(txRequest, ownAddress) {
+export async function signWeb3JsTransactionWithNomo(txRequest, ownAddress) {
     const unsignedRawTx = txRequest.getMessageToSign(false);
     const serializedHexTx = rlpEncodeTx(unsignedRawTx);
     console.log("unsignedTxHex", serializedHexTx);
@@ -94,7 +94,7 @@ export async function sendDemoTransaction() {
         gasPrice: 10000000000,
     };
     const transaction = Transaction.fromTxData(txData, { common });
-    const signedTxHex = await signTransactionWithSigHex(transaction, ownAddress);
+    const signedTxHex = await signWeb3JsTransactionWithNomo(transaction, ownAddress);
     const res = await web3.eth.sendSignedTransaction(signedTxHex);
     console.log("res", res);
     return res;

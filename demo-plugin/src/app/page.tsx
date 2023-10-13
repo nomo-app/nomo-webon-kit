@@ -11,8 +11,8 @@ import {
 } from "nomo-plugin-kit/dist/nomo_theming";
 import styles from "./page.module.css";
 import "./nomo.css";
-import { sendDemoTransaction } from "ethersjs-nomo-plugins/dist/ethersjs_provider";
-// import { sendDemoTransaction } from "web3js-nomo-plugins/dist/web3js_provider";
+import { sendDemoTransaction as sendDemoTxEthers } from "ethersjs-nomo-plugins/dist/ethersjs_provider";
+import { sendDemoTransaction as sendDemoTxWeb3Js } from "web3js-nomo-plugins";
 import { testSigning } from "../../test/web3_signing_test";
 
 export default function Home() {
@@ -101,7 +101,7 @@ export default function Home() {
         <div className={styles.card}>
           <h2
             onClick={() => {
-              sendDemoTransaction()
+              sendDemoTxWeb3Js()
                 .then((res) => {
                   function replacer(key: string, value: any) {
                     // JSON.stringify does not know how to serialize BigInts, so we add this replacer function
@@ -126,12 +126,47 @@ export default function Home() {
                 });
             }}
           >
-            Sign EVM transaction <span>-&gt;</span>
+            Sign EVM transaction with web3.js<span>-&gt;</span>
           </h2>
           <p>
-            Send a transaction to the ZENIQ Smartchain, signed by the Nomo app.
+            Send a transaction to the ZENIQ Smartchain, signed by the Nomo app with web3js-nomo-plugins.
           </p>
         </div>
+        <div className={styles.card}>
+          <h2
+            onClick={() => {
+              sendDemoTxEthers()
+                .then((res) => {
+                  function replacer(key: string, value: any) {
+                    // JSON.stringify does not know how to serialize BigInts, so we add this replacer function
+                    if (typeof value === "bigint") {
+                      return value.toString(); // Convert BigInt to string
+                    }
+                    return value; // Return other values as is
+                  }
+                  const resJson = JSON.stringify(res, replacer, 2);
+                  openDialog({
+                    title: "Transaction submitted to the ZENIQ Smartchain!",
+                    content: resJson,
+                  });
+                })
+                .catch((e) => {
+                  console.error(e);
+                  openDialog({
+                    title: "sendDemoTransaction failed",
+                    content:
+                      e instanceof Error ? e.toString() : JSON.stringify(e),
+                  });
+                });
+            }}
+          >
+            Sign EVM transaction with ethers.js<span>-&gt;</span>
+          </h2>
+          <p>
+            Send a transaction to the ZENIQ Smartchain, signed by the Nomo app with ethersjs-nomo-plugins.
+          </p>
+        </div>
+
 
         <div className={styles.card}>
           <h2

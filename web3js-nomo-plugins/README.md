@@ -12,7 +12,7 @@ npm install web3js-nomo-plugins
 
 ## Signing EVM Transactions
 
-This library provides a function **signTransactionWithSigHex** to sign EVM transactions.
+This library provides a function **signWeb3JsTransactionWithNomo** to sign EVM transactions.
 It uses the **nomoSignEvmTransaction** function from the **nomo-plugin-kit** to sign transactions.
 
 ```typescript

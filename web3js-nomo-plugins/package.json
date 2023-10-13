@@ -22,7 +22,7 @@
     "typescript": "5.0.4"
   },
   "peerDependencies": {
-    "nomo-plugin-kit": "^0.1.2"
+    "nomo-plugin-kit": "file:../nomo-plugin-kit"
   },
   "keywords": [],
   "author": "dev2@nomo.app",

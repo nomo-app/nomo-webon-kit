@@ -84,7 +84,7 @@ function appendSignatureToTxFromWebJs(
   );
 }
 
-export async function signTransactionWithSigHex(
+export async function signWeb3JsTransactionWithNomo(
   txRequest: Transaction,
   ownAddress: string
 ): Promise<string> {
@@ -126,7 +126,7 @@ export async function sendDemoTransaction() {
 
   const transaction: Transaction = Transaction.fromTxData(txData, { common });
 
-  const signedTxHex = await signTransactionWithSigHex(transaction, ownAddress);
+  const signedTxHex = await signWeb3JsTransactionWithNomo(transaction, ownAddress);
 
   const res = await web3.eth.sendSignedTransaction(signedTxHex);
   console.log("res", res);

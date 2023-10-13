@@ -7,13 +7,12 @@ A plugin is a web-application that runs within the NOMO-app.
 Plugins are a powerful capability of the NOMO-app that unlock the following features in an easy-to-use way:
 
 - Crypto wallet functionality
-- Messaging via zeniq.chat service
-- Taking pictures / uploading documents
-- AI-powered features like speech-to-text offline
-- Authentication with NOMO-Auth
-- Authentication with NOMO-ID
+- A decentralized chat service
+- Taking pictures / documents / QRCodes
+- AI-powered features
+- Authentication with NOMO-Auth or NOMO-ID
+- More features are coming with Nomo App updates!
 
-Some of those features are not yet available, but many more features are expected to come with NOMO-app-updates!  
 This README explains how to develop plugins for the NOMO-app.  
 Furthermore, this repo contains a demo-plugin to showcase the provided functionality.  
 In order to use this package, we expect that plugins are written in JavaScript or TypeScript.
@@ -43,9 +42,9 @@ Then the demo-plugin should run at <http://localhost:3000/>.
 
 ## Step 3: Launch ngrok tunnel
 
-> Launching an `ngrok` https-tunnel is only needed for Android/iOS.
+> Typically, launching an `ngrok` tunnel is only needed for Android/iOS.
 > You can skip this step if you are using a Desktop-version of the NOMO-app.
-> Without an https-tool like `ngrok`, you might get an error because Android rejects plugins that run over unsecure http.
+> Moreover, you may skip this step if your phone is in the same local Wifi as your dev-PC.
 
 `ngrok` is a useful tool for exposing your localhost to the Internet.
 By using `ngrok`, the NOMO-app can easily access the demo-plugin regardless of which network your phone is connected to.

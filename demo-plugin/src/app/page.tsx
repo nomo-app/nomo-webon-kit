@@ -126,7 +126,7 @@ export default function Home() {
                 });
             }}
           >
-            Sign EVM transaction with web3js-nomo-plugins<span>-&gt;</span>
+            Sign EVM transaction with web3.js<span>-&gt;</span>
           </h2>
           <p>
             Send a transaction to the ZENIQ Smartchain, signed by the Nomo app with web3js-nomo-plugins.
@@ -160,7 +160,7 @@ export default function Home() {
                 });
             }}
           >
-            Sign EVM transaction with ethersjs-nomo-plugins<span>-&gt;</span>
+            Sign EVM transaction with ethers.js<span>-&gt;</span>
           </h2>
           <p>
             Send a transaction to the ZENIQ Smartchain, signed by the Nomo app with ethersjs-nomo-plugins.

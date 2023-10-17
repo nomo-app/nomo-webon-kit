@@ -58,6 +58,8 @@ export const nomo = {
     getVisibleAssets: nomoGetVisibleAssets,
     getEvmAddress: nomoGetEvmAddress,
     selectAssetFromDialog: nomoSelectAssetFromDialog,
+    getManifest: nomoGetManifest,
+    launchUrl: nomoLaunchUrl,
 };
 const originalConsoleLog = console.log;
 const originalConsoleInfo = console.info;
@@ -389,4 +391,17 @@ export async function nomoSelectAssetFromDialog() {
         };
     }
     return await invokeNomoFunction("nomoSelectAssetFromDialog", {});
+}
+/**
+ * Returns the nomo_manifest.json that was used during the installation of the plugin.
+ * For example, this can be used by a plugin for checking its own version.
+ */
+export async function nomoGetManifest() {
+    return await invokeNomoFunction('nomoGetManifest', {});
+}
+/**
+ * Passes a URL to the underlying platform for handling.
+ */
+export async function nomoLaunchUrl(args) {
+    return await invokeNomoFunction('nomoLaunchUrl', args);
 }

@@ -63,6 +63,8 @@ export const nomo = {
   getVisibleAssets: nomoGetVisibleAssets,
   getEvmAddress: nomoGetEvmAddress,
   selectAssetFromDialog: nomoSelectAssetFromDialog,
+  getManifest: nomoGetManifest,
+  launchUrl: nomoLaunchUrl,
 };
 
 const originalConsoleLog = console.log;
@@ -395,11 +397,11 @@ export async function nomoGetDeviceName(): Promise<{
 export async function nomoAuthHttp(
   args:
     | {
-        url: string;
-        method?: "GET" | "POST";
-        headers?: { [key: string]: string };
-        body?: string;
-      }
+      url: string;
+      method?: "GET" | "POST";
+      headers?: { [key: string]: string };
+      body?: string;
+    }
     | string
 ): Promise<{
   statusCode: number;
@@ -438,7 +440,7 @@ export async function nomoMnemonicBackupExisted(): Promise<{
  * For example, this can be used to refresh data when re-opening a plugin after a long pause.
  */
 export async function nomoRegisterOnPluginVisible(
-  callback: () => void
+  callback: (args: { fullscreenMode: boolean }) => void
 ): Promise<void> {
   window.onPluginVisible = callback;
   if (isFallbackModeActive()) {
@@ -522,14 +524,29 @@ export async function nomoSelectAssetFromDialog(): Promise<{
 }> {
   if (isFallbackModeActive()) {
     return {
-      selectedAsset: 
-        {
-          name: "AVINOC",
-          symbol: "AVINOC ZEN20",
-          decimals: 18,
-          contractAddress: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",
-        },
+      selectedAsset:
+      {
+        name: "AVINOC",
+        symbol: "AVINOC ZEN20",
+        decimals: 18,
+        contractAddress: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",
+      },
     };
   }
   return await invokeNomoFunction("nomoSelectAssetFromDialog", {});
+}
+
+/**
+ * Returns the nomo_manifest.json that was used during the installation of the plugin.
+ * For example, this can be used by a plugin for checking its own version.
+ */
+export async function nomoGetManifest(): Promise<Record<string, unknown>> {
+  return await invokeNomoFunction('nomoGetManifest', {});
+}
+
+/**
+ * Passes a URL to the underlying platform for handling.
+ */
+export async function nomoLaunchUrl(args: { url: string, launchMode: "platformDefault" | "inAppWebView" | "externalApplication" | "externalNonBrowserApplication" }): Promise<any> {
+  return await invokeNomoFunction('nomoLaunchUrl', args);
 }

@@ -46,6 +46,8 @@ export declare const nomo: {
     getVisibleAssets: typeof nomoGetVisibleAssets;
     getEvmAddress: typeof nomoGetEvmAddress;
     selectAssetFromDialog: typeof nomoSelectAssetFromDialog;
+    getManifest: typeof nomoGetManifest;
+    launchUrl: typeof nomoLaunchUrl;
 };
 /**
  * A set of logging-functions to enable debugging with the Nomo dev mode.
@@ -238,7 +240,9 @@ export declare function nomoMnemonicBackupExisted(): Promise<{
  * Registers a callback that will be called every time when the plugin gets visible within the Nomo App.
  * For example, this can be used to refresh data when re-opening a plugin after a long pause.
  */
-export declare function nomoRegisterOnPluginVisible(callback: () => void): Promise<void>;
+export declare function nomoRegisterOnPluginVisible(callback: (args: {
+    fullscreenMode: boolean;
+}) => void): Promise<void>;
 /**
  * Returns the currently selected language of the Nomo App.
  */
@@ -281,4 +285,16 @@ export declare function nomoSelectAssetFromDialog(): Promise<{
         contractAddress?: string;
     };
 }>;
+/**
+ * Returns the nomo_manifest.json that was used during the installation of the plugin.
+ * For example, this can be used by a plugin for checking its own version.
+ */
+export declare function nomoGetManifest(): Promise<Record<string, unknown>>;
+/**
+ * Passes a URL to the underlying platform for handling.
+ */
+export declare function nomoLaunchUrl(args: {
+    url: string;
+    launchMode: "platformDefault" | "inAppWebView" | "externalApplication" | "externalNonBrowserApplication";
+}): Promise<any>;
 export {};

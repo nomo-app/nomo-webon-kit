@@ -1,5 +1,5 @@
 {
-  "nomo_manifest_version": "1.0.0",
+  "nomo_manifest_version": "1.1.0",
   "plugin_id": "app.nomo.demoplugin",
   "plugin_name": "Demo Plugin",
   "plugin_version": "0.1.0",

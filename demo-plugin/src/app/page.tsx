@@ -12,7 +12,7 @@ import {
 import styles from "./page.module.css";
 import "./nomo.css";
 import { sendDemoTransaction as sendDemoTxEthers } from "ethersjs-nomo-plugins/dist/ethersjs_provider";
-import { sendDemoTransaction as sendDemoTxWeb3Js } from "web3js-nomo-plugins";
+// import { sendDemoTransaction as sendDemoTxWeb3Js } from "web3js-nomo-plugins";
 import { testSigning } from "../../test/web3_signing_test";
 
 export default function Home() {
@@ -44,11 +44,13 @@ export default function Home() {
       console.log("Got value from nomoLocalStorage: " + value);
     });
     nomo.getDeviceHashes().then(console.log).catch(console.error);
+    nomo.getManifest().then(console.log).catch(console.error);
     injectNomoCSSVariables();
-    nomo.registerOnPluginVisible(() => {
-      console.log("onPluginVisible called");
+    nomo.registerOnPluginVisible((args) => {
+      console.log("onPluginVisible called", args);
     });
     nomo.getVisibleAssets().then(console.log).catch(console.error);
+    //nomo.launchUrl({url: "https://google.com", launchMode: "externalApplication"});
   }, []);
 
   const openDialog = (content: DialogContent) => {
@@ -98,7 +100,7 @@ export default function Home() {
           <b>Device name:</b> {JSON.stringify(deviceName)}
         </div>
 
-        <div className={styles.card}>
+        {/* <div className={styles.card}>
           <h2
             onClick={() => {
               sendDemoTxWeb3Js()
@@ -131,7 +133,7 @@ export default function Home() {
           <p>
             Send a transaction to the ZENIQ Smartchain, signed by the Nomo app with web3js-nomo-plugins.
           </p>
-        </div>
+        </div> */}
         <div className={styles.card}>
           <h2
             onClick={() => {

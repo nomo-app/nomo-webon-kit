@@ -4,6 +4,7 @@
     "dev": "next dev",
     "deploy": "rm -f .env.local && npm run build && ./scripts/deploy.sh",
     "build": "next build && next export",
+    "build_tar": "next build && next export && mv out $npm_package_name && tar -czvf $npm_package_name.tar.gz $npm_package_name",
     "start": "npx serve@latest out",
     "lint": "next lint"
   },

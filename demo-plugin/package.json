@@ -20,6 +20,6 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "5.0.4",
-    "web3js-nomo-plugins": "^0.1.0"
+    "web3js-nomo-plugins": "file:../web3js-nomo-plugins"
   }
 }

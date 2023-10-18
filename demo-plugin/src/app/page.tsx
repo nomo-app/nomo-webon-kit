@@ -12,7 +12,7 @@ import {
 import styles from "./page.module.css";
 import "./nomo.css";
 import { replacer } from "./utils";
-import { sendDemoTransaction as sendDemoTxEthers } from "ethersjs-nomo-plugins/dist/ethersjs_provider";
+import { sendDemoTransaction as sendDemoTxEthers } from "ethersjs-nomo-plugins";
 import { sendDemoTransaction as sendDemoTxWeb3Js } from "web3js-nomo-plugins";
 import { testSigning } from "../../test/web3_signing_test";
 

@@ -14,7 +14,7 @@
     "@types/react-dom": "18.2.4",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
-    "ethersjs-nomo-plugins": "^0.1.1",
+    "ethersjs-nomo-plugins": "file:../ethersjs-nomo-plugins",
     "next": "13.4.3",
     "nomo-plugin-kit": "file:../nomo-plugin-kit",
     "react": "18.2.0",

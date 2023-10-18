@@ -1,11 +1,11 @@
 import { Bytes, ethers, Signer, UnsignedTransaction, utils } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/abstract-provider";
 import { Deferrable, defineReadOnly } from "@ethersproject/properties";
-import { isFallbackModeActive } from "nomo-plugin-kit/dist/dart_interface";
+import { isFallbackModeActive } from "nomo-plugin-kit";
 import {
   nomoGetWalletAddresses,
   nomoSignEvmTransaction,
-} from "nomo-plugin-kit/dist/nomo_api";
+} from "nomo-plugin-kit";
 
 function appendSignatureToTx(
   unsignedTx: UnsignedTransaction,

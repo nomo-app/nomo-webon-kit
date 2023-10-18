@@ -1,7 +1,4 @@
-import {
-  nomoGetWalletAddresses,
-  nomoSignEvmTransaction,
-} from "nomo-plugin-kit/dist/nomo_api";
+import { nomo } from "nomo-plugin-kit";
 
 function resolveSig(sigHex: string) {
   const r = BigInt("0x" + sigHex.slice(0, 64));
@@ -20,13 +17,13 @@ export async function testSigning(): Promise<string> {
     8257219745238357900642489194207469846836140993477625668205050420177290661755n;
   const expectedV: bigint = 27n;
 
-  const addresses = await nomoGetWalletAddresses();
+  const addresses = await nomo.getWalletAddresses();
   const ownAddress = addresses.walletAddresses["ETH"];
   if (ownAddress !== "0x05870f1507d820212E921e1f39f14660336231D1") {
     return "This test only works with the reject wallet";
   }
 
-  const res = await nomoSignEvmTransaction({ messageHex: inputHex });
+  const res = await nomo.signEvmTransaction({ messageHex: inputHex });
   console.log("sigFromNomo", res.sigHex);
   const { v, r, s } = resolveSig(res.sigHex);
   //   console.log("v", v);

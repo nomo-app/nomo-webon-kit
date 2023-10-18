@@ -2,10 +2,11 @@
   "name": "ethersjs-nomo-plugins",
   "version": "0.1.1",
   "description": "ethersjs-nomo-plugins for nomo",
-  "main": "dist",
+  "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf dist && tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "doPublish": "npm uninstall nomo-plugin-kit && npm i --save-peer nomo-plugin-kit && npm publish"
   },
   "repository": {
     "type": "git",
@@ -17,9 +18,10 @@
     "@types/node": "^20.5.9"
   },
   "peerDependencies": {
-    "nomo-plugin-kit": "^0.1.0"
+    "nomo-plugin-kit": "file:../nomo-plugin-kit"
   },
   "keywords": [],
   "author": "dev2@nomo.app",
   "license": "ISC"
+}
 }

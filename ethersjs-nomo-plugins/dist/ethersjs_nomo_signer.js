@@ -1,4 +1,6 @@
-import { Transaction } from "ethers";
+import { ethers, Signer, utils } from "ethers";
+import { defineReadOnly } from "@ethersproject/properties";
+import { isFallbackModeActive } from "nomo-plugin-kit/dist/dart_interface";
 import { nomoGetWalletAddresses, nomoSignEvmTransaction, } from "nomo-plugin-kit/dist/nomo_api";
 function appendSignatureToTx(unsignedTx, sigHexFromNative) {
     if (sigHexFromNative.length !== 130) {
@@ -94,14 +96,14 @@ export class EthersjsNomoSigner {
             return Promise.resolve(cachedAddress);
         }
         return new Promise((resolve, reject) => {
-            nomoGetWalletAddresses()
+            nomo.getWalletAddresses()
                 .then((res) => {
-                cachedAddress = res.walletAddresses["ETH"];
-                resolve(cachedAddress);
-            })
+                    cachedAddress = res.walletAddresses["ETH"];
+                    resolve(cachedAddress);
+                })
                 .catch((err) => {
-                reject(err);
-            });
+                    reject(err);
+                });
         });
     }
     signMessage(_message) {
@@ -127,14 +129,14 @@ export class EthersjsNomoSigner {
         }
         const unsignedRawTx = Transaction.from(unsignedTx).unsignedSerialized;
         return new Promise((resolve, reject) => {
-            nomoSignEvmTransaction({ messageHex: unsignedRawTx })
+            nomo.signEvmTransaction({ messageHex: unsignedRawTx })
                 .then((res) => {
-                const signedRawTx = appendSignatureToTx(unsignedTx, res.sigHex);
-                resolve(signedRawTx);
-            })
+                    const signedRawTx = appendSignatureToTx(unsignedTx, res.sigHex);
+                    resolve(signedRawTx);
+                })
                 .catch((err) => {
-                reject(err);
-            });
+                    reject(err);
+                });
         });
     }
 }

@@ -4,17 +4,17 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Dialog, { DialogContent } from "./components/dialog";
 import { useNomoState } from "./hooks/custom_hooks";
-import { nomo } from "nomo-plugin-kit/dist/nomo_api";
+import { nomo } from "nomo-plugin-kit";
 import {
   getCurrentNomoTheme,
   injectNomoCSSVariables,
-} from "nomo-plugin-kit/dist/nomo_theming";
+} from "nomo-plugin-kit";
 import styles from "./page.module.css";
 import "./nomo.css";
-import { sendDemoTransaction as sendDemoTxEthers } from "ethersjs-nomo-plugins/dist/ethersjs_provider";
-// import { sendDemoTransaction as sendDemoTxWeb3Js } from "web3js-nomo-plugins";
+import { replacer } from "./utils";
+import { sendDemoTransaction as sendDemoTxEthers } from "ethersjs-nomo-plugins";
+import { sendDemoTransaction as sendDemoTxWeb3Js } from "web3js-nomo-plugins";
 import { testSigning } from "../../test/web3_signing_test";
-
 export default function Home() {
   const [dialog, setDialog] = useState<DialogContent | null>(null);
   const platformInfo = useNomoState(nomo.getPlatformInfo);
@@ -100,19 +100,12 @@ export default function Home() {
           <b>Device name:</b> {JSON.stringify(deviceName)}
         </div>
 
-        {/* <div className={styles.card}>
+        <div className={styles.card}>
           <h2
             onClick={() => {
               sendDemoTxWeb3Js()
                 .then((res) => {
-                  function replacer(key: string, value: any) {
-                    // JSON.stringify does not know how to serialize BigInts, so we add this replacer function
-                    if (typeof value === "bigint") {
-                      return value.toString(); // Convert BigInt to string
-                    }
-                    return value; // Return other values as is
-                  }
-                  const resJson = JSON.stringify(res, replacer, 2);
+                  const resJson = replacer(res);
                   openDialog({
                     title: "Transaction submitted to the ZENIQ Smartchain!",
                     content: resJson,
@@ -133,20 +126,13 @@ export default function Home() {
           <p>
             Send a transaction to the ZENIQ Smartchain, signed by the Nomo app with web3js-nomo-plugins.
           </p>
-        </div> */}
+        </div>
         <div className={styles.card}>
           <h2
             onClick={() => {
               sendDemoTxEthers()
                 .then((res) => {
-                  function replacer(key: string, value: any) {
-                    // JSON.stringify does not know how to serialize BigInts, so we add this replacer function
-                    if (typeof value === "bigint") {
-                      return value.toString(); // Convert BigInt to string
-                    }
-                    return value; // Return other values as is
-                  }
-                  const resJson = JSON.stringify(res, replacer, 2);
+                  const resJson = replacer(res);
                   openDialog({
                     title: "Transaction submitted to the ZENIQ Smartchain!",
                     content: resJson,
@@ -478,3 +464,5 @@ export default function Home() {
     </main>
   );
 }
+
+

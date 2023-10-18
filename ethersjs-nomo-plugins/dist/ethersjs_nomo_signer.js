@@ -1,7 +1,5 @@
-import { ethers, Signer, utils } from "ethers";
-import { defineReadOnly } from "@ethersproject/properties";
-import { isFallbackModeActive } from "nomo-plugin-kit/dist/dart_interface";
-import { nomoGetWalletAddresses, nomoSignEvmTransaction, } from "nomo-plugin-kit/dist/nomo_api";
+import { Transaction } from "ethers";
+import { nomo } from "nomo-plugin-kit";
 function appendSignatureToTx(unsignedTx, sigHexFromNative) {
     if (sigHexFromNative.length !== 130) {
         throw Error("unexpected sigHexFromNative length");
@@ -98,45 +96,35 @@ export class EthersjsNomoSigner {
         return new Promise((resolve, reject) => {
             nomo.getWalletAddresses()
                 .then((res) => {
-                    cachedAddress = res.walletAddresses["ETH"];
-                    resolve(cachedAddress);
-                })
+                cachedAddress = res.walletAddresses["ETH"];
+                resolve(cachedAddress);
+            })
                 .catch((err) => {
-                    reject(err);
-                });
+                reject(err);
+            });
         });
     }
     signMessage(_message) {
         return Promise.reject("signMessage not implemented");
     }
-    signTransaction(txRequest) {
+    async signTransaction(txRequest) {
         // if (isFallbackModeActive()) {
         //   return signTxDevWallet(txRequest);
         // }
-        const allowedTransactionKeys = {
-            chainId: true,
-            data: true,
-            gasLimit: true,
-            gasPrice: true,
-            nonce: true,
-            to: true,
-            type: true,
-            value: true,
-        }; // ethers.js enforced strict rules on what properties are allowed in unsignedTx
-        const unsignedTx = {};
-        for (const key of Object.keys(allowedTransactionKeys)) {
-            unsignedTx[key] = txRequest[key];
-        }
+        console.log("unsignedTx", txRequest);
+        const unsignedTx = await this.populateTransaction(txRequest);
+        console.log("populatedTx", unsignedTx);
         const unsignedRawTx = Transaction.from(unsignedTx).unsignedSerialized;
+        console.log("unsignedRawTx", unsignedRawTx);
         return new Promise((resolve, reject) => {
             nomo.signEvmTransaction({ messageHex: unsignedRawTx })
                 .then((res) => {
-                    const signedRawTx = appendSignatureToTx(unsignedTx, res.sigHex);
-                    resolve(signedRawTx);
-                })
+                const signedRawTx = appendSignatureToTx(unsignedTx, res.sigHex);
+                resolve(signedRawTx);
+            })
                 .catch((err) => {
-                    reject(err);
-                });
+                reject(err);
+            });
         });
     }
 }

@@ -137,30 +137,20 @@ export class EthersjsNomoSigner implements Signer {
     return Promise.reject("signMessage not implemented");
   }
 
-  signTransaction(txRequest: TransactionRequest): Promise<string> {
+  async signTransaction(txRequest: TransactionRequest): Promise<string> {
     // if (isFallbackModeActive()) {
     //   return signTxDevWallet(txRequest);
     // }
 
-    const allowedTransactionKeys: { [key: string]: boolean } = {
-      chainId: true,
-      data: true,
-      gasLimit: true,
-      gasPrice: true,
-      nonce: true,
-      to: true,
-      type: true,
-      value: true,
-    }; // ethers.js enforced strict rules on what properties are allowed in unsignedTx
-    const unsignedTx: Record<string, any> = {};
-    for (const key of Object.keys(allowedTransactionKeys)) {
 
-      unsignedTx[key] = (txRequest as Record<string, any>)[key];
 
-    }
-
+    console.log("unsignedTx", txRequest);
+    const unsignedTx = await this.populateTransaction(txRequest);
+    console.log("populatedTx", unsignedTx);
 
     const unsignedRawTx = Transaction.from(unsignedTx).unsignedSerialized;
+    console.log("unsignedRawTx", unsignedRawTx);
+
     return new Promise((resolve, reject) => {
       nomo.signEvmTransaction({ messageHex: unsignedRawTx })
         .then((res) => {

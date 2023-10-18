@@ -17,6 +17,7 @@ export async function sendDemoTransaction() {
         gasPrice: gasPrice,
         nonce: nonce,
         chainId: chainId,
+        type: 0,
     };
     const res = await zscSigner.sendTransaction(tx);
     return res;

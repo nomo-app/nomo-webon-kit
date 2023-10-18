@@ -1,8 +1,5 @@
 import { Web3 } from "web3";
-import {
-  nomoSignEvmTransaction,
-  nomoGetEvmAddress,
-} from "nomo-plugin-kit/dist/nomo_api";
+import { nomo } from "nomo-plugin-kit";
 import { Transaction, Common } from "web3-eth-accounts";
 import { BigNumber } from "ethers";
 import { RLP } from "@ethereumjs/rlp";
@@ -93,7 +90,7 @@ export async function signWeb3JsTransactionWithNomo(
   console.log("unsignedTxHex", serializedHexTx);
 
   return new Promise((resolve, reject) => {
-    nomoSignEvmTransaction({ messageHex: serializedHexTx })
+    nomo.signEvmTransaction({ messageHex: serializedHexTx })
       .then((res) => {
         console.log("resFromNomo", res.sigHex);
 
@@ -111,7 +108,7 @@ export async function signWeb3JsTransactionWithNomo(
 }
 
 export async function sendDemoTransaction() {
-  const ownAddress = await nomoGetEvmAddress();
+  const ownAddress = await nomo.getEvmAddress();
   console.log("ownAddress", ownAddress);
   const value = web3.utils.toWei("0.1", "ether");
   const nonce = await web3.eth.getTransactionCount(ownAddress);

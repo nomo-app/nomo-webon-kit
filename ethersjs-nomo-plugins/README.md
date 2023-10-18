@@ -20,11 +20,11 @@ First, install the package via npm:
 Then you can import one of the following objects, depending on your use case:
 
 ```
-import { EthersjsNomoSigner } from "ethersjs-nomo-plugins/dist/ethersjs_nomo_signer"; // this can be used for constructing your own signer-object
+import { EthersjsNomoSigner } from "ethersjs-nomo-plugins"; // this can be used for constructing your own signer-object
 
-import { zscSigner } from "ethersjs-nomo-plugins/dist/ethersjs_provider"; // a ready-made signer-object for interacting with the ZENIQ Smartchain
+import { zscSigner } from "ethersjs-nomo-plugins"; // a ready-made signer-object for interacting with the ZENIQ Smartchain
 
-import { sendDemoTransaction } from "ethersjs-nomo-plugins/dist/ethersjs_provider"; // an example on how to construct a transaction
+import { sendDemoTransaction } from "ethersjs-nomo-plugins"; // an example on how to construct a transaction
 ```
 
 Please consult the demo-plugin and to the ethers.js documentation for more details.

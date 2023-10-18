@@ -17,7 +17,7 @@
     "@types/node": "^20.5.9"
   },
   "peerDependencies": {
-    "nomo-plugin-kit": "^0.1.0"
+    "nomo-plugin-kit": "file:../nomo-plugin-kit"
   },
   "keywords": [],
   "author": "dev2@nomo.app",

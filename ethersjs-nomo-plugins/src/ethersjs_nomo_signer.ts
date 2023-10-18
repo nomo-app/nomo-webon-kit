@@ -1,11 +1,8 @@
 import { Bytes, ethers, Signer, UnsignedTransaction, utils } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/abstract-provider";
 import { Deferrable, defineReadOnly } from "@ethersproject/properties";
-import { isFallbackModeActive } from "nomo-plugin-kit/dist/dart_interface";
-import {
-  nomoGetWalletAddresses,
-  nomoSignEvmTransaction,
-} from "nomo-plugin-kit/dist/nomo_api";
+import { isFallbackModeActive } from "nomo-plugin-kit";
+import { nomo } from "nomo-plugin-kit";
 
 function appendSignatureToTx(
   unsignedTx: UnsignedTransaction,
@@ -66,7 +63,7 @@ export class EthersjsNomoSigner extends Signer {
       return Promise.resolve(cachedAddress);
     }
     return new Promise((resolve, reject) => {
-      nomoGetWalletAddresses()
+      nomo.getWalletAddresses()
         .then((res) => {
           cachedAddress = res.walletAddresses["ETH"];
           resolve(cachedAddress);
@@ -104,7 +101,7 @@ export class EthersjsNomoSigner extends Signer {
       unsignedTx as UnsignedTransaction
     );
     return new Promise((resolve, reject) => {
-      nomoSignEvmTransaction({ messageHex: unsignedRawTx })
+      nomo.signEvmTransaction({ messageHex: unsignedRawTx })
         .then((res) => {
           const signedRawTx = appendSignatureToTx(
             unsignedTx as UnsignedTransaction,

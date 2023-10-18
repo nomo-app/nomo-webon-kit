@@ -34,9 +34,10 @@ Download the NOMO-app and create a wallet with it.
 
 Clone this repo, then launch the demo-plugin with:
 
-`cd demo-plugin`  
-`npm i`  
-`npm run dev`
+`cd ethersjs-nomo-plugins && npm i`  
+`cd web3js-nomo-plugins && npm i`  
+`cd demo-plugin && npm i`  
+`npm run dev`  
 
 Then the demo-plugin should run at <http://localhost:3000/>.
 

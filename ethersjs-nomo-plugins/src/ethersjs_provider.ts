@@ -1,22 +1,28 @@
-import { BigNumber, ethers, providers } from "ethers";
+import { TransactionResponse, ethers, TransactionRequest, BigNumberish } from "ethers";
 import { EthersjsNomoSigner } from "./ethersjs_nomo_signer";
 
 const rpcUrlZeniqSmartChain = "https://smart.zeniq.network:9545";
 const chainIdZeniqSmartChain = 383414847825;
 
-export const zscProvider = new ethers.providers.JsonRpcProvider(
+export const zscProvider = new ethers.JsonRpcProvider(
   rpcUrlZeniqSmartChain,
   chainIdZeniqSmartChain
 );
 export const zscSigner = new EthersjsNomoSigner(zscProvider);
 
-export async function sendDemoTransaction(): Promise<providers.TransactionResponse> {
+export async function sendDemoTransaction(): Promise<TransactionResponse> {
   const ownAddress = await zscSigner.getAddress();
-  const value: BigNumber = ethers.utils.parseUnits("0.1", 18);
-  const tx: providers.TransactionRequest = {
+  const value: BigNumberish = ethers.parseUnits("0.1", 18);
+  const gasPrice: BigNumberish = 10000000000;
+  const nonce: number = await zscSigner.getNonce();
+  const chainId: BigNumberish = chainIdZeniqSmartChain;
+  const tx: TransactionRequest = {
     to: ownAddress, // send ZENIQ to ourselves
-    value,
+    value: value,
     gasLimit: 21000,
+    gasPrice: gasPrice,
+    nonce: nonce,
+    chainId: chainId,
   };
   const res = await zscSigner.sendTransaction(tx);
   return res;

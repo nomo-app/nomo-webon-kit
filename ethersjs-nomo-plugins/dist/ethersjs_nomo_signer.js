@@ -1,6 +1,4 @@
-import { ethers, Signer, utils } from "ethers";
-import { defineReadOnly } from "@ethersproject/properties";
-import { isFallbackModeActive } from "nomo-plugin-kit/dist/dart_interface";
+import { Transaction } from "ethers";
 import { nomoGetWalletAddresses, nomoSignEvmTransaction, } from "nomo-plugin-kit/dist/nomo_api";
 function appendSignatureToTx(unsignedTx, sigHexFromNative) {
     if (sigHexFromNative.length !== 130) {
@@ -9,37 +7,89 @@ function appendSignatureToTx(unsignedTx, sigHexFromNative) {
     const sigHex = sigHexFromNative.startsWith("0x")
         ? sigHexFromNative
         : "0x" + sigHexFromNative;
-    return utils.serializeTransaction(unsignedTx, sigHex);
+    unsignedTx.signature = sigHex;
+    console.log("unsignedTx", unsignedTx);
+    return Transaction.from(unsignedTx).serialized;
+    // return utils.serializeTransaction(unsignedTx as UnsignedTransaction, sigHex);
 }
-let fallbackDevSigner = null;
-function createFallbackDevSigner() {
-    if (!fallbackDevSigner) {
-        console.error("fallback mode: try to read NEXT_PUBLIC_FALLBACK_MNEMONIC from environment");
-        const mnemonic = process.env.NEXT_PUBLIC_FALLBACK_MNEMONIC;
-        if (!mnemonic || !mnemonic.length) {
-            throw Error("NEXT_PUBLIC_FALLBACK_MNEMONIC is not defined. Create a .env.local to define it");
-        }
-        fallbackDevSigner = ethers.Wallet.fromMnemonic(mnemonic);
-    }
-    return fallbackDevSigner;
-}
-function signTxDevWallet(txRequest) {
-    const devSigner = createFallbackDevSigner();
-    return devSigner.signTransaction(txRequest);
-}
+// let fallbackDevSigner: ethers.Wallet | null = null;
+// function createFallbackDevSigner(): ethers.Wallet {
+//   if (!fallbackDevSigner) {
+//     console.error(
+//       "fallback mode: try to read NEXT_PUBLIC_FALLBACK_MNEMONIC from environment"
+//     );
+//     const mnemonic = process.env.NEXT_PUBLIC_FALLBACK_MNEMONIC;
+//     if (!mnemonic || !mnemonic.length) {
+//       throw Error(
+//         "NEXT_PUBLIC_FALLBACK_MNEMONIC is not defined. Create a .env.local to define it"
+//       );
+//     }
+//     fallbackDevSigner = ethers.Wallet.fromMnemonic(mnemonic);
+//   }
+//   return fallbackDevSigner;
+// }
+// function signTxDevWallet(
+//   txRequest: Deferrable<TransactionRequest>
+// ): Promise<string> {
+//   const devSigner = createFallbackDevSigner();
+//   return devSigner.signTransaction(txRequest as TransactionRequest);
+// }
 let cachedAddress = null;
-export class EthersjsNomoSigner extends Signer {
+export class EthersjsNomoSigner {
     constructor(provider) {
-        super();
-        defineReadOnly(this, "provider", provider || null);
+        this.provider = provider;
     }
     connect(_provider) {
         return this;
     }
-    getAddress() {
-        if (isFallbackModeActive()) {
-            return createFallbackDevSigner().getAddress();
+    getNonce(blockTag) {
+        return this.provider.getTransactionCount(this.getAddress(), blockTag);
+    }
+    populateCall(tx) {
+        throw new Error("Method not implemented.");
+    }
+    populateTransaction(tx) {
+        const allowedTransactionKeys = {
+            chainId: true,
+            data: true,
+            gasLimit: true,
+            gasPrice: true,
+            nonce: true,
+            to: true,
+            type: true,
+            value: true,
+        }; // ethers.js enforced strict rules on what properties are allowed in unsignedTx
+        const unsignedTx = {};
+        for (const key of Object.keys(allowedTransactionKeys)) {
+            unsignedTx[key] = tx[key];
         }
+        return Promise.resolve(unsignedTx);
+    }
+    estimateGas(tx) {
+        return this.provider.estimateGas(tx);
+    }
+    call(tx) {
+        throw new Error("Method not implemented.");
+    }
+    resolveName(name) {
+        throw new Error("Method not implemented.");
+    }
+    sendTransaction(tx) {
+        console.log("txToSend", tx);
+        const txResponse = this.signTransaction(tx).then((res) => {
+            return this.provider.broadcastTransaction(res);
+        }).catch((err) => {
+            throw err;
+        });
+        return txResponse;
+    }
+    signTypedData(domain, types, value) {
+        throw new Error("Method not implemented.");
+    }
+    getAddress() {
+        // if (isFallbackModeActive()) {
+        //   return createFallbackDevSigner().getAddress();
+        // }
         if (cachedAddress) {
             return Promise.resolve(cachedAddress);
         }
@@ -58,9 +108,9 @@ export class EthersjsNomoSigner extends Signer {
         return Promise.reject("signMessage not implemented");
     }
     signTransaction(txRequest) {
-        if (isFallbackModeActive()) {
-            return signTxDevWallet(txRequest);
-        }
+        // if (isFallbackModeActive()) {
+        //   return signTxDevWallet(txRequest);
+        // }
         const allowedTransactionKeys = {
             chainId: true,
             data: true,
@@ -75,7 +125,7 @@ export class EthersjsNomoSigner extends Signer {
         for (const key of Object.keys(allowedTransactionKeys)) {
             unsignedTx[key] = txRequest[key];
         }
-        const unsignedRawTx = utils.serializeTransaction(unsignedTx);
+        const unsignedRawTx = Transaction.from(unsignedTx).unsignedSerialized;
         return new Promise((resolve, reject) => {
             nomoSignEvmTransaction({ messageHex: unsignedRawTx })
                 .then((res) => {

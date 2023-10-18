@@ -12,7 +12,7 @@ import {
 import styles from "./page.module.css";
 import "./nomo.css";
 import { sendDemoTransaction as sendDemoTxEthers } from "ethersjs-nomo-plugins/dist/ethersjs_provider";
-// import { sendDemoTransaction as sendDemoTxWeb3Js } from "web3js-nomo-plugins";
+import { sendDemoTransaction as sendDemoTxWeb3Js } from "web3js-nomo-plugins";
 import { testSigning } from "../../test/web3_signing_test";
 
 export default function Home() {
@@ -100,7 +100,7 @@ export default function Home() {
           <b>Device name:</b> {JSON.stringify(deviceName)}
         </div>
 
-        {/* <div className={styles.card}>
+        <div className={styles.card}>
           <h2
             onClick={() => {
               sendDemoTxWeb3Js()
@@ -133,7 +133,7 @@ export default function Home() {
           <p>
             Send a transaction to the ZENIQ Smartchain, signed by the Nomo app with web3js-nomo-plugins.
           </p>
-        </div> */}
+        </div>
         <div className={styles.card}>
           <h2
             onClick={() => {

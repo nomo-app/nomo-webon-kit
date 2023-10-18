@@ -40,6 +40,14 @@ export declare const nomo: {
     qrScan: typeof nomoQrScan;
     injectIntoPlugin: typeof nomoInjectIntoPlugin;
     mnemonicBackupExisted: typeof nomoMnemonicBackupExisted;
+    registerOnPluginVisible: typeof nomoRegisterOnPluginVisible;
+    getLanguage: typeof nomoGetLanguage;
+    addCustomToken: typeof nomoAddCustomToken;
+    getVisibleAssets: typeof nomoGetVisibleAssets;
+    getEvmAddress: typeof nomoGetEvmAddress;
+    selectAssetFromDialog: typeof nomoSelectAssetFromDialog;
+    getManifest: typeof nomoGetManifest;
+    launchUrl: typeof nomoLaunchUrl;
 };
 /**
  * A set of logging-functions to enable debugging with the Nomo dev mode.
@@ -57,6 +65,10 @@ export declare const nomoConsole: {
  * mobile dev mode of the Nomo App.
  */
 export declare function nomoEnableMobileConsoleDebugging(): void;
+/**
+ * Opens the camera to scan a qrCode.
+ * Returns a raw qrCode or a list of comma-separated qrCodes.
+ */
 export declare function nomoQrScan(): Promise<{
     qrCode: string;
 }>;
@@ -114,6 +126,13 @@ export declare function nomoInjectQRCode(args: {
     qrCode: string;
     navigateBack: boolean;
 }): Promise<void>;
+/**
+ * Opens another plugin on top of the current plugin.
+ * If the plugin is not yet running, the plugin will be launched.
+ * If the plugin is not yet installed, an error is thrown.
+ * A payload can be passed to the plugin.
+ * Afterwards, the user may navigate back to the current plugin by pressing the back button.
+ */
 export declare function nomoInjectIntoPlugin(args: {
     payload: string;
     pluginId: string;
@@ -217,4 +236,65 @@ export declare function nomoSendAssets(args: {
 export declare function nomoMnemonicBackupExisted(): Promise<{
     mnemonicBackupExisted: boolean;
 }>;
+/**
+ * Registers a callback that will be called every time when the plugin gets visible within the Nomo App.
+ * For example, this can be used to refresh data when re-opening a plugin after a long pause.
+ */
+export declare function nomoRegisterOnPluginVisible(callback: (args: {
+    fullscreenMode: boolean;
+}) => void): Promise<void>;
+/**
+ * Returns the currently selected language of the Nomo App.
+ */
+export declare function nomoGetLanguage(): Promise<{
+    language: string;
+}>;
+/**
+ * Adds a custom token to the list of visible assets in the Nomo Wallet.
+ * Before that, it opens a dialog for the user to confirm.
+ */
+export declare function nomoAddCustomToken(args: {
+    contractAddress: string;
+    network: string;
+}): Promise<void>;
+/**
+ * Returns a list of assets that are currently visible in the Nomo Wallet.
+ */
+export declare function nomoGetVisibleAssets(): Promise<{
+    visibleAssets: Array<{
+        name: string;
+        symbol: string;
+        decimals: number;
+        contractAddress?: string;
+    }>;
+}>;
+/**
+ * A convenience function to get the Smartchain address of the Nomo Wallet.
+ * Internally, it calls "nomoGetWalletAddresses" and caches the result.
+ */
+export declare function nomoGetEvmAddress(): Promise<string>;
+/**
+ * Opens a dialog for the user to select an asset.
+ * If the dialog does not look "correct", plugins are free to call "nomoGetVisibleAssets" and implement their own dialog.
+ */
+export declare function nomoSelectAssetFromDialog(): Promise<{
+    selectedAsset: {
+        name: string;
+        symbol: string;
+        decimals: number;
+        contractAddress?: string;
+    };
+}>;
+/**
+ * Returns the nomo_manifest.json that was used during the installation of the plugin.
+ * For example, this can be used by a plugin for checking its own version.
+ */
+export declare function nomoGetManifest(): Promise<Record<string, unknown>>;
+/**
+ * Passes a URL to the underlying platform for handling.
+ */
+export declare function nomoLaunchUrl(args: {
+    url: string;
+    launchMode: "platformDefault" | "inAppWebView" | "externalApplication" | "externalNonBrowserApplication";
+}): Promise<any>;
 export {};

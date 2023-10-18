@@ -52,6 +52,14 @@ export const nomo = {
     qrScan: nomoQrScan,
     injectIntoPlugin: nomoInjectIntoPlugin,
     mnemonicBackupExisted: nomoMnemonicBackupExisted,
+    registerOnPluginVisible: nomoRegisterOnPluginVisible,
+    getLanguage: nomoGetLanguage,
+    addCustomToken: nomoAddCustomToken,
+    getVisibleAssets: nomoGetVisibleAssets,
+    getEvmAddress: nomoGetEvmAddress,
+    selectAssetFromDialog: nomoSelectAssetFromDialog,
+    getManifest: nomoGetManifest,
+    launchUrl: nomoLaunchUrl,
 };
 const originalConsoleLog = console.log;
 const originalConsoleInfo = console.info;
@@ -95,6 +103,10 @@ export function nomoEnableMobileConsoleDebugging() {
         console.error = nomoConsole.error;
     }
 }
+/**
+ * Opens the camera to scan a qrCode.
+ * Returns a raw qrCode or a list of comma-separated qrCodes.
+ */
 export async function nomoQrScan() {
     return await invokeNomoFunction("nomoQrScan", {});
 }
@@ -182,6 +194,13 @@ export async function nomoGetWalletAddresses() {
 export async function nomoInjectQRCode(args) {
     return await invokeNomoFunction("nomoInjectQRCode", args);
 }
+/**
+ * Opens another plugin on top of the current plugin.
+ * If the plugin is not yet running, the plugin will be launched.
+ * If the plugin is not yet installed, an error is thrown.
+ * A payload can be passed to the plugin.
+ * Afterwards, the user may navigate back to the current plugin by pressing the back button.
+ */
 export async function nomoInjectIntoPlugin(args) {
     return await invokeNomoFunction("nomoInjectIntoPlugin", args);
 }
@@ -298,4 +317,91 @@ export async function nomoMnemonicBackupExisted() {
         return { mnemonicBackupExisted: false };
     }
     return await invokeNomoFunction("nomoMnemonicBackupExisted", {});
+}
+/**
+ * Registers a callback that will be called every time when the plugin gets visible within the Nomo App.
+ * For example, this can be used to refresh data when re-opening a plugin after a long pause.
+ */
+export async function nomoRegisterOnPluginVisible(callback) {
+    window.onPluginVisible = callback;
+    if (isFallbackModeActive()) {
+        return;
+    }
+    return await invokeNomoFunction("nomoEnableOnPluginVisible", {});
+}
+/**
+ * Returns the currently selected language of the Nomo App.
+ */
+export async function nomoGetLanguage() {
+    if (isFallbackModeActive()) {
+        return { language: "en" };
+    }
+    return await invokeNomoFunction("nomoGetLanguage", {});
+}
+/**
+ * Adds a custom token to the list of visible assets in the Nomo Wallet.
+ * Before that, it opens a dialog for the user to confirm.
+ */
+export async function nomoAddCustomToken(args) {
+    return await invokeNomoFunction("nomoAddCustomToken", args);
+}
+/**
+ * Returns a list of assets that are currently visible in the Nomo Wallet.
+ */
+export async function nomoGetVisibleAssets() {
+    if (isFallbackModeActive()) {
+        return {
+            visibleAssets: [
+                {
+                    name: "AVINOC",
+                    symbol: "AVINOC ZEN20",
+                    decimals: 18,
+                    contractAddress: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",
+                },
+            ],
+        };
+    }
+    return await invokeNomoFunction("nomoGetVisibleAssets", {});
+}
+let cachedEvmAddress = null;
+/**
+ * A convenience function to get the Smartchain address of the Nomo Wallet.
+ * Internally, it calls "nomoGetWalletAddresses" and caches the result.
+ */
+export async function nomoGetEvmAddress() {
+    if (!cachedEvmAddress) {
+        const res = await nomoGetWalletAddresses();
+        cachedEvmAddress = res.walletAddresses["ETH"];
+    }
+    return cachedEvmAddress;
+}
+/**
+ * Opens a dialog for the user to select an asset.
+ * If the dialog does not look "correct", plugins are free to call "nomoGetVisibleAssets" and implement their own dialog.
+ */
+export async function nomoSelectAssetFromDialog() {
+    if (isFallbackModeActive()) {
+        return {
+            selectedAsset: {
+                name: "AVINOC",
+                symbol: "AVINOC ZEN20",
+                decimals: 18,
+                contractAddress: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",
+            },
+        };
+    }
+    return await invokeNomoFunction("nomoSelectAssetFromDialog", {});
+}
+/**
+ * Returns the nomo_manifest.json that was used during the installation of the plugin.
+ * For example, this can be used by a plugin for checking its own version.
+ */
+export async function nomoGetManifest() {
+    return await invokeNomoFunction('nomoGetManifest', {});
+}
+/**
+ * Passes a URL to the underlying platform for handling.
+ */
+export async function nomoLaunchUrl(args) {
+    return await invokeNomoFunction('nomoLaunchUrl', args);
 }

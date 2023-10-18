@@ -1,17 +1,18 @@
 # Nomo Plugin Kit
 
+See the [api-docs](api-docs/modules.md) for a list of individual functions.
+
 This package is designed for developers to develop _plugins_ for the [NOMO-app](https://nomo.app).
 A plugin is a web-application that runs within the NOMO-app.
 Plugins are a powerful capability of the NOMO-app that unlock the following features in an easy-to-use way:
 
 - Crypto wallet functionality
-- Messaging via zeniq.chat service
-- Taking pictures / uploading documents
-- AI-powered features like speech-to-text offline
-- Authentication with NOMO-Auth
-- Authentication with NOMO-ID
+- A decentralized chat service
+- Taking pictures / documents / QRCodes
+- AI-powered features
+- Authentication with NOMO-Auth or NOMO-ID
+- More features are coming with Nomo App updates!
 
-Some of those features are not yet available, but many more features are expected to come with NOMO-app-updates!  
 This README explains how to develop plugins for the NOMO-app.  
 Furthermore, this repo contains a demo-plugin to showcase the provided functionality.  
 In order to use this package, we expect that plugins are written in JavaScript or TypeScript.
@@ -41,8 +42,9 @@ Then the demo-plugin should run at <http://localhost:3000/>.
 
 ## Step 3: Launch ngrok tunnel
 
-> You can skip this step if you are using a Desktop-version of the NOMO-app.
 > Typically, launching an `ngrok` tunnel is only needed for Android/iOS.
+> You can skip this step if you are using a Desktop-version of the NOMO-app.
+> Moreover, you may skip this step if your phone is in the same local Wifi as your dev-PC.
 
 `ngrok` is a useful tool for exposing your localhost to the Internet.
 By using `ngrok`, the NOMO-app can easily access the demo-plugin regardless of which network your phone is connected to.
@@ -69,9 +71,7 @@ Paste the URL from the previous steps, then the NOMO-app should launch the demo-
 You are now free to make changes to the demo-plugin or experiment with the features.  
 From now on, the About-screen will change into a "developer-area".
 
-# JavaScript API
-
-The functions that are provided by this package are documented in the [api-docs](api-docs/modules.md).
+# Installation
 
 You can add this package to your project with: `npm install nomo-plugin-kit`.
 
@@ -153,5 +153,3 @@ Then the following URL is a functional deeplink:
 <https://nomo.app/pluginv1/demoplugin.nomo.app>
 
 If needed, this deeplink can be easily converted into a QRCode with any QRCode-generator.
-
-

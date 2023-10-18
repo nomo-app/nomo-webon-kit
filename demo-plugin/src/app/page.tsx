@@ -11,7 +11,9 @@ import {
 } from "nomo-plugin-kit/dist/nomo_theming";
 import styles from "./page.module.css";
 import "./nomo.css";
-import { sendDemoTransaction } from "ethersjs-nomo-plugins/dist/ethersjs_provider";
+import { sendDemoTransaction as sendDemoTxEthers } from "ethersjs-nomo-plugins/dist/ethersjs_provider";
+import { sendDemoTransaction as sendDemoTxWeb3Js } from "web3js-nomo-plugins";
+import { testSigning } from "../../test/web3_signing_test";
 
 export default function Home() {
   const [dialog, setDialog] = useState<DialogContent | null>(null);
@@ -28,7 +30,6 @@ export default function Home() {
   );
   useEffect(() => {
     nomo.enableMobileConsoleDebugging();
-    console.log("test console log");
     console.warn("test console warning");
     console.info("test console info");
     console.log(
@@ -43,7 +44,13 @@ export default function Home() {
       console.log("Got value from nomoLocalStorage: " + value);
     });
     nomo.getDeviceHashes().then(console.log).catch(console.error);
+    nomo.getManifest().then(console.log).catch(console.error);
     injectNomoCSSVariables();
+    nomo.registerOnPluginVisible((args) => {
+      console.log("onPluginVisible called", args);
+    });
+    nomo.getVisibleAssets().then(console.log).catch(console.error);
+    //nomo.launchUrl({url: "https://google.com", launchMode: "externalApplication"});
   }, []);
 
   const openDialog = (content: DialogContent) => {
@@ -96,11 +103,19 @@ export default function Home() {
         <div className={styles.card}>
           <h2
             onClick={() => {
-              sendDemoTransaction()
+              sendDemoTxWeb3Js()
                 .then((res) => {
+                  function replacer(key: string, value: any) {
+                    // JSON.stringify does not know how to serialize BigInts, so we add this replacer function
+                    if (typeof value === "bigint") {
+                      return value.toString(); // Convert BigInt to string
+                    }
+                    return value; // Return other values as is
+                  }
+                  const resJson = JSON.stringify(res, replacer, 2);
                   openDialog({
                     title: "Transaction submitted to the ZENIQ Smartchain!",
-                    content: JSON.stringify(res),
+                    content: resJson,
                   });
                 })
                 .catch((e) => {
@@ -113,12 +128,47 @@ export default function Home() {
                 });
             }}
           >
-            Sign EVM transaction <span>-&gt;</span>
+            Sign EVM transaction with web3.js<span>-&gt;</span>
           </h2>
           <p>
-            Send a transaction to the ZENIQ Smartchain, signed by the Nomo app.
+            Send a transaction to the ZENIQ Smartchain, signed by the Nomo app with web3js-nomo-plugins.
           </p>
         </div>
+        <div className={styles.card}>
+          <h2
+            onClick={() => {
+              sendDemoTxEthers()
+                .then((res) => {
+                  function replacer(key: string, value: any) {
+                    // JSON.stringify does not know how to serialize BigInts, so we add this replacer function
+                    if (typeof value === "bigint") {
+                      return value.toString(); // Convert BigInt to string
+                    }
+                    return value; // Return other values as is
+                  }
+                  const resJson = JSON.stringify(res, replacer, 2);
+                  openDialog({
+                    title: "Transaction submitted to the ZENIQ Smartchain!",
+                    content: resJson,
+                  });
+                })
+                .catch((e) => {
+                  console.error(e);
+                  openDialog({
+                    title: "sendDemoTransaction failed",
+                    content:
+                      e instanceof Error ? e.toString() : JSON.stringify(e),
+                  });
+                });
+            }}
+          >
+            Sign EVM transaction with ethers.js<span>-&gt;</span>
+          </h2>
+          <p>
+            Send a transaction to the ZENIQ Smartchain, signed by the Nomo app with ethersjs-nomo-plugins.
+          </p>
+        </div>
+
 
         <div className={styles.card}>
           <h2
@@ -336,44 +386,45 @@ export default function Home() {
             the user controls a specific wallet.
           </p>
         </div>
-        <div className={styles.card}>
+        {/* <div className={styles.card}>
           <h2
             onClick={() => {
               nomo
-              .qrScan()
-              .then((res) => {
-                openDialog({
-                  title: "QrScan successful!",
-                  content: JSON.stringify(res),
+                .qrScan()
+                .then((res) => {
+                  openDialog({
+                    title: "QrScan successful!",
+                    content: JSON.stringify(res),
+                  });
+                })
+                .catch((e) => {
+                  console.error(e);
+                  // Handle any errors here
                 });
-              })
-              .catch((e) => {
-                console.error(e);
-                // Handle any errors here
-              });
             }}
           >
             QR-Scanner<span>-&gt;</span>
           </h2>
-          <p>
-            Scan a QrCode.
-          </p>
-        </div>
-        <div className={styles.card}>
+          <p>Scan a QrCode.</p>
+        </div> */}
+        {/* <div className={styles.card}>
           <h2
             onClick={() => {
               nomo
                 .injectIntoPlugin({
-                  payload: "https://example.com/api/resource?key1=value1&key2=value2&key3=value3",
+                  payload:
+                    "https://example.com/api/resource?key1=value1&key2=value2&key3=value3",
                   pluginId: "app.nomo.demoplugin",
                 })
                 .then((res) => {
-                  nomo.localStorage.getItem("app.nomo.demoplugin").then((res) => {
-                    openDialog({
-                      title: "Injection successful!",
-                      content: JSON.stringify(res),
+                  nomo.localStorage
+                    .getItem("app.nomo.demoplugin")
+                    .then((res) => {
+                      openDialog({
+                        title: "Injection successful!",
+                        content: JSON.stringify(res),
+                      });
                     });
-                  });
                 })
                 .catch((e) => {
                   console.error(e);
@@ -383,12 +434,47 @@ export default function Home() {
           >
             Inject payload into Plugin.<span>-&gt;</span>
           </h2>
-          <p>
-            Scan a QrCode.
-          </p>
+          <p>Scan a QrCode.</p>
+        </div> */}
+        <div className={styles.card}>
+          <h2
+            onClick={() => {
+              nomo
+                .addCustomToken({
+                  contractAddress: "0x83B58BC6CB9653117c206DDAFA3018b9344F8070",
+                  network: "zeniqSmartChain",
+                })
+                .catch(console.error);
+            }}
+          >
+            Add custom token<span>-&gt;</span>
+          </h2>
+          <p>Plugins can expand the list of tokens</p>
+        </div>
+        <div className={styles.card}>
+          <h2
+            onClick={() => {
+              testSigning()
+                .then((res) => {
+                  openDialog({
+                    title: "Unittest Result",
+                    content: JSON.stringify(res),
+                  });
+                })
+                .catch((e) => {
+                  console.error(e);
+                  openDialog({
+                    title: "sign transaction failed",
+                    content: e.toString(),
+                  });
+                });
+            }}
+          >
+            Unittest transaction signing <span>-&gt;</span>
+          </h2>
+          <p>Unittest for signing a transaction with the Nomo app.</p>
         </div>
       </div>
     </main>
   );
-  
 }

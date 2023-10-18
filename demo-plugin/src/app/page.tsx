@@ -11,6 +11,7 @@ import {
 } from "nomo-plugin-kit/dist/nomo_theming";
 import styles from "./page.module.css";
 import "./nomo.css";
+import { replacer } from "./utils";
 import { sendDemoTransaction as sendDemoTxEthers } from "ethersjs-nomo-plugins/dist/ethersjs_provider";
 import { sendDemoTransaction as sendDemoTxWeb3Js } from "web3js-nomo-plugins";
 import { testSigning } from "../../test/web3_signing_test";
@@ -105,14 +106,7 @@ export default function Home() {
             onClick={() => {
               sendDemoTxWeb3Js()
                 .then((res) => {
-                  function replacer(key: string, value: any) {
-                    // JSON.stringify does not know how to serialize BigInts, so we add this replacer function
-                    if (typeof value === "bigint") {
-                      return value.toString(); // Convert BigInt to string
-                    }
-                    return value; // Return other values as is
-                  }
-                  const resJson = JSON.stringify(res, replacer, 2);
+                  const resJson = replacer(res);
                   openDialog({
                     title: "Transaction submitted to the ZENIQ Smartchain!",
                     content: resJson,
@@ -139,14 +133,7 @@ export default function Home() {
             onClick={() => {
               sendDemoTxEthers()
                 .then((res) => {
-                  function replacer(key: string, value: any) {
-                    // JSON.stringify does not know how to serialize BigInts, so we add this replacer function
-                    if (typeof value === "bigint") {
-                      return value.toString(); // Convert BigInt to string
-                    }
-                    return value; // Return other values as is
-                  }
-                  const resJson = JSON.stringify(res, replacer, 2);
+                  const resJson = replacer(res);
                   openDialog({
                     title: "Transaction submitted to the ZENIQ Smartchain!",
                     content: resJson,
@@ -478,3 +465,5 @@ export default function Home() {
     </main>
   );
 }
+
+

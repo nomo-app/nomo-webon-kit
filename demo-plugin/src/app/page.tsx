@@ -4,11 +4,11 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Dialog, { DialogContent } from "./components/dialog";
 import { useNomoState } from "./hooks/custom_hooks";
-import { nomo } from "nomo-plugin-kit/dist/nomo_api";
+import { nomo } from "nomo-plugin-kit";
 import {
   getCurrentNomoTheme,
   injectNomoCSSVariables,
-} from "nomo-plugin-kit/dist/nomo_theming";
+} from "nomo-plugin-kit";
 import styles from "./page.module.css";
 import "./nomo.css";
 import { replacer } from "./utils";

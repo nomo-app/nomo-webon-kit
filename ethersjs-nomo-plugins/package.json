@@ -2,7 +2,7 @@
   "name": "ethersjs-nomo-plugins",
   "version": "0.1.1",
   "description": "ethersjs-nomo-plugins for nomo",
-  "main": "dist",
+  "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf dist && tsc",
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -37,7 +37,6 @@ function createFallbackDevSigner(): HDNodeWallet {
       );
     }
 
-    console.log("mnemonic", mnemonic);
     fallbackDevSigner = Wallet.fromPhrase(mnemonic);
   }
   return fallbackDevSigner;

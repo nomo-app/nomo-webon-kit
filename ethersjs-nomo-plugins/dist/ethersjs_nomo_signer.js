@@ -111,15 +111,8 @@ export class EthersjsNomoSigner {
         console.log("populatedTx", unsignedTx);
         const unsignedRawTx = Transaction.from(unsignedTx).unsignedSerialized;
         console.log("unsignedRawTx", unsignedRawTx);
-        return new Promise((resolve, reject) => {
-            nomo.signEvmTransaction({ messageHex: unsignedRawTx })
-                .then((res) => {
-                const signedRawTx = appendSignatureToTx(unsignedTx, res.sigHex);
-                resolve(signedRawTx);
-            })
-                .catch((err) => {
-                reject(err);
-            });
-        });
+        const res = await nomo.signEvmTransaction({ messageHex: unsignedRawTx });
+        const signedRawTx = appendSignatureToTx(unsignedTx, res.sigHex);
+        return signedRawTx;
     }
 }

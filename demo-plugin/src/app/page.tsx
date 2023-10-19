@@ -5,10 +5,7 @@ import { useEffect, useState } from "react";
 import Dialog, { DialogContent } from "./components/dialog";
 import { useNomoState } from "./hooks/custom_hooks";
 import { nomo } from "nomo-plugin-kit";
-import {
-  getCurrentNomoTheme,
-  injectNomoCSSVariables,
-} from "nomo-plugin-kit";
+import { getCurrentNomoTheme, injectNomoCSSVariables } from "nomo-plugin-kit";
 import styles from "./page.module.css";
 import "./nomo.css";
 import { replacer } from "./utils";
@@ -124,7 +121,8 @@ export default function Home() {
             Sign EVM transaction with web3.js<span>-&gt;</span>
           </h2>
           <p>
-            Send a transaction to the ZENIQ Smartchain, signed by the Nomo app with web3js-nomo-plugins.
+            Send a transaction to the ZENIQ Smartchain, signed by the Nomo app
+            with web3js-nomo-plugins.
           </p>
         </div>
         <div className={styles.card}>
@@ -151,10 +149,10 @@ export default function Home() {
             Sign EVM transaction with ethers.js<span>-&gt;</span>
           </h2>
           <p>
-            Send a transaction to the ZENIQ Smartchain, signed by the Nomo app with ethersjs-nomo-plugins.
+            Send a transaction to the ZENIQ Smartchain, signed by the Nomo app
+            with ethersjs-nomo-plugins.
           </p>
         </div>
-
 
         <div className={styles.card}>
           <h2
@@ -319,20 +317,24 @@ export default function Home() {
 
         <div className={styles.card}>
           <h2
-            onClick={() => {
-              nomo
-                .sendAssets({
-                  assetSymbol: "ZENIQ Token",
+            onClick={async () => {
+              try {
+                const res = await nomo.selectAssetFromDialog();
+                const asset = res.selectedAsset;
+                const balance = BigInt(asset.balance);
+                const amount = balance / 100n;
+                await nomo.sendAssets({
+                  assetSymbol: asset.symbol,
                   targetAddress: "0x7561DEAf4ECf96dc9F0d50B4136046979ACdAD3e",
-                  amount: "100000000000000000", // must be in the smallest unit (e.g. wei or satoshi)
-                })
-                .catch((e) => {
-                  console.error(e);
-                  openDialog({
-                    title: "nomoSendAssets failed",
-                    content: JSON.stringify(e),
-                  });
+                  amount: amount.toString(), // must be in the smallest unit (e.g. wei or satoshi)
                 });
+              } catch (e) {
+                console.error(e);
+                openDialog({
+                  title: "nomoSendAssets failed",
+                  content: JSON.stringify(e),
+                });
+              }
             }}
           >
             Send assets<span>-&gt;</span>
@@ -420,7 +422,8 @@ export default function Home() {
           <h2
             onClick={() => {
               nomo
-                .qrScan().then((res) =>  {
+                .qrScan()
+                .then((res) => {
                   openDialog({
                     title: "QrScan successful!",
                     content: JSON.stringify(res),
@@ -466,5 +469,3 @@ export default function Home() {
     </main>
   );
 }
-
-

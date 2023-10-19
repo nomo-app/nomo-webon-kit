@@ -60,6 +60,8 @@ export const nomo = {
     selectAssetFromDialog: nomoSelectAssetFromDialog,
     getManifest: nomoGetManifest,
     launchUrl: nomoLaunchUrl,
+    getBalance: nomoGetBalance,
+    getAssetIcon: nomoGetAssetIcon,
 };
 const originalConsoleLog = console.log;
 const originalConsoleInfo = console.info;
@@ -386,6 +388,7 @@ export async function nomoSelectAssetFromDialog() {
                 name: "AVINOC",
                 symbol: "AVINOC ZEN20",
                 decimals: 18,
+                balance: "1000000000000000000",
                 contractAddress: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",
             },
         };
@@ -397,11 +400,25 @@ export async function nomoSelectAssetFromDialog() {
  * For example, this can be used by a plugin for checking its own version.
  */
 export async function nomoGetManifest() {
-    return await invokeNomoFunction('nomoGetManifest', {});
+    return await invokeNomoFunction("nomoGetManifest", {});
 }
 /**
  * Passes a URL to the underlying platform for handling.
  */
 export async function nomoLaunchUrl(args) {
-    return await invokeNomoFunction('nomoLaunchUrl', args);
+    return await invokeNomoFunction("nomoLaunchUrl", args);
+}
+/**
+ * Returns not only the balance of an asset, but also additional information like the network or the contract-address.
+ * Typically, the decimals are needed to convert a raw balance into a user-readable balance.
+ */
+export async function nomoGetBalance(args) {
+    return await invokeNomoFunction("nomoGetBalance", args);
+}
+/**
+ * Returns a set of URLs that contain icons of the asset.
+ * May throw an error if no icons can be found.
+ */
+export async function nomoGetAssetIcon(args) {
+    return await invokeNomoFunction("nomoGetAssetIcon", args);
 }

@@ -1,6 +1,6 @@
 {
   "name": "nomo-plugin-kit",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Nomo-Plugin-Kit for the Nomo App",
   "main": "dist/index.js",
   "scripts": {

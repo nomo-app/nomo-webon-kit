@@ -29,7 +29,9 @@ import { sendDemoTransaction } from "ethersjs-nomo-plugins"; // an example on ho
 
 Please consult the demo-plugin and to the ethers.js documentation for more details.
 
-## Limitations
+## ethers.js-V5/V6
 
-Currently, this package only works with ethers.js-V5.
-ethers.js-V6 is not yet supported.
+Starting from 0.2.0, this package works with ethers.js-V6.
+An older version of this package works with ethers.js-V5.
+
+  

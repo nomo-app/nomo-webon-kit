@@ -1,6 +1,6 @@
 {
   "name": "ethersjs-nomo-plugins",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "ethersjs-nomo-plugins for nomo",
   "main": "dist/index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "url": "https://github.com/nomo-app/nomo-plugin-kit.git"
   },
   "dependencies": {
-    "ethers": "^5.7.2",
+    "ethers": "^6.8.0",
     "typescript": "5.0.4",
     "@types/node": "^20.5.9"
   },
@@ -23,4 +23,4 @@
   "keywords": [],
   "author": "dev2@nomo.app",
   "license": "ISC"
-  }
+}

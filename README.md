@@ -2,9 +2,9 @@
 
 See the [api-docs](api-docs/modules.md) for a list of individual functions.
 
-This package is designed for developers to develop _plugins_ for the [NOMO-app](https://nomo.app).
-A plugin is a web-application that runs within the NOMO-app.
-Plugins are a powerful capability of the NOMO-app that unlock the following features in an easy-to-use way:
+This package is designed for developers to develop _web-plugins_ for the [NOMO-app](https://nomo.app).
+A web-plugin is a web-application that runs within the NOMO-app.
+Web-plugins are a powerful capability of the NOMO-app that unlock the following features in an easy-to-use way:
 
 - Crypto wallet functionality
 - A decentralized chat service
@@ -13,9 +13,9 @@ Plugins are a powerful capability of the NOMO-app that unlock the following feat
 - Authentication with NOMO-Auth or NOMO-ID
 - More features are coming with Nomo App updates!
 
-This README explains how to develop plugins for the NOMO-app.  
+This README explains how to develop web-plugins for the NOMO-app.  
 Furthermore, this repo contains a demo-plugin to showcase the provided functionality.  
-In order to use this package, we expect that plugins are written in JavaScript or TypeScript.
+In order to use this package, we expect that web-plugins are written in JavaScript or TypeScript.
 
 # Quick Usage Guide
 
@@ -85,7 +85,7 @@ This package has a ready-made provider that utilizes the Nomo App for signing tr
 
 # Debugging of Plugins
 
-In the following sections, we describe multiple ways for debugging Nomo plugins.
+In the following sections, we describe multiple ways for debugging web-plugins.
 
 ## Debugging with the Nomo dev mode
 
@@ -120,12 +120,12 @@ See <https://developer.chrome.com/docs/devtools/remote-debugging/webviews/> for 
 
 # Release of Plugins
 
-Once you are done with an initial version, a few more steps are needed to release a plugin.
+Once you are done with an initial version, a few more steps are needed to release a web-plugin.
 
 ## Hosting Plugins
 
-Firstly, the plugin needs to be hosted at a publicly available URL.
-Nomo recommends the usage of a Content Delivery Network (CDN) for hosting plugins.
+Firstly, the web-plugin needs to be hosted at a publicly available URL.
+Nomo recommends the usage of a Content Delivery Network (CDN) for hosting web-plugins.
 By using a decent CDN, Nomo plugins can be made globally available without any scalability concerns.
 
 ## Plugin Manifests
@@ -139,16 +139,16 @@ You can copy-paste this example, but at a minimum you will need to change the fo
 
 ## Security Restrictions
 
-For regular users, the NOMO-app only accepts plugins that are hosted at the domain `*.nomo.app`.
-In contrast, the users who have activated the Nomo dev mode are free to install plugins from arbitrary domains.
+For regular users, the NOMO-app only accepts web-plugins that are hosted at the domain `*.nomo.app`.
+In contrast, the users who have activated the Nomo dev mode are free to install web-plugins from arbitrary domains.
 This is a security-restriction that may be lifted in future version of the NOMO-app.
 
 ## Distributing Plugins via QRCodes or Deeplinks
 
-Once a plugin is hosted, you can construct a deeplink for installing the plugin.
+Once a web-plugin is hosted, you can construct a deeplink for installing the web-plugin.
 Deeplinks can be constructed by prepending `https://nomo.app/pluginv1/` to the hosting-domain.
 
-For example, let's assume that the hosting-URL of a plugin is <https://demoplugin.nomo.app>.
+For example, let's assume that the hosting-URL of a web-plugin is <https://demoplugin.nomo.app>.
 Then the following URL is a functional deeplink:
 
 <https://nomo.app/pluginv1/demoplugin.nomo.app>

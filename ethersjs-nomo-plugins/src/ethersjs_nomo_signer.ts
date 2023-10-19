@@ -1,4 +1,4 @@
-import { BlockTag, Provider, Signer, Transaction, TransactionLike, TransactionRequest, TransactionResponse, TypedDataDomain, TypedDataField } from "ethers";
+import { BlockTag, HDNodeWallet, Provider, Signer, Transaction, TransactionLike, TransactionRequest, TransactionResponse, TypedDataDomain, TypedDataField, Wallet } from "ethers";
 import { isFallbackModeActive } from "nomo-plugin-kit";
 import { nomo } from "nomo-plugin-kit";
 
@@ -19,33 +19,36 @@ function appendSignatureToTx(
   console.log("unsignedTx", unsignedTx);
 
   return Transaction.from(unsignedTx).serialized;
-  // return utils.serializeTransaction(unsignedTx as UnsignedTransaction, sigHex);
 }
 
-// let fallbackDevSigner: ethers.Wallet | null = null;
+let fallbackDevSigner: HDNodeWallet | null = null;
 
-// function createFallbackDevSigner(): ethers.Wallet {
-//   if (!fallbackDevSigner) {
-//     console.error(
-//       "fallback mode: try to read NEXT_PUBLIC_FALLBACK_MNEMONIC from environment"
-//     );
-//     const mnemonic = process.env.NEXT_PUBLIC_FALLBACK_MNEMONIC;
-//     if (!mnemonic || !mnemonic.length) {
-//       throw Error(
-//         "NEXT_PUBLIC_FALLBACK_MNEMONIC is not defined. Create a .env.local to define it"
-//       );
-//     }
-//     fallbackDevSigner = ethers.Wallet.fromMnemonic(mnemonic);
-//   }
-//   return fallbackDevSigner;
-// }
+function createFallbackDevSigner(): HDNodeWallet {
+  if (!fallbackDevSigner) {
+    console.error(
+      "fallback mode: try to read NEXT_PUBLIC_FALLBACK_MNEMONIC from environment"
+    );
+    const mnemonic = process.env.NEXT_PUBLIC_FALLBACK_MNEMONIC;
 
-// function signTxDevWallet(
-//   txRequest: Deferrable<TransactionRequest>
-// ): Promise<string> {
-//   const devSigner = createFallbackDevSigner();
-//   return devSigner.signTransaction(txRequest as TransactionRequest);
-// }
+
+    if (!mnemonic || !mnemonic.length) {
+      throw Error(
+        "NEXT_PUBLIC_FALLBACK_MNEMONIC is not defined. Create a .env.local to define it"
+      );
+    }
+
+    console.log("mnemonic", mnemonic);
+    fallbackDevSigner = Wallet.fromPhrase(mnemonic);
+  }
+  return fallbackDevSigner;
+}
+
+function signTxDevWallet(
+  txRequest: TransactionRequest
+): Promise<string> {
+  const devSigner = createFallbackDevSigner();
+  return devSigner.signTransaction(txRequest);
+}
 
 let cachedAddress: string | null = null;
 
@@ -115,9 +118,9 @@ export class EthersjsNomoSigner implements Signer {
 
 
   getAddress(): Promise<string> {
-    // if (isFallbackModeActive()) {
-    //   return createFallbackDevSigner().getAddress();
-    // }
+    if (isFallbackModeActive()) {
+      return createFallbackDevSigner().getAddress();
+    }
     if (cachedAddress) {
       return Promise.resolve(cachedAddress);
     }
@@ -138,9 +141,13 @@ export class EthersjsNomoSigner implements Signer {
   }
 
   async signTransaction(txRequest: TransactionRequest): Promise<string> {
-    // if (isFallbackModeActive()) {
-    //   return signTxDevWallet(txRequest);
-    // }
+
+    console.log("isFallbackModeActive", isFallbackModeActive());
+
+    if (isFallbackModeActive()) {
+
+      return signTxDevWallet(txRequest);
+    }
 
 
 

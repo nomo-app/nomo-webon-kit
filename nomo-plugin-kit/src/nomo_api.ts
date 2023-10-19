@@ -65,6 +65,8 @@ export const nomo = {
   selectAssetFromDialog: nomoSelectAssetFromDialog,
   getManifest: nomoGetManifest,
   launchUrl: nomoLaunchUrl,
+  getBalance: nomoGetBalance,
+  getAssetIcon: nomoGetAssetIcon,
 };
 
 const originalConsoleLog = console.log;
@@ -397,11 +399,11 @@ export async function nomoGetDeviceName(): Promise<{
 export async function nomoAuthHttp(
   args:
     | {
-      url: string;
-      method?: "GET" | "POST";
-      headers?: { [key: string]: string };
-      body?: string;
-    }
+        url: string;
+        method?: "GET" | "POST";
+        headers?: { [key: string]: string };
+        body?: string;
+      }
     | string
 ): Promise<{
   statusCode: number;
@@ -519,16 +521,18 @@ export async function nomoSelectAssetFromDialog(): Promise<{
     name: string;
     symbol: string;
     decimals: number;
+    balance: string;
     contractAddress?: string;
+    network?: string | null;
   };
 }> {
   if (isFallbackModeActive()) {
     return {
-      selectedAsset:
-      {
+      selectedAsset: {
         name: "AVINOC",
         symbol: "AVINOC ZEN20",
         decimals: 18,
+        balance: "1000000000000000000",
         contractAddress: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",
       },
     };
@@ -541,12 +545,49 @@ export async function nomoSelectAssetFromDialog(): Promise<{
  * For example, this can be used by a plugin for checking its own version.
  */
 export async function nomoGetManifest(): Promise<Record<string, unknown>> {
-  return await invokeNomoFunction('nomoGetManifest', {});
+  return await invokeNomoFunction("nomoGetManifest", {});
 }
 
 /**
  * Passes a URL to the underlying platform for handling.
  */
-export async function nomoLaunchUrl(args: { url: string, launchMode: "platformDefault" | "inAppWebView" | "externalApplication" | "externalNonBrowserApplication" }): Promise<any> {
-  return await invokeNomoFunction('nomoLaunchUrl', args);
+export async function nomoLaunchUrl(args: {
+  url: string;
+  launchMode:
+    | "platformDefault"
+    | "inAppWebView"
+    | "externalApplication"
+    | "externalNonBrowserApplication";
+}): Promise<any> {
+  return await invokeNomoFunction("nomoLaunchUrl", args);
+}
+
+/**
+ * Returns not only the balance of an asset, but also additional information like the network or the contract-address.
+ * Typically, the decimals are needed to convert a raw balance into a user-readable balance.
+ */
+export async function nomoGetBalance(args: { assetSymbol: string }): Promise<{
+  symbol: string;
+  name: string;
+  decimals: number;
+  balance: string;
+  contractAddress?: string | null;
+  network?: string | null;
+}> {
+  return await invokeNomoFunction("nomoGetBalance", args);
+}
+
+/**
+ * Returns a set of URLs that contain icons of the asset.
+ * May throw an error if no icons can be found.
+ */
+export async function nomoGetAssetIcon(args: { assetSymbol: string }): Promise<{
+  large: string;
+  small: string;
+  thumb: string;
+  isPending: boolean;
+  symbol: string;
+  name: string;
+}> {
+  return await invokeNomoFunction("nomoGetAssetIcon", args);
 }

@@ -48,6 +48,8 @@ export declare const nomo: {
     selectAssetFromDialog: typeof nomoSelectAssetFromDialog;
     getManifest: typeof nomoGetManifest;
     launchUrl: typeof nomoLaunchUrl;
+    getBalance: typeof nomoGetBalance;
+    getAssetIcon: typeof nomoGetAssetIcon;
 };
 /**
  * A set of logging-functions to enable debugging with the Nomo dev mode.
@@ -282,7 +284,9 @@ export declare function nomoSelectAssetFromDialog(): Promise<{
         name: string;
         symbol: string;
         decimals: number;
+        balance: string;
         contractAddress?: string;
+        network?: string | null;
     };
 }>;
 /**
@@ -297,4 +301,32 @@ export declare function nomoLaunchUrl(args: {
     url: string;
     launchMode: "platformDefault" | "inAppWebView" | "externalApplication" | "externalNonBrowserApplication";
 }): Promise<any>;
+/**
+ * Returns not only the balance of an asset, but also additional information like the network or the contract-address.
+ * Typically, the decimals are needed to convert a raw balance into a user-readable balance.
+ */
+export declare function nomoGetBalance(args: {
+    assetSymbol: string;
+}): Promise<{
+    symbol: string;
+    name: string;
+    decimals: number;
+    balance: string;
+    contractAddress?: string | null;
+    network?: string | null;
+}>;
+/**
+ * Returns a set of URLs that contain icons of the asset.
+ * May throw an error if no icons can be found.
+ */
+export declare function nomoGetAssetIcon(args: {
+    assetSymbol: string;
+}): Promise<{
+    large: string;
+    small: string;
+    thumb: string;
+    isPending: boolean;
+    symbol: string;
+    name: string;
+}>;
 export {};

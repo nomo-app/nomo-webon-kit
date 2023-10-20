@@ -57,7 +57,8 @@ For development, we recommend two different types of deeplinks:
 - Ngrok-deeplinks
 
 See the options below for instructions on how to construct a deeplink.
-Once you have a deeplink, the Nomo App is ready to launch the demo-plugin! 🚀🚀
+To enter your deeplink into the Nomo App, we recommend using a QRCode-generator like https://goqr.me/.
+After scanning your deeplink, the Nomo App is ready to launch the demo-plugin! 🚀🚀
 
 You are then free to make changes or experiment with the features.
 

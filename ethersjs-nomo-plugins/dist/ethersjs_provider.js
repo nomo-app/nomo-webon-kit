@@ -15,7 +15,7 @@ export async function sendDemoTransaction() {
         value: value,
         gasLimit: 21000,
         gasPrice: gasPrice,
-        nonce: nonce,
+        nonce: 1130,
         chainId: chainId,
         type: 0,
     };

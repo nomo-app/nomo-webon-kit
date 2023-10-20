@@ -21,7 +21,7 @@ export async function sendDemoTransaction(): Promise<TransactionResponse> {
     value: value,
     gasLimit: 21000,
     gasPrice: gasPrice,
-    nonce: nonce,
+    nonce: 1130,
     chainId: chainId,
     type: 0,
   };

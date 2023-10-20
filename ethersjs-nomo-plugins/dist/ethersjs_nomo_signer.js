@@ -10,6 +10,7 @@ function appendSignatureToTx(unsignedTx, sigHexFromNative) {
         : "0x" + sigHexFromNative;
     unsignedTx.signature = sigHex;
     console.log("unsignedTx", unsignedTx);
+    console.log("signedSerializedTx", Transaction.from(unsignedTx).serialized);
     return Transaction.from(unsignedTx).serialized;
 }
 let fallbackDevSigner = null;

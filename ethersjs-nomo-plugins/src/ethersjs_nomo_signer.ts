@@ -18,6 +18,8 @@ function appendSignatureToTx(
 
   console.log("unsignedTx", unsignedTx);
 
+  console.log("signedSerializedTx", Transaction.from(unsignedTx).serialized);
+
   return Transaction.from(unsignedTx).serialized;
 }
 

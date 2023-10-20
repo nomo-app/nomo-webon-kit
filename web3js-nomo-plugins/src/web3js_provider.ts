@@ -1,19 +1,12 @@
 import { Web3 } from "web3";
 import { nomo } from "nomo-plugin-kit";
-import { Transaction, Common } from "web3-eth-accounts";
-import { BigNumber } from "ethers";
+import { Transaction } from "web3-eth-accounts";
 import { RLP } from "@ethereumjs/rlp";
 
-import { UnsignedTransaction, utils } from "ethers";
 
 const rpcUrlZeniqSmartChain = "https://smart.zeniq.network:9545";
 const chainIdZeniqSmartChain = 383414847825;
-const common = Common.custom({
-  name: "mainnet",
-  networkId: chainIdZeniqSmartChain,
-  chainId: chainIdZeniqSmartChain,
-  url: rpcUrlZeniqSmartChain,
-});
+
 
 const web3 = new Web3(new Web3.providers.HttpProvider(rpcUrlZeniqSmartChain));
 
@@ -25,11 +18,10 @@ export function rlpEncodeTx(data: Uint8Array[]): string {
 }
 
 export function appendSignatureToTxFromWebJs(
-  txRequestFromWeb3Js: Record<string, any>,
+  txRequestFromWeb3Js: Transaction,
   sigHexFromNative: string,
-  ownAddress: string
 ) {
-  // in this case, we use ethers.js only for serialization of transactions, everything else is done by web3.js
+
   if (sigHexFromNative.length !== 130) {
     throw Error("unexpected sigHexFromNative length");
   }
@@ -37,48 +29,49 @@ export function appendSignatureToTxFromWebJs(
     ? sigHexFromNative
     : "0x" + sigHexFromNative;
 
-  const allowedTransactionKeys: { [key: string]: boolean } = {
-    chainId: true,
-    data: true,
-    gasLimit: true,
-    gasPrice: true,
-    nonce: true,
-    to: true,
-    type: true,
-    value: true,
-  }; // ethers.js enforced strict rules on what properties are allowed in unsignedTx
 
-  // we provide a few hardcoded properties that might be missing in the object from web3js
-  const unsignedTxEthersjs: Record<string, any> = {
+  const rsv = extractRSVFromSignature(sigHex);
+
+
+
+  const signedTxData = {
+    nonce: txRequestFromWeb3Js.nonce,
+    to: txRequestFromWeb3Js.to, // send ZENIQ to ourselves
+    value: txRequestFromWeb3Js.value,
+    gasLimit: txRequestFromWeb3Js.gasLimit,
+    gasPrice: txRequestFromWeb3Js.gasPrice,
+    type: txRequestFromWeb3Js.type,
     chainId: chainIdZeniqSmartChain,
-    type: 0,
-  };
-
-  for (const key of Object.keys(allowedTransactionKeys)) {
-    let propertyFromWeb3Js = (txRequestFromWeb3Js as Record<string, any>)[key];
-    if (typeof propertyFromWeb3Js === "bigint") {
-      if (key === "value") {
-        propertyFromWeb3Js = BigNumber.from(propertyFromWeb3Js); // convert JS bigint into BigNumber for ethers.js v5
-      } else {
-        propertyFromWeb3Js = Number(propertyFromWeb3Js);
-      }
-    }
-    if (key === "to") {
-      propertyFromWeb3Js = ownAddress;
-    }
-    if (propertyFromWeb3Js !== undefined) {
-      unsignedTxEthersjs[key] = propertyFromWeb3Js;
-    }
-    if (unsignedTxEthersjs[key] === undefined) {
-      throw Error("missing property " + key + " in txRequestFromWeb3Js");
-    }
+    r: rsv.r,
+    s: rsv.s,
+    v: rsv.v,
   }
-  Object.freeze(unsignedTxEthersjs);
 
-  return utils.serializeTransaction(
-    unsignedTxEthersjs as UnsignedTransaction,
-    sigHex
-  );
+
+  const signedTx = Transaction.fromTxData(signedTxData);
+  console.log("signedTx", signedTx);
+
+
+  const serializedSignedTX = signedTx.serialize();
+  console.log("serializedSignedTx", serializedSignedTX);
+
+  const hexstring = web3.utils.bytesToHex(serializedSignedTX);
+  console.log("hexstring", hexstring);
+
+  return hexstring;
+
+}
+
+function extractRSVFromSignature(signature: string) {
+  const rHex = signature.slice(2, 66);
+  const sHex = signature.slice(66, 130);
+  const vHex = signature.slice(130);
+
+  const r = BigInt("0x" + rHex);
+  const s = BigInt("0x" + sHex);
+  const v = BigInt("0x" + vHex);
+
+  return { r, s, v }
 }
 
 export async function signWeb3JsTransactionWithNomo(
@@ -97,7 +90,6 @@ export async function signWeb3JsTransactionWithNomo(
         const signedRawTx = appendSignatureToTxFromWebJs(
           txRequest,
           res.sigHex,
-          ownAddress
         );
         resolve(signedRawTx);
       })
@@ -119,9 +111,10 @@ export async function sendDemoTransaction() {
     value: web3.utils.toBigInt(value),
     gasLimit: 21000n,
     gasPrice: 10000000000,
+    chainId: chainIdZeniqSmartChain,
   };
 
-  const transaction: Transaction = Transaction.fromTxData(txData, { common });
+  const transaction: Transaction = Transaction.fromTxData(txData);
 
   const signedTxHex = await signWeb3JsTransactionWithNomo(transaction, ownAddress);
 

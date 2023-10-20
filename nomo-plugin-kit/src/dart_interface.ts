@@ -29,13 +29,14 @@ function getDartBridge(): ((arg0: string) => void) | null {
   }
 }
 
+let invocationCounter: number = 0;
+
 export async function invokeNomoFunction(
   functionName: string,
   args: object | null
 ): Promise<any> {
-  const callDate = new Date();
-  const invocationID =
-    functionName + "_" + callDate.toISOString() + "_" + Math.random();
+  invocationCounter++;
+  const invocationID = invocationCounter.toString();
   const payload: string = JSON.stringify({
     functionName,
     invocationID,
@@ -105,4 +106,4 @@ const fulfillPromiseFromFlutter = function (base64FromFlutter: string) {
 };
 try {
   window.fulfillPromiseFromFlutter = fulfillPromiseFromFlutter;
-} catch (e) { }
+} catch (e) {}

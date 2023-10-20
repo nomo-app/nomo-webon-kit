@@ -23,9 +23,10 @@ function getDartBridge() {
         return null; // fallback mode
     }
 }
+let invocationCounter = 0;
 export async function invokeNomoFunction(functionName, args) {
-    const callDate = new Date();
-    const invocationID = functionName + "_" + callDate.toISOString() + "_" + Math.random();
+    invocationCounter++;
+    const invocationID = invocationCounter.toString();
     const payload = JSON.stringify({
         functionName,
         invocationID,

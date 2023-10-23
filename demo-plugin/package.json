@@ -2,9 +2,11 @@
   "name": "nomo-demo-plugin",
   "scripts": {
     "dev": "next dev",
-    "deploy": "rm -f .env.local && npm run build && ./scripts/deploy.sh",
+    "deploy_legacy": "rm -f .env.local && ./scripts/deploy_legacy.sh",
+    "deploy_zip": "./scripts/deploy_zip.sh",
     "build": "next build && next export",
-    "build_tar": "next build && next export && mv out $npm_package_name && tar -czvf $npm_package_name.tar.gz $npm_package_name",
+    "build_tar": "npm run build && tar -czvf $npm_package_name.tar.gz out",
+    "build_zip": "npm run build && rm -f $npm_package_name.zip && zip -r $npm_package_name.zip out",
     "start": "npx serve@latest out",
     "lint": "next lint"
   },

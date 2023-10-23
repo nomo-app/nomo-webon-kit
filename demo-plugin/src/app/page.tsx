@@ -465,6 +465,16 @@ export default function Home() {
           </h2>
           <p>Unittest for signing a transaction with the Nomo app.</p>
         </div>
+        <div
+          onClick={() => {
+            nomo.launchUrl({
+              url: "mailto:support@nomo.app",
+              launchMode: "platformDefault",
+            });
+          }}
+        >
+          Contact support
+        </div>
       </div>
     </main>
   );

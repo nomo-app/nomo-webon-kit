@@ -67,6 +67,8 @@ export const nomo = {
   launchUrl: nomoLaunchUrl,
   getBalance: nomoGetBalance,
   getAssetIcon: nomoGetAssetIcon,
+  openFAQPage: nomoOpenFAQPage,
+  getInstalledPlugins: nomoGetInstalledPlugins,
 };
 
 const originalConsoleLog = console.log;
@@ -544,7 +546,7 @@ export async function nomoSelectAssetFromDialog(): Promise<{
  * Returns the nomo_manifest.json that was used during the installation of the plugin.
  * For example, this can be used by a plugin for checking its own version.
  */
-export async function nomoGetManifest(): Promise<Record<string, unknown>> {
+export async function nomoGetManifest(): Promise<NomoManifest> {
   return await invokeNomoFunction("nomoGetManifest", {});
 }
 
@@ -590,4 +592,61 @@ export async function nomoGetAssetIcon(args: { assetSymbol: string }): Promise<{
   name: string;
 }> {
   return await invokeNomoFunction("nomoGetAssetIcon", args);
+}
+
+/**
+ * Opens a standardized FAQ page in Nomo design.
+ * "faqContent" should be a nested object of questions and answers (with depth=2).
+ * Optionally, a button for contacting support is shown below of the FAQs.
+ */
+export async function nomoOpenFAQPage(args: {
+  faqContent: Record<string, Record<string, string>>;
+  initiallyExpanded: boolean;
+  supportButtonTitle?: string;
+  supportButtonUrl?: string;
+}): Promise<void> {
+  return await invokeNomoFunction("nomoOpenFAQPage", args);
+}
+
+export interface NomoManifest {
+  /**
+   * If min_nomo_version is set, then outdated versions of the Nomo App will refuse to install the plugin.
+   */
+  min_nomo_version?: string | null;
+  /**
+   * nomo_manifest_version should be 1.1.0.
+   */
+  nomo_manifest_version: string;
+  /**
+   * A list of permissions for security-critical features.
+   */
+  permissions: string[];
+  /**
+   * plugin_id should be the reverse-domain of a domain that is owned by the plugin-author.
+   * See https://en.wikipedia.org/wiki/Reverse_domain_name_notation for more details about the reverse domain name notation.
+   */
+  plugin_id: string;
+  /**
+   * plugin_name is the user-visible name of the plugin.
+   */
+  plugin_name: string;
+  /**
+   * plugin_url is the URL that the Nomo App uses for installing the plugin.
+   * Typically, plugin_url gets extracted out of a deeplink that is supplied to the Nomo App.
+   */
+  plugin_url: string;
+  /**
+   * plugin_version should comply with the semantic versioning standard.
+   * See https://semver.org/ for details.
+   */
+  plugin_version: string;
+}
+
+/**
+ * Gets all manifests of the installed plugins, including information like plugin_name/plugin_id/plugin_version.
+ */
+export async function nomoGetInstalledPlugins(): Promise<{
+  manifests: NomoManifest[];
+}> {
+  return await invokeNomoFunction("nomoGetInstalledPlugins", null);
 }

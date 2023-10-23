@@ -47,6 +47,7 @@ export default function Home() {
       console.log("onPluginVisible called", args);
     });
     nomo.getVisibleAssets().then(console.log).catch(console.error);
+    nomo.getInstalledPlugins().then(console.log).catch(console.error);
     //nomo.launchUrl({url: "https://google.com", launchMode: "externalApplication"});
   }, []);
 
@@ -252,21 +253,6 @@ export default function Home() {
         <div className={styles.card}>
           <h2
             onClick={() => {
-              openDialog({
-                title: "Feature not yet available",
-                content:
-                  "Future updates of the NOMO-app will bring AI capabilities.",
-              });
-            }}
-          >
-            Speech to text<span>-&gt;</span>
-          </h2>
-          <p>Say something to the NOMO-app and get the text into the plugin.</p>
-        </div>
-
-        <div className={styles.card}>
-          <h2
-            onClick={() => {
               nomo
                 .authHttp({
                   // url: "http://localhost:3001/get_test",
@@ -294,24 +280,6 @@ export default function Home() {
           <p>
             NOMO-Auth is a protocol for seamless authentication of plugins,
             utilizing the NOMO-wallet.
-          </p>
-        </div>
-
-        <div className={styles.card}>
-          <h2
-            onClick={() => {
-              openDialog({
-                title: "NOMO-ID",
-                content:
-                  "For NOMO-ID, a plugin can inject QRCodes without actually scanning QRCodes. See GitHub for more information about the NOMO-ID protocol.",
-              });
-            }}
-          >
-            NOMO-ID<span>-&gt;</span>
-          </h2>
-          <p>
-            Log in instantly with NOMO-ID. With NOMO-plugins, there is no need
-            to scan a QRCode.
           </p>
         </div>
 
@@ -474,6 +442,28 @@ export default function Home() {
           }}
         >
           Contact support
+        </div>
+        <div
+          onClick={() => {
+            nomo.openFAQPage({
+              initiallyExpanded: true,
+              supportButtonTitle: "Contact Support",
+              supportButtonUrl: "mailto:support@nomo.app",
+              faqContent: {
+                "Section 1": {
+                  "Entry 1.a": "Content 1.a",
+                  "Entry 1.b": "Content 1.b",
+                },
+                "Section 2": {
+                  "Entry 2.a": "Content 2.a",
+                  "Entry 2.b": "Content 2.b",
+                  "Entry 2.c": "Content 2.c",
+                },
+              },
+            });
+          }}
+        >
+          Open FAQs
         </div>
       </div>
     </main>

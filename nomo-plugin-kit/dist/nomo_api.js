@@ -62,6 +62,8 @@ export const nomo = {
     launchUrl: nomoLaunchUrl,
     getBalance: nomoGetBalance,
     getAssetIcon: nomoGetAssetIcon,
+    openFAQPage: nomoOpenFAQPage,
+    getInstalledPlugins: nomoGetInstalledPlugins,
 };
 const originalConsoleLog = console.log;
 const originalConsoleInfo = console.info;
@@ -421,4 +423,18 @@ export async function nomoGetBalance(args) {
  */
 export async function nomoGetAssetIcon(args) {
     return await invokeNomoFunction("nomoGetAssetIcon", args);
+}
+/**
+ * Opens a standardized FAQ page in Nomo design.
+ * "faqContent" should be a nested object of questions and answers (with depth=2).
+ * Optionally, a button for contacting support is shown below of the FAQs.
+ */
+export async function nomoOpenFAQPage(args) {
+    return await invokeNomoFunction("nomoOpenFAQPage", args);
+}
+/**
+ * Gets all manifests of the installed plugins, including information like plugin_name/plugin_id/plugin_version.
+ */
+export async function nomoGetInstalledPlugins() {
+    return await invokeNomoFunction("nomoGetInstalledPlugins", null);
 }

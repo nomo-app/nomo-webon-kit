@@ -50,6 +50,8 @@ export declare const nomo: {
     launchUrl: typeof nomoLaunchUrl;
     getBalance: typeof nomoGetBalance;
     getAssetIcon: typeof nomoGetAssetIcon;
+    openFAQPage: typeof nomoOpenFAQPage;
+    getInstalledPlugins: typeof nomoGetInstalledPlugins;
 };
 /**
  * A set of logging-functions to enable debugging with the Nomo dev mode.
@@ -293,7 +295,7 @@ export declare function nomoSelectAssetFromDialog(): Promise<{
  * Returns the nomo_manifest.json that was used during the installation of the plugin.
  * For example, this can be used by a plugin for checking its own version.
  */
-export declare function nomoGetManifest(): Promise<Record<string, unknown>>;
+export declare function nomoGetManifest(): Promise<NomoManifest>;
 /**
  * Passes a URL to the underlying platform for handling.
  */
@@ -328,5 +330,31 @@ export declare function nomoGetAssetIcon(args: {
     isPending: boolean;
     symbol: string;
     name: string;
+}>;
+/**
+ * Opens a standardized FAQ page in Nomo design.
+ * "faqContent" should be a nested object of questions and answers (with depth=2).
+ * Optionally, a button for contacting support is shown below of the FAQs.
+ */
+export declare function nomoOpenFAQPage(args: {
+    faqContent: Record<string, Record<string, string>>;
+    initiallyExpanded: boolean;
+    supportButtonTitle?: string;
+    supportButtonUrl?: string;
+}): Promise<void>;
+export interface NomoManifest {
+    min_nomo_version?: string | null;
+    nomo_manifest_version: string;
+    permissions: string[];
+    plugin_id: string;
+    plugin_name: string;
+    plugin_url: string;
+    plugin_version: string;
+}
+/**
+ * Gets all manifests of the installed plugins, including information like plugin_name/plugin_id/plugin_version.
+ */
+export declare function nomoGetInstalledPlugins(): Promise<{
+    manifests: NomoManifest[];
 }>;
 export {};

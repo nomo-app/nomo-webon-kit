@@ -2,7 +2,7 @@
   "nomo_manifest_version": "1.1.0",
   "plugin_id": "app.nomo.demoplugin",
   "plugin_name": "Demo Plugin",
-  "plugin_version": "0.1.0",
+  "plugin_version": "0.1.1",
   "min_nomo_version": "0.3.1",
   "dependencies": [],
   "permissions": [
@@ -13,6 +13,7 @@
     "nomo.permission.DEVICE_FINGERPRINTING",
     "nomo.permission.ADD_CUSTOM_TOKEN",
     "nomo.permission.SIGN_EVM_TRANSACTION",
-    "nomo.permission.SIGN_EVM_MESSAGE"
+    "nomo.permission.SIGN_EVM_MESSAGE",
+    "nomo.permission.GET_INSTALLED_PLUGINS"
   ]
 }

@@ -8,7 +8,7 @@
     "deploy_tar": "./scripts/deploy_tar.sh",
     "build_all": "npm run build && npm run build_tar && npm run build_zip",
     "build": "next build && next export",
-    "build_tar": "tar -cv --gzip --file=$npm_package_name.tar.gz out",
+    "build_tar": "rm -f $npm_package_name.tar.gz && tar -cv --gzip --file=$npm_package_name.tar.gz out",
     "build_zip": "rm -f $npm_package_name.zip && zip -r $npm_package_name.zip out",
     "start": "npx serve@latest out",
     "lint": "next lint"

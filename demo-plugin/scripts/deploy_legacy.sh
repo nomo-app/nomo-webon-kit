@@ -2,7 +2,7 @@
 set -x
 set -e
 
-BUILD_PATH=out/
+RELEASE_DIR=out/
 DEPLOY_PATH=/var/www/demoplugin
 
 if [[ -n "$SSH_TARGET" ]]; then
@@ -12,7 +12,7 @@ else
     exit -1
 fi
 
-ls $BUILD_PATH
-rsync -avz --progress $BUILD_PATH $SSH_TARGET:$DEPLOY_PATH
+ls $RELEASE_DIR # ls to check if release-directory exists
+rsync -avz --progress $RELEASE_DIR $SSH_TARGET:$DEPLOY_PATH
 
 ./scripts/clear_cloudflare_cache.sh

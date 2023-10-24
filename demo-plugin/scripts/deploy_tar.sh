@@ -2,6 +2,8 @@
 set -x
 set -e
 
+# deploy deeplink: https://nomo.app/pluginv1/demoplugin.nomo.app/nomo-demo-plugin.tar.gz
+
 RELEASE_FILE=nomo-demo-plugin.tar.gz
 DEPLOY_PATH=/var/www/demoplugin/$RELEASE_FILE
 

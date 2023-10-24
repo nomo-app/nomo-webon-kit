@@ -13,7 +13,7 @@ WebOns are a powerful capability of the Nomo App that unlock the following featu
 - Authentication with NOMO-Auth or NOMO-ID
 - More features are coming with Nomo App updates!
 
-This README explains how to develop WebOn for the Nomo App.  
+This README explains how to develop WebOns for the Nomo App.  
 Furthermore, this repo contains a demo-WebOn to showcase the provided functionality.  
 In order to use this package, we expect that WebOns are written in JavaScript or TypeScript.
 

@@ -60,8 +60,8 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.description}>
         <p>
-          NOMO Demo Plugin - Get started by editing src/app/page.tsx. Scroll
-          down to explore features of NOMO-plugins!
+          Nomo Demo WebOn - Get started by editing src/app/page.tsx. Scroll down
+          to explore features of WebOns!
         </p>
       </div>
 
@@ -122,7 +122,7 @@ export default function Home() {
           </h2>
           <p>
             Send a transaction to the ZENIQ Smartchain, signed by the Nomo app
-            with web3js-nomo-plugins.
+            with web3js-nomo-webons.
           </p>
         </div>
         <div className={styles.card}>
@@ -153,7 +153,7 @@ export default function Home() {
           </h2>
           <p>
             Send a transaction to the ZENIQ Smartchain, signed by the Nomo app
-            with ethersjs-nomo-plugins.
+            with ethersjs-nomo-webons.
           </p>
         </div>
 
@@ -179,7 +179,7 @@ export default function Home() {
           >
             Take picture <span>-&gt;</span>
           </h2>
-          <p>Use the NOMO-app for getting a picture into the plugin.</p>
+          <p>Use the NOMO-app for getting a picture into the WebOn.</p>
         </div>
         {!!pictureFromCamera ? (
           <img
@@ -213,7 +213,7 @@ export default function Home() {
           >
             Open gallery<span>-&gt;</span>
           </h2>
-          <p>Upload documents or images from a NOMO-plugin.</p>
+          <p>Upload documents or images from a Nomo WebOn.</p>
         </div>
         {!!pictureFromGallery ? (
           <img
@@ -246,10 +246,7 @@ export default function Home() {
           >
             Open a chat <span>-&gt;</span>
           </h2>
-          <p>
-            Open a chat with a human or with a chat-bot, powered by the
-            zeniq.chat service.
-          </p>
+          <p>Open a decentralized chat with a human or with a chat-bot.</p>
         </div>
 
         <div className={styles.card}>
@@ -280,7 +277,7 @@ export default function Home() {
             NOMO-Auth<span>-&gt;</span>
           </h2>
           <p>
-            NOMO-Auth is a protocol for seamless authentication of plugins,
+            NOMO-Auth is a protocol for seamless authentication of WebOns,
             utilizing the NOMO-wallet.
           </p>
         </div>
@@ -310,7 +307,7 @@ export default function Home() {
             Send assets<span>-&gt;</span>
           </h2>
           <p>
-            With consent from the user, plugins can send assets from the
+            With consent from the user, WebOns can send assets from the
             NOMO-wallet.
           </p>
         </div>
@@ -340,7 +337,7 @@ export default function Home() {
             Sign EVM message<span>-&gt;</span>
           </h2>
           <p>
-            With consent from the user, plugins can sign messages to prove that
+            With consent from the user, WebOns can sign messages to prove that
             the user controls a specific wallet.
           </p>
         </div>
@@ -386,7 +383,7 @@ export default function Home() {
           >
             Add custom token<span>-&gt;</span>
           </h2>
-          <p>Plugins can expand the list of tokens</p>
+          <p>WebOns can expand the list of tokens</p>
         </div>
         <div className={styles.card}>
           <h2
@@ -431,7 +428,7 @@ export default function Home() {
           >
             Switch theme<span>-&gt;</span>
           </h2>
-          <p>Plugins can switch between different Nomo themes</p>
+          <p>WebOns can switch between different Nomo themes</p>
         </div>
         <div className={styles.card}>
           <h2

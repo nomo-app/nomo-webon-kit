@@ -1,7 +1,7 @@
-# ethersjs-nomo-plugins
+# ethersjs-nomo-webons
 
 The goal of this package is to support already existing ethers.js code with only minimal changes.
-This makes it possible to develop all kinds of decentralized applications as Nomo plugins.
+This makes it possible to develop decentralized applications as Nomo WebOns.
 
 For example, this package can be used for the following tasks:
 
@@ -9,7 +9,7 @@ For example, this package can be used for the following tasks:
 - Querying data from a blockchain
 - Deploying new smart contracts
 
-All of this is backed by a seed phrase of the Nomo App, and the seed phrase remains secure even if the plugin code was malicious.
+All of this is backed by a seed phrase of the Nomo App, and the seed phrase remains secure even if the WebOn-code was malicious.
 
 ## How to use
 
@@ -33,5 +33,3 @@ Please consult the demo-plugin and to the ethers.js documentation for more detai
 
 Starting from 0.2.0, this package works with ethers.js-V6.
 An older version of this package works with ethers.js-V5.
-
-  

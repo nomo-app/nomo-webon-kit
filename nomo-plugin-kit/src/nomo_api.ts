@@ -307,7 +307,7 @@ export async function nomoPickFromGallery(args?: {
 }
 
 /**
- * This is a low-level function that should not be called directly. Instead, the functions in "nomo_theming" should be used.
+ * "nomoGetTheme" is a low-level function that should not be called directly. Instead, the functions in "nomo_theming" should be used.
  */
 export async function nomoGetTheme(): Promise<{
   name: string;
@@ -331,30 +331,6 @@ export async function nomoGetTheme(): Promise<{
     settingsColumnColor: string;
   };
 }> {
-  if (isFallbackModeActive()) {
-    return {
-      name: "LIGHT",
-      displayName: "Nomo Light",
-      colors: {
-        primary: "0xffbca570",
-        onPrimary: "0xffffffff",
-        primaryContainer: "0xfffcfaf7",
-        secondary: "0xffd1af72",
-        onSecondary: "0xff000000",
-        secondaryContainer: "0xffe6d0a3",
-        background: "0xfff5f5f5",
-        surface: "0xffffffff",
-        foreground1: "0xcf000000",
-        foreground2: "0xdf000000",
-        foreground3: "0xef000000",
-        snackBarColor: "0xfffff7e5",
-        disabledColor: "0xffe0e0e0",
-        error: "0xffff5252",
-        settingsTileColor: "0xffffffff",
-        settingsColumnColor: "0xffededed",
-      },
-    };
-  }
   return await invokeNomoFunction("nomoGetTheme", null);
 }
 
@@ -525,6 +501,7 @@ export async function nomoSelectAssetFromDialog(): Promise<{
     decimals: number;
     balance: string;
     contractAddress?: string;
+    receiveAddress: string | null;
     network?: string | null;
   };
 }> {
@@ -536,6 +513,7 @@ export async function nomoSelectAssetFromDialog(): Promise<{
         decimals: 18,
         balance: "1000000000000000000",
         contractAddress: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",
+        receiveAddress: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",
       },
     };
   }
@@ -565,7 +543,7 @@ export async function nomoLaunchUrl(args: {
 }
 
 /**
- * Returns not only the balance of an asset, but also additional information like the network or the contract-address.
+ * Returns not only the balance of an asset, but also additional information like the network, a contract-address and a receive-address.
  * Typically, the decimals are needed to convert a raw balance into a user-readable balance.
  */
 export async function nomoGetBalance(args: { assetSymbol: string }): Promise<{
@@ -574,6 +552,7 @@ export async function nomoGetBalance(args: { assetSymbol: string }): Promise<{
   decimals: number;
   balance: string;
   contractAddress?: string | null;
+  receiveAddress: string | null;
   network?: string | null;
 }> {
   return await invokeNomoFunction("nomoGetBalance", args);

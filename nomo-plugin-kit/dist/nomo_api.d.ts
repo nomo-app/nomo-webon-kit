@@ -166,7 +166,7 @@ export declare function nomoPickFromGallery(args?: {
     imageBase64: string;
 }>;
 /**
- * This is a low-level function that should not be called directly. Instead, the functions in "nomo_theming" should be used.
+ * "nomoGetTheme" is a low-level function that should not be called directly. Instead, the functions in "nomo_theming" should be used.
  */
 export declare function nomoGetTheme(): Promise<{
     name: string;
@@ -288,6 +288,7 @@ export declare function nomoSelectAssetFromDialog(): Promise<{
         decimals: number;
         balance: string;
         contractAddress?: string;
+        receiveAddress: string | null;
         network?: string | null;
     };
 }>;
@@ -304,7 +305,7 @@ export declare function nomoLaunchUrl(args: {
     launchMode: "platformDefault" | "inAppWebView" | "externalApplication" | "externalNonBrowserApplication";
 }): Promise<any>;
 /**
- * Returns not only the balance of an asset, but also additional information like the network or the contract-address.
+ * Returns not only the balance of an asset, but also additional information like the network, a contract-address and a receive-address.
  * Typically, the decimals are needed to convert a raw balance into a user-readable balance.
  */
 export declare function nomoGetBalance(args: {
@@ -315,6 +316,7 @@ export declare function nomoGetBalance(args: {
     decimals: number;
     balance: string;
     contractAddress?: string | null;
+    receiveAddress: string | null;
     network?: string | null;
 }>;
 /**

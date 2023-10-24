@@ -12,6 +12,7 @@ import { replacer } from "./utils";
 import { sendDemoTransaction as sendDemoTxEthers } from "ethersjs-nomo-plugins";
 import { sendDemoTransaction as sendDemoTxWeb3Js } from "web3js-nomo-plugins";
 import { testSigning } from "../../test/web3_signing_test";
+import { NomoTheme, switchNomoTheme } from "nomo-plugin-kit/dist/nomo_theming";
 export default function Home() {
   const [dialog, setDialog] = useState<DialogContent | null>(null);
   const platformInfo = useNomoState(nomo.getPlatformInfo);
@@ -88,10 +89,6 @@ export default function Home() {
         <div style={{ width: "100%" }}>
           <b>Chat messenger address:</b>{" "}
           {JSON.stringify(messengerAddress).substring(0, 70)}..
-        </div>
-        <div style={{ height: "10px" }} />
-        <div style={{ width: "100%" }}>
-          <b>NOMO theme:</b> {JSON.stringify(theme).substring(0, 70)}..
         </div>
         <div style={{ height: "10px" }} />
         <div style={{ width: "100%" }}>
@@ -409,6 +406,27 @@ export default function Home() {
             QRScan<span>-&gt;</span>
           </h2>
           <p>Scan a QRCode with rapid speed</p>
+        </div>
+        <div className={styles.card}>
+          <h2
+            onClick={async () => {
+              const oldTheme: NomoTheme = (await getCurrentNomoTheme())
+                .name as NomoTheme;
+              const newTheme: NomoTheme =
+                oldTheme === "LIGHT"
+                  ? "DARK"
+                  : oldTheme == "DARK"
+                  ? "TUPAN"
+                  : oldTheme == "TUPAN"
+                  ? "AVINOC"
+                  : "LIGHT";
+              await switchNomoTheme({ theme: newTheme });
+              await injectNomoCSSVariables(); // refresh css variables after switching theme
+            }}
+          >
+            Switch theme<span>-&gt;</span>
+          </h2>
+          <p>Plugins can switch between different Nomo themes</p>
         </div>
         <div className={styles.card}>
           <h2

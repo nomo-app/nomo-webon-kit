@@ -19,7 +19,6 @@ export default function Home() {
   const walletAddresses = useNomoState(nomo.getWalletAddresses);
   const messengerAddress = useNomoState(nomo.getMessengerAddress);
   const deviceName = useNomoState(nomo.getDeviceName);
-  const theme = useNomoState(getCurrentNomoTheme);
   const [pictureFromCamera, setPictureFromCamera] = useState<string | null>(
     null
   );

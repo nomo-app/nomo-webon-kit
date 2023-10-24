@@ -52,6 +52,7 @@ export declare const nomo: {
     getAssetIcon: typeof nomoGetAssetIcon;
     openFAQPage: typeof nomoOpenFAQPage;
     getInstalledPlugins: typeof nomoGetInstalledPlugins;
+    launchSmartchainFaucet: typeof nomoLaunchSmartchainFaucet;
 };
 /**
  * A set of logging-functions to enable debugging with the Nomo dev mode.
@@ -76,6 +77,10 @@ export declare function nomoEnableMobileConsoleDebugging(): void;
 export declare function nomoQrScan(): Promise<{
     qrCode: string;
 }>;
+/**
+ * An alternative to JSON.stringify
+ */
+export declare function stringifyWithBigInts(obj: any): string;
 declare function nomoNativeLog(severity: "LOG" | "INFO" | "WARN" | "ERROR", args: any[]): void;
 /**
  * Creates a signature for an EVM-based transaction.
@@ -383,4 +388,8 @@ export interface NomoManifest {
 export declare function nomoGetInstalledPlugins(): Promise<{
     manifests: NomoManifest[];
 }>;
+/**
+ * Launches a free faucet that can be used for paying transaction fees.
+ */
+export declare function nomoLaunchSmartchainFaucet(): Promise<void>;
 export {};

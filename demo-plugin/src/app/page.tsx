@@ -8,11 +8,12 @@ import { nomo } from "nomo-plugin-kit";
 import { getCurrentNomoTheme, injectNomoCSSVariables } from "nomo-plugin-kit";
 import styles from "./page.module.css";
 import "./nomo.css";
-import { replacer } from "./utils";
+import { openFaucetIfNeeded } from "./utils";
 import { sendDemoTransaction as sendDemoTxEthers } from "ethersjs-nomo-plugins";
 import { sendDemoTransaction as sendDemoTxWeb3Js } from "web3js-nomo-plugins";
 import { testSigning } from "../../test/web3_signing_test";
 import { NomoTheme, switchNomoTheme } from "nomo-plugin-kit/dist/nomo_theming";
+import { stringifyWithBigInts } from "nomo-plugin-kit/dist/nomo_api";
 export default function Home() {
   const [dialog, setDialog] = useState<DialogContent | null>(null);
   const platformInfo = useNomoState(nomo.getPlatformInfo);
@@ -41,7 +42,6 @@ export default function Home() {
       console.log("Got value from nomoLocalStorage: " + value);
     });
     nomo.getDeviceHashes().then(console.log).catch(console.error);
-    nomo.getManifest().then(console.log).catch(console.error);
     injectNomoCSSVariables();
     nomo.registerOnPluginVisible((args) => {
       console.log("onPluginVisible called", args);
@@ -96,23 +96,26 @@ export default function Home() {
 
         <div className={styles.card}>
           <h2
-            onClick={() => {
-              sendDemoTxWeb3Js()
-                .then((res) => {
-                  const resJson = replacer(res);
-                  openDialog({
-                    title: "Transaction submitted to the ZENIQ Smartchain!",
-                    content: resJson,
-                  });
-                })
-                .catch((e) => {
-                  console.error(e);
-                  openDialog({
-                    title: "sendDemoTransaction failed",
-                    content:
-                      e instanceof Error ? e.toString() : JSON.stringify(e),
-                  });
+            onClick={async () => {
+              try {
+                const faucetNeeded = await openFaucetIfNeeded();
+                if (faucetNeeded) {
+                  return;
+                }
+                const res = await sendDemoTxWeb3Js();
+                const resJson = stringifyWithBigInts(res);
+                openDialog({
+                  title: "web3js-TX submitted to the ZENIQ Smartchain!",
+                  content: resJson,
                 });
+              } catch (e) {
+                console.error(e);
+                openDialog({
+                  title: "web3js-demo failed",
+                  content:
+                    e instanceof Error ? e.toString() : stringifyWithBigInts(e),
+                });
+              }
             }}
           >
             Sign EVM transaction with web3.js<span>-&gt;</span>
@@ -124,23 +127,26 @@ export default function Home() {
         </div>
         <div className={styles.card}>
           <h2
-            onClick={() => {
-              sendDemoTxEthers()
-                .then((res) => {
-                  const resJson = replacer(res);
-                  openDialog({
-                    title: "Transaction submitted to the ZENIQ Smartchain!",
-                    content: resJson,
-                  });
-                })
-                .catch((e) => {
-                  console.error(e);
-                  openDialog({
-                    title: "sendDemoTransaction failed",
-                    content:
-                      e instanceof Error ? e.toString() : JSON.stringify(e),
-                  });
+            onClick={async () => {
+              try {
+                const faucetNeeded = await openFaucetIfNeeded();
+                if (faucetNeeded) {
+                  return;
+                }
+                const res = await sendDemoTxEthers();
+                const resJson = stringifyWithBigInts(res);
+                openDialog({
+                  title: "ethersjs-TX submitted to the ZENIQ Smartchain!",
+                  content: resJson,
                 });
+              } catch (e) {
+                console.error(e);
+                openDialog({
+                  title: "ethersjs-demo failed",
+                  content:
+                    e instanceof Error ? e.toString() : stringifyWithBigInts(e),
+                });
+              }
             }}
           >
             Sign EVM transaction with ethers.js<span>-&gt;</span>

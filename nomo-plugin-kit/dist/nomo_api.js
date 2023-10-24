@@ -64,6 +64,7 @@ export const nomo = {
     getAssetIcon: nomoGetAssetIcon,
     openFAQPage: nomoOpenFAQPage,
     getInstalledPlugins: nomoGetInstalledPlugins,
+    launchSmartchainFaucet: nomoLaunchSmartchainFaucet,
 };
 const originalConsoleLog = console.log;
 const originalConsoleInfo = console.info;
@@ -114,12 +115,26 @@ export function nomoEnableMobileConsoleDebugging() {
 export async function nomoQrScan() {
     return await invokeNomoFunction("nomoQrScan", {});
 }
+/**
+ * An alternative to JSON.stringify
+ */
+export function stringifyWithBigInts(obj) {
+    function replacer(_key, value) {
+        // workaround for stringifying an object with bigints
+        if (typeof value === "bigint") {
+            return value.toString();
+        }
+        return value;
+    }
+    const resJson = JSON.stringify(obj, replacer, 1);
+    return resJson;
+}
 function nomoNativeLog(severity, args) {
     if (isFallbackModeActive()) {
         return;
     }
     try {
-        const argsArray = args.map((arg) => JSON.stringify(arg));
+        const argsArray = args.map((arg) => stringifyWithBigInts(arg));
         invokeNomoFunction("nomoNativeLog", { argsArray, severity });
     }
     catch (e) {
@@ -414,4 +429,13 @@ export async function nomoOpenFAQPage(args) {
  */
 export async function nomoGetInstalledPlugins() {
     return await invokeNomoFunction("nomoGetInstalledPlugins", null);
+}
+/**
+ * Launches a free faucet that can be used for paying transaction fees.
+ */
+export async function nomoLaunchSmartchainFaucet() {
+    return await nomoInjectQRCode({
+        qrCode: "https://nomo.app/pluginv1/faucet.nomo.app",
+        navigateBack: false,
+    });
 }

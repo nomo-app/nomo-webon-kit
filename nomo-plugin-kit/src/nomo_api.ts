@@ -69,6 +69,7 @@ export const nomo = {
   getAssetIcon: nomoGetAssetIcon,
   openFAQPage: nomoOpenFAQPage,
   getInstalledPlugins: nomoGetInstalledPlugins,
+  launchSmartchainFaucet: nomoLaunchSmartchainFaucet,
 };
 
 const originalConsoleLog = console.log;
@@ -125,6 +126,21 @@ export async function nomoQrScan(): Promise<{ qrCode: string }> {
   return await invokeNomoFunction("nomoQrScan", {});
 }
 
+/**
+ * An alternative to JSON.stringify
+ */
+export function stringifyWithBigInts(obj: any): string {
+  function replacer(_key: string, value: any) {
+    // workaround for stringifying an object with bigints
+    if (typeof value === "bigint") {
+      return value.toString();
+    }
+    return value;
+  }
+  const resJson = JSON.stringify(obj, replacer, 1);
+  return resJson;
+}
+
 function nomoNativeLog(
   severity: "LOG" | "INFO" | "WARN" | "ERROR",
   args: any[]
@@ -133,7 +149,7 @@ function nomoNativeLog(
     return;
   }
   try {
-    const argsArray = args.map((arg) => JSON.stringify(arg));
+    const argsArray = args.map((arg) => stringifyWithBigInts(arg));
     invokeNomoFunction("nomoNativeLog", { argsArray, severity });
   } catch (e) {
     originalConsoleError(e);
@@ -628,4 +644,14 @@ export async function nomoGetInstalledPlugins(): Promise<{
   manifests: NomoManifest[];
 }> {
   return await invokeNomoFunction("nomoGetInstalledPlugins", null);
+}
+
+/**
+ * Launches a free faucet that can be used for paying transaction fees.
+ */
+export async function nomoLaunchSmartchainFaucet(): Promise<void> {
+  return await nomoInjectQRCode({
+    qrCode: "https://nomo.app/pluginv1/faucet.nomo.app",
+    navigateBack: false,
+  });
 }

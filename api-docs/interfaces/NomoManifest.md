@@ -20,11 +20,11 @@
 
 • `Optional` **min\_nomo\_version**: ``null`` \| `string`
 
-If min_nomo_version is set, then outdated versions of the Nomo App will refuse to install the plugin.
+If min_nomo_version is set, then outdated versions of the Nomo App will refuse to install the WebOn.
 
 #### Defined in
 
-[nomo_api.ts:610](https://github.com/nomo-app/nomo-plugin-kit/blob/e0cf0fc/nomo-plugin-kit/src/nomo_api.ts#L610)
+[nomo_api.ts:610](https://github.com/nomo-app/nomo-plugin-kit/blob/d3bf681/nomo-plugin-kit/src/nomo_api.ts#L610)
 
 ___
 
@@ -36,7 +36,7 @@ nomo_manifest_version should be 1.1.0.
 
 #### Defined in
 
-[nomo_api.ts:614](https://github.com/nomo-app/nomo-plugin-kit/blob/e0cf0fc/nomo-plugin-kit/src/nomo_api.ts#L614)
+[nomo_api.ts:614](https://github.com/nomo-app/nomo-plugin-kit/blob/d3bf681/nomo-plugin-kit/src/nomo_api.ts#L614)
 
 ___
 
@@ -48,7 +48,7 @@ A list of permissions for security-critical features.
 
 #### Defined in
 
-[nomo_api.ts:618](https://github.com/nomo-app/nomo-plugin-kit/blob/e0cf0fc/nomo-plugin-kit/src/nomo_api.ts#L618)
+[nomo_api.ts:618](https://github.com/nomo-app/nomo-plugin-kit/blob/d3bf681/nomo-plugin-kit/src/nomo_api.ts#L618)
 
 ___
 
@@ -56,12 +56,12 @@ ___
 
 • **plugin\_id**: `string`
 
-plugin_id should be the reverse-domain of a domain that is owned by the plugin-author.
+plugin_id should be the reverse-domain of a domain that is owned by the WebOn-author.
 See https://en.wikipedia.org/wiki/Reverse_domain_name_notation for more details about the reverse domain name notation.
 
 #### Defined in
 
-[nomo_api.ts:623](https://github.com/nomo-app/nomo-plugin-kit/blob/e0cf0fc/nomo-plugin-kit/src/nomo_api.ts#L623)
+[nomo_api.ts:623](https://github.com/nomo-app/nomo-plugin-kit/blob/d3bf681/nomo-plugin-kit/src/nomo_api.ts#L623)
 
 ___
 
@@ -69,11 +69,11 @@ ___
 
 • **plugin\_name**: `string`
 
-plugin_name is the user-visible name of the plugin.
+plugin_name is the user-visible name of the WebOn.
 
 #### Defined in
 
-[nomo_api.ts:627](https://github.com/nomo-app/nomo-plugin-kit/blob/e0cf0fc/nomo-plugin-kit/src/nomo_api.ts#L627)
+[nomo_api.ts:627](https://github.com/nomo-app/nomo-plugin-kit/blob/d3bf681/nomo-plugin-kit/src/nomo_api.ts#L627)
 
 ___
 
@@ -81,12 +81,12 @@ ___
 
 • **plugin\_url**: `string`
 
-plugin_url is the URL that the Nomo App uses for installing the plugin.
+plugin_url is the URL that the Nomo App uses for installing the WebOn.
 Typically, plugin_url gets extracted out of a deeplink that is supplied to the Nomo App.
 
 #### Defined in
 
-[nomo_api.ts:632](https://github.com/nomo-app/nomo-plugin-kit/blob/e0cf0fc/nomo-plugin-kit/src/nomo_api.ts#L632)
+[nomo_api.ts:632](https://github.com/nomo-app/nomo-plugin-kit/blob/d3bf681/nomo-plugin-kit/src/nomo_api.ts#L632)
 
 ___
 
@@ -99,4 +99,4 @@ See https://semver.org/ for details.
 
 #### Defined in
 
-[nomo_api.ts:637](https://github.com/nomo-app/nomo-plugin-kit/blob/e0cf0fc/nomo-plugin-kit/src/nomo_api.ts#L637)
+[nomo_api.ts:637](https://github.com/nomo-app/nomo-plugin-kit/blob/d3bf681/nomo-plugin-kit/src/nomo_api.ts#L637)

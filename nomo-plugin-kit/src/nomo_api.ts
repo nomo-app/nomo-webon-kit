@@ -2,8 +2,8 @@ import { invokeNomoFunction, isFallbackModeActive } from "./dart_interface";
 import { nomoAuthFetch } from "./nomo_auth";
 
 /**
- * nomoLocalStorage provides a mechanism for sharing data between plugins.
- * If a plugin_id is passed to nomoLocalStorage.getItem, then it tries to read data from another plugin with the given plugin_id.
+ * nomoLocalStorage provides a mechanism for sharing data between WebOns.
+ * If a plugin_id is passed to nomoLocalStorage.getItem, then it tries to read data from another WebOn with the given plugin_id.
  * nomoLocalStorage can also be used as an alternative to the regular localStorage.
  */
 export const nomoLocalStorage = {
@@ -34,7 +34,7 @@ export const nomoLocalStorage = {
 };
 
 /**
- * The nomo-object exposes plugin-functions in an easy-to-use way.
+ * The nomo-object exposes WebOn-functions in an easy-to-use way.
  * The nomo-object can be used with only one import and supports the auto-completion of IDEs.
  */
 export const nomo = {
@@ -185,7 +185,7 @@ export async function nomoSignEvmMessage(args: {
 }
 
 /**
- * Returns both the NOMO-version and the operating system where the plugin runs.
+ * Returns both the NOMO-version and the operating system where the WebOn runs.
  * Can be used for implementing platform-specific functionality.
  * See https://nomo.app/ for an overview of supported platforms.
  */
@@ -255,11 +255,11 @@ export async function nomoInjectQRCode(args: {
 }
 
 /**
- * Opens another plugin on top of the current plugin.
- * If the plugin is not yet running, the plugin will be launched.
- * If the plugin is not yet installed, an error is thrown.
- * A payload can be passed to the plugin.
- * Afterwards, the user may navigate back to the current plugin by pressing the back button.
+ * Opens another WebOn on top of the current WebOn.
+ * If the WebOn is not yet running, the WebOn will be launched.
+ * If the WebOn is not yet installed, an error is thrown.
+ * A payload can be passed to the WebOn.
+ * Afterwards, the user may navigate back to the current WebOn by pressing the back button.
  */
 export async function nomoInjectIntoPlugin(args: {
   payload: string;
@@ -432,8 +432,8 @@ export async function nomoMnemonicBackupExisted(): Promise<{
 }
 
 /**
- * Registers a callback that will be called every time when the plugin gets visible within the Nomo App.
- * For example, this can be used to refresh data when re-opening a plugin after a long pause.
+ * Registers a callback that will be called every time when the WebOn gets visible within the Nomo App.
+ * For example, this can be used to refresh data when re-opening a WebOn after a long pause.
  */
 export async function nomoRegisterOnPluginVisible(
   callback: (args: { fullscreenMode: boolean }) => void
@@ -508,7 +508,7 @@ export async function nomoGetEvmAddress(): Promise<string> {
 
 /**
  * Opens a dialog for the user to select an asset.
- * If the dialog does not look "correct", plugins are free to call "nomoGetVisibleAssets" and implement their own dialog.
+ * If the dialog does not look "correct", WebOns are free to call "nomoGetVisibleAssets" and implement their own dialog.
  */
 export async function nomoSelectAssetFromDialog(): Promise<{
   selectedAsset: {
@@ -537,8 +537,8 @@ export async function nomoSelectAssetFromDialog(): Promise<{
 }
 
 /**
- * Returns the nomo_manifest.json that was used during the installation of the plugin.
- * For example, this can be used by a plugin for checking its own version.
+ * Returns the nomo_manifest.json that was used during the installation of the WebOn.
+ * For example, this can be used by a WebOn for checking its own version.
  */
 export async function nomoGetManifest(): Promise<NomoManifest> {
   return await invokeNomoFunction("nomoGetManifest", {});
@@ -605,7 +605,7 @@ export async function nomoOpenFAQPage(args: {
 
 export interface NomoManifest {
   /**
-   * If min_nomo_version is set, then outdated versions of the Nomo App will refuse to install the plugin.
+   * If min_nomo_version is set, then outdated versions of the Nomo App will refuse to install the WebOn.
    */
   min_nomo_version?: string | null;
   /**
@@ -617,16 +617,16 @@ export interface NomoManifest {
    */
   permissions: string[];
   /**
-   * plugin_id should be the reverse-domain of a domain that is owned by the plugin-author.
+   * plugin_id should be the reverse-domain of a domain that is owned by the WebOn-author.
    * See https://en.wikipedia.org/wiki/Reverse_domain_name_notation for more details about the reverse domain name notation.
    */
   plugin_id: string;
   /**
-   * plugin_name is the user-visible name of the plugin.
+   * plugin_name is the user-visible name of the WebOn.
    */
   plugin_name: string;
   /**
-   * plugin_url is the URL that the Nomo App uses for installing the plugin.
+   * plugin_url is the URL that the Nomo App uses for installing the WebOn.
    * Typically, plugin_url gets extracted out of a deeplink that is supplied to the Nomo App.
    */
   plugin_url: string;
@@ -638,7 +638,7 @@ export interface NomoManifest {
 }
 
 /**
- * Gets all manifests of the installed plugins, including information like plugin_name/plugin_id/plugin_version.
+ * Gets all manifests of the installed WebOns, including information like plugin_name/plugin_id/plugin_version.
  */
 export async function nomoGetInstalledPlugins(): Promise<{
   manifests: NomoManifest[];

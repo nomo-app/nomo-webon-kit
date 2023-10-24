@@ -1,8 +1,8 @@
 import { invokeNomoFunction, isFallbackModeActive } from "./dart_interface";
 import { nomoAuthFetch } from "./nomo_auth";
 /**
- * nomoLocalStorage provides a mechanism for sharing data between plugins.
- * If a plugin_id is passed to nomoLocalStorage.getItem, then it tries to read data from another plugin with the given plugin_id.
+ * nomoLocalStorage provides a mechanism for sharing data between WebOns.
+ * If a plugin_id is passed to nomoLocalStorage.getItem, then it tries to read data from another WebOn with the given plugin_id.
  * nomoLocalStorage can also be used as an alternative to the regular localStorage.
  */
 export const nomoLocalStorage = {
@@ -29,7 +29,7 @@ export const nomoLocalStorage = {
     },
 };
 /**
- * The nomo-object exposes plugin-functions in an easy-to-use way.
+ * The nomo-object exposes WebOn-functions in an easy-to-use way.
  * The nomo-object can be used with only one import and supports the auto-completion of IDEs.
  */
 export const nomo = {
@@ -163,7 +163,7 @@ export async function nomoSignEvmMessage(args) {
     return await invokeNomoFunction("nomoSignEvmMessage", args);
 }
 /**
- * Returns both the NOMO-version and the operating system where the plugin runs.
+ * Returns both the NOMO-version and the operating system where the WebOn runs.
  * Can be used for implementing platform-specific functionality.
  * See https://nomo.app/ for an overview of supported platforms.
  */
@@ -214,11 +214,11 @@ export async function nomoInjectQRCode(args) {
     return await invokeNomoFunction("nomoInjectQRCode", args);
 }
 /**
- * Opens another plugin on top of the current plugin.
- * If the plugin is not yet running, the plugin will be launched.
- * If the plugin is not yet installed, an error is thrown.
- * A payload can be passed to the plugin.
- * Afterwards, the user may navigate back to the current plugin by pressing the back button.
+ * Opens another WebOn on top of the current WebOn.
+ * If the WebOn is not yet running, the WebOn will be launched.
+ * If the WebOn is not yet installed, an error is thrown.
+ * A payload can be passed to the WebOn.
+ * Afterwards, the user may navigate back to the current WebOn by pressing the back button.
  */
 export async function nomoInjectIntoPlugin(args) {
     return await invokeNomoFunction("nomoInjectIntoPlugin", args);
@@ -314,8 +314,8 @@ export async function nomoMnemonicBackupExisted() {
     return await invokeNomoFunction("nomoMnemonicBackupExisted", {});
 }
 /**
- * Registers a callback that will be called every time when the plugin gets visible within the Nomo App.
- * For example, this can be used to refresh data when re-opening a plugin after a long pause.
+ * Registers a callback that will be called every time when the WebOn gets visible within the Nomo App.
+ * For example, this can be used to refresh data when re-opening a WebOn after a long pause.
  */
 export async function nomoRegisterOnPluginVisible(callback) {
     window.onPluginVisible = callback;
@@ -372,7 +372,7 @@ export async function nomoGetEvmAddress() {
 }
 /**
  * Opens a dialog for the user to select an asset.
- * If the dialog does not look "correct", plugins are free to call "nomoGetVisibleAssets" and implement their own dialog.
+ * If the dialog does not look "correct", WebOns are free to call "nomoGetVisibleAssets" and implement their own dialog.
  */
 export async function nomoSelectAssetFromDialog() {
     if (isFallbackModeActive()) {
@@ -390,8 +390,8 @@ export async function nomoSelectAssetFromDialog() {
     return await invokeNomoFunction("nomoSelectAssetFromDialog", {});
 }
 /**
- * Returns the nomo_manifest.json that was used during the installation of the plugin.
- * For example, this can be used by a plugin for checking its own version.
+ * Returns the nomo_manifest.json that was used during the installation of the WebOn.
+ * For example, this can be used by a WebOn for checking its own version.
  */
 export async function nomoGetManifest() {
     return await invokeNomoFunction("nomoGetManifest", {});
@@ -425,7 +425,7 @@ export async function nomoOpenFAQPage(args) {
     return await invokeNomoFunction("nomoOpenFAQPage", args);
 }
 /**
- * Gets all manifests of the installed plugins, including information like plugin_name/plugin_id/plugin_version.
+ * Gets all manifests of the installed WebOns, including information like plugin_name/plugin_id/plugin_version.
  */
 export async function nomoGetInstalledPlugins() {
     return await invokeNomoFunction("nomoGetInstalledPlugins", null);

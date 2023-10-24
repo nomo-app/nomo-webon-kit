@@ -1,4 +1,4 @@
-# ethersjs-nomo-plugins
+# ethersjs-nomo-webons
 
 The goal of this package is to support already existing ethers.js code with only minimal changes.
 This makes it possible to develop decentralized applications as Nomo WebOns.

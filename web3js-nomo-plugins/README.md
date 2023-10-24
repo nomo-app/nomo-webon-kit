@@ -43,4 +43,4 @@ await sendDemoTransaction();
 
 Feel free to use this library to interact with the Zeniq Smart Chain using Web3.js and **nomo-plugin-kit**.
 
-Please consult the demo-plugin and the web3.js documentation for more details.
+Please consult the demo-WebOn and the web3.js documentation for more details.

@@ -1,5 +1,5 @@
-This demo-plugin is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-You can use nextjs for your NOMO-plugin, but please feel free to use any other JavaScript-framework as well.
+This demo-WebOn is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+You can use nextjs for your WebOn, but please feel free to use any other JavaScript-framework as well.
 
 ## Getting Started
 

@@ -24,7 +24,7 @@ If min_nomo_version is set, then outdated versions of the Nomo App will refuse t
 
 #### Defined in
 
-[nomo_api.ts:594](https://github.com/nomo-app/nomo-plugin-kit/blob/3fd5d14/nomo-plugin-kit/src/nomo_api.ts#L594)
+[nomo_api.ts:610](https://github.com/nomo-app/nomo-plugin-kit/blob/e0cf0fc/nomo-plugin-kit/src/nomo_api.ts#L610)
 
 ___
 
@@ -36,7 +36,7 @@ nomo_manifest_version should be 1.1.0.
 
 #### Defined in
 
-[nomo_api.ts:598](https://github.com/nomo-app/nomo-plugin-kit/blob/3fd5d14/nomo-plugin-kit/src/nomo_api.ts#L598)
+[nomo_api.ts:614](https://github.com/nomo-app/nomo-plugin-kit/blob/e0cf0fc/nomo-plugin-kit/src/nomo_api.ts#L614)
 
 ___
 
@@ -48,7 +48,7 @@ A list of permissions for security-critical features.
 
 #### Defined in
 
-[nomo_api.ts:602](https://github.com/nomo-app/nomo-plugin-kit/blob/3fd5d14/nomo-plugin-kit/src/nomo_api.ts#L602)
+[nomo_api.ts:618](https://github.com/nomo-app/nomo-plugin-kit/blob/e0cf0fc/nomo-plugin-kit/src/nomo_api.ts#L618)
 
 ___
 
@@ -61,7 +61,7 @@ See https://en.wikipedia.org/wiki/Reverse_domain_name_notation for more details 
 
 #### Defined in
 
-[nomo_api.ts:607](https://github.com/nomo-app/nomo-plugin-kit/blob/3fd5d14/nomo-plugin-kit/src/nomo_api.ts#L607)
+[nomo_api.ts:623](https://github.com/nomo-app/nomo-plugin-kit/blob/e0cf0fc/nomo-plugin-kit/src/nomo_api.ts#L623)
 
 ___
 
@@ -73,7 +73,7 @@ plugin_name is the user-visible name of the plugin.
 
 #### Defined in
 
-[nomo_api.ts:611](https://github.com/nomo-app/nomo-plugin-kit/blob/3fd5d14/nomo-plugin-kit/src/nomo_api.ts#L611)
+[nomo_api.ts:627](https://github.com/nomo-app/nomo-plugin-kit/blob/e0cf0fc/nomo-plugin-kit/src/nomo_api.ts#L627)
 
 ___
 
@@ -86,7 +86,7 @@ Typically, plugin_url gets extracted out of a deeplink that is supplied to the N
 
 #### Defined in
 
-[nomo_api.ts:616](https://github.com/nomo-app/nomo-plugin-kit/blob/3fd5d14/nomo-plugin-kit/src/nomo_api.ts#L616)
+[nomo_api.ts:632](https://github.com/nomo-app/nomo-plugin-kit/blob/e0cf0fc/nomo-plugin-kit/src/nomo_api.ts#L632)
 
 ___
 
@@ -99,4 +99,4 @@ See https://semver.org/ for details.
 
 #### Defined in
 
-[nomo_api.ts:621](https://github.com/nomo-app/nomo-plugin-kit/blob/3fd5d14/nomo-plugin-kit/src/nomo_api.ts#L621)
+[nomo_api.ts:637](https://github.com/nomo-app/nomo-plugin-kit/blob/e0cf0fc/nomo-plugin-kit/src/nomo_api.ts#L637)

@@ -1,11 +1,16 @@
-export function replacer(res: any) {
-    function replacer(key: string, value: any) {
-        // JSON.stringify does not know how to serialize BigInts, so we add this replacer function
-        if (typeof value === "bigint") {
-            return value.toString(); // Convert BigInt to string
-        }
-        return value; // Return other values as is
-    }
-    const resJson = JSON.stringify(res, replacer, 1);
-    return resJson;
+import { nomo } from "nomo-plugin-kit";
+
+export async function openFaucetIfNeeded(): Promise<boolean> {
+  const res = await nomo.getBalance({
+    assetSymbol: "ZENIQ Token",
+  });
+  if (res.balance === "null") {
+    res.balance = "0";
+  }
+  const balance = BigInt(res.balance ?? "0");
+  if (balance === 0n) {
+    await nomo.launchSmartchainFaucet();
+    return true;
+  }
+  return false;
 }

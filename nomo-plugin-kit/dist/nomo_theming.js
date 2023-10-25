@@ -51,26 +51,26 @@ function capitalizeFirstLetter(inputString) {
     return inputString.charAt(0).toUpperCase() + inputString.slice(1);
 }
 const lightTheme = {
-    name: "LIGHT",
-    displayName: "Nomo Light",
-    colors: {
-        primary: "0xffbca570",
-        onPrimary: "0xffffffff",
-        primaryContainer: "0xfffcfaf7",
-        secondary: "0xffd1af72",
-        onSecondary: "0xff000000",
-        secondaryContainer: "0xffe6d0a3",
-        background: "0xfff5f5f5",
-        surface: "0xffffffff",
-        foreground1: "0xcf000000",
-        foreground2: "0xdf000000",
-        foreground3: "0xef000000",
-        snackBarColor: "0xfffff7e5",
-        disabledColor: "0xffe0e0e0",
-        error: "0xffff5252",
-        settingsTileColor: "0xffffffff",
-        settingsColumnColor: "0xffededed",
-    },
+    "name": "LIGHT",
+    "displayName": "Nomo Light",
+    "colors": {
+        "primary": "#bca570ff",
+        "onPrimary": "#ffffffff",
+        "primaryContainer": "#fcfaf7ff",
+        "secondary": "#d1af72ff",
+        "onSecondary": "#000000ff",
+        "secondaryContainer": "#e6d0a3ff",
+        "background": "#f5f5f5ff",
+        "surface": "#ffffffff",
+        "foreground1": "#000000cf",
+        "foreground2": "#000000df",
+        "foreground3": "#000000ef",
+        "snackBarColor": "#fff7e5ff",
+        "disabledColor": "#e0e0e0ff",
+        "error": "#ff5252ff",
+        "settingsTileColor": "#ffffffff",
+        "settingsColumnColor": "#edededff"
+    }
 };
 const darkTheme = {
     name: "DARK",

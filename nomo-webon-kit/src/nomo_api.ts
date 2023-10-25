@@ -1,5 +1,6 @@
 import { invokeNomoFunction, isFallbackModeActive } from "./dart_interface";
 import { nomoAuthFetch } from "./nomo_auth";
+import { compareSemanticVersions } from "./util";
 
 /**
  * nomoLocalStorage provides a mechanism for sharing data between WebOns.
@@ -70,6 +71,7 @@ export const nomo = {
   openFAQPage: nomoOpenFAQPage,
   getInstalledPlugins: nomoGetInstalledPlugins,
   launchSmartchainFaucet: nomoLaunchSmartchainFaucet,
+  hasMinimumNomoVersion: hasMinimumNomoVersion,
 };
 
 const originalConsoleLog = console.log;
@@ -184,6 +186,14 @@ export async function nomoSignEvmMessage(args: {
   return await invokeNomoFunction("nomoSignEvmMessage", args);
 }
 
+let _cachedPlatformInfo: {
+  version: string;
+  buildNumber: string;
+  appName: string;
+  clientName: string;
+  operatingSystem: string;
+} | null = null;
+
 /**
  * Returns both the NOMO-version and the operating system where the WebOn runs.
  * Can be used for implementing platform-specific functionality.
@@ -198,14 +208,34 @@ export async function nomoGetPlatformInfo(): Promise<{
 }> {
   if (isFallbackModeActive()) {
     return {
-      version: "0.2.0",
+      version: "0.9.0",
       buildNumber: "123400",
       appName: "Not in Nomo app!",
       clientName: "Not in Nomo app!",
       operatingSystem: "unknown",
     };
   }
-  return await invokeNomoFunction("nomoGetPlatformInfo", null);
+  if (!_cachedPlatformInfo) {
+    _cachedPlatformInfo = await invokeNomoFunction("nomoGetPlatformInfo", null);
+  }
+  return _cachedPlatformInfo!;
+}
+
+/**
+ * This function checks at runtime if the Nomo App has a minimum version.
+ * It is also possible to require a minimum Nomo App version in the manifest.
+ */
+export async function hasMinimumNomoVersion(args: {
+  minVersion: string;
+}): Promise<{ minVersionFulfilled: boolean; nomoVersion: string }> {
+  const plaformInfo = await nomoGetPlatformInfo();
+  const nomoVersion = plaformInfo.version;
+  const c = compareSemanticVersions(args.minVersion, nomoVersion);
+  if (c > 0) {
+    return { minVersionFulfilled: false, nomoVersion };
+  } else {
+    return { minVersionFulfilled: true, nomoVersion };
+  }
 }
 
 /**

@@ -1,5 +1,6 @@
 import { invokeNomoFunction, isFallbackModeActive } from "./dart_interface";
 import { nomoAuthFetch } from "./nomo_auth";
+import { compareSemanticVersions } from "./util";
 /**
  * nomoLocalStorage provides a mechanism for sharing data between WebOns.
  * If a plugin_id is passed to nomoLocalStorage.getItem, then it tries to read data from another WebOn with the given plugin_id.
@@ -65,6 +66,7 @@ export const nomo = {
     openFAQPage: nomoOpenFAQPage,
     getInstalledPlugins: nomoGetInstalledPlugins,
     launchSmartchainFaucet: nomoLaunchSmartchainFaucet,
+    hasMinimumNomoVersion: hasMinimumNomoVersion,
 };
 const originalConsoleLog = console.log;
 const originalConsoleInfo = console.info;
@@ -162,6 +164,7 @@ export async function nomoSignEvmMessage(args) {
     }
     return await invokeNomoFunction("nomoSignEvmMessage", args);
 }
+let _cachedPlatformInfo = null;
 /**
  * Returns both the NOMO-version and the operating system where the WebOn runs.
  * Can be used for implementing platform-specific functionality.
@@ -170,14 +173,32 @@ export async function nomoSignEvmMessage(args) {
 export async function nomoGetPlatformInfo() {
     if (isFallbackModeActive()) {
         return {
-            version: "0.2.0",
+            version: "0.9.0",
             buildNumber: "123400",
             appName: "Not in Nomo app!",
             clientName: "Not in Nomo app!",
             operatingSystem: "unknown",
         };
     }
-    return await invokeNomoFunction("nomoGetPlatformInfo", null);
+    if (!_cachedPlatformInfo) {
+        _cachedPlatformInfo = await invokeNomoFunction("nomoGetPlatformInfo", null);
+    }
+    return _cachedPlatformInfo;
+}
+/**
+ * This function checks at runtime if the Nomo App has a minimum version.
+ * It is also possible to require a minimum Nomo App version in the manifest.
+ */
+export async function hasMinimumNomoVersion(args) {
+    const plaformInfo = await nomoGetPlatformInfo();
+    const nomoVersion = plaformInfo.version;
+    const c = compareSemanticVersions(args.minVersion, nomoVersion);
+    if (c > 0) {
+        return { minVersionFulfilled: false, nomoVersion };
+    }
+    else {
+        return { minVersionFulfilled: true, nomoVersion };
+    }
 }
 /**
  * Can be used for chatting with other NOMO-users, but also for push-notifications or chat-bots.

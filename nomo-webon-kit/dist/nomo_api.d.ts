@@ -53,6 +53,7 @@ export declare const nomo: {
     openFAQPage: typeof nomoOpenFAQPage;
     getInstalledPlugins: typeof nomoGetInstalledPlugins;
     launchSmartchainFaucet: typeof nomoLaunchSmartchainFaucet;
+    hasMinimumNomoVersion: typeof hasMinimumNomoVersion;
 };
 /**
  * A set of logging-functions to enable debugging with the Nomo dev mode.
@@ -112,6 +113,16 @@ export declare function nomoGetPlatformInfo(): Promise<{
     appName: string;
     clientName: string;
     operatingSystem: string;
+}>;
+/**
+ * This function checks at runtime if the Nomo App has a minimum version.
+ * It is also possible to require a minimum Nomo App version in the manifest.
+ */
+export declare function hasMinimumNomoVersion(args: {
+    minVersion: string;
+}): Promise<{
+    minVersionFulfilled: boolean;
+    nomoVersion: string;
 }>;
 /**
  * Can be used for chatting with other NOMO-users, but also for push-notifications or chat-bots.

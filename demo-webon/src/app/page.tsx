@@ -27,6 +27,17 @@ export default function Home() {
     null
   );
   useEffect(() => {
+    const minVersion = "1.4.0";
+    nomo.hasMinimumNomoVersion({ minVersion }).then((res) => {
+      if (!res.minVersionFulfilled) {
+        alert(
+          "Nomo App outdated! This WebOn requires at least Nomo version " +
+            minVersion +
+            " but you have Nomo version " +
+            res.nomoVersion
+        );
+      }
+    });
     nomo.enableMobileConsoleDebugging();
     console.warn("test console warning");
     console.info("test console info");

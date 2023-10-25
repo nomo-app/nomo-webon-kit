@@ -27,7 +27,7 @@ export default function Home() {
     null
   );
   useEffect(() => {
-    const minVersion = "1.4.0";
+    const minVersion = "0.3.2";
     nomo.hasMinimumNomoVersion({ minVersion }).then((res) => {
       if (!res.minVersionFulfilled) {
         alert(

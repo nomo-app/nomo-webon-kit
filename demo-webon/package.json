@@ -1,5 +1,5 @@
 {
-  "name": "nomo-demo-plugin",
+  "name": "nomo-demo-webon",
   "scripts": {
     "dev": "next dev",
     "deploy_all": "npm run deploy_legacy && npm run deploy_zip && npm run deploy_tar",

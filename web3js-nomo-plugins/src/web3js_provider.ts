@@ -1,11 +1,16 @@
 import { Web3 } from "web3";
 import { nomo } from "nomo-plugin-kit";
-import { Transaction } from "web3-eth-accounts";
+import { Transaction, Common } from "web3-eth-accounts";
 import { RLP } from "@ethereumjs/rlp";
 
 
 const rpcUrlZeniqSmartChain = "https://smart.zeniq.network:9545";
 const chainIdZeniqSmartChain = 383414847825;
+
+const common = Common.custom({
+  name: "Zeniq",
+  chainId: chainIdZeniqSmartChain,
+});
 
 
 const web3 = new Web3(new Web3.providers.HttpProvider(rpcUrlZeniqSmartChain));
@@ -48,14 +53,16 @@ export function appendSignatureToTxFromWebJs(
   }
 
 
-  const signedTx = Transaction.fromTxData(signedTxData);
+  const signedTx = Transaction.fromTxData(signedTxData, { common });
   console.log("signedTx", signedTx);
-
+  console.log("isSigned", signedTx.verifySignature());
 
   const serializedSignedTX = signedTx.serialize();
   console.log("serializedSignedTx", serializedSignedTX);
 
   const hexstring = web3.utils.bytesToHex(serializedSignedTX);
+
+
   console.log("hexstring", hexstring);
 
   return hexstring;
@@ -106,15 +113,14 @@ export async function sendDemoTransaction() {
   const nonce = await web3.eth.getTransactionCount(ownAddress);
 
   const txData = {
-    nonce: nonce,
+    nonce: 1130n,
     to: ownAddress, // send ZENIQ to ourselves
     value: web3.utils.toBigInt(value),
     gasLimit: 21000n,
-    gasPrice: 10000000000,
-    chainId: chainIdZeniqSmartChain,
+    gasPrice: 10000000000n,
   };
 
-  const transaction: Transaction = Transaction.fromTxData(txData);
+  const transaction: Transaction = Transaction.fromTxData(txData, { common });
 
   const signedTxHex = await signWeb3JsTransactionWithNomo(transaction, ownAddress);
 

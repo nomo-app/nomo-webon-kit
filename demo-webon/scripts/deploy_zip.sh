@@ -2,7 +2,7 @@
 set -x
 set -e
 
-RELEASE_FILE=nomo-demo-plugin.zip
+RELEASE_FILE=nomo-demo-webon.zip
 DEPLOY_PATH=/var/www/html/downloads/plugins/$RELEASE_FILE
 
 if [[ -n "$SSH_TARGET" ]]; then

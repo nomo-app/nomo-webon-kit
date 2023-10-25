@@ -115,8 +115,6 @@ Moreover, the Nomo dev mode includes a few auxiliary features like refreshing th
 
 As mentioned in previous sections, the Nomo dev mode can be enabled by clicking multiple times on the about screen icon.
 
-> :warning: The console-window does not work for arbitrary websites! The console-window only works for websites that have included the nomo-plugin-kit within their JavaScript-codebase.
-
 ## Debugging via breakpoints
 
 When running a local dev server, your IDE can be configured to enable breakpoints (e.g. Visual Studio Code).

@@ -27,7 +27,7 @@ import { zscSigner } from "ethersjs-nomo-plugins"; // a ready-made signer-object
 import { sendDemoTransaction } from "ethersjs-nomo-plugins"; // an example on how to construct a transaction
 ```
 
-Please consult the demo-plugin and to the ethers.js documentation for more details.
+Please consult the demo-webon and to the ethers.js documentation for more details.
 
 ## ethers.js-V5/V6
 

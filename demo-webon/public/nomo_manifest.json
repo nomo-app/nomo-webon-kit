@@ -14,6 +14,7 @@
     "nomo.permission.ADD_CUSTOM_TOKEN",
     "nomo.permission.SIGN_EVM_TRANSACTION",
     "nomo.permission.SIGN_EVM_MESSAGE",
-    "nomo.permission.GET_INSTALLED_PLUGINS"
+    "nomo.permission.GET_INSTALLED_WEBONS",
+    "nomo.permission.INSTALL_WEBON"
   ]
 }

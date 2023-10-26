@@ -51,7 +51,8 @@ export declare const nomo: {
     getBalance: typeof nomoGetBalance;
     getAssetIcon: typeof nomoGetAssetIcon;
     openFAQPage: typeof nomoOpenFAQPage;
-    getInstalledPlugins: typeof nomoGetInstalledPlugins;
+    getInstalledWebOns: typeof nomoGetInstalledWebOns;
+    installWebOn: typeof nomoInstallWebOn;
     launchSmartchainFaucet: typeof nomoLaunchSmartchainFaucet;
     hasMinimumNomoVersion: typeof hasMinimumNomoVersion;
 };
@@ -394,11 +395,20 @@ export interface NomoManifest {
     plugin_version: string;
 }
 /**
- * Gets all manifests of the installed WebOns, including information like plugin_name/plugin_id/plugin_version.
+ * Gets all manifests of the installed WebOns, including information like name/id/version.
  */
-export declare function nomoGetInstalledPlugins(): Promise<{
+export declare function nomoGetInstalledWebOns(): Promise<{
     manifests: NomoManifest[];
 }>;
+/**
+ * Installs a WebOn with or without user interaction.
+ * See the README for an explanation about deeplinks.
+ * Returns a stackTrace if the installation fails.
+ */
+export declare function nomoInstallWebOn(args: {
+    deeplink: string;
+    skipPermissionDialog: boolean;
+}): Promise<void>;
 /**
  * Launches a free faucet that can be used for paying transaction fees.
  */

@@ -69,7 +69,8 @@ export const nomo = {
   getBalance: nomoGetBalance,
   getAssetIcon: nomoGetAssetIcon,
   openFAQPage: nomoOpenFAQPage,
-  getInstalledPlugins: nomoGetInstalledPlugins,
+  getInstalledWebOns: nomoGetInstalledWebOns,
+  installWebOn: nomoInstallWebOn,
   launchSmartchainFaucet: nomoLaunchSmartchainFaucet,
   hasMinimumNomoVersion: hasMinimumNomoVersion,
 };
@@ -668,12 +669,24 @@ export interface NomoManifest {
 }
 
 /**
- * Gets all manifests of the installed WebOns, including information like plugin_name/plugin_id/plugin_version.
+ * Gets all manifests of the installed WebOns, including information like name/id/version.
  */
-export async function nomoGetInstalledPlugins(): Promise<{
+export async function nomoGetInstalledWebOns(): Promise<{
   manifests: NomoManifest[];
 }> {
-  return await invokeNomoFunction("nomoGetInstalledPlugins", null);
+  return await invokeNomoFunction("nomoGetInstalledWebOns", null);
+}
+
+/**
+ * Installs a WebOn with or without user interaction.
+ * See the README for an explanation about deeplinks.
+ * Returns a stackTrace if the installation fails.
+ */
+ export async function nomoInstallWebOn(args: {
+  deeplink: string,
+  skipPermissionDialog: boolean,
+}): Promise<void> {
+  return await invokeNomoFunction("nomoInstallWebOn", args);
 }
 
 /**

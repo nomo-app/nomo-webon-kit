@@ -359,11 +359,11 @@ export default function Home() {
                 .injectIntoPlugin({
                   payload:
                     "https://example.com/api/resource?key1=value1&key2=value2&key3=value3",
-                  pluginId: "app.nomo.demoplugin",
+                  pluginId: "app.nomo.demowebon",
                 })
                 .then((res) => {
                   nomo.localStorage
-                    .getItem("app.nomo.demoplugin")
+                    .getItem("app.nomo.demowebon")
                     .then((res) => {
                       openDialog({
                         title: "Injection successful!",

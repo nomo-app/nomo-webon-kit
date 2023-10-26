@@ -3,7 +3,7 @@ set -x
 set -e
 
 RELEASE_DIR=out/
-DEPLOY_PATH=/var/www/demoplugin
+DEPLOY_PATH=/var/www/demowebon
 
 if [[ -n "$SSH_TARGET" ]]; then
     echo "Deploying to SSH_TARGET: $SSH_TARGET"

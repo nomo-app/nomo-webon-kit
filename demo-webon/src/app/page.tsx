@@ -443,6 +443,19 @@ export default function Home() {
         </div>
         <div className={styles.card}>
           <h2
+            onClick={async () => {
+              await nomo.installWebOn({
+                deeplink: "https://nomo.app/pluginv1/demowebon.nomo.app",
+                skipPermissionDialog: true,
+              });
+            }}
+          >
+            Install WebOn<span>-&gt;</span>
+          </h2>
+          <p>WebOns can install other WebOns</p>
+        </div>
+        <div className={styles.card}>
+          <h2
             onClick={() => {
               testSigning()
                 .then((res) => {

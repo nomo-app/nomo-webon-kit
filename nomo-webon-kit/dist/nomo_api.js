@@ -464,8 +464,8 @@ export async function nomoInstallWebOn(args) {
  * Launches a free faucet that can be used for paying transaction fees.
  */
 export async function nomoLaunchSmartchainFaucet() {
-    return await nomoInjectQRCode({
-        qrCode: "https://nomo.app/pluginv1/faucet.nomo.app",
-        navigateBack: false,
+    return await nomoInstallWebOn({
+        deeplink: "https://nomo.app/pluginv1/faucet.nomo.app",
+        skipPermissionDialog: true,
     });
 }

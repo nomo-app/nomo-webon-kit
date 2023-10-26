@@ -682,9 +682,9 @@ export async function nomoGetInstalledWebOns(): Promise<{
  * See the README for an explanation about deeplinks.
  * Returns a stackTrace if the installation fails.
  */
- export async function nomoInstallWebOn(args: {
-  deeplink: string,
-  skipPermissionDialog: boolean,
+export async function nomoInstallWebOn(args: {
+  deeplink: string;
+  skipPermissionDialog: boolean;
 }): Promise<void> {
   return await invokeNomoFunction("nomoInstallWebOn", args);
 }
@@ -693,8 +693,8 @@ export async function nomoGetInstalledWebOns(): Promise<{
  * Launches a free faucet that can be used for paying transaction fees.
  */
 export async function nomoLaunchSmartchainFaucet(): Promise<void> {
-  return await nomoInjectQRCode({
-    qrCode: "https://nomo.app/pluginv1/faucet.nomo.app",
-    navigateBack: false,
+  return await nomoInstallWebOn({
+    deeplink: "https://nomo.app/pluginv1/faucet.nomo.app",
+    skipPermissionDialog: true,
   });
 }

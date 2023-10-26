@@ -58,7 +58,7 @@ export default function Home() {
       console.log("onPluginVisible called", args);
     });
     nomo.getVisibleAssets().then(console.log).catch(console.error);
-    nomo.getInstalledPlugins().then(console.log).catch(console.error);
+    nomo.getInstalledWebOns().then(console.log).catch(console.error);
     //nomo.launchUrl({url: "https://google.com", launchMode: "externalApplication"});
   }, []);
 

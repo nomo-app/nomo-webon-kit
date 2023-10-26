@@ -58,7 +58,7 @@ export default function Home() {
       console.log("onPluginVisible called", args);
     });
     nomo.getVisibleAssets().then(console.log).catch(console.error);
-    nomo.getInstalledPlugins().then(console.log).catch(console.error);
+    nomo.getInstalledWebOns().then(console.log).catch(console.error);
     //nomo.launchUrl({url: "https://google.com", launchMode: "externalApplication"});
   }, []);
 
@@ -440,6 +440,25 @@ export default function Home() {
             Switch theme<span>-&gt;</span>
           </h2>
           <p>WebOns can switch between different Nomo themes</p>
+        </div>
+        <div className={styles.card}>
+          <h2
+            onClick={async () => {
+              nomo.installWebOn({
+                deeplink: "https://nomo.app/pluginv1/demowebon.nomo.app",
+                skipPermissionDialog: true,
+              }).catch((e) => {
+                console.error(e);
+                openDialog({
+                  title: "failed to install WebOn",
+                  content: JSON.stringify(e),
+                });
+              }) ;
+            }}
+          >
+            Install WebOn<span>-&gt;</span>
+          </h2>
+          <p>WebOns can install other WebOns</p>
         </div>
         <div className={styles.card}>
           <h2

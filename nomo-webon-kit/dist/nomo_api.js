@@ -64,7 +64,8 @@ export const nomo = {
     getBalance: nomoGetBalance,
     getAssetIcon: nomoGetAssetIcon,
     openFAQPage: nomoOpenFAQPage,
-    getInstalledPlugins: nomoGetInstalledPlugins,
+    getInstalledWebOns: nomoGetInstalledWebOns,
+    installWebOn: nomoInstallWebOn,
     launchSmartchainFaucet: nomoLaunchSmartchainFaucet,
     hasMinimumNomoVersion: hasMinimumNomoVersion,
 };
@@ -446,17 +447,25 @@ export async function nomoOpenFAQPage(args) {
     return await invokeNomoFunction("nomoOpenFAQPage", args);
 }
 /**
- * Gets all manifests of the installed WebOns, including information like plugin_name/plugin_id/plugin_version.
+ * Gets all manifests of the installed WebOns, including information like name/id/version.
  */
-export async function nomoGetInstalledPlugins() {
-    return await invokeNomoFunction("nomoGetInstalledPlugins", null);
+export async function nomoGetInstalledWebOns() {
+    return await invokeNomoFunction("nomoGetInstalledWebOns", null);
+}
+/**
+ * Installs a WebOn with or without user interaction.
+ * See the README for an explanation about deeplinks.
+ * Returns a stackTrace if the installation fails.
+ */
+export async function nomoInstallWebOn(args) {
+    return await invokeNomoFunction("nomoInstallWebOn", args);
 }
 /**
  * Launches a free faucet that can be used for paying transaction fees.
  */
 export async function nomoLaunchSmartchainFaucet() {
-    return await nomoInjectQRCode({
-        qrCode: "https://nomo.app/pluginv1/faucet.nomo.app",
-        navigateBack: false,
+    return await nomoInstallWebOn({
+        deeplink: "https://nomo.app/pluginv1/faucet.nomo.app",
+        skipPermissionDialog: true,
     });
 }

@@ -2,7 +2,7 @@
   "nomo_manifest_version": "1.1.0",
   "plugin_id": "app.nomo.demowebon",
   "plugin_name": "Demo WebOn",
-  "plugin_version": "0.1.6",
+  "plugin_version": "0.1.7",
   "min_nomo_version": "0.3.2",
   "dependencies": [],
   "permissions": [
@@ -14,6 +14,7 @@
     "nomo.permission.ADD_CUSTOM_TOKEN",
     "nomo.permission.SIGN_EVM_TRANSACTION",
     "nomo.permission.SIGN_EVM_MESSAGE",
-    "nomo.permission.GET_INSTALLED_PLUGINS"
+    "nomo.permission.GET_INSTALLED_WEBONS",
+    "nomo.permission.INSTALL_WEBON"
   ]
 }

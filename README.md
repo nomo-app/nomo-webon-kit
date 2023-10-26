@@ -30,7 +30,7 @@ Download the Nomo App and create a wallet with it.
 
 ## Step 2: Launch the demo-WebOn locally
 
-> You can skip step 2 and step 4 if you use the following WebOn-deeplink: <https://nomo.app/pluginv1/demoplugin.nomo.app>
+> You can skip step 2 and step 4 if you use the following WebOn-deeplink: <https://nomo.app/pluginv1/demowebon.nomo.app>
 
 Clone this repo, then launch the demo-WebOn with:
 
@@ -149,7 +149,7 @@ By using a decent CDN, WebOns can be made globally available without any scalabi
 ## WebOn Manifests
 
 In addition to the actual code, every production-WebOn needs to host a `nomo_manifest.json`.
-See <https://demoplugin.nomo.app/nomo_manifest.json> for an example of a `nomo_manifest.json`.
+See <https://demowebon.nomo.app/nomo_manifest.json> for an example of a `nomo_manifest.json`.
 You can copy-paste this example, but at a minimum you will need to change the following fields:
 
 - `plugin_id`
@@ -166,9 +166,9 @@ This is a security-restriction that may be lifted in future version of the Nomo 
 Once a WebOn is hosted, you can construct a deeplink for installing the WebOn.
 Deeplinks can be constructed by inserting `nomo.app/pluginv1/` into your hosting-URL.
 
-For example, let's assume that the hosting-URL of a WebOn is <https://demoplugin.nomo.app>.
+For example, let's assume that the hosting-URL of a WebOn is <https://demowebon.nomo.app>.
 Then the following URL is a functional deeplink:
 
-<https://nomo.app/pluginv1/demoplugin.nomo.app>
+<https://nomo.app/pluginv1/demowebon.nomo.app>
 
 If needed, this deeplink can be easily converted into a QRCode with any QRCode-generator.

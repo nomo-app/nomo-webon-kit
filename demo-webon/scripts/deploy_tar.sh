@@ -2,10 +2,10 @@
 set -x
 set -e
 
-# deploy deeplink: https://nomo.app/pluginv1/demoplugin.nomo.app/nomo-demo-webon.tar.gz
+# deploy deeplink: https://nomo.app/pluginv1/demowebon.nomo.app/nomo-demo-webon.tar.gz
 
 RELEASE_FILE=nomo-demo-webon.tar.gz
-DEPLOY_PATH=/var/www/demoplugin/$RELEASE_FILE
+DEPLOY_PATH=/var/www/demowebon/$RELEASE_FILE
 
 if [[ -n "$SSH_TARGET" ]]; then
     echo "Deploying to SSH_TARGET: $SSH_TARGET"

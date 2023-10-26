@@ -24,7 +24,7 @@ If min_nomo_version is set, then outdated versions of the Nomo App will refuse t
 
 #### Defined in
 
-[nomo_api.ts:641](https://github.com/nomo-app/nomo-webon-kit/blob/776e904/nomo-webon-kit/src/nomo_api.ts#L641)
+[nomo_api.ts:641](https://github.com/nomo-app/nomo-webon-kit/blob/5de7f71/nomo-webon-kit/src/nomo_api.ts#L641)
 
 ___
 
@@ -36,7 +36,7 @@ nomo_manifest_version should be 1.1.0.
 
 #### Defined in
 
-[nomo_api.ts:645](https://github.com/nomo-app/nomo-webon-kit/blob/776e904/nomo-webon-kit/src/nomo_api.ts#L645)
+[nomo_api.ts:645](https://github.com/nomo-app/nomo-webon-kit/blob/5de7f71/nomo-webon-kit/src/nomo_api.ts#L645)
 
 ___
 
@@ -48,7 +48,7 @@ A list of permissions for security-critical features.
 
 #### Defined in
 
-[nomo_api.ts:649](https://github.com/nomo-app/nomo-webon-kit/blob/776e904/nomo-webon-kit/src/nomo_api.ts#L649)
+[nomo_api.ts:649](https://github.com/nomo-app/nomo-webon-kit/blob/5de7f71/nomo-webon-kit/src/nomo_api.ts#L649)
 
 ___
 
@@ -61,7 +61,7 @@ See https://en.wikipedia.org/wiki/Reverse_domain_name_notation for more details 
 
 #### Defined in
 
-[nomo_api.ts:654](https://github.com/nomo-app/nomo-webon-kit/blob/776e904/nomo-webon-kit/src/nomo_api.ts#L654)
+[nomo_api.ts:654](https://github.com/nomo-app/nomo-webon-kit/blob/5de7f71/nomo-webon-kit/src/nomo_api.ts#L654)
 
 ___
 
@@ -73,7 +73,7 @@ plugin_name is the user-visible name of the WebOn.
 
 #### Defined in
 
-[nomo_api.ts:658](https://github.com/nomo-app/nomo-webon-kit/blob/776e904/nomo-webon-kit/src/nomo_api.ts#L658)
+[nomo_api.ts:658](https://github.com/nomo-app/nomo-webon-kit/blob/5de7f71/nomo-webon-kit/src/nomo_api.ts#L658)
 
 ___
 
@@ -86,7 +86,7 @@ Typically, plugin_url gets extracted out of a deeplink that is supplied to the N
 
 #### Defined in
 
-[nomo_api.ts:663](https://github.com/nomo-app/nomo-webon-kit/blob/776e904/nomo-webon-kit/src/nomo_api.ts#L663)
+[nomo_api.ts:663](https://github.com/nomo-app/nomo-webon-kit/blob/5de7f71/nomo-webon-kit/src/nomo_api.ts#L663)
 
 ___
 
@@ -99,4 +99,4 @@ See https://semver.org/ for details.
 
 #### Defined in
 
-[nomo_api.ts:668](https://github.com/nomo-app/nomo-webon-kit/blob/776e904/nomo-webon-kit/src/nomo_api.ts#L668)
+[nomo_api.ts:668](https://github.com/nomo-app/nomo-webon-kit/blob/5de7f71/nomo-webon-kit/src/nomo_api.ts#L668)

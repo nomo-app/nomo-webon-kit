@@ -408,6 +408,7 @@ export declare function nomoGetInstalledWebOns(): Promise<{
 export declare function nomoInstallWebOn(args: {
     deeplink: string;
     skipPermissionDialog: boolean;
+    navigateBack: boolean;
 }): Promise<void>;
 /**
  * Launches a free faucet that can be used for paying transaction fees.

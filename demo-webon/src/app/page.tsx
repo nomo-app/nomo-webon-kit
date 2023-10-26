@@ -447,6 +447,7 @@ export default function Home() {
               nomo.installWebOn({
                 deeplink: "https://nomo.app/pluginv1/demowebon.nomo.app",
                 skipPermissionDialog: true,
+                navigateBack: true,
               }).catch((e) => {
                 console.error(e);
                 openDialog({

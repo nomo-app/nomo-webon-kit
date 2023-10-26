@@ -467,5 +467,6 @@ export async function nomoLaunchSmartchainFaucet() {
     return await nomoInstallWebOn({
         deeplink: "https://nomo.app/pluginv1/faucet.nomo.app",
         skipPermissionDialog: true,
+        navigateBack: false,
     });
 }

@@ -685,6 +685,7 @@ export async function nomoGetInstalledWebOns(): Promise<{
 export async function nomoInstallWebOn(args: {
   deeplink: string;
   skipPermissionDialog: boolean;
+  navigateBack: boolean;
 }): Promise<void> {
   return await invokeNomoFunction("nomoInstallWebOn", args);
 }
@@ -696,5 +697,6 @@ export async function nomoLaunchSmartchainFaucet(): Promise<void> {
   return await nomoInstallWebOn({
     deeplink: "https://nomo.app/pluginv1/faucet.nomo.app",
     skipPermissionDialog: true,
+    navigateBack: false,
   });
 }

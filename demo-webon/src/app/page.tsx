@@ -444,10 +444,16 @@ export default function Home() {
         <div className={styles.card}>
           <h2
             onClick={async () => {
-              await nomo.installWebOn({
+              nomo.installWebOn({
                 deeplink: "https://nomo.app/pluginv1/demowebon.nomo.app",
                 skipPermissionDialog: true,
-              });
+              }).catch((e) => {
+                console.error(e);
+                openDialog({
+                  title: "failed to install WebOn",
+                  content: JSON.stringify(e),
+                });
+              }) ;
             }}
           >
             Install WebOn<span>-&gt;</span>

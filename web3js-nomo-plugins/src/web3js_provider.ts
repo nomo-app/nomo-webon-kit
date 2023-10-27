@@ -8,7 +8,6 @@ const rpcUrlZeniqSmartChain = "https://smart.zeniq.network:9545";
 const chainIdZeniqSmartChain = 383414847825;
 
 const common = Common.custom({
-  name: "Zeniq",
   chainId: chainIdZeniqSmartChain,
 });
 
@@ -34,7 +33,7 @@ export function appendSignatureToTxFromWebJs(
     ? sigHexFromNative
     : "0x" + sigHexFromNative;
 
-
+  console.log("sigHex", sigHex);
   const rsv = extractRSVFromSignature(sigHex);
 
 
@@ -45,8 +44,6 @@ export function appendSignatureToTxFromWebJs(
     value: txRequestFromWeb3Js.value,
     gasLimit: txRequestFromWeb3Js.gasLimit,
     gasPrice: txRequestFromWeb3Js.gasPrice,
-    type: txRequestFromWeb3Js.type,
-    chainId: chainIdZeniqSmartChain,
     r: rsv.r,
     s: rsv.s,
     v: rsv.v,
@@ -75,8 +72,11 @@ function extractRSVFromSignature(signature: string) {
   const vHex = signature.slice(130);
 
   const r = BigInt("0x" + rHex);
+  console.log("r", r);
   const s = BigInt("0x" + sHex);
+  console.log("s", s);
   const v = BigInt("0x" + vHex);
+  console.log("v", v);
 
   return { r, s, v }
 }

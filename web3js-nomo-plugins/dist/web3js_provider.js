@@ -5,7 +5,6 @@ import { RLP } from "@ethereumjs/rlp";
 const rpcUrlZeniqSmartChain = "https://smart.zeniq.network:9545";
 const chainIdZeniqSmartChain = 383414847825;
 const common = Common.custom({
-    name: "Zeniq",
     chainId: chainIdZeniqSmartChain,
 });
 const web3 = new Web3(new Web3.providers.HttpProvider(rpcUrlZeniqSmartChain));
@@ -22,6 +21,7 @@ export function appendSignatureToTxFromWebJs(txRequestFromWeb3Js, sigHexFromNati
     const sigHex = sigHexFromNative.startsWith("0x")
         ? sigHexFromNative
         : "0x" + sigHexFromNative;
+    console.log("sigHex", sigHex);
     const rsv = extractRSVFromSignature(sigHex);
     const signedTxData = {
         nonce: txRequestFromWeb3Js.nonce,
@@ -29,8 +29,6 @@ export function appendSignatureToTxFromWebJs(txRequestFromWeb3Js, sigHexFromNati
         value: txRequestFromWeb3Js.value,
         gasLimit: txRequestFromWeb3Js.gasLimit,
         gasPrice: txRequestFromWeb3Js.gasPrice,
-        type: txRequestFromWeb3Js.type,
-        chainId: chainIdZeniqSmartChain,
         r: rsv.r,
         s: rsv.s,
         v: rsv.v,
@@ -49,8 +47,11 @@ function extractRSVFromSignature(signature) {
     const sHex = signature.slice(66, 130);
     const vHex = signature.slice(130);
     const r = BigInt("0x" + rHex);
+    console.log("r", r);
     const s = BigInt("0x" + sHex);
+    console.log("s", s);
     const v = BigInt("0x" + vHex);
+    console.log("v", v);
     return { r, s, v };
 }
 export async function signWeb3JsTransactionWithNomo(txRequest, ownAddress) {

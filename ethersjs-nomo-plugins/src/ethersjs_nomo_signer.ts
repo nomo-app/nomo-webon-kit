@@ -13,7 +13,6 @@ function appendSignatureToTx(
     ? sigHexFromNative
     : "0x" + sigHexFromNative;
 
-
   unsignedTx.signature = sigHex;
 
   console.log("unsignedTx", unsignedTx);
@@ -22,6 +21,7 @@ function appendSignatureToTx(
 
   return Transaction.from(unsignedTx).serialized;
 }
+
 
 let fallbackDevSigner: HDNodeWallet | null = null;
 

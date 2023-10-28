@@ -1,6 +1,6 @@
 import { BlockTag, HDNodeWallet, Provider, Signer, Transaction, TransactionLike, TransactionRequest, TransactionResponse, TypedDataDomain, TypedDataField, Wallet } from "ethers";
-import { isFallbackModeActive } from "nomo-plugin-kit";
-import { nomo } from "nomo-plugin-kit";
+import { isFallbackModeActive } from "nomo-webon-kit";
+import { nomo } from "nomo-webon-kit";
 
 function appendSignatureToTx(
   unsignedTx: Transaction,

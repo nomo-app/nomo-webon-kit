@@ -1,4 +1,4 @@
-import { nomo } from "nomo-plugin-kit";
+import { nomo } from "nomo-webon-kit";
 
 export async function openFaucetIfNeeded(): Promise<boolean> {
   const res = await nomo.getBalance({

@@ -7,16 +7,16 @@ This repository provides a TypeScript library for interacting with the Zeniq Sma
 To use this library, you can install it via npm:
 
 ```bash
-npm install web3js-nomo-plugins
+npm install web3js-nomo-webons
 ```
 
 ## Signing EVM Transactions
 
 This library provides a function **signWeb3JsTransactionWithNomo** to sign EVM transactions.
-It uses the **nomoSignEvmTransaction** function from the **nomo-plugin-kit** to sign transactions.
+It uses the **nomoSignEvmTransaction** function from the **nomo-webon-kit** to sign transactions.
 
 ```typescript
-import { signWeb3JsTransactionWithNomo } from "web3js-nomo-plugins";
+import { signWeb3JsTransactionWithNomo } from "web3js-nomo-webons";
 import { Transaction } from "web3-eth-accounts";
 
 const transaction = new Transaction({
@@ -36,11 +36,11 @@ console.log("Signed Transaction: ", signedTransaction);
 The function **sendDemoTransaction** sends a demo transaction on the Zeniq Smart Chain using **your wallet address**.
 
 ```typescript
-import { sendDemoTransaction } from "web3js-nomo-plugins";
+import { sendDemoTransaction } from "web3js-nomo-webons";
 
 await sendDemoTransaction();
 ```
 
-Feel free to use this library to interact with the Zeniq Smart Chain using Web3.js and **nomo-plugin-kit**.
+Feel free to use this library to interact with the Zeniq Smart Chain using Web3.js and **nomo-webon-kit**.
 
 Please consult the demo-WebOn and the web3.js documentation for more details.

@@ -19,12 +19,12 @@
     "@types/react-dom": "18.2.4",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
-    "ethersjs-nomo-plugins": "file:../ethersjs-nomo-plugins",
+    "ethersjs-nomo-webons": "file:../ethersjs-nomo-webons",
     "next": "13.4.3",
-    "nomo-plugin-kit": "file:../nomo-webon-kit",
+    "nomo-webon-kit": "file:../nomo-webon-kit",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "5.0.4",
-    "web3js-nomo-plugins": "file:../web3js-nomo-plugins"
+    "web3js-nomo-webons": "file:../web3js-nomo-webons"
   }
 }

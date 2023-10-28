@@ -1,16 +1,16 @@
 {
-  "name": "ethersjs-nomo-plugins",
+  "name": "ethersjs-nomo-webons",
   "version": "0.2.0",
-  "description": "ethersjs-nomo-plugins for nomo",
+  "description": "ethersjs-nomo-webons for nomo",
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf dist && tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "doPublish": "npm uninstall nomo-plugin-kit && npm i --save-peer nomo-plugin-kit && npm publish"
+    "doPublish": "npm uninstall nomo-webon-kit && npm i --save-peer nomo-webon-kit && npm publish"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nomo-app/nomo-plugin-kit.git"
+    "url": "https://github.com/nomo-app/nomo-webon-kit.git"
   },
   "dependencies": {
     "ethers": "^6.8.0",
@@ -18,7 +18,7 @@
     "@types/node": "^20.5.9"
   },
   "peerDependencies": {
-    "nomo-plugin-kit": "file:../nomo-webon-kit"
+    "nomo-webon-kit": "file:../nomo-webon-kit"
   },
   "keywords": [],
   "author": "dev2@nomo.app",

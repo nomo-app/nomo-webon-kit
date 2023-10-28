@@ -1,4 +1,4 @@
-import { nomo } from "nomo-plugin-kit";
+import { nomo } from "nomo-webon-kit";
 
 function resolveSig(sigHex: string) {
   const r = BigInt("0x" + sigHex.slice(0, 64));

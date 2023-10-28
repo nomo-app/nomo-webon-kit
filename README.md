@@ -34,8 +34,8 @@ Download the Nomo App and create a wallet with it.
 
 Clone this repo, then launch the demo-WebOn with:
 
-`cd ethersjs-nomo-plugins && npm i`  
-`cd web3js-nomo-plugins && npm i`  
+`cd ethersjs-nomo-webons && npm i`  
+`cd web3js-nomo-webons && npm i`  
 `cd demo-webon && npm i`  
 `npm run dev`
 
@@ -94,13 +94,13 @@ With this, you can construct the following deeplink by inserting the prefix `nom
 
 # Installation
 
-You can add this package to your project with: `npm install nomo-plugin-kit`.
+You can add this package to your project with: `npm install nomo-webon-kit`.
 
 Take a look at the demo-WebOn to see how the package can be used.
 
 ## Interacting with EVM blockchains
 
-If you want to port a decentralized application, then we recommend the package https://www.npmjs.com/package/ethersjs-nomo-plugins.
+If you want to port a decentralized application, then we recommend the package https://www.npmjs.com/package/ethersjs-nomo-webons.
 This package has a ready-made provider that utilizes the Nomo App for signing transactions.
 
 # Debugging of WebOns

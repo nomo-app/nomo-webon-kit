@@ -1,5 +1,5 @@
 import { Web3 } from "web3";
-import { nomo } from "nomo-plugin-kit";
+import { nomo } from "nomo-webon-kit";
 import { Transaction, Common } from "web3-eth-accounts";
 import { BigNumber } from "ethers";
 import { RLP } from "@ethereumjs/rlp";

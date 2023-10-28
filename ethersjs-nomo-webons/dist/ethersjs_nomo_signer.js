@@ -1,6 +1,6 @@
 import { Transaction, Wallet } from "ethers";
-import { isFallbackModeActive } from "nomo-plugin-kit";
-import { nomo } from "nomo-plugin-kit";
+import { isFallbackModeActive } from "nomo-webon-kit";
+import { nomo } from "nomo-webon-kit";
 function appendSignatureToTx(unsignedTx, sigHexFromNative) {
     if (sigHexFromNative.length !== 130) {
         throw Error("unexpected sigHexFromNative length");

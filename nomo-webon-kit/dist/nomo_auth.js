@@ -24,7 +24,7 @@ const _cachedJWTs = {};
 function _injectNomoAuthHeaders({ nomoAuthAddress, url, headers, }) {
     headers["nomo-auth-addr"] = nomoAuthAddress;
     headers["nomo-auth-version"] = "1.0.0";
-    headers["nomo-plugin"] = "PluginName/PluginVersion";
+    headers["nomo-webon"] = "WebOnName/WebOnVersion";
     const jwt = _cachedJWTs[nomoAuthAddress];
     if (jwt) {
         headers["nomo-sig"] = _nomoSignMessageSimulation({ jwt, url });

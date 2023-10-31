@@ -3,7 +3,7 @@ import { nomoAuthFetch } from "./nomo_auth";
 import { compareSemanticVersions } from "./util";
 /**
  * nomoLocalStorage provides a mechanism for sharing data between WebOns.
- * If a plugin_id is passed to nomoLocalStorage.getItem, then it tries to read data from another WebOn with the given plugin_id.
+ * If a webon_id is passed to nomoLocalStorage.getItem, then it tries to read data from another WebOn with the given webon_id.
  * nomoLocalStorage can also be used as an alternative to the regular localStorage.
  */
 export const nomoLocalStorage = {
@@ -51,9 +51,9 @@ export const nomo = {
     localStorage: nomoLocalStorage,
     enableMobileConsoleDebugging: nomoEnableMobileConsoleDebugging,
     qrScan: nomoQrScan,
-    injectIntoPlugin: nomoInjectIntoPlugin,
+    injectIntoWebOn: nomoInjectIntoWebOn,
     mnemonicBackupExisted: nomoMnemonicBackupExisted,
-    registerOnPluginVisible: nomoRegisterOnPluginVisible,
+    registerOnWebOnVisible: nomoRegisterOnWebOnVisible,
     getLanguage: nomoGetLanguage,
     addCustomToken: nomoAddCustomToken,
     getVisibleAssets: nomoGetVisibleAssets,
@@ -242,8 +242,8 @@ export async function nomoInjectQRCode(args) {
  * A payload can be passed to the WebOn.
  * Afterwards, the user may navigate back to the current WebOn by pressing the back button.
  */
-export async function nomoInjectIntoPlugin(args) {
-    return await invokeNomoFunction("nomoInjectIntoPlugin", args);
+export async function nomoInjectIntoWebOn(args) {
+    return await invokeNomoFunction("nomoInjectIntoWebOn", args);
 }
 const imagePrefix = "data:image/png;base64,";
 const fallbackImage = imagePrefix +
@@ -339,12 +339,12 @@ export async function nomoMnemonicBackupExisted() {
  * Registers a callback that will be called every time when the WebOn gets visible within the Nomo App.
  * For example, this can be used to refresh data when re-opening a WebOn after a long pause.
  */
-export async function nomoRegisterOnPluginVisible(callback) {
-    window.onPluginVisible = callback;
+export async function nomoRegisterOnWebOnVisible(callback) {
+    window.onWebOnVisible = callback;
     if (isFallbackModeActive()) {
         return;
     }
-    return await invokeNomoFunction("nomoEnableOnPluginVisible", {});
+    return await invokeNomoFunction("nomoEnableOnWebOnVisible", {});
 }
 /**
  * Returns the currently selected language of the Nomo App.
@@ -465,7 +465,7 @@ export async function nomoInstallWebOn(args) {
  */
 export async function nomoLaunchSmartchainFaucet() {
     return await nomoInstallWebOn({
-        deeplink: "https://nomo.app/pluginv1/faucet.nomo.app",
+        deeplink: "https://nomo.app/webon/faucet.nomo.app",
         skipPermissionDialog: true,
         navigateBack: false,
     });

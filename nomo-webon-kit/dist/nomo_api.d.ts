@@ -1,11 +1,11 @@
 /**
  * nomoLocalStorage provides a mechanism for sharing data between WebOns.
- * If a plugin_id is passed to nomoLocalStorage.getItem, then it tries to read data from another WebOn with the given plugin_id.
+ * If a webon_id is passed to nomoLocalStorage.getItem, then it tries to read data from another WebOn with the given webon_id.
  * nomoLocalStorage can also be used as an alternative to the regular localStorage.
  */
 export declare const nomoLocalStorage: {
     getItem: (key: string, options?: {
-        plugin_id: string;
+        webon_id: string;
     }) => Promise<String | null>;
     setItem: (key: string, value: string) => Promise<void>;
     removeItem: (key: string) => Promise<void>;
@@ -31,16 +31,16 @@ export declare const nomo: {
     nativeLog: typeof nomoNativeLog;
     localStorage: {
         getItem: (key: string, options?: {
-            plugin_id: string;
+            webon_id: string;
         }) => Promise<String | null>;
         setItem: (key: string, value: string) => Promise<void>;
         removeItem: (key: string) => Promise<void>;
     };
     enableMobileConsoleDebugging: typeof nomoEnableMobileConsoleDebugging;
     qrScan: typeof nomoQrScan;
-    injectIntoPlugin: typeof nomoInjectIntoPlugin;
+    injectIntoWebOn: typeof nomoInjectIntoWebOn;
     mnemonicBackupExisted: typeof nomoMnemonicBackupExisted;
-    registerOnPluginVisible: typeof nomoRegisterOnPluginVisible;
+    registerOnWebOnVisible: typeof nomoRegisterOnWebOnVisible;
     getLanguage: typeof nomoGetLanguage;
     addCustomToken: typeof nomoAddCustomToken;
     getVisibleAssets: typeof nomoGetVisibleAssets;
@@ -154,9 +154,9 @@ export declare function nomoInjectQRCode(args: {
  * A payload can be passed to the WebOn.
  * Afterwards, the user may navigate back to the current WebOn by pressing the back button.
  */
-export declare function nomoInjectIntoPlugin(args: {
+export declare function nomoInjectIntoWebOn(args: {
     payload: string;
-    pluginId: string;
+    webon_id: string;
 }): Promise<void>;
 /**
  * Opens the camera and returns a picture in base64-encoding.
@@ -261,7 +261,7 @@ export declare function nomoMnemonicBackupExisted(): Promise<{
  * Registers a callback that will be called every time when the WebOn gets visible within the Nomo App.
  * For example, this can be used to refresh data when re-opening a WebOn after a long pause.
  */
-export declare function nomoRegisterOnPluginVisible(callback: (args: {
+export declare function nomoRegisterOnWebOnVisible(callback: (args: {
     fullscreenMode: boolean;
 }) => void): Promise<void>;
 /**
@@ -375,24 +375,24 @@ export interface NomoManifest {
      */
     permissions: string[];
     /**
-     * plugin_id should be the reverse-domain of a domain that is owned by the WebOn-author.
+     * webon_id should be the reverse-domain of a domain that is owned by the WebOn-author.
      * See https://en.wikipedia.org/wiki/Reverse_domain_name_notation for more details about the reverse domain name notation.
      */
-    plugin_id: string;
+    webon_id: string;
     /**
-     * plugin_name is the user-visible name of the WebOn.
+     * webon_name is the user-visible name of the WebOn.
      */
-    plugin_name: string;
+    webon_name: string;
     /**
-     * plugin_url is the URL that the Nomo App uses for installing the WebOn.
-     * Typically, plugin_url gets extracted out of a deeplink that is supplied to the Nomo App.
+     * webon_url is the URL that the Nomo App uses for installing the WebOn.
+     * Typically, webon_url gets extracted out of a deeplink that is supplied to the Nomo App.
      */
-    plugin_url: string;
+    webon_url: string;
     /**
-     * plugin_version should comply with the semantic versioning standard.
+     * webon_version should comply with the semantic versioning standard.
      * See https://semver.org/ for details.
      */
-    plugin_version: string;
+    webon_version: string;
 }
 /**
  * Gets all manifests of the installed WebOns, including information like name/id/version.

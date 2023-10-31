@@ -30,7 +30,7 @@ Download the Nomo App and create a wallet with it.
 
 ## Step 2: Launch the demo-WebOn locally
 
-> You can skip step 2 and step 4 if you use the following WebOn-deeplink: <https://nomo.app/pluginv1/demowebon.nomo.app>
+> You can skip step 2 and step 4 if you use the following WebOn-deeplink: <https://nomo.app/webon/demowebon.nomo.app>
 
 Clone this repo, then launch the demo-WebOn with:
 
@@ -64,13 +64,13 @@ You are then free to make changes or experiment with the features.
 
 ### Option 1: Local-Wifi-deeplinks
 
-> If you are using a Desktop-version of the Nomo App, then you may use a simplified deeplink like <http://nomo.app/pluginv1/localhost:3000>.
+> If you are using a Desktop-version of the Nomo App, then you may use a simplified deeplink like <http://nomo.app/webon/localhost:3000>.
 
 For this type of deeplink, your phone needs to be in the same local network as your dev-machine.
 For example, let’s assume your dev-machine has the IP address `172.16.251.205` and the demo-WebOn is running at `http://localhost:3000`.
-Then you can construct the following deeplink by inserting the prefix `nomo.app/pluginv1/`:
+Then you can construct the following deeplink by inserting the prefix `nomo.app/webon/`:
 
-<http://nomo.app/pluginv1/172.16.251.205:3000>
+<http://nomo.app/webon/172.16.251.205:3000>
 
 ### Option 2: ngrok-deeplinks
 
@@ -88,9 +88,9 @@ This command should give you a URL that looks something like this:
 
 <https://56b1.ngrok-free.app>
 
-With this, you can construct the following deeplink by inserting the prefix `nomo.app/pluginv1/`:
+With this, you can construct the following deeplink by inserting the prefix `nomo.app/webon/`:
 
-<https://nomo.app/pluginv1/56b1.ngrok-free.app>
+<https://nomo.app/webon/56b1.ngrok-free.app>
 
 # Installation
 
@@ -152,8 +152,8 @@ In addition to the actual code, every production-WebOn needs to host a `nomo_man
 See <https://demowebon.nomo.app/nomo_manifest.json> for an example of a `nomo_manifest.json`.
 You can copy-paste this example, but at a minimum you will need to change the following fields:
 
-- `plugin_id`
-- `plugin_name`
+- `webon_id`
+- `webon_name`
 
 ## Security Restrictions
 
@@ -164,11 +164,11 @@ This is a security-restriction that may be lifted in future version of the Nomo 
 ## Distributing WebOns via QRCodes or Deeplinks
 
 Once a WebOn is hosted, you can construct a deeplink for installing the WebOn.
-Deeplinks can be constructed by inserting `nomo.app/pluginv1/` into your hosting-URL.
+Deeplinks can be constructed by inserting `nomo.app/webon/` into your hosting-URL.
 
 For example, let's assume that the hosting-URL of a WebOn is <https://demowebon.nomo.app>.
 Then the following URL is a functional deeplink:
 
-<https://nomo.app/pluginv1/demowebon.nomo.app>
+<https://nomo.app/webon/demowebon.nomo.app>
 
 If needed, this deeplink can be easily converted into a QRCode with any QRCode-generator.

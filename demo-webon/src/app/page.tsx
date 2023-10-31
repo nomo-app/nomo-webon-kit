@@ -54,8 +54,8 @@ export default function Home() {
     });
     nomo.getDeviceHashes().then(console.log).catch(console.error);
     injectNomoCSSVariables();
-    nomo.registerOnPluginVisible((args) => {
-      console.log("onPluginVisible called", args);
+    nomo.registerOnWebOnVisible((args) => {
+      console.log("onWebOnVisible called", args);
     });
     nomo.getVisibleAssets().then(console.log).catch(console.error);
     nomo.getInstalledWebOns().then(console.log).catch(console.error);
@@ -352,35 +352,6 @@ export default function Home() {
             the user controls a specific wallet.
           </p>
         </div>
-        {/* <div className={styles.card}>
-          <h2
-            onClick={() => {
-              nomo
-                .injectIntoPlugin({
-                  payload:
-                    "https://example.com/api/resource?key1=value1&key2=value2&key3=value3",
-                  pluginId: "app.nomo.demowebon",
-                })
-                .then((res) => {
-                  nomo.localStorage
-                    .getItem("app.nomo.demowebon")
-                    .then((res) => {
-                      openDialog({
-                        title: "Injection successful!",
-                        content: JSON.stringify(res),
-                      });
-                    });
-                })
-                .catch((e) => {
-                  console.error(e);
-                  // Handle any errors here
-                });
-            }}
-          >
-            Inject payload into Plugin.<span>-&gt;</span>
-          </h2>
-          <p>Scan a QrCode.</p>
-        </div> */}
         <div className={styles.card}>
           <h2
             onClick={() => {
@@ -445,7 +416,7 @@ export default function Home() {
           <h2
             onClick={async () => {
               nomo.installWebOn({
-                deeplink: "https://nomo.app/pluginv1/demowebon.nomo.app",
+                deeplink: "https://nomo.app/webon/demowebon.nomo.app",
                 skipPermissionDialog: true,
                 navigateBack: true,
               }).catch((e) => {

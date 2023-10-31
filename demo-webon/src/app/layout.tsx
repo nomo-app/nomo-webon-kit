@@ -4,8 +4,8 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "NOMO Demo Plugin",
-  description: "A showcase of NOMO plugin functionality",
+  title: "Nomo Demo WebOn",
+  description: "A showcase of Nomo WebOn functionality",
 };
 
 export default function RootLayout({

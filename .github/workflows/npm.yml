@@ -19,6 +19,8 @@ jobs:
         node-version: '18.17.1'
     - name: Change directory
       run: cd nomo-webon-kit
+    - name: List current di
+      run: ls
 
     - name: Install Dependencies and build
       run: npm install && npm run build

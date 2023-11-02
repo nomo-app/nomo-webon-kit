@@ -13,14 +13,13 @@ jobs:
       matrix:
         node-version: ['18.17.1']
     steps:
-    - run: cd web3js-nomo-webons
     - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    
+    - run: cd nomo-webon-kit
     - name: Install Dependencies and build
     - run: npm install && npm run build
       

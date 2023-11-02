@@ -1,3 +1,5 @@
+export type EvmNetwork = "zeniqSmartChain" | "ethereumMainnet" | "binanceSmartChain";
+export type Network = EvmNetwork | "bitcoin" | "zeniq" | "litecoin" | "bitcoinCash";
 /**
  * nomoLocalStorage provides a mechanism for sharing data between WebOns.
  * If a webon_id is passed to nomoLocalStorage.getItem, then it tries to read data from another WebOn with the given webon_id.
@@ -75,6 +77,8 @@ export declare function nomoEnableMobileConsoleDebugging(): void;
 /**
  * Opens the camera to scan a qrCode.
  * Returns a raw qrCode or a list of comma-separated qrCodes.
+ *
+ * Needs nomo.permission.CAMERA.
  */
 export declare function nomoQrScan(): Promise<{
     qrCode: string;
@@ -87,6 +91,8 @@ declare function nomoNativeLog(severity: "LOG" | "INFO" | "WARN" | "ERROR", args
 /**
  * Creates a signature for an EVM-based transaction.
  * See EthersjsNomoSigner for an example on how to use this function.
+ *
+ * Needs nomo.permission.SIGN_EVM_TRANSACTION.
  */
 export declare function nomoSignEvmTransaction(args: {
     messageHex: string;
@@ -97,6 +103,8 @@ export declare function nomoSignEvmTransaction(args: {
  * Creates an Ethereum-styled message signature.
  * The resulting signature is not usable for submitting transactions,
  * but it can be used as a proof that the user controls a wallet.
+ *
+ * Needs nomo.permission.SIGN_EVM_MESSAGE.
  */
 export declare function nomoSignEvmMessage(args: {
     message: string;
@@ -127,6 +135,8 @@ export declare function hasMinimumNomoVersion(args: {
 }>;
 /**
  * Can be used for chatting with other NOMO-users, but also for push-notifications or chat-bots.
+ *
+ * Needs nomo.permission.SEND_MESSAGE.
  */
 export declare function nomoGetMessengerAddress(): Promise<{
     messengerAddress: string;
@@ -153,6 +163,8 @@ export declare function nomoInjectQRCode(args: {
  * If the WebOn is not yet installed, an error is thrown.
  * A payload can be passed to the WebOn.
  * Afterwards, the user may navigate back to the current WebOn by pressing the back button.
+ *
+ * Since Nomo App 0.3.4.
  */
 export declare function nomoInjectIntoWebOn(args: {
     payload: string;
@@ -161,6 +173,8 @@ export declare function nomoInjectIntoWebOn(args: {
 /**
  * Opens the camera and returns a picture in base64-encoding.
  * The promise rejects if the user chooses to cancel.
+ *
+ * Needs nomo.permission.CAMERA.
  */
 export declare function nomoTakePicture(args?: {
     maxWidth?: number;
@@ -173,6 +187,8 @@ export declare function nomoTakePicture(args?: {
 /**
  * Opens an image-picker and returns an image in base64-encoding.
  * The promise rejects if the user chooses to cancel.
+ *
+ * Needs nomo.permission.READ_MEDIA.
  */
 export declare function nomoPickFromGallery(args?: {
     maxWidth?: number;
@@ -210,12 +226,16 @@ export declare function nomoGetTheme(): Promise<{
 /**
  * Returns a comma-separated list of device hashes.
  * Can be used for fingerprinting devices.
+ *
+ * Needs nomo.permission.DEVICE_FINGERPRINTING.
  */
 export declare function nomoGetDeviceHashes(): Promise<{
     deviceHashes: string;
 }>;
 /**
  * Returns a human-readable name of the device.
+ *
+ * Needs nomo.permission.DEVICE_FINGERPRINTING.
  */
 export declare function nomoGetDeviceName(): Promise<{
     deviceName: string;
@@ -244,6 +264,8 @@ export declare function nomoAuthHttp(args: {
 /**
  * Opens a confirmation-dialog to send assets away from the NOMO-wallet.
  * Assets are only sent if the user confirms the dialog.
+ *
+ * Needs nomo.permission.SEND_ASSETS.
  */
 export declare function nomoSendAssets(args: {
     assetSymbol: string;
@@ -260,6 +282,8 @@ export declare function nomoMnemonicBackupExisted(): Promise<{
 /**
  * Registers a callback that will be called every time when the WebOn gets visible within the Nomo App.
  * For example, this can be used to refresh data when re-opening a WebOn after a long pause.
+ *
+ * Since Nomo App 0.3.4.
  */
 export declare function nomoRegisterOnWebOnVisible(callback: (args: {
     fullscreenMode: boolean;
@@ -273,10 +297,12 @@ export declare function nomoGetLanguage(): Promise<{
 /**
  * Adds a custom token to the list of visible assets in the Nomo Wallet.
  * Before that, it opens a dialog for the user to confirm.
+ *
+ * Needs nomo.permission.ADD_CUSTOM_TOKEN.
  */
 export declare function nomoAddCustomToken(args: {
     contractAddress: string;
-    network: string;
+    network: EvmNetwork;
 }): Promise<void>;
 /**
  * Returns a list of assets that are currently visible in the Nomo Wallet.
@@ -396,6 +422,8 @@ export interface NomoManifest {
 }
 /**
  * Gets all manifests of the installed WebOns, including information like name/id/version.
+ *
+ * Needs nomo.permission.GET_INSTALLED_WEBONS.
  */
 export declare function nomoGetInstalledWebOns(): Promise<{
     manifests: NomoManifest[];
@@ -404,6 +432,8 @@ export declare function nomoGetInstalledWebOns(): Promise<{
  * Installs a WebOn with or without user interaction.
  * See the README for an explanation about deeplinks.
  * Returns a stackTrace if the installation fails.
+ *
+ * Needs nomo.permission.INSTALL_WEBON.
  */
 export declare function nomoInstallWebOn(args: {
     deeplink: string;

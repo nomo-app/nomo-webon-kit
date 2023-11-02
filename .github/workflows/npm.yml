@@ -22,7 +22,7 @@ jobs:
         cd nomo-webon-kit
         npm install
         npm run build
-        git diff nomo-webon-kit --exit-code
+        git diff --exit-code .
         
     - name: Install dependencies and build ethersjs-nomo-webons
       run: |
@@ -41,5 +41,5 @@ jobs:
         cd demo-webon
         npm install
         npm run build
-        git diff demo-webon --exit-code
+        git diff --exit-code .
   

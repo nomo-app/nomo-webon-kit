@@ -2,25 +2,27 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: ['18.17.1']
     steps:
     - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: cd nomo-webon-kit
+        node-version: '18.17.1'
+    - name: Change directory
+      run: cd nomo-webon-kit
+
     - name: Install Dependencies and build
-    - run: npm install && npm run build
+      run: |
+        npm install
+        npm run build
       
         

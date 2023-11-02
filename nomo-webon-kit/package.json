@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rm -rf dist && tsc",
     "doPublish": "cp ../README.md README.md && npm publish",
-    "generate_docs": "typedoc src/nomo_api.ts --plugin typedoc-plugin-markdown --out ../api-docs/ --exclude **.ts && rm ../api-docs/README.md"
+    "generate_docs": "git checkout main && git diff --exit-code && typedoc src/nomo_api.ts --plugin typedoc-plugin-markdown --out ../api-docs/ --exclude **.ts && rm ../api-docs/README.md"
   },
   "repository": {
     "type": "git",

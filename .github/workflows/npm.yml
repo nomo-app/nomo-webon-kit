@@ -21,14 +21,6 @@ jobs:
         cache: 'npm'
     
     - name: Install Dependencies and build
-      run: |
-        # List of package directories (add more if needed)
-        packages=("demo-webon" "ethersjs-nomo-webons" "web3js-nomo-webons" "nomo-webon-kit")
-
-        for package in "${packages[@]}"; do
-          echo "Building $package"
-          cd "$package"  # Enter the package directory
-          npm install  # Install dependencies for the package
-          npm run build  # Build the package
-          cd ..  # Return to the root directory
-        done
+      run: cd web3js-nomo-webons && npm install && npm run build
+      
+        

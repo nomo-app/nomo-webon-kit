@@ -29,12 +29,14 @@ jobs:
         cd ethersjs-nomo-webons
         npm install
         npm run build
+        git diff --exit-code .
          
     - name: Install dependencies and build web3js-nomo-webons
       run: |
         cd web3js-nomo-webons
         npm install
         npm run build
+        git diff --exit-code .
         
     - name: Install dependencies and build demo-webon
       run: |

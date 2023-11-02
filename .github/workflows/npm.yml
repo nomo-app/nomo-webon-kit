@@ -21,7 +21,6 @@ jobs:
       run: cd nomo-webon-kit
 
     - name: Install Dependencies and build
-    - run: npm install
-    - run: npm run build
+      run: npm install && npm run build
       
         

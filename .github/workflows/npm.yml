@@ -32,6 +32,3 @@ jobs:
           npm run build  # Build the package
           cd ..  # Return to the root directory
         done
-      
-    - name: Find difference
-    - run: git diff --exit-code

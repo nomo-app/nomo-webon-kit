@@ -14,6 +14,7 @@ import { sendDemoTransaction as sendDemoTxWeb3Js } from "web3js-nomo-webons";
 import { testSigning } from "../../test/web3_signing_test";
 import { NomoTheme, switchNomoTheme } from "nomo-webon-kit/dist/nomo_theming";
 import { stringifyWithBigInts } from "nomo-webon-kit/dist/nomo_api";
+import { mintNFT } from "./evm/mint_nft";
 export default function Home() {
   const [dialog, setDialog] = useState<DialogContent | null>(null);
   const platformInfo = useNomoState(nomo.getPlatformInfo);
@@ -32,9 +33,9 @@ export default function Home() {
       if (!res.minVersionFulfilled) {
         alert(
           "Nomo App outdated! This WebOn requires at least Nomo version " +
-            minVersion +
-            " but you have Nomo version " +
-            res.nomoVersion
+          minVersion +
+          " but you have Nomo version " +
+          res.nomoVersion
         );
       }
     });
@@ -167,7 +168,36 @@ export default function Home() {
             with ethersjs-nomo-webons.
           </p>
         </div>
-
+        <div className={styles.card}>
+          <h2
+            onClick={async () => {
+              try {
+                const faucetNeeded = await openFaucetIfNeeded();
+                if (faucetNeeded) {
+                  return;
+                }
+                const res = await mintNFT();
+                const resJson = stringifyWithBigInts(res);
+                openDialog({
+                  title: "ethersjs-contract submitted to the ZENIQ Smartchain!",
+                  content: resJson,
+                });
+              } catch (e) {
+                console.error(e);
+                openDialog({
+                  title: "ethersjs-contract-demo failed",
+                  content:
+                    e instanceof Error ? e.toString() : stringifyWithBigInts(e),
+                });
+              }
+            }}
+          >
+            Mint Nft with ethers.js<span>-&gt;</span>
+          </h2>
+          <p>
+            Mint an NFT on the ZENIQ Smartchain, signed by the Nomo app with ethersjs-nomo-webons.
+          </p>
+        </div>
         <div className={styles.card}>
           <h2
             onClick={() => {
@@ -400,10 +430,10 @@ export default function Home() {
                 oldTheme === "LIGHT"
                   ? "DARK"
                   : oldTheme == "DARK"
-                  ? "TUPAN"
-                  : oldTheme == "TUPAN"
-                  ? "AVINOC"
-                  : "LIGHT";
+                    ? "TUPAN"
+                    : oldTheme == "TUPAN"
+                      ? "AVINOC"
+                      : "LIGHT";
               await switchNomoTheme({ theme: newTheme });
               await injectNomoCSSVariables(); // refresh css variables after switching theme
             }}
@@ -425,7 +455,7 @@ export default function Home() {
                   title: "failed to install WebOn",
                   content: JSON.stringify(e),
                 });
-              }) ;
+              });
             }}
           >
             Install WebOn<span>-&gt;</span>

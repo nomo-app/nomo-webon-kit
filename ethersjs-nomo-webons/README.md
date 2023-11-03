@@ -28,6 +28,7 @@ import { sendDemoTransaction } from "ethersjs-nomo-webons"; // an example on how
 ```
 
 Please consult the demo-webon and to the ethers.js documentation for more details.
+See https://github.com/nomo-app/nomo-webon-kit/tree/main/demo-webon/src/app/evm for an example on how to invoke a smart contract with this package.
 
 ## ethers.js-V5/V6
 

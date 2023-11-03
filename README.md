@@ -102,6 +102,8 @@ Take a look at the demo-WebOn to see how the package can be used.
 
 If you want to port a decentralized application, then we recommend the package https://www.npmjs.com/package/ethersjs-nomo-webons.
 This package has a ready-made provider that utilizes the Nomo App for signing transactions.
+There also exists the package web3js-nomo-webons.
+While the ethersjs-package is battle-tested in production, the web3js-package is rather an experimental prototype.
 
 # Debugging of WebOns
 

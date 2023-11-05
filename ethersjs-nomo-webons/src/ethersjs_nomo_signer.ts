@@ -1,4 +1,16 @@
-import { BlockTag, HDNodeWallet, Provider, Signer, Transaction, TransactionLike, TransactionRequest, TransactionResponse, TypedDataDomain, TypedDataField, Wallet } from "ethers";
+import {
+  BlockTag,
+  HDNodeWallet,
+  Provider,
+  Signer,
+  Transaction,
+  TransactionLike,
+  TransactionRequest,
+  TransactionResponse,
+  TypedDataDomain,
+  TypedDataField,
+  Wallet,
+} from "ethers";
 import { isFallbackModeActive } from "nomo-webon-kit";
 import { nomo } from "nomo-webon-kit";
 
@@ -13,7 +25,6 @@ function appendSignatureToTx(
     ? sigHexFromNative
     : "0x" + sigHexFromNative;
 
-
   unsignedTx.signature = sigHex;
 
   console.log("unsignedTx", unsignedTx);
@@ -25,11 +36,10 @@ let fallbackDevSigner: HDNodeWallet | null = null;
 
 function createFallbackDevSigner(): HDNodeWallet {
   if (!fallbackDevSigner) {
-    console.error(
+    console.warn(
       "fallback mode: try to read NEXT_PUBLIC_FALLBACK_MNEMONIC from environment"
     );
     const mnemonic = process.env.NEXT_PUBLIC_FALLBACK_MNEMONIC;
-
 
     if (!mnemonic || !mnemonic.length) {
       throw Error(
@@ -42,23 +52,16 @@ function createFallbackDevSigner(): HDNodeWallet {
   return fallbackDevSigner;
 }
 
-function signTxDevWallet(
-  txRequest: TransactionRequest
-): Promise<string> {
+function signTxDevWallet(txRequest: TransactionRequest): Promise<string> {
   const devSigner = createFallbackDevSigner();
   return devSigner.signTransaction(txRequest);
 }
 
-let cachedAddress: string | null = null;
-
-
 export class EthersjsNomoSigner implements Signer {
-
   constructor(provider: Provider) {
     this.provider = provider;
   }
   provider: Provider;
-
 
   connect(_provider: Provider): Signer {
     return this;
@@ -68,11 +71,12 @@ export class EthersjsNomoSigner implements Signer {
     return this.provider.getTransactionCount(this.getAddress(), blockTag);
   }
 
-
   populateCall(tx: TransactionRequest): Promise<TransactionLike<string>> {
     throw new Error("Method not implemented.");
   }
-  populateTransaction(tx: TransactionRequest): Promise<TransactionLike<string>> {
+  populateTransaction(
+    tx: TransactionRequest
+  ): Promise<TransactionLike<string>> {
     const allowedTransactionKeys: { [key: string]: boolean } = {
       chainId: true,
       data: true,
@@ -100,39 +104,31 @@ export class EthersjsNomoSigner implements Signer {
     throw new Error("Method not implemented.");
   }
   sendTransaction(tx: TransactionRequest): Promise<TransactionResponse> {
+    console.log("txToSend", tx);
 
-    console.log("txToSend", tx)
-
-    const txResponse = this.signTransaction(tx).then((res) => {
-      return this.provider.broadcastTransaction(res);
-    }).catch((err) => {
-      throw err
-    });
+    const txResponse = this.signTransaction(tx)
+      .then((res) => {
+        return this.provider.broadcastTransaction(res);
+      })
+      .catch((err) => {
+        throw err;
+      });
 
     return txResponse;
   }
-  signTypedData(domain: TypedDataDomain, types: Record<string, TypedDataField[]>, value: Record<string, any>): Promise<string> {
+  signTypedData(
+    domain: TypedDataDomain,
+    types: Record<string, TypedDataField[]>,
+    value: Record<string, any>
+  ): Promise<string> {
     throw new Error("Method not implemented.");
   }
-
 
   getAddress(): Promise<string> {
     if (isFallbackModeActive()) {
       return createFallbackDevSigner().getAddress();
     }
-    if (cachedAddress) {
-      return Promise.resolve(cachedAddress);
-    }
-    return new Promise((resolve, reject) => {
-      nomo.getWalletAddresses()
-        .then((res) => {
-          cachedAddress = res.walletAddresses["ETH"];
-          resolve(cachedAddress);
-        })
-        .catch((err: any) => {
-          reject(err);
-        });
-    });
+    return nomo.getEvmAddress();
   }
 
   signMessage(_message: any | string): Promise<string> {
@@ -140,15 +136,11 @@ export class EthersjsNomoSigner implements Signer {
   }
 
   async signTransaction(txRequest: TransactionRequest): Promise<string> {
-
     console.log("isFallbackModeActive", isFallbackModeActive());
 
     if (isFallbackModeActive()) {
-
       return signTxDevWallet(txRequest);
     }
-
-
 
     console.log("unsignedTx", txRequest);
     const unsignedTx = await this.populateTransaction(txRequest);

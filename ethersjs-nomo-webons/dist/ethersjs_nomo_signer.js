@@ -1,4 +1,4 @@
-import { Transaction, Wallet } from "ethers";
+import { Transaction, Wallet, } from "ethers";
 import { isFallbackModeActive } from "nomo-webon-kit";
 import { nomo } from "nomo-webon-kit";
 function appendSignatureToTx(unsignedTx, sigHexFromNative) {
@@ -15,7 +15,7 @@ function appendSignatureToTx(unsignedTx, sigHexFromNative) {
 let fallbackDevSigner = null;
 function createFallbackDevSigner() {
     if (!fallbackDevSigner) {
-        console.error("fallback mode: try to read NEXT_PUBLIC_FALLBACK_MNEMONIC from environment");
+        console.warn("fallback mode: try to read NEXT_PUBLIC_FALLBACK_MNEMONIC from environment");
         const mnemonic = process.env.NEXT_PUBLIC_FALLBACK_MNEMONIC;
         if (!mnemonic || !mnemonic.length) {
             throw Error("NEXT_PUBLIC_FALLBACK_MNEMONIC is not defined. Create a .env.local to define it");
@@ -28,7 +28,6 @@ function signTxDevWallet(txRequest) {
     const devSigner = createFallbackDevSigner();
     return devSigner.signTransaction(txRequest);
 }
-let cachedAddress = null;
 export class EthersjsNomoSigner {
     constructor(provider) {
         this.provider = provider;
@@ -70,9 +69,11 @@ export class EthersjsNomoSigner {
     }
     sendTransaction(tx) {
         console.log("txToSend", tx);
-        const txResponse = this.signTransaction(tx).then((res) => {
+        const txResponse = this.signTransaction(tx)
+            .then((res) => {
             return this.provider.broadcastTransaction(res);
-        }).catch((err) => {
+        })
+            .catch((err) => {
             throw err;
         });
         return txResponse;
@@ -84,19 +85,7 @@ export class EthersjsNomoSigner {
         if (isFallbackModeActive()) {
             return createFallbackDevSigner().getAddress();
         }
-        if (cachedAddress) {
-            return Promise.resolve(cachedAddress);
-        }
-        return new Promise((resolve, reject) => {
-            nomo.getWalletAddresses()
-                .then((res) => {
-                cachedAddress = res.walletAddresses["ETH"];
-                resolve(cachedAddress);
-            })
-                .catch((err) => {
-                reject(err);
-            });
-        });
+        return nomo.getEvmAddress();
     }
     signMessage(_message) {
         return Promise.reject("signMessage not implemented");

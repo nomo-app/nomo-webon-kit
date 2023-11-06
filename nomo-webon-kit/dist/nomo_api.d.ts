@@ -419,6 +419,15 @@ export interface NomoManifest {
      * See https://semver.org/ for details.
      */
     webon_version: string;
+    /**
+     * If true, then the WebOn could be displayed in both card-mode and fullscreen-mode.
+     * If false, then the WebOn will only be displayed in fullscreen-mode.
+     */
+    card_mode?: boolean;
+    /**
+     * If defined, then the WebOn can decide whether a navigation bar should be shown or not.
+     */
+    show_navbar?: boolean;
 }
 /**
  * Gets all manifests of the installed WebOns, including information like name/id/version.

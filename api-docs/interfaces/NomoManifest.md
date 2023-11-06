@@ -6,15 +6,30 @@
 
 ### Properties
 
+- [card\_mode](NomoManifest.md#card_mode)
 - [min\_nomo\_version](NomoManifest.md#min_nomo_version)
 - [nomo\_manifest\_version](NomoManifest.md#nomo_manifest_version)
 - [permissions](NomoManifest.md#permissions)
+- [show\_navbar](NomoManifest.md#show_navbar)
 - [webon\_id](NomoManifest.md#webon_id)
 - [webon\_name](NomoManifest.md#webon_name)
 - [webon\_url](NomoManifest.md#webon_url)
 - [webon\_version](NomoManifest.md#webon_version)
 
 ## Properties
+
+### card\_mode
+
+• `Optional` **card\_mode**: `boolean`
+
+If true, then the WebOn could be displayed in both card-mode and fullscreen-mode.
+If false, then the WebOn will only be displayed in fullscreen-mode.
+
+#### Defined in
+
+[nomo_api.ts:708](https://github.com/nomo-app/nomo-webon-kit/blob/f590a1b/nomo-webon-kit/src/nomo_api.ts#L708)
+
+___
 
 ### min\_nomo\_version
 
@@ -24,7 +39,7 @@ If min_nomo_version is set, then outdated versions of the Nomo App will refuse t
 
 #### Defined in
 
-[nomo_api.ts:676](https://github.com/nomo-app/nomo-webon-kit/blob/927f8ff/nomo-webon-kit/src/nomo_api.ts#L676)
+[nomo_api.ts:676](https://github.com/nomo-app/nomo-webon-kit/blob/f590a1b/nomo-webon-kit/src/nomo_api.ts#L676)
 
 ___
 
@@ -36,7 +51,7 @@ nomo_manifest_version should be 1.1.0.
 
 #### Defined in
 
-[nomo_api.ts:680](https://github.com/nomo-app/nomo-webon-kit/blob/927f8ff/nomo-webon-kit/src/nomo_api.ts#L680)
+[nomo_api.ts:680](https://github.com/nomo-app/nomo-webon-kit/blob/f590a1b/nomo-webon-kit/src/nomo_api.ts#L680)
 
 ___
 
@@ -48,7 +63,19 @@ A list of permissions for security-critical features.
 
 #### Defined in
 
-[nomo_api.ts:684](https://github.com/nomo-app/nomo-webon-kit/blob/927f8ff/nomo-webon-kit/src/nomo_api.ts#L684)
+[nomo_api.ts:684](https://github.com/nomo-app/nomo-webon-kit/blob/f590a1b/nomo-webon-kit/src/nomo_api.ts#L684)
+
+___
+
+### show\_navbar
+
+• `Optional` **show\_navbar**: `boolean`
+
+If defined, then the WebOn can decide whether a navigation bar should be shown or not.
+
+#### Defined in
+
+[nomo_api.ts:712](https://github.com/nomo-app/nomo-webon-kit/blob/f590a1b/nomo-webon-kit/src/nomo_api.ts#L712)
 
 ___
 
@@ -61,7 +88,7 @@ See https://en.wikipedia.org/wiki/Reverse_domain_name_notation for more details 
 
 #### Defined in
 
-[nomo_api.ts:689](https://github.com/nomo-app/nomo-webon-kit/blob/927f8ff/nomo-webon-kit/src/nomo_api.ts#L689)
+[nomo_api.ts:689](https://github.com/nomo-app/nomo-webon-kit/blob/f590a1b/nomo-webon-kit/src/nomo_api.ts#L689)
 
 ___
 
@@ -73,7 +100,7 @@ webon_name is the user-visible name of the WebOn.
 
 #### Defined in
 
-[nomo_api.ts:693](https://github.com/nomo-app/nomo-webon-kit/blob/927f8ff/nomo-webon-kit/src/nomo_api.ts#L693)
+[nomo_api.ts:693](https://github.com/nomo-app/nomo-webon-kit/blob/f590a1b/nomo-webon-kit/src/nomo_api.ts#L693)
 
 ___
 
@@ -86,7 +113,7 @@ Typically, webon_url gets extracted out of a deeplink that is supplied to the No
 
 #### Defined in
 
-[nomo_api.ts:698](https://github.com/nomo-app/nomo-webon-kit/blob/927f8ff/nomo-webon-kit/src/nomo_api.ts#L698)
+[nomo_api.ts:698](https://github.com/nomo-app/nomo-webon-kit/blob/f590a1b/nomo-webon-kit/src/nomo_api.ts#L698)
 
 ___
 
@@ -99,4 +126,4 @@ See https://semver.org/ for details.
 
 #### Defined in
 
-[nomo_api.ts:703](https://github.com/nomo-app/nomo-webon-kit/blob/927f8ff/nomo-webon-kit/src/nomo_api.ts#L703)
+[nomo_api.ts:703](https://github.com/nomo-app/nomo-webon-kit/blob/f590a1b/nomo-webon-kit/src/nomo_api.ts#L703)

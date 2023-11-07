@@ -156,6 +156,11 @@ You can copy-paste this example, but at a minimum you will need to change the fo
 - `webon_id`
 - `webon_name`
 
+## Execution Modes
+
+When releasing a WebOn, it is important to understand the difference between dev mode, dev-dev mode and production mode.
+See the [advanced docs](https://github.com/nomo-app/nomo-webon-kit/tree/main/advanced-docs) to prepare a WebOn for production.
+
 ## Security Restrictions
 
 For regular users, the Nomo App only accepts WebOns that are hosted at the domain `*.nomo.app`.

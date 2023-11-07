@@ -2,6 +2,23 @@ import { invokeNomoFunction, isFallbackModeActive } from "./dart_interface";
 import { nomoAuthFetch } from "./nomo_auth";
 import { compareSemanticVersions } from "./util";
 /**
+ * Gets details about the execution environment of the WebOn.
+ * See the advanced docs for more details about execution modes: https://github.com/nomo-app/nomo-webon-kit/tree/main/advanced-docs
+ *
+ * Since Nomo App 0.3.4.
+ */
+export async function nomoGetExecutionMode() {
+    if (isFallbackModeActive()) {
+        return {
+            executionMode: "FALLBACK",
+            hostingMode: null,
+            webView: "not_in_nomo_app",
+            cardMode: null,
+        };
+    }
+    return await invokeNomoFunction("nomoGetExecutionMode", null);
+}
+/**
  * nomoLocalStorage provides a mechanism for sharing data between WebOns.
  * If a webon_id is passed to nomoLocalStorage.getItem, then it tries to read data from another WebOn with the given webon_id.
  * nomoLocalStorage can also be used as an alternative to the regular localStorage.
@@ -34,6 +51,7 @@ export const nomoLocalStorage = {
  * The nomo-object can be used with only one import and supports the auto-completion of IDEs.
  */
 export const nomo = {
+    getExecutionMode: nomoGetExecutionMode,
     signEvmTransaction: nomoSignEvmTransaction,
     signEvmMessage: nomoSignEvmMessage,
     getPlatformInfo: nomoGetPlatformInfo,

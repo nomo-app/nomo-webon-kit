@@ -13,6 +13,33 @@ export type Network =
   | "litecoin"
   | "bitcoinCash";
 
+export type NomoExecutionMode = "PRODUCTION" | "DEV" | "DEV_DEV" | "FALLBACK";
+export type NomoHostingMode = "NOMO_INTEGRATED_HOSTING" | "EXTERNAL_HOSTING";
+export type NomoWebView = "webview_flutter" | "webview_cef" | "not_in_nomo_app";
+
+/**
+ * Gets details about the execution environment of the WebOn.
+ * See the advanced docs for more details about execution modes: https://github.com/nomo-app/nomo-webon-kit/tree/main/advanced-docs
+ *
+ * Since Nomo App 0.3.4.
+ */
+export async function nomoGetExecutionMode(): Promise<{
+  executionMode: NomoExecutionMode;
+  hostingMode: NomoHostingMode | null;
+  webView: NomoWebView;
+  cardMode: boolean | null;
+}> {
+  if (isFallbackModeActive()) {
+    return {
+      executionMode: "FALLBACK",
+      hostingMode: null,
+      webView: "not_in_nomo_app",
+      cardMode: null,
+    };
+  }
+  return await invokeNomoFunction("nomoGetExecutionMode", null);
+}
+
 /**
  * nomoLocalStorage provides a mechanism for sharing data between WebOns.
  * If a webon_id is passed to nomoLocalStorage.getItem, then it tries to read data from another WebOn with the given webon_id.
@@ -50,6 +77,7 @@ export const nomoLocalStorage = {
  * The nomo-object can be used with only one import and supports the auto-completion of IDEs.
  */
 export const nomo = {
+  getExecutionMode: nomoGetExecutionMode,
   signEvmTransaction: nomoSignEvmTransaction,
   signEvmMessage: nomoSignEvmMessage,
   getPlatformInfo: nomoGetPlatformInfo,
@@ -500,7 +528,7 @@ export async function nomoMnemonicBackupExisted(): Promise<{
  * Since Nomo App 0.3.4.
  */
 export async function nomoRegisterOnWebOnVisible(
-  callback: (args: { fullscreenMode: boolean }) => void
+  callback: (args: { cardMode: boolean }) => void
 ): Promise<void> {
   window.onWebOnVisible = callback;
   if (isFallbackModeActive()) {

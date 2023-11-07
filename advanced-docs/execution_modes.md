@@ -16,7 +16,7 @@ Finally, WebOns can decide if they want to support the _card mode_.
 
 This document aims to clarify all the modes and support WebOn developers through their journey.
 
-## Production mode
+## Production Mode
 
 The primary "feature“ of the production mode are its security restrictions.
 In production mode, the Nomo App only accepts https-deeplinks that are in a set of _trusted domains_.
@@ -25,14 +25,14 @@ By putting a WebOn into the WebOn-store, the WebOn will automatically be on a tr
 
 Currently, the trusted domains are `nomo.app` as well as subdomains of `nomo.app`.
 
-## Dev mode
+## Dev Mode
 
 The Dev mode is almost the same as the production mode, except that it does not have any security restrictions.
 This allows for rapid development with live-reload in a local network.
 
 To enable the Dev mode, you need to visit the DevDev mode only one time. Afterwards, you can proceed with the regular flows of supplying deeplinks.
 
-## DevDev mode
+## DevDev Mode
 
 The DevDev mode allows to run code even without installing a WebOn.
 As such, the DevDev mode is the only mode that does not require a `nomo_manifest.json`.
@@ -42,7 +42,7 @@ In addition, the DevDev mode provides additional features like reload-buttons, b
 > :warning: Be aware that the DevDev-features are not available in production!
 > For example, if your WebOn needs a back-button, then you need to implement the back-button by yourself.
 
-## Fallback mode
+## Fallback Mode
 
 Our recommended way of developing WebOns is to connect Chrome DevTools to the Nomo App as explained in the README.
 Nevertheless, there are some developers who prefer to use a regular browser instead of the Nomo App.
@@ -55,7 +55,7 @@ Many nomo-functions in the fallback mode will simply return a rejected promise.
 
 The hosting mode determines the primary server for serving assets to a WebOn.
 
-## Nomo integrated hosting
+## Nomo Integrated Hosting
 
 For integrated hosting, the Nomo App launches a localhost-server whenever a WebOn gets launched.
 The localhost-server remains alive as long as the Nomo App is running.
@@ -70,7 +70,7 @@ Integrated hosting has the following advantages:
 For integrated hosting, the Nomo App requires to package WebOns into a tar.gz-file.
 See https://github.com/nomo-app/nomo-webon-kit/blob/main/advanced-docs/packaging.md for details about packaging a tar.gz-file.
 
-## External hosting
+## External Hosting
 
 WebOns with external hosting work similar to a regular website.
 

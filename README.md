@@ -19,7 +19,7 @@ In order to use this package, we expect that WebOns are written in JavaScript or
 
 # Quick Usage Guide
 
-Before going into more details, we explain a few quick steps for getting the demo-WebOn up and running together with the Nomo App.
+Before going into more details, we explain a few quick steps for getting a WebOn up and running together with the Nomo App.
 
 **Prerequisites:** We assume a working knowledge of npm and JavaScript.
 
@@ -28,18 +28,17 @@ Before going into more details, we explain a few quick steps for getting the dem
 Goto <https://nomo.app/>.  
 Download the Nomo App and create a wallet with it.
 
-## Step 2: Launch the demo-WebOn locally
+## Step 2: Launch a WebOn locally
 
-> You can skip step 2 and step 4 if you use the following WebOn-deeplink: <https://nomo.app/webon/demowebon.nomo.app>
+> You can skip step 2 and step 4 if you use the following deeplink: <https://nomo.app/webon/demowebon.nomo.app>
 
-Clone this repo, then launch the demo-WebOn with:
+Clone one of the [Opensource WebOns](https://github.com/nomo-app/nomo-webon-kit/tree/main/advanced-docs/opensource_webons.md) or alternatively use your own frontend template.
+Install npm dependencies and launch your WebOn on localhost.
 
-`cd ethersjs-nomo-webons && npm i`  
-`cd web3js-nomo-webons && npm i`  
-`cd demo-webon && npm i`  
+`npm i`  
 `npm run dev`
 
-Then the demo-WebOn should run at <http://localhost:3000/>.
+Then your WebOn should run at <http://localhost:3000/> or similar.
 
 ## Step 3: Enable the Nomo Dev Mode
 
@@ -58,7 +57,7 @@ For development, we recommend two different types of deeplinks:
 
 See the options below for instructions on how to construct a deeplink.
 To enter your deeplink into the Nomo App, we recommend using a QRCode-generator like https://goqr.me/.
-After scanning your deeplink, the Nomo App is ready to launch the demo-WebOn! 🚀🚀
+After scanning your deeplink, the Nomo App is ready to launch your WebOn! 🚀🚀
 
 You are then free to make changes or experiment with the features.
 
@@ -67,7 +66,7 @@ You are then free to make changes or experiment with the features.
 > If you are using a Desktop-version of the Nomo App, then you may use a simplified deeplink like <http://nomo.app/webon/localhost:3000>.
 
 For this type of deeplink, your phone needs to be in the same local network as your dev-machine.
-For example, let’s assume your dev-machine has the IP address `172.16.251.205` and the demo-WebOn is running at `http://localhost:3000`.
+For example, let’s assume your dev-machine has the IP address `172.16.251.205` and your WebOn is running at `http://localhost:3000`.
 Then you can construct the following deeplink by inserting the prefix `nomo.app/webon/`:
 
 <http://nomo.app/webon/172.16.251.205:3000>
@@ -79,8 +78,8 @@ If you are unable to use local-Wifi-deeplinks, then you can use ngrok-deeplinks 
 By using `ngrok`, the Nomo App can access your dev-machine regardless of which network your phone is connected to.
 First, download `ngrok` from <https://ngrok.com/> and create an ngrok-account.
 
-Further, we assume that the demo-WebOn is running locally on port 3000.
-Run the following command to expose the demo-WebOn to the Internet:
+Further, we assume that your WebOn is running locally on port 3000.
+Run the following command to expose your WebOn to the Internet:
 
 `ngrok http 3000`
 
@@ -96,7 +95,7 @@ With this, you can construct the following deeplink by inserting the prefix `nom
 
 You can add this package to your project with: `npm install nomo-webon-kit`.
 
-Take a look at the demo-WebOn to see how the package can be used.
+Take a look at the [Demo WebOn](https://github.com/nomo-app/nomo-webon-kit/tree/main/demo-webon) to see how the package can be used.
 
 ## Interacting with EVM blockchains
 

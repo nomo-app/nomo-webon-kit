@@ -34,7 +34,7 @@ To enable the Dev mode, you need to visit the DevDev mode only one time. Afterwa
 
 ## DevDev mode
 
-The DevDev mode allows to run code without even installing a WebOn.
+The DevDev mode allows to run code even without installing a WebOn.
 As such, the DevDev mode is the only mode that does not require a `nomo_manifest.json`.
 
 In addition, the DevDev mode provides additional features like reload-buttons, back-buttons and a button to clear the cache.

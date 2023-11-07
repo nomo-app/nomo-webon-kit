@@ -18,8 +18,8 @@ import { openFaucetIfNeeded } from "./evm/evm_utils";
 export default function Home() {
   const [dialog, setDialog] = useState<DialogContent | null>(null);
   const platformInfo = useNomoState(nomo.getPlatformInfo);
-  const walletAddresses = useNomoState(nomo.getWalletAddresses);
-  const messengerAddress = useNomoState(nomo.getMessengerAddress);
+  const evmAddress = useNomoState(nomo.getEvmAddress);
+  const executionMode = useNomoState(nomo.getExecutionMode);
   const deviceName = useNomoState(nomo.getDeviceName);
   const [pictureFromCamera, setPictureFromCamera] = useState<string | null>(
     null
@@ -94,12 +94,11 @@ export default function Home() {
         </div>
         <div style={{ height: "10px" }} />
         <div style={{ width: "100%" }}>
-          <b>Wallet addresses:</b> {JSON.stringify(walletAddresses)}
+          <b>WebOn mode:</b> {JSON.stringify(executionMode)}
         </div>
         <div style={{ height: "10px" }} />
         <div style={{ width: "100%" }}>
-          <b>Chat messenger address:</b>{" "}
-          {JSON.stringify(messengerAddress).substring(0, 70)}..
+          <b>EVM address:</b> {evmAddress}
         </div>
         <div style={{ height: "10px" }} />
         <div style={{ width: "100%" }}>

@@ -6,6 +6,7 @@
     "deploy_legacy": "rm -f .env.local && ./scripts/deploy_legacy.sh",
     "deploy_zip": "./scripts/deploy_zip.sh",
     "deploy_tar": "./scripts/deploy_tar.sh",
+    "deploy_manifest": "./scripts/deploy_manifest.sh",
     "build_all": "npm run build && npm run build_tar && npm run build_zip",
     "build": "next build && next export",
     "build_tar": "rm -f $npm_package_name.tar.gz && COPYFILE_DISABLE=1 tar -cv --gzip --file=$npm_package_name.tar.gz out",

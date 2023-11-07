@@ -9,7 +9,7 @@ import { getCurrentNomoTheme, injectNomoCSSVariables } from "nomo-webon-kit";
 import styles from "./page.module.css";
 import "./nomo.css";
 import { sendDemoTransaction as sendDemoTxEthers } from "ethersjs-nomo-webons";
-import { sendDemoTransaction as sendDemoTxWeb3Js } from "web3js-nomo-webons";
+// import { sendDemoTransaction as sendDemoTxWeb3Js } from "web3js-nomo-webons";
 import { testSigning } from "../../test/web3_signing_test";
 import { NomoTheme, switchNomoTheme } from "nomo-webon-kit/dist/nomo_theming";
 import { stringifyWithBigInts } from "nomo-webon-kit/dist/nomo_api";
@@ -113,37 +113,6 @@ export default function Home() {
                 if (faucetNeeded) {
                   return;
                 }
-                const res = await sendDemoTxWeb3Js();
-                const resJson = stringifyWithBigInts(res);
-                openDialog({
-                  title: "web3js-TX submitted to the ZENIQ Smartchain!",
-                  content: resJson,
-                });
-              } catch (e) {
-                console.error(e);
-                openDialog({
-                  title: "web3js-demo failed",
-                  content:
-                    e instanceof Error ? e.toString() : stringifyWithBigInts(e),
-                });
-              }
-            }}
-          >
-            Sign EVM transaction with web3.js<span>-&gt;</span>
-          </h2>
-          <p>
-            Send a transaction to the ZENIQ Smartchain, signed by the Nomo app
-            with web3js-nomo-webons.
-          </p>
-        </div>
-        <div className={styles.card}>
-          <h2
-            onClick={async () => {
-              try {
-                const faucetNeeded = await openFaucetIfNeeded();
-                if (faucetNeeded) {
-                  return;
-                }
                 const res = await sendDemoTxEthers();
                 const resJson = stringifyWithBigInts(res);
                 openDialog({
@@ -160,7 +129,7 @@ export default function Home() {
               }
             }}
           >
-            Sign EVM transaction with ethers.js<span>-&gt;</span>
+            Sign EVM transaction<span>-&gt;</span>
           </h2>
           <p>
             Send a transaction to the ZENIQ Smartchain, signed by the Nomo app
@@ -191,7 +160,7 @@ export default function Home() {
               }
             }}
           >
-            Mint Nft with ethers.js<span>-&gt;</span>
+            Mint NFT<span>-&gt;</span>
           </h2>
           <p>
             Mint an NFT on the ZENIQ Smartchain, signed by the Nomo app with

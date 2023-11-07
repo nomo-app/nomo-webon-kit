@@ -2,6 +2,8 @@
 set -x
 set -e
 
+# Deploy url: https://nomo.app/webons/app.nomo.demowebon/manifest
+
 if [[ -n "$SSH_TARGET" ]]; then
     echo "Deploying to SSH_TARGET: $SSH_TARGET"
 else
@@ -10,7 +12,7 @@ else
 fi
 
 RELEASE_FILE=public/nomo_manifest.json
-DEPLOY_PATH="/var/www/html/webon/"
+DEPLOY_PATH="/var/www/html/webons/"
 
 # Get webon_id value from the JSON file
 webon_id=$(jq -r '.webon_id' "$RELEASE_FILE")

@@ -33,9 +33,9 @@ export default function Home() {
       if (!res.minVersionFulfilled) {
         alert(
           "Nomo App outdated! This WebOn requires at least Nomo version " +
-            minVersion +
-            " but you have Nomo version " +
-            res.nomoVersion
+          minVersion +
+          " but you have Nomo version " +
+          res.nomoVersion
         );
       }
     });
@@ -160,7 +160,7 @@ export default function Home() {
               }
             }}
           >
-            Mint NFT<span>-&gt;</span>
+            Mint NomoDev Token<span>-&gt;</span>
           </h2>
           <p>
             Mint an NFT on the ZENIQ Smartchain, signed by the Nomo app with
@@ -399,10 +399,10 @@ export default function Home() {
                 oldTheme === "LIGHT"
                   ? "DARK"
                   : oldTheme == "DARK"
-                  ? "TUPAN"
-                  : oldTheme == "TUPAN"
-                  ? "AVINOC"
-                  : "LIGHT";
+                    ? "TUPAN"
+                    : oldTheme == "TUPAN"
+                      ? "AVINOC"
+                      : "LIGHT";
               await switchNomoTheme({ theme: newTheme });
               await injectNomoCSSVariables(); // refresh css variables after switching theme
             }}

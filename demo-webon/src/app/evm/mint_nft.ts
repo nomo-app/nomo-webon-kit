@@ -1,6 +1,6 @@
 import { ethers, TransactionResponse } from "ethers";
 import { zscSigner, zscProvider } from "ethersjs-nomo-webons";
-import Nft from "../abi/NFT.json";
+import NomoDev from "../abi/NomoDev.json";
 import {
   extractContractAddress,
   throwIfFundsAreInsufficient,
@@ -17,12 +17,19 @@ export async function mintNFT(): Promise<TransactionResponse | any> {
    */
   await throwIfFundsAreInsufficient();
 
-  const contractAddress = await extractContractAddress({ contractJson: Nft });
-  const contract = new ethers.Contract(
-    contractAddress,
-    Nft.abi,
-    zscProvider as any
-  );
+
+  // const contractAddress = await extractContractAddress({ contractJson: NomoDev });
+  // const contract = new ethers.Contract(
+  //   contractAddress,
+  //   NomoDev.abi,
+  //   zscProvider as any
+  // );
+
+
+  const contractAddress = "0x6D3bE2Fca848393eE83b2A1d65b312889cacF5e6"; // The contract address of the NomoDev contract. Currently hardcoded.
+  const contract = new ethers.Contract(contractAddress, NomoDev.abi, zscProvider as any);
+
+
 
   const data = "0xf34344"; // data could be a hash of an image or something
   const ownAddress = await zscSigner.getAddress(); // we are minting to our own wallet address

@@ -42,4 +42,4 @@ The tar.gz file should contain an "out" directory, which represents the output o
 
 ## Icon
 
-To ensure seamless integration, it is imperative to place your AppIcon within the public directory, adhering to the specified file name: "icon.svg". Please note that our system exclusively supports SVG (Scalable Vector Graphics) image files. The anticipated pathway for the Icon should be "out/icon.svg".
+To ensure seamless integration, it is imperative to place your AppIcon within the "out" directory, adhering to the specified file name: "icon.svg". Please note that our system exclusively supports SVG (Scalable Vector Graphics) image files. The anticipated pathway for the Icon should be "out/icon.svg".

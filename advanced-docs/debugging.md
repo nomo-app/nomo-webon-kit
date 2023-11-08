@@ -35,4 +35,3 @@ On Desktop, the DevDev mode provides integrated DevTools that look almost the sa
 ## Debugging via breakpoints
 
 When running a local dev server, your IDE can be configured to enable breakpoints (e.g. Visual Studio Code).
-Again, you can use the Nomo dev mode for connecting to your local dev server.

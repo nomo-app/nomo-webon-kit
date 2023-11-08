@@ -163,7 +163,7 @@ export default function Home() {
             Mint NomoDev Token<span>-&gt;</span>
           </h2>
           <p>
-            Mint an NFT on the ZENIQ Smartchain, signed by the Nomo app with
+            Mint NomoDev Token on the ZENIQ Smartchain, signed by the Nomo app with
             ethersjs-nomo-webons.
           </p>
         </div>

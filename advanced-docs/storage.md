@@ -1,7 +1,7 @@
 # WebOn Storage
 
 WebOns will be stored locally on the device upon the User's consent for installation. 
-Prior to installation, the Manifest will be retrieved in a unified stream to acquire essential details such as the app_id, URL, version, and other relevant information.
+Prior to installation, the Manifest will be retrieved in a tar.gz-stream to acquire essential details such as the webon_id, webon_version, and other relevant information.
 
 Additionally, a local server will be initiated using different ports for each WebOn, ensuring a seamless and pleasant user experience while interacting with the WebOns.
 

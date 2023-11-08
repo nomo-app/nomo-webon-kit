@@ -84,6 +84,7 @@ export const nomo = {
     openFAQPage: nomoOpenFAQPage,
     getInstalledWebOns: nomoGetInstalledWebOns,
     installWebOn: nomoInstallWebOn,
+    uninstallWebOn: nomoUninstallWebOn,
     launchSmartchainFaucet: nomoLaunchSmartchainFaucet,
     hasMinimumNomoVersion: hasMinimumNomoVersion,
 };
@@ -505,6 +506,16 @@ export async function nomoGetInstalledWebOns() {
  */
 export async function nomoInstallWebOn(args) {
     return await invokeNomoFunction("nomoInstallWebOn", args);
+}
+/**
+ * The reverse operation of nomoInstallWebOn.
+ * Throws an error if the WebOn cannot be found.
+ *
+ * Needs nomo.permission.INSTALL_WEBON.
+ * Since Nomo App 0.3.4.
+ */
+export async function nomoUninstallWebOn(args) {
+    return await invokeNomoFunction("nomoUninstallWebOn", args);
 }
 /**
  * Launches a free faucet that can be used for paying transaction fees.

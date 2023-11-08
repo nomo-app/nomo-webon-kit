@@ -10,7 +10,7 @@ The following steps are recommended to connect Chrome DevTools to an Android dev
 - Install Android Studio
 - Connect your phone via USB
 - Launch Android Studio to see if the connected phone can be found
-- Use the Nomo App to launch a WebOn as described above (by using a deeplink)
+- Launch your WebOn by using a deeplink
 - Open `chrome://inspect/#devices` within Chrome for initiating a remote-debugging session with the WebOn
 
 See <https://developer.chrome.com/docs/devtools/remote-debugging/webviews/> for more details.

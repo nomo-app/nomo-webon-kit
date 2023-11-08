@@ -36,10 +36,10 @@ Every tar.gz-archive must include a `nomo_manifest.json`.
 See https://github.com/nomo-app/nomo-webon-kit/blob/main/demo-webon/public/nomo_manifest.json for an example manifest.
 See https://github.com/nomo-app/nomo-webon-kit/blob/main/api-docs/interfaces/NomoManifest.md for documentation about the manifest-properties.
 
-## Icon
-
-TODO
-
 ## index.html
 
-TODO
+The tar.gz file should contain an "out" directory, which represents the output of the build files. Inside this "out" directory, the index.html file should be placed at the top level. It is crucial to ensure the presence of the "out" directory, housing the essential index.html file. The anticipated file path for the index.html should be "out/index.html". This particular file serves as the primary document for your WebOns interface.
+
+## Icon
+
+To ensure seamless integration, it is imperative to place your WebOn-Icon within the "out" directory, adhering to the specified file name: "icon.svg". Please note that our system exclusively supports SVG (Scalable Vector Graphics) image files. The anticipated pathway for the Icon should be "out/icon.svg".

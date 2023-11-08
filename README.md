@@ -104,37 +104,10 @@ This package has a ready-made provider that utilizes the Nomo App for signing tr
 There also exists the package web3js-nomo-webons.
 While the ethersjs-package is battle-tested in production, the web3js-package is rather an experimental prototype.
 
-# Debugging of WebOns
+# Debugging WebOns
 
-In the following sections, we describe multiple ways for debugging WebOns.
-
-## Debugging with the Nomo dev mode
-
-The Nomo dev mode includes a console-window that facilitates debugging via the functions console.log/console.info/console.error/console.warn.
-The same console-window is also used for debugging Nomo-specific APIs.
-Moreover, the Nomo dev mode includes a few auxiliary features like refreshing the page or clearing local storage.
-
-As mentioned in previous sections, the Nomo dev mode can be enabled by clicking multiple times on the about screen icon.
-
-## Debugging via breakpoints
-
-When running a local dev server, your IDE can be configured to enable breakpoints (e.g. Visual Studio Code).
-Again, you can use the Nomo dev mode for connecting to your local dev server.
-
-## Remote debugging for Android
-
-In addition to the previously mentioned techniques, there exists the possibility of remote-debugging the web-view within the Nomo App.
-By doing remote-debugging, you can utilize the full power of Chrome DevTools within the Nomo App.
-
-The following steps are recommended to use Chrome DevTools for Android remote debugging:
-
-- Install Android Studio
-- Connect your phone via USB
-- Launch Android Studio to see if the connected phone can be found
-- Use the Nomo App to launch a WebOn as described above (by using a deeplink)
-- Open `chrome://inspect/#devices` within Chrome for initiating a remote-debugging session with the WebOn
-
-See <https://developer.chrome.com/docs/devtools/remote-debugging/webviews/> for more details.
+There are multiple ways of debugging WebOns, but our preferred way is to connect Chrome DevTools to a WebOn.
+See the [debugging docs](https://github.com/nomo-app/nomo-webon-kit/tree/main/advanced-docs/debugging.md) for more details.
 
 # Release of WebOns
 

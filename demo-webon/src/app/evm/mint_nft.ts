@@ -5,6 +5,7 @@ import {
   extractContractAddress,
   throwIfFundsAreInsufficient,
 } from "./evm_utils";
+import { nomo } from "nomo-webon-kit";
 
 /**
  * This is an example of a smart-contract-call via the EthersJS-Nomo-WebOns package.
@@ -47,5 +48,7 @@ export async function mintNFT(): Promise<TransactionResponse | any> {
     data: contract.interface.encodeFunctionData("mint", [ownAddress, data]),
   };
   const res = await zscSigner.sendTransaction(tx);
+  await nomo.addCustomToken({ contractAddress, network: "zeniqSmartChain" });
+
   return res;
 }

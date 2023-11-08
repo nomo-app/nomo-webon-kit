@@ -25,7 +25,7 @@ Consult Apple documentation for details on how to connect to an iPhone WebView.
 On Android/iOS, the DevDev mode includes a console-window for the functions console.log/console.info/console.error/console.warn.
 Moreover, the DevDev mode includes a few auxiliary features like refreshing the page or clearing local storage.
 
-As mentioned in previous sections, the DevDev mode can be enabled by clicking multiple times on the about screen icon.
+As mentioned in the README, the DevDev mode can be enabled by clicking multiple times on the about screen icon.
 
 ## DevDev Mode on Windows/Linux/macOS
 

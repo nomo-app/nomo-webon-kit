@@ -30,7 +30,6 @@ export default function Home() {
   useEffect(() => {
     const minVersion = "0.3.3";
     nomo.hasMinimumNomoVersion({ minVersion }).then((res: any) => {
-      console.log("hasMinimumNomoVersion", res);
       if (!res.minVersionFulfilled) {
         openDialog({
           title: "Nomo App outdated!",
@@ -47,13 +46,12 @@ export default function Home() {
     nomo.getDeviceHashes().then(console.log).catch(console.error);
     injectNomoCSSVariables();
     nomo.registerOnWebOnVisible((args: { cardMode: boolean }) => {
-      console.log("onWebOnVisible called", args);
+      console.log("onWebOnVisible", args);
     });
     nomo.getManifest().then(console.log).catch(console.error);
   }, []);
 
   const openDialog = (content: DialogContent) => {
-    console.log("openDialog", content); // console logs should appear in nomoNativeLog as well
     setDialog(content);
   };
 
@@ -134,7 +132,7 @@ export default function Home() {
             Sign EVM transaction<span>-&gt;</span>
           </h2>
           <p>
-            Send a transaction to the ZENIQ Smartchain, signed by the Nomo app
+            Send a transaction to the ZENIQ Smartchain, signed by the Nomo App
             with ethersjs-nomo-webons.
           </p>
         </div>
@@ -165,7 +163,7 @@ export default function Home() {
             Mint NomoDev Token<span>-&gt;</span>
           </h2>
           <p>
-            Mint NomoDev Token on the ZENIQ Smartchain, signed by the Nomo app
+            Mint NomoDev Token on the ZENIQ Smartchain, signed by the Nomo App
             with ethersjs-nomo-webons.
           </p>
         </div>
@@ -191,7 +189,7 @@ export default function Home() {
           >
             Take picture <span>-&gt;</span>
           </h2>
-          <p>Use the NOMO-app for getting a picture into the WebOn.</p>
+          <p>Use the Nomo App for getting a picture into a WebOn.</p>
         </div>
         {!!pictureFromCamera ? (
           <img
@@ -200,7 +198,7 @@ export default function Home() {
             style={{ maxWidth: "100%" }}
           ></img>
         ) : (
-          <div>Your camera image will be shown here</div>
+          <div>Your picture will be shown here</div>
         )}
 
         <div className={styles.card}>
@@ -454,9 +452,9 @@ export default function Home() {
                 });
             }}
           >
-            Unittest transaction signing <span>-&gt;</span>
+            Test transaction signing <span>-&gt;</span>
           </h2>
-          <p>Unittest for signing a transaction with the Nomo app.</p>
+          <p>A unit-test for signing a transaction with the Nomo App.</p>
         </div>
         <div
           onClick={() => {

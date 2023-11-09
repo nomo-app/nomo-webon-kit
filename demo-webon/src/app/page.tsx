@@ -28,43 +28,30 @@ export default function Home() {
     null
   );
   useEffect(() => {
-    const minVersion = "0.3.2";
-    nomo.hasMinimumNomoVersion({ minVersion }).then((res) => {
+    const minVersion = "0.3.3";
+    nomo.hasMinimumNomoVersion({ minVersion }).then((res: any) => {
       if (!res.minVersionFulfilled) {
-        alert(
-          "Nomo App outdated! This WebOn requires at least Nomo version " +
-          minVersion +
-          " but you have Nomo version " +
-          res.nomoVersion
-        );
+        openDialog({
+          title: "Nomo App outdated!",
+          content:
+            "This WebOn requires at least Nomo " +
+            minVersion +
+            " but you have Nomo " +
+            res.nomoVersion,
+        });
       }
     });
     nomo.enableMobileConsoleDebugging();
-    console.warn("test console warning");
-    console.info("test console info");
-    console.log(
-      "test console with multiple args",
-      1,
-      { object: 3 },
-      { nesting: { key: "some value" } },
-      false
-    );
     nomo.localStorage.setItem("foo", "bar");
-    nomo.localStorage.getItem("foo").then((value) => {
-      console.log("Got value from nomoLocalStorage: " + value);
-    });
     nomo.getDeviceHashes().then(console.log).catch(console.error);
     injectNomoCSSVariables();
-    nomo.registerOnWebOnVisible((args) => {
-      console.log("onWebOnVisible called", args);
+    nomo.registerOnWebOnVisible((args: { cardMode: boolean }) => {
+      console.log("onWebOnVisible", args);
     });
-    nomo.getVisibleAssets().then(console.log).catch(console.error);
-    nomo.getInstalledWebOns().then(console.log).catch(console.error);
-    //nomo.launchUrl({url: "https://google.com", launchMode: "externalApplication"});
+    nomo.getManifest().then(console.log).catch(console.error);
   }, []);
 
   const openDialog = (content: DialogContent) => {
-    console.log("openDialog", content); // console logs should appear in nomoNativeLog as well
     setDialog(content);
   };
 
@@ -108,6 +95,19 @@ export default function Home() {
         <div className={styles.card}>
           <h2
             onClick={async () => {
+              nomo.launchUrl({
+                url: "https://dev.nomo.app",
+                launchMode: "externalApplication",
+              });
+            }}
+          >
+            Developer docs<span>-&gt;</span>
+          </h2>
+          <p>Visit dev.nomo.app to learn more about the Nomo ecosystem.</p>
+        </div>
+        <div className={styles.card}>
+          <h2
+            onClick={async () => {
               try {
                 const faucetNeeded = await openFaucetIfNeeded();
                 if (faucetNeeded) {
@@ -132,7 +132,7 @@ export default function Home() {
             Sign EVM transaction<span>-&gt;</span>
           </h2>
           <p>
-            Send a transaction to the ZENIQ Smartchain, signed by the Nomo app
+            Send a transaction to the ZENIQ Smartchain, signed by the Nomo App
             with ethersjs-nomo-webons.
           </p>
         </div>
@@ -163,8 +163,8 @@ export default function Home() {
             Mint NomoDev Token<span>-&gt;</span>
           </h2>
           <p>
-            Mint NomoDev Token on the ZENIQ Smartchain, signed by the Nomo app with
-            ethersjs-nomo-webons.
+            Mint NomoDev Token on the ZENIQ Smartchain, signed by the Nomo App
+            with ethersjs-nomo-webons.
           </p>
         </div>
         <div className={styles.card}>
@@ -189,7 +189,7 @@ export default function Home() {
           >
             Take picture <span>-&gt;</span>
           </h2>
-          <p>Use the NOMO-app for getting a picture into the WebOn.</p>
+          <p>Use the Nomo App for getting a picture into a WebOn.</p>
         </div>
         {!!pictureFromCamera ? (
           <img
@@ -198,7 +198,7 @@ export default function Home() {
             style={{ maxWidth: "100%" }}
           ></img>
         ) : (
-          <div>Your camera image will be shown here</div>
+          <div>Your picture will be shown here</div>
         )}
 
         <div className={styles.card}>
@@ -399,10 +399,10 @@ export default function Home() {
                 oldTheme === "LIGHT"
                   ? "DARK"
                   : oldTheme == "DARK"
-                    ? "TUPAN"
-                    : oldTheme == "TUPAN"
-                      ? "AVINOC"
-                      : "LIGHT";
+                  ? "TUPAN"
+                  : oldTheme == "TUPAN"
+                  ? "AVINOC"
+                  : "LIGHT";
               await switchNomoTheme({ theme: newTheme });
               await injectNomoCSSVariables(); // refresh css variables after switching theme
             }}
@@ -452,9 +452,9 @@ export default function Home() {
                 });
             }}
           >
-            Unittest transaction signing <span>-&gt;</span>
+            Test transaction signing <span>-&gt;</span>
           </h2>
-          <p>Unittest for signing a transaction with the Nomo app.</p>
+          <p>A unit-test for signing a transaction with the Nomo App.</p>
         </div>
         <div
           onClick={() => {

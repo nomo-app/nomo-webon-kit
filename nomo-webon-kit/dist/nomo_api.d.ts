@@ -71,6 +71,7 @@ export declare const nomo: {
     openFAQPage: typeof nomoOpenFAQPage;
     getInstalledWebOns: typeof nomoGetInstalledWebOns;
     installWebOn: typeof nomoInstallWebOn;
+    uninstallWebOn: typeof nomoUninstallWebOn;
     launchSmartchainFaucet: typeof nomoLaunchSmartchainFaucet;
     hasMinimumNomoVersion: typeof hasMinimumNomoVersion;
 };
@@ -464,6 +465,16 @@ export declare function nomoInstallWebOn(args: {
     deeplink: string;
     skipPermissionDialog: boolean;
     navigateBack: boolean;
+}): Promise<void>;
+/**
+ * The reverse operation of nomoInstallWebOn.
+ * Throws an error if the WebOn cannot be found.
+ *
+ * Needs nomo.permission.INSTALL_WEBON.
+ * Since Nomo App 0.3.4.
+ */
+export declare function nomoUninstallWebOn(args: {
+    webon_url: string;
 }): Promise<void>;
 /**
  * Launches a free faucet that can be used for paying transaction fees.

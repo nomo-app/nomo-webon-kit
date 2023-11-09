@@ -28,39 +28,28 @@ export default function Home() {
     null
   );
   useEffect(() => {
-    const minVersion = "0.3.2";
-    nomo.hasMinimumNomoVersion({ minVersion }).then((res) => {
+    const minVersion = "0.3.3";
+    nomo.hasMinimumNomoVersion({ minVersion }).then((res: any) => {
+      console.log("hasMinimumNomoVersion", res);
       if (!res.minVersionFulfilled) {
-        alert(
-          "Nomo App outdated! This WebOn requires at least Nomo version " +
-          minVersion +
-          " but you have Nomo version " +
-          res.nomoVersion
-        );
+        openDialog({
+          title: "Nomo App outdated!",
+          content:
+            "This WebOn requires at least Nomo " +
+            minVersion +
+            " but you have Nomo " +
+            res.nomoVersion,
+        });
       }
     });
     nomo.enableMobileConsoleDebugging();
-    console.warn("test console warning");
-    console.info("test console info");
-    console.log(
-      "test console with multiple args",
-      1,
-      { object: 3 },
-      { nesting: { key: "some value" } },
-      false
-    );
     nomo.localStorage.setItem("foo", "bar");
-    nomo.localStorage.getItem("foo").then((value) => {
-      console.log("Got value from nomoLocalStorage: " + value);
-    });
     nomo.getDeviceHashes().then(console.log).catch(console.error);
     injectNomoCSSVariables();
-    nomo.registerOnWebOnVisible((args) => {
+    nomo.registerOnWebOnVisible((args: { cardMode: boolean }) => {
       console.log("onWebOnVisible called", args);
     });
-    nomo.getVisibleAssets().then(console.log).catch(console.error);
-    nomo.getInstalledWebOns().then(console.log).catch(console.error);
-    //nomo.launchUrl({url: "https://google.com", launchMode: "externalApplication"});
+    nomo.getManifest().then(console.log).catch(console.error);
   }, []);
 
   const openDialog = (content: DialogContent) => {
@@ -105,6 +94,19 @@ export default function Home() {
           <b>Device name:</b> {JSON.stringify(deviceName)}
         </div>
 
+        <div className={styles.card}>
+          <h2
+            onClick={async () => {
+              nomo.launchUrl({
+                url: "https://dev.nomo.app",
+                launchMode: "externalApplication",
+              });
+            }}
+          >
+            Developer docs<span>-&gt;</span>
+          </h2>
+          <p>Visit dev.nomo.app to learn more about the Nomo ecosystem.</p>
+        </div>
         <div className={styles.card}>
           <h2
             onClick={async () => {
@@ -163,8 +165,8 @@ export default function Home() {
             Mint NomoDev Token<span>-&gt;</span>
           </h2>
           <p>
-            Mint NomoDev Token on the ZENIQ Smartchain, signed by the Nomo app with
-            ethersjs-nomo-webons.
+            Mint NomoDev Token on the ZENIQ Smartchain, signed by the Nomo app
+            with ethersjs-nomo-webons.
           </p>
         </div>
         <div className={styles.card}>
@@ -399,10 +401,10 @@ export default function Home() {
                 oldTheme === "LIGHT"
                   ? "DARK"
                   : oldTheme == "DARK"
-                    ? "TUPAN"
-                    : oldTheme == "TUPAN"
-                      ? "AVINOC"
-                      : "LIGHT";
+                  ? "TUPAN"
+                  : oldTheme == "TUPAN"
+                  ? "AVINOC"
+                  : "LIGHT";
               await switchNomoTheme({ theme: newTheme });
               await injectNomoCSSVariables(); // refresh css variables after switching theme
             }}

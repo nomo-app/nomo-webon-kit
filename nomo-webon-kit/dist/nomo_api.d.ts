@@ -88,7 +88,8 @@ export declare const nomoConsole: {
 };
 /**
  * After calling this function, console logs are visible in the
- * mobile dev mode of the Nomo App.
+ * mobile DevDev-mode of the Nomo App.
+ * For the Desktop DevDev-mode, this function is not necessary.
  */
 export declare function nomoEnableMobileConsoleDebugging(): void;
 /**

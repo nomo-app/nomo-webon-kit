@@ -23,12 +23,22 @@ Then you can import one of the following objects, depending on your use case:
 import { EthersjsNomoSigner } from "ethersjs-nomo-webons"; // this can be used for constructing your own signer-object
 
 import { zscSigner } from "ethersjs-nomo-webons"; // a ready-made signer-object for interacting with the ZENIQ Smartchain
-
-import { sendDemoTransaction } from "ethersjs-nomo-webons"; // an example on how to construct a transaction
 ```
 
-Please consult the demo-webon and to the ethers.js documentation for more details.
-See https://github.com/nomo-app/nomo-webon-kit/tree/main/demo-webon/src/app/evm for an example on how to invoke a smart contract with this package.
+Please consult the Demo-WebOn and the ethers.js-V6 documentation for more details.
+See the [minting example](https://github.com/nomo-app/nomo-webon-kit/tree/main/demo-webon/src/app/evm) for invoking a smart contract with this package.
+
+## Multichain Support
+
+Whatever EVM-chain you are using, you can easily create a signer-object with just a few lines of code.
+For example:
+
+````
+import { EthersjsNomoSigner } from "ethersjs-nomo-webons";
+
+const ethProvider = ethers.getDefaultProvider();
+const ethSigner = new EthersjsNomoSigner(ethProvider);
+````
 
 ## ethers.js-V5/V6
 

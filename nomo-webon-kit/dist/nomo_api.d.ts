@@ -280,8 +280,9 @@ export declare function nomoAuthHttp(args: {
     response: string;
 }>;
 /**
- * Opens a confirmation-dialog to send assets away from the NOMO-wallet.
+ * Opens a confirmation-dialog to send assets away from the Nomo App.
  * Assets are only sent if the user confirms the dialog.
+ * "amount" should be a string that can be parsed by "BigInt.parse":  https://api.flutter.dev/flutter/dart-core/BigInt/parse.html
  *
  * Needs nomo.permission.SEND_ASSETS.
  */

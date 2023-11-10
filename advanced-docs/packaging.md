@@ -42,4 +42,10 @@ The tar.gz file should contain an "out" directory, which represents the output o
 
 ## Icon
 
-To ensure seamless integration, it is imperative to place your WebOn-Icon within the "out" directory, adhering to the specified file name: "icon.svg". Please note that our system exclusively supports SVG (Scalable Vector Graphics) image files. The anticipated pathway for the Icon should be "out/icon.svg".
+To ensure seamless integration, it is imperative to place your WebOn-Icon within the "out" directory, adhering to the specified file name: "nomo_icon.svg". Please note that our system exclusively supports SVG (Scalable Vector Graphics) image files. The anticipated pathway for the Icon should be "out/nomo_icon.svg".
+
+## Card Icon
+
+If a WebOn supports the card mode, then it should also provide a "nomo_card.svg".
+
+

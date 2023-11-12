@@ -11,7 +11,7 @@ The guidelines apply for both JavaScript/TypeScript and Dart.
 Unless noted otherwise, it is assumed that async APIs can throw an error.
 In most cases, it is the API-user's responsibility to try/catch errors.
 Nomo APIs must not silent-catch errors unless they have a meaningful way of handling them!
-Further, Nomo Packages should distinguish between *"known errors"* and *"unknown errors"*.
+Furthermore, Nomo APIs should distinguish between *"known errors"* and *"unknown errors"*.
 
 ### Known Errors
 
@@ -24,10 +24,15 @@ In some situations, those error messages can be used as a replacement for readin
 
 *Unknown errors* are unpredictable and can happen due to a malfunctioning of packages or the Nomo App itself.
 If an unknown error happens, then the Nomo App returns a whole Dart-Stacktrace back to JavaScript.
-Please copy-paste those Dart-Stacktraces into a GitHub-issue if you see an unknown error.
+Please copy-paste this Dart-Stacktrace into a GitHub-issue if you see an unknown error.
 
 ## Autogenerating Docs
 
 ## API Stability
 
 ## Lightweight Dependencies
+
+Since Nomo packages are included in a large number of projects, it is important that Nomo packages are not bloated with heavyweight dependencies.
+If a feature can be implemented with only a few lines of code, then we prefer to code it ourselves instead of adding yet another dependency.
+
+For npm packages, dependencies that are only needed for local development and testing must be put into the *devDependencies* in the package.json.

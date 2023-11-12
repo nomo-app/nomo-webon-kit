@@ -27,7 +27,7 @@ Thanks to ES6 Object Property Shorthands, named arguments are feasible with mini
 
 Nomo APIs should be opinionated in a way that they choose sensible default values.
 However, API users should be able to customize those values or even bypass an API by calling underlying packages directly.
-Customizable APIs play well with the named arguments from the previous section, since named arguments can be easily made optional.
+Customizable APIs play well with named arguments, since named arguments can be easily made optional.
 
 ## Error Handling
 

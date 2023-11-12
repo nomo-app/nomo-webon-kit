@@ -84,6 +84,11 @@ Make APIs as abstract as possible, but not too abstract.
 If we are hiding too much complexity, then there is a risk of higher level code breaking in unpredictable ways.
 For example, since EVM chains and UTXO chains have a radically different architecture, it is often needed to make different APIs for them.
 
+## Avoid Hidden State
+
+If a Nomo API depends on the result of previous API calls, then this should be made visible in the function signature.
+If needed, Nomo APIs can be put into an object that holds associated state.
+
 ## Lightweight Dependencies
 
 Since Nomo packages are included in a large number of projects, it is important that Nomo packages are not bloated with heavyweight dependencies.

@@ -37,6 +37,16 @@ We use the following packages for generating documentation:
 - TypeScript: [typedoc](https://www.npmjs.com/package/typedoc)
 - Dart: TODO
 
+## Executable Docs
+
+For many Nomo APIs, it is useful to link Unit tests or sample apps as an "executable documentation".
+This is especially true for crypto-functions that are difficult to explain without a test.
+Most Unit tests should follow a simple three-part structure:
+
+- Step 1: Generate or hardcode test inputs
+- Step 2: Call Nomo APIs
+- Step 3: Assert the expected results
+
 ## API Stability
 
 Please do not break production-APIs unless you have a strong reason for it!

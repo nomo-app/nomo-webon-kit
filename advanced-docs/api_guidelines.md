@@ -28,15 +28,22 @@ Please copy-paste this Dart-Stacktrace into a GitHub-issue if you see an unknown
 
 ## Autogenerating Docs
 
+Beside of a general introduction, Nomo APIs should come with automatically generated docs for every public function.
+Most public functions should have a comment, but the comment should not repeat the information that is already in the function-signature.
+To generate reliable docs, it is important to use TypeScript instead of Vanilla JavaScript.
 
+We use the following packages for generating documentation:
+
+- TypeScript: [typedoc](https://www.npmjs.com/package/typedoc)
+- Dart: TODO
 
 ## API Stability
 
 Please do not break production-APIs unless you have a strong reason for it!
 Nomo APIs are used across many WebOns and operating systems.
-We will not redeploy dozens of projects just because you think that a function could be named better.
+We will not refactor dozens of projects just because you think that a function could be named better.
 Try to think about how many developer hours you would waste before making a breaking change.
-As a general guideline, breaking changes should be only made for highly severe API-problems or a 10x-improvements of functionality.
+As a general guideline, breaking changes should be only made for highly severe API-problems or a 10x-improvement of functionality.
 
 ## Lightweight Dependencies
 

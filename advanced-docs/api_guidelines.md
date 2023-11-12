@@ -6,6 +6,24 @@ The guidelines apply for both JavaScript/TypeScript and Dart.
 
 ## Named Arguments
 
+Almost all Nomo APIs should use *named arguments* instead of positional arguments.
+See the following example to understand why named arguments are needed:
+
+````
+await nomoDoSomething(true, false, false, true); // Bad API design: What the hell is the meaning of those bool-arguments?
+
+await nomoDoSomething({ // Good API design: The bool-arguments are self-explaining  
+    showFees: true,  
+    showPrice: false,  
+    showGasprice: false,  
+    showGaslimit: true,  
+});
+````
+
+Named arguments do not only improve readability, but also help to avoid bugs and make it easier to expand Nomo APIs later on.
+Thanks to ES6 Object Property Shorthands, named arguments are feasible with minimal effort.
+
+
 ## Error Handling
 
 Unless noted otherwise, it is assumed that async APIs can throw an error.

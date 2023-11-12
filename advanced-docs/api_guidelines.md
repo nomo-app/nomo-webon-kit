@@ -14,7 +14,7 @@ await nomoDoSomething(true, false, false, true); // Bad API design: What the hel
 
 await nomoDoSomething({ // Good API design: The bool-arguments are self-explaining  
     showFees: true,  
-    showPrice: false,  
+    showData: false,  
     showGasprice: false,  
     showGaslimit: true,  
 });
@@ -71,7 +71,13 @@ Please do not break production-APIs unless you have a strong reason for it!
 Nomo APIs are used across many WebOns and operating systems.
 We will not refactor dozens of projects just because you think that a function could be named better.
 Try to think about how many developer hours you would waste before making a breaking change.
-As a general guideline, breaking changes should be only made for highly severe API-problems or a 10x-improvement of functionality.
+As a general guideline, breaking changes should be only made for highly severe API-problems or a 10x-improvement of the developer experience.
+
+## Avoid Broken Abstractions
+
+Make APIs as abstract as possible, but not too abstract.
+If we are hiding too much complexity, then there is a risk of higher level code breaking in unpredictable ways.
+For example, since EVM chains and UTXO chains have a radically different architecture, it is often needed to make different APIs for them.
 
 ## Lightweight Dependencies
 

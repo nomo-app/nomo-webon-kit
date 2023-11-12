@@ -28,7 +28,15 @@ Please copy-paste this Dart-Stacktrace into a GitHub-issue if you see an unknown
 
 ## Autogenerating Docs
 
+
+
 ## API Stability
+
+Please do not break production-APIs unless you have a strong reason for it!
+Nomo APIs are used across many WebOns and operating systems.
+We will not redeploy dozens of projects just because you think that a function could be named better.
+Try to think about how many developer hours you would waste before making a breaking change.
+As a general guideline, breaking changes should be only made for highly severe API-problems or a 10x-improvements of functionality.
 
 ## Lightweight Dependencies
 

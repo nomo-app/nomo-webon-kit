@@ -20,9 +20,6 @@ This document aims to clarify all the modes and support WebOn developers through
 
 The primary "feature“ of the production mode are its security restrictions.
 In production mode, the Nomo App only accepts https-deeplinks that are in a set of _trusted domains_.
-
-By putting a WebOn into the WebOn-store, the WebOn will automatically be on a trusted domain.
-
 Currently, the trusted domains are `nomo.app` as well as subdomains of `nomo.app`.
 
 ## Dev Mode
@@ -64,8 +61,7 @@ Integrated hosting has the following advantages:
 
 - Fast initial loading times even with bad internet connections
 - Capability of running WebOns offline
-- Can be deployed to Nomo-managed infrastructure
-- Updates can be distributed via the WebOn Store
+- Deployments can be easily done with the [nomo-webon-cli](https://github.com/nomo-app/nomo-webon-cli)
 
 For integrated hosting, the Nomo App requires to package WebOns into a tar.gz-file.
 See https://github.com/nomo-app/nomo-webon-kit/blob/main/advanced-docs/packaging.md for details about packaging a tar.gz-file.

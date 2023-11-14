@@ -17,7 +17,7 @@ On iOS, the path is generally within the app's sandboxed environment:
 
 ### *macOS:*
 For macOS:
-`/Users/<username>/Library/Containers/com.zeniq.app/Data/Documents`
+`/Users/<username>/Library/Containers/com.zeniq.app/Data/`
 
 ### *Linux:*
 On Linux:

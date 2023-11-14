@@ -1,6 +1,7 @@
 # Debugging WebOns
 
 In this document, we describe multiple ways for debugging WebOns.
+Before going into debugging, it might be useful to learn about the [execution modes](https://github.com/nomo-app/nomo-webon-kit/tree/main/advanced-docs/execution_modes.md) of WebOns.
 
 ## Connect Chrome DevTools to Android
 

@@ -39,6 +39,7 @@ Install npm dependencies and launch your WebOn on localhost.
 `npm run dev`
 
 Then your WebOn should run at <http://localhost:3000/> or similar.
+If your frontend is not yet a WebOn, then you will need to add a [nomo_manifest.json](https://demowebon.nomo.app/nomo_manifest.json).
 
 ## Step 3: Enable the Nomo Dev Mode
 
@@ -109,31 +110,12 @@ While the ethersjs-package is battle-tested in production, the web3js-package is
 There are multiple ways of debugging WebOns, but our preferred way is to connect Chrome DevTools to a WebOn.
 See the [debugging docs](https://github.com/nomo-app/nomo-webon-kit/tree/main/advanced-docs/debugging.md) for more details.
 
-# Release of WebOns
-
-Once you are done with an initial version, a few more steps are needed to release a WebOn.
-
-## Hosting WebOns
-
-Firstly, the WebOn needs to be hosted at a publicly available URL.
-Nomo recommends the usage of a Content Delivery Network (CDN) for hosting WebOns.
-By using a decent CDN, WebOns can be made globally available without any scalability concerns.
-
-## WebOn Manifests
-
-In addition to the actual code, every production-WebOn needs to host a `nomo_manifest.json`.
-See <https://demowebon.nomo.app/nomo_manifest.json> for an example of a `nomo_manifest.json`.
-You can copy-paste this example, but at a minimum you will need to change the following fields:
-
-- `webon_id`
-- `webon_name`
-
-## Deploying WebOns
+# Deploying WebOns
 
 We recommend the [nomo-webon-cli](https://github.com/nomo-app/nomo-webon-cli) for deploying WebOns.
 The `nomo-webon-cli` can be used both for production deployments as well as for internal test deployments or CI/CD pipelines.
 
-## Sharing WebOns via QRCodes or Deeplinks
+# Sharing WebOns
 
 Once a WebOn is deployed, you can share it by long-pressing on the WebOn-icon within the Nomo App's home screen.
 After long-pressing, you will see a dialog with information like the webon_version and the webon_url.

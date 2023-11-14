@@ -128,14 +128,14 @@ You can copy-paste this example, but at a minimum you will need to change the fo
 - `webon_id`
 - `webon_name`
 
-## Execution Modes
+## Deploying WebOns
 
-When releasing a WebOn, it is important to understand the difference between dev mode, dev-dev mode and production mode.
-See the [advanced docs](https://github.com/nomo-app/nomo-webon-kit/tree/main/advanced-docs) to prepare a WebOn for production.
+We recommend the [nomo-webon-cli](https://github.com/nomo-app/nomo-webon-cli) for deploying WebOns.
+The `nomo-webon-cli` can be used both for production deployments as well as for internal test deployments or CI/CD pipelines.
 
-## Distributing WebOns via QRCodes or Deeplinks
+## Sharing WebOns via QRCodes or Deeplinks
 
-Once a WebOn is installed, you can share it by long-pressing on the WebOn-icon within the Nomo App's home screen.
+Once a WebOn is deployed, you can share it by long-pressing on the WebOn-icon within the Nomo App's home screen.
 After long-pressing, you will see a dialog with information like the webon_version and the webon_url.
 Within this dialog, the "Share button" will give you a deeplink that can be shared with users or other developers.
 

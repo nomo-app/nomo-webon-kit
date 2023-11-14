@@ -22,9 +22,15 @@ See the following example of a `next.config.js` that can generate static builds:
 
 ### Svelte
 
-TODO: Explain how to build static with Svelte
+If you use SvelteKit, you can follow those steps for producing a static build:
 
-TODO: Perhaps add link to a Svelte open source WebOn?
+- Add @sveltejs/adapter-static to your svelte.config.js
+- Create a file `src/routes/+layout.server.js` with the following content:
+
+```
+export const ssr = false // disable server side rendering
+export const prerender = true // enable prerender
+```
 
 # Required files
 

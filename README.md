@@ -6,15 +6,11 @@ This package is designed for developers to develop _WebOns_ for the [Nomo App](h
 A WebOn is a web-application that runs within the Nomo App.
 WebOns are a powerful capability of the Nomo App that unlock the following features in an easy-to-use way:
 
-- Crypto wallet functionality
+- Seamless wallet connection that works even offline
 - A decentralized chat service
-- Taking pictures / documents / QRCodes
 - Optional: Verification that users are real via KYC wallets
-- Authentication with NOMO-Auth or NOMO-ID
+- Authentication via Nomo-Auth or Nomo-ID
 - More features are coming with Nomo App updates!
-
-This README explains how to develop WebOns.  
-Furthermore, this repo contains a demo to showcase the provided functionality.  
 
 ## Why Nomo WebOns?
 

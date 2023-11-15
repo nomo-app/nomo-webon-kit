@@ -17,6 +17,22 @@ This README explains how to develop WebOns for the Nomo App.
 Furthermore, this repo contains a demo-WebOn to showcase the provided functionality.  
 In order to use this package, we expect that WebOns are written in JavaScript or TypeScript.
 
+## Why Nomo WebOns?
+
+The Nomo WebOn API has the potential to revolutionize the web3 user experience.
+To understand why, see the following problems of traditional APIs:
+
+- With APIs like "WalletConnect“, communication flows over a (centralized) middleman, even if both wallet and website are running on the same phone!
+- The middleman adds complexity, delays and lots of boilerplate code
+
+With the Nomo API, there is no more middleman.
+WebOns and Wallet communicate locally on the same phone.
+The results are:
+
+- WebOns do not need any "connect wallet“ button
+- WebOns are fast and reliable 
+- ethers.js can be setup with only [three lines of JavaScript](https://github.com/nomo-app/nomo-webon-kit/tree/main/ethersjs-nomo-webons#multichain-support)
+
 # Quick Usage Guide
 
 Before going into more details, we explain a few quick steps for getting a WebOn up and running together with the Nomo App.

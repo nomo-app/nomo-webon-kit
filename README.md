@@ -19,9 +19,9 @@ Furthermore, this repo contains a demo to showcase the provided functionality.
 ## Why Nomo WebOns?
 
 The Nomo WebOn API has the potential to revolutionize the web3 user experience.
-To understand why, see the following problems of traditional APIs:
+To understand why, see the following problems of traditional systems like "WalletConnect":
 
-- With APIs like "WalletConnect“, communication flows over a (centralized) middleman, even if both wallet and website are running on the same phone!
+- With "WalletConnect“, communication flows over a (centralized) middleman, even if both wallet and website are running on the same phone!
 - The middleman adds complexity, delays and lots of boilerplate code
 
 With the Nomo API, there is no more middleman.

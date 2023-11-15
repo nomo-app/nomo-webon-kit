@@ -9,13 +9,12 @@ WebOns are a powerful capability of the Nomo App that unlock the following featu
 - Crypto wallet functionality
 - A decentralized chat service
 - Taking pictures / documents / QRCodes
-- AI-powered features
+- Optional: Verification that users are real via KYC wallets
 - Authentication with NOMO-Auth or NOMO-ID
 - More features are coming with Nomo App updates!
 
-This README explains how to develop WebOns for the Nomo App.  
-Furthermore, this repo contains a demo-WebOn to showcase the provided functionality.  
-In order to use this package, we expect that WebOns are written in JavaScript or TypeScript.
+This README explains how to develop WebOns.  
+Furthermore, this repo contains a demo to showcase the provided functionality.  
 
 ## Why Nomo WebOns?
 
@@ -113,6 +112,7 @@ With this, you can construct the following deeplink by inserting the prefix `nom
 You can add this package to your project with: `npm install nomo-webon-kit`.
 
 Take a look at the [Demo WebOn](https://github.com/nomo-app/nomo-webon-kit/tree/main/demo-webon) to see how the package can be used.
+In order to use this package, we expect that WebOns are written in JavaScript or TypeScript.
 
 ## Interacting with EVM blockchains
 

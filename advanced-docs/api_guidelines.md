@@ -58,7 +58,7 @@ To generate reliable docs, it is important to use TypeScript instead of Vanilla 
 We use the following packages for generating documentation:
 
 - TypeScript: [typedoc](https://www.npmjs.com/package/typedoc)
-- Dart: TODO
+- Dart: [dartdoc](https://pub.dev/packages/dartdoc)
 
 ## Executable Docs
 

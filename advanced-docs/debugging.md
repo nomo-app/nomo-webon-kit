@@ -23,15 +23,13 @@ Consult Apple documentation for details on how to connect to an iPhone WebView.
 
 ## DevDev Mode on Android/iOS
 
-On Android/iOS, the DevDev mode includes a console-window for the functions console.log/console.info/console.error/console.warn.
-Moreover, the DevDev mode includes a few auxiliary features like refreshing the page or clearing local storage.
+On Android/iOS, the DevDev mode includes a small window for the functions console.log/console.info/console.error/console.warn.
+Moreover, the DevDev mode includes auxiliary features like refreshing the page or clearing local storage.
 
-As mentioned in the README, the DevDev mode can be enabled by clicking multiple times on the about screen icon.
+## Desktop Debugging
 
-## DevDev Mode on Windows/Linux/macOS
-
-On Desktop, the DevDev mode is way more powerful than on mobile.
-On Desktop, the DevDev mode provides integrated DevTools that look almost the same as Chrome DevTools.
+On Desktop, the Nomo App offers an integrated DevTool that looks almost the same as Chrome DevTools.
+This DevTool can be used even in production mode; the only prerequisite is that the Dev Mode had been activated at least once.
 
 ## Debugging via breakpoints
 

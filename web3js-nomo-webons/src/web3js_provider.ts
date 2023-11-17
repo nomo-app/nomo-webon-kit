@@ -90,7 +90,8 @@ export async function signWeb3JsTransactionWithNomo(
   console.log("unsignedTxHex", serializedHexTx);
 
   return new Promise((resolve, reject) => {
-    nomo.signEvmTransaction({ messageHex: serializedHexTx })
+    const chainIDTX: string = utils.hexlify(chainIdZeniqSmartChain);
+    nomo.signEvmTransaction({ messageHex: serializedHexTx, chainID: chainIDTX })
       .then((res) => {
         console.log("resFromNomo", res.sigHex);
 

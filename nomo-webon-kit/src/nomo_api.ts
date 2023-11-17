@@ -210,6 +210,7 @@ function nomoNativeLog(
  */
 export async function nomoSignEvmTransaction(args: {
   messageHex: string;
+  chainID: string;
 }): Promise<{ sigHex: string }> {
   // a fallback mode is implemented in EthersjsNomoSigner
   return await invokeNomoFunction("nomoSignEvmTransaction", args);
@@ -483,11 +484,11 @@ export async function nomoGetDeviceName(): Promise<{
 export async function nomoAuthHttp(
   args:
     | {
-        url: string;
-        method?: "GET" | "POST";
-        headers?: { [key: string]: string };
-        body?: string;
-      }
+      url: string;
+      method?: "GET" | "POST";
+      headers?: { [key: string]: string };
+      body?: string;
+    }
     | string
 ): Promise<{
   statusCode: number;
@@ -647,10 +648,10 @@ export async function nomoGetManifest(): Promise<NomoManifest> {
 export async function nomoLaunchUrl(args: {
   url: string;
   launchMode:
-    | "platformDefault"
-    | "inAppWebView"
-    | "externalApplication"
-    | "externalNonBrowserApplication";
+  | "platformDefault"
+  | "inAppWebView"
+  | "externalApplication"
+  | "externalNonBrowserApplication";
 }): Promise<any> {
   return await invokeNomoFunction("nomoLaunchUrl", args);
 }

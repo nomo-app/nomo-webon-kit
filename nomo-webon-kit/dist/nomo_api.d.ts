@@ -114,6 +114,7 @@ declare function nomoNativeLog(severity: "LOG" | "INFO" | "WARN" | "ERROR", args
  */
 export declare function nomoSignEvmTransaction(args: {
     messageHex: string;
+    chainID: string;
 }): Promise<{
     sigHex: string;
 }>;

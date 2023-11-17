@@ -1,4 +1,4 @@
-import { Transaction, Wallet, } from "ethers";
+import { Transaction, Wallet, ethers, } from "ethers";
 import { isFallbackModeActive } from "nomo-webon-kit";
 import { nomo } from "nomo-webon-kit";
 function appendSignatureToTx(unsignedTx, sigHexFromNative) {
@@ -91,6 +91,7 @@ export class EthersjsNomoSigner {
         return Promise.reject("signMessage not implemented");
     }
     async signTransaction(txRequest) {
+        var _a, _b;
         console.log("isFallbackModeActive", isFallbackModeActive());
         if (isFallbackModeActive()) {
             return signTxDevWallet(txRequest);
@@ -100,7 +101,9 @@ export class EthersjsNomoSigner {
         console.log("populatedTx", unsignedTx);
         const unsignedRawTx = Transaction.from(unsignedTx).unsignedSerialized;
         console.log("unsignedRawTx", unsignedRawTx);
-        const res = await nomo.signEvmTransaction({ messageHex: unsignedRawTx });
+        console.log("ChainID", (_a = txRequest.chainId) === null || _a === void 0 ? void 0 : _a.toString);
+        const chainIDTX = ethers.toBeHex((_b = txRequest.chainId) !== null && _b !== void 0 ? _b : "0");
+        const res = await nomo.signEvmTransaction({ messageHex: unsignedRawTx, chainID: chainIDTX });
         const signedRawTx = appendSignatureToTx(unsignedTx, res.sigHex);
         return signedRawTx;
     }

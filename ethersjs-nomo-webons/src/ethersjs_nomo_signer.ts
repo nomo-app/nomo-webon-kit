@@ -10,6 +10,7 @@ import {
   TypedDataDomain,
   TypedDataField,
   Wallet,
+  ethers,
 } from "ethers";
 import { isFallbackModeActive } from "nomo-webon-kit";
 import { nomo } from "nomo-webon-kit";
@@ -149,7 +150,11 @@ export class EthersjsNomoSigner implements Signer {
     const unsignedRawTx = Transaction.from(unsignedTx).unsignedSerialized;
     console.log("unsignedRawTx", unsignedRawTx);
 
-    const res = await nomo.signEvmTransaction({ messageHex: unsignedRawTx });
+    console.log("ChainID", txRequest.chainId?.toString);
+
+    const chainIDTX: string = ethers.toBeHex(txRequest.chainId ?? "0");
+
+    const res = await nomo.signEvmTransaction({ messageHex: unsignedRawTx, chainID: chainIDTX });
     const signedRawTx = appendSignatureToTx(
       unsignedTx as Transaction,
       res.sigHex

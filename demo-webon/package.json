@@ -2,15 +2,13 @@
   "name": "nomo-demo-webon",
   "scripts": {
     "dev": "next dev",
-    "deploy_all": "npm run deploy_legacy && npm run deploy_zip && npm run deploy_tar",
+    "deploy_all": "npm run deploy_legacy && npm run deploy_tar",
     "deploy_legacy": "rm -f .env.local && ./scripts/deploy_legacy.sh",
-    "deploy_zip": "./scripts/deploy_zip.sh",
     "deploy_tar": "./scripts/deploy_tar.sh",
     "deploy_manifest": "./scripts/deploy_manifest.sh",
-    "build_all": "npm run build && npm run build_tar && npm run build_zip",
+    "build_all": "npm run build && npm run build_tar",
     "build": "next build && next export",
     "build_tar": "rm -f nomo.tar.gz && COPYFILE_DISABLE=1 tar -cv --gzip --file=nomo.tar.gz out",
-    "build_zip": "rm -f nomo.zip && COPYFILE_DISABLE=1 zip -r nomo.zip out",
     "start": "npx serve@latest out",
     "lint": "next lint"
   },

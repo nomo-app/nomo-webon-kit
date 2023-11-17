@@ -8,8 +8,6 @@ import { nomo } from "nomo-webon-kit";
 import { getCurrentNomoTheme, injectNomoCSSVariables } from "nomo-webon-kit";
 import styles from "./page.module.css";
 import "./nomo.css";
-import { sendDemoTransaction as sendDemoTxEthers } from "ethersjs-nomo-webons";
-// import { sendDemoTransaction as sendDemoTxWeb3Js } from "web3js-nomo-webons";
 import { testSigning } from "../../test/web3_signing_test";
 import { NomoTheme, switchNomoTheme } from "nomo-webon-kit/dist/nomo_theming";
 import { stringifyWithBigInts } from "nomo-webon-kit/dist/nomo_api";
@@ -48,7 +46,6 @@ export default function Home() {
     nomo.registerOnWebOnVisible((args: { cardMode: boolean }) => {
       console.log("onWebOnVisible", args);
     });
-    nomo.getManifest().then(console.log).catch(console.error);
   }, []);
 
   const openDialog = (content: DialogContent) => {
@@ -113,37 +110,6 @@ export default function Home() {
                 if (faucetNeeded) {
                   return;
                 }
-                const res = await sendDemoTxEthers();
-                const resJson = stringifyWithBigInts(res);
-                openDialog({
-                  title: "ethersjs-TX submitted to the ZENIQ Smartchain!",
-                  content: resJson,
-                });
-              } catch (e) {
-                console.error(e);
-                openDialog({
-                  title: "ethersjs-demo failed",
-                  content:
-                    e instanceof Error ? e.toString() : stringifyWithBigInts(e),
-                });
-              }
-            }}
-          >
-            Sign EVM transaction<span>-&gt;</span>
-          </h2>
-          <p>
-            Send a transaction to the ZENIQ Smartchain, signed by the Nomo App
-            with ethersjs-nomo-webons.
-          </p>
-        </div>
-        <div className={styles.card}>
-          <h2
-            onClick={async () => {
-              try {
-                const faucetNeeded = await openFaucetIfNeeded();
-                if (faucetNeeded) {
-                  return;
-                }
                 const res = await mintNFT();
                 const resJson = stringifyWithBigInts(res);
                 openDialog({
@@ -160,11 +126,11 @@ export default function Home() {
               }
             }}
           >
-            Mint NomoDev Token<span>-&gt;</span>
+            Demo with ethers.js<span>-&gt;</span>
           </h2>
           <p>
-            Mint NomoDev Token on the ZENIQ Smartchain, signed by the Nomo App
-            with ethersjs-nomo-webons.
+            Mint a NomoDev Token on the ZENIQ Smartchain, signed by the Nomo App
+            via ethers.js-V6.
           </p>
         </div>
         <div className={styles.card}>
@@ -189,7 +155,7 @@ export default function Home() {
           >
             Take picture <span>-&gt;</span>
           </h2>
-          <p>Use the Nomo App for getting a picture into a WebOn.</p>
+          <p>Your picture will be instantly shown below.</p>
         </div>
         {!!pictureFromCamera ? (
           <img
@@ -198,99 +164,8 @@ export default function Home() {
             style={{ maxWidth: "100%" }}
           ></img>
         ) : (
-          <div>Your picture will be shown here</div>
+          <div></div>
         )}
-
-        <div className={styles.card}>
-          <h2
-            onClick={() => {
-              nomo
-                .pickFromGallery({
-                  maxWidth: 1000,
-                  maxHeight: 1000,
-                })
-                .then((res) => {
-                  setPictureFromGallery(res.imageBase64);
-                })
-                .catch((e) => {
-                  console.error(e);
-                  openDialog({
-                    title: "nomoPickFromGallery failed",
-                    content: JSON.stringify(e),
-                  });
-                });
-            }}
-          >
-            Open gallery<span>-&gt;</span>
-          </h2>
-          <p>Upload documents or images from a Nomo WebOn.</p>
-        </div>
-        {!!pictureFromGallery ? (
-          <img
-            src={pictureFromGallery}
-            alt=""
-            style={{ maxWidth: "100%" }}
-          ></img>
-        ) : (
-          <div>Your gallery image will be shown here</div>
-        )}
-
-        <div className={styles.card}>
-          <h2
-            onClick={() => {
-              const chatInvitationLink =
-                "https://nomo.id/@0x6b65b7eadc7544dcf04869136466ba6224e799a2:zeniq.chat";
-              nomo
-                .injectQRCode({
-                  qrCode: chatInvitationLink,
-                  navigateBack: true,
-                })
-                .catch((e) => {
-                  console.error(e);
-                  openDialog({
-                    title: "Opening a chat failed",
-                    content: JSON.stringify(e),
-                  });
-                });
-            }}
-          >
-            Open a chat <span>-&gt;</span>
-          </h2>
-          <p>Open a decentralized chat with a human or with a chat-bot.</p>
-        </div>
-
-        <div className={styles.card}>
-          <h2
-            onClick={() => {
-              nomo
-                .authHttp({
-                  // url: "http://localhost:3001/get_test",
-                  url: "https://price.zeniq.services/v2/currentprice/avinoc/usd",
-                })
-                .then((res) => {
-                  openDialog({
-                    title: "NOMO-Auth",
-                    content:
-                      "Used nomoAuthHttp for fetching an AVINOC-price: " +
-                      res.response,
-                  });
-                })
-                .catch((e) => {
-                  console.error(e);
-                  openDialog({
-                    title: "nomoAuthHttp failed",
-                    content: JSON.stringify(e),
-                  });
-                });
-            }}
-          >
-            NOMO-Auth<span>-&gt;</span>
-          </h2>
-          <p>
-            NOMO-Auth is a protocol for seamless authentication of WebOns,
-            utilizing the NOMO-wallet.
-          </p>
-        </div>
 
         <div className={styles.card}>
           <h2
@@ -318,7 +193,7 @@ export default function Home() {
           </h2>
           <p>
             With consent from the user, WebOns can send assets from the
-            NOMO-wallet.
+            Nomo App.
           </p>
         </div>
 
@@ -350,21 +225,6 @@ export default function Home() {
             With consent from the user, WebOns can sign messages to prove that
             the user controls a specific wallet.
           </p>
-        </div>
-        <div className={styles.card}>
-          <h2
-            onClick={() => {
-              nomo
-                .addCustomToken({
-                  contractAddress: "0x83B58BC6CB9653117c206DDAFA3018b9344F8070",
-                  network: "zeniqSmartChain",
-                })
-                .catch(console.error);
-            }}
-          >
-            Add custom token<span>-&gt;</span>
-          </h2>
-          <p>WebOns can expand the list of tokens</p>
         </div>
         <div className={styles.card}>
           <h2
@@ -414,24 +274,27 @@ export default function Home() {
         <div className={styles.card}>
           <h2
             onClick={async () => {
-              nomo
-                .installWebOn({
-                  deeplink: "https://nomo.app/webon/demowebon.nomo.app",
-                  skipPermissionDialog: true,
-                  navigateBack: true,
-                })
-                .catch((e) => {
-                  console.error(e);
-                  openDialog({
-                    title: "failed to install WebOn",
-                    content: JSON.stringify(e),
+              try {
+                const manifests = (await nomo.getInstalledWebOns()).manifests;
+                for (const manifest of manifests) {
+                  await nomo.injectIntoWebOn({
+                    payload: "",
+                    webon_id: manifest.webon_id,
                   });
+                }
+              } catch (e) {
+                console.error(e);
+                openDialog({
+                  title: "ethersjs-demo failed",
+                  content:
+                    e instanceof Error ? e.toString() : stringifyWithBigInts(e),
                 });
+              }
             }}
           >
-            Install WebOn<span>-&gt;</span>
+            Launch other WebOns<span>-&gt;</span>
           </h2>
-          <p>WebOns can install other WebOns</p>
+          <p>WebOns can be combined to enable more powerful use cases.</p>
         </div>
         <div className={styles.card}>
           <h2

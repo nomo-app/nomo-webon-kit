@@ -4,8 +4,8 @@
   "plugin_id": "app.nomo.demowebon",
   "webon_name": "Demo WebOn",
   "plugin_name": "Demo WebOn",
-  "webon_version": "0.1.10",
-  "plugin_version": "0.1.10",
+  "webon_version": "0.2.0",
+  "plugin_version": "0.2.0",
   "min_nomo_version": "0.3.3",
   "dependencies": [],
   "permissions": [

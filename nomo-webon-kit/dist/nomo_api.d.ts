@@ -300,7 +300,7 @@ export declare function nomoMnemonicBackupExisted(): Promise<{
 }>;
 /**
  * Registers a callback that will be called every time when the WebOn gets visible within the Nomo App.
- * For example, this can be used to refresh data when re-opening a WebOn after a long pause.
+ * For example, this can be used to refresh themes or languages when re-opening a WebOn after a pause.
  *
  * Since Nomo App 0.3.4.
  */

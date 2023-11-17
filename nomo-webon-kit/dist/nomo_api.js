@@ -467,6 +467,10 @@ export async function nomoGetManifest() {
  * Passes a URL to the underlying platform for handling.
  */
 export async function nomoLaunchUrl(args) {
+    if (isFallbackModeActive()) {
+        window.open(args.url, "_blank");
+        return;
+    }
     return await invokeNomoFunction("nomoLaunchUrl", args);
 }
 /**

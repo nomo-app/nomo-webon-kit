@@ -5,17 +5,17 @@ import { useEffect, useState } from "react";
 import Dialog, { DialogContent } from "./components/dialog";
 import { useNomoState } from "./hooks/custom_hooks";
 import { nomo } from "nomo-webon-kit";
-import { getCurrentNomoTheme, injectNomoCSSVariables } from "nomo-webon-kit";
+import { injectNomoCSSVariables } from "nomo-webon-kit";
 import styles from "./page.module.css";
 import "./nomo.css";
 import { testSigning } from "../../test/web3_signing_test";
-import { NomoTheme, switchNomoTheme } from "nomo-webon-kit/dist/nomo_theming";
-import {
-  NomoManifest,
-  stringifyWithBigInts,
-} from "nomo-webon-kit/dist/nomo_api";
+import { stringifyWithBigInts } from "nomo-webon-kit/dist/nomo_api";
 import { mintNFT } from "./evm/mint_nft";
 import { openFaucetIfNeeded } from "./evm/evm_utils";
+import { launchAllWebOnsDemo } from "./multi-webons/multi_webon_demo";
+import { themeSwitchDemo } from "./theming/theme_switch_demo";
+import { faqDemo } from "./faq/faq_demo";
+import { sendOnePercentOfBalance } from "./assets/send_demo";
 export default function Home() {
   const [dialog, setDialog] = useState<DialogContent | null>(null);
   const platformInfo = useNomoState(nomo.getPlatformInfo);
@@ -171,15 +171,7 @@ export default function Home() {
           <h2
             onClick={async () => {
               try {
-                const res = await nomo.selectAssetFromDialog();
-                const asset = res.selectedAsset;
-                const balance = BigInt(asset.balance);
-                const amount = balance / 100n;
-                await nomo.sendAssets({
-                  assetSymbol: asset.symbol,
-                  targetAddress: "0x7561DEAf4ECf96dc9F0d50B4136046979ACdAD3e",
-                  amount: amount.toString(), // must be in the smallest unit (e.g. wei or satoshi)
-                });
+                await sendOnePercentOfBalance();
               } catch (e) {
                 console.error(e);
                 openDialog({
@@ -253,18 +245,7 @@ export default function Home() {
         <div className={styles.card}>
           <h2
             onClick={async () => {
-              const oldTheme: NomoTheme = (await getCurrentNomoTheme())
-                .name as NomoTheme;
-              const newTheme: NomoTheme =
-                oldTheme === "LIGHT"
-                  ? "DARK"
-                  : oldTheme == "DARK"
-                  ? "TUPAN"
-                  : oldTheme == "TUPAN"
-                  ? "AVINOC"
-                  : "LIGHT";
-              await switchNomoTheme({ theme: newTheme });
-              await injectNomoCSSVariables(); // refresh css variables after switching theme
+              await themeSwitchDemo();
             }}
           >
             Switch theme<span>-&gt;</span>
@@ -275,29 +256,11 @@ export default function Home() {
           <h2
             onClick={async () => {
               try {
-                const manifests = (await nomo.getInstalledWebOns()).manifests;
-                const ownManifest = await nomo.getManifest();
-                const otherManifests = manifests.filter(
-                  (m: NomoManifest) => m.webon_url !== ownManifest.webon_url
-                );
-                if (!otherManifests.length) {
-                  openDialog({
-                    title: "No other WebOns installed",
-                    content:
-                      "You need to install other WebOns to test this feature.",
-                  });
-                  return;
-                }
-                for (const manifest of otherManifests) {
-                  await nomo.launchWebOn({
-                    payload: "",
-                    manifest,
-                  });
-                }
+                await launchAllWebOnsDemo();
               } catch (e) {
                 console.error(e);
                 openDialog({
-                  title: "launchWebOn failed",
+                  title: "launchAllWebOnsDemo failed",
                   content:
                     e instanceof Error ? e.toString() : stringifyWithBigInts(e),
                 });
@@ -342,23 +305,8 @@ export default function Home() {
           Contact support
         </div>
         <div
-          onClick={() => {
-            nomo.openFAQPage({
-              initiallyExpanded: true,
-              supportButtonTitle: "Contact Support",
-              supportButtonUrl: "mailto:support@nomo.app",
-              faqContent: {
-                "Section 1": {
-                  "Entry 1.a": "Content 1.a",
-                  "Entry 1.b": "Content 1.b",
-                },
-                "Section 2": {
-                  "Entry 2.a": "Content 2.a",
-                  "Entry 2.b": "Content 2.b",
-                  "Entry 2.c": "Content 2.c",
-                },
-              },
-            });
+          onClick={async () => {
+            await faqDemo();
           }}
         >
           Open FAQs

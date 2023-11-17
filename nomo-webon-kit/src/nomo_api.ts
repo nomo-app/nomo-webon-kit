@@ -652,6 +652,10 @@ export async function nomoLaunchUrl(args: {
     | "externalApplication"
     | "externalNonBrowserApplication";
 }): Promise<any> {
+  if (isFallbackModeActive()) {
+    window.open(args.url, "_blank");
+    return;
+  }
   return await invokeNomoFunction("nomoLaunchUrl", args);
 }
 

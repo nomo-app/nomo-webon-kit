@@ -23,7 +23,7 @@ export async function testSigning(): Promise<string> {
     return "This test only works with the reject wallet";
   }
 
-  const res = await nomo.signEvmTransaction({ messageHex: inputHex });
+  const res = await nomo.signEvmTransaction({ messageHex: inputHex, chainID: "383414847825" });
   console.log("sigFromNomo", res.sigHex);
   const { v, r, s } = resolveSig(res.sigHex);
   //   console.log("v", v);

@@ -10,7 +10,10 @@ import styles from "./page.module.css";
 import "./nomo.css";
 import { testSigning } from "../../test/web3_signing_test";
 import { NomoTheme, switchNomoTheme } from "nomo-webon-kit/dist/nomo_theming";
-import { stringifyWithBigInts } from "nomo-webon-kit/dist/nomo_api";
+import {
+  NomoManifest,
+  stringifyWithBigInts,
+} from "nomo-webon-kit/dist/nomo_api";
 import { mintNFT } from "./evm/mint_nft";
 import { openFaucetIfNeeded } from "./evm/evm_utils";
 export default function Home() {
@@ -20,9 +23,6 @@ export default function Home() {
   const executionMode = useNomoState(nomo.getExecutionMode);
   const deviceName = useNomoState(nomo.getDeviceName);
   const [pictureFromCamera, setPictureFromCamera] = useState<string | null>(
-    null
-  );
-  const [pictureFromGallery, setPictureFromGallery] = useState<string | null>(
     null
   );
   useEffect(() => {
@@ -192,8 +192,8 @@ export default function Home() {
             Send assets<span>-&gt;</span>
           </h2>
           <p>
-            With consent from the user, WebOns can send assets from the
-            Nomo App.
+            With consent from the user, WebOns can send assets from the Nomo
+            App.
           </p>
         </div>
 
@@ -276,7 +276,19 @@ export default function Home() {
             onClick={async () => {
               try {
                 const manifests = (await nomo.getInstalledWebOns()).manifests;
-                for (const manifest of manifests) {
+                const ownManifest = await nomo.getManifest();
+                const otherManifests = manifests.filter(
+                  (m: NomoManifest) => m.webon_url !== ownManifest.webon_url
+                );
+                if (!otherManifests.length) {
+                  openDialog({
+                    title: "No other WebOns installed",
+                    content:
+                      "You need to install other WebOns to test this feature.",
+                  });
+                  return;
+                }
+                for (const manifest of otherManifests) {
                   await nomo.launchWebOn({
                     payload: "",
                     manifest,
@@ -285,7 +297,7 @@ export default function Home() {
               } catch (e) {
                 console.error(e);
                 openDialog({
-                  title: "ethersjs-demo failed",
+                  title: "launchWebOn failed",
                   content:
                     e instanceof Error ? e.toString() : stringifyWithBigInts(e),
                 });

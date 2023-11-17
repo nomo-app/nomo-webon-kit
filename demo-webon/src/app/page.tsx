@@ -8,8 +8,6 @@ import { nomo } from "nomo-webon-kit";
 import { getCurrentNomoTheme, injectNomoCSSVariables } from "nomo-webon-kit";
 import styles from "./page.module.css";
 import "./nomo.css";
-import { sendDemoTransaction as sendDemoTxEthers } from "ethersjs-nomo-webons";
-// import { sendDemoTransaction as sendDemoTxWeb3Js } from "web3js-nomo-webons";
 import { testSigning } from "../../test/web3_signing_test";
 import { NomoTheme, switchNomoTheme } from "nomo-webon-kit/dist/nomo_theming";
 import { stringifyWithBigInts } from "nomo-webon-kit/dist/nomo_api";

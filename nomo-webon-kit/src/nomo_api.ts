@@ -95,7 +95,7 @@ export const nomo = {
   localStorage: nomoLocalStorage,
   enableMobileConsoleDebugging: nomoEnableMobileConsoleDebugging,
   qrScan: nomoQrScan,
-  injectIntoWebOn: nomoInjectIntoWebOn,
+  launchWebOn: nomoLaunchWebOn,
   mnemonicBackupExisted: nomoMnemonicBackupExisted,
   registerOnWebOnVisible: nomoRegisterOnWebOnVisible,
   getLanguage: nomoGetLanguage,
@@ -343,11 +343,11 @@ export async function nomoInjectQRCode(args: {
  *
  * Since Nomo App 0.3.4.
  */
-export async function nomoInjectIntoWebOn(args: {
+export async function nomoLaunchWebOn(args: {
   payload: string;
-  webon_id: string;
+  manifest: NomoManifest;
 }): Promise<void> {
-  return await invokeNomoFunction("nomoInjectIntoWebOn", args);
+  return await invokeNomoFunction("nomoLaunchWebOn", args);
 }
 
 const imagePrefix = "data:image/png;base64,";

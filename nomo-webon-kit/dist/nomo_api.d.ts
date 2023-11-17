@@ -56,7 +56,7 @@ export declare const nomo: {
     };
     enableMobileConsoleDebugging: typeof nomoEnableMobileConsoleDebugging;
     qrScan: typeof nomoQrScan;
-    injectIntoWebOn: typeof nomoInjectIntoWebOn;
+    launchWebOn: typeof nomoLaunchWebOn;
     mnemonicBackupExisted: typeof nomoMnemonicBackupExisted;
     registerOnWebOnVisible: typeof nomoRegisterOnWebOnVisible;
     getLanguage: typeof nomoGetLanguage;
@@ -184,9 +184,9 @@ export declare function nomoInjectQRCode(args: {
  *
  * Since Nomo App 0.3.4.
  */
-export declare function nomoInjectIntoWebOn(args: {
+export declare function nomoLaunchWebOn(args: {
     payload: string;
-    webon_id: string;
+    manifest: NomoManifest;
 }): Promise<void>;
 /**
  * Opens the camera and returns a picture in base64-encoding.

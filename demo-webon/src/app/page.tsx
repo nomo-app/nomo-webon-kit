@@ -277,9 +277,9 @@ export default function Home() {
               try {
                 const manifests = (await nomo.getInstalledWebOns()).manifests;
                 for (const manifest of manifests) {
-                  await nomo.injectIntoWebOn({
+                  await nomo.launchWebOn({
                     payload: "",
-                    webon_id: manifest.webon_id,
+                    manifest,
                   });
                 }
               } catch (e) {

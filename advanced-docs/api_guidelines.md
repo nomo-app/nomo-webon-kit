@@ -49,6 +49,13 @@ In some situations, those error messages can be used as a replacement for readin
 If an unknown error happens, then the Nomo App returns a whole Dart-Stacktrace back to JavaScript.
 Please copy-paste this Dart-Stacktrace into a GitHub-issue if you see an unknown error.
 
+### Input Validation
+
+If possible, Nomo API inputs should be validated to ensure correct operation.
+Do not assume that Nomo developers read any docs!
+Many developers will rely on error messages instead of docs.
+Hence, if an API input is wrong, then we should better throw a useful error message instead of letting the code fail at random places.
+
 ## Autogenerating Docs
 
 Beside of a general introduction, Nomo APIs should come with automatically generated docs for every public function.

@@ -27,7 +27,7 @@ Taking it a step further, the whole concept of a *"connect wallet button"* is hi
 
 ## Third Generation: Free DApps with unlimited UX
 
-To liberate DApps from middlemans like wallletconnect.com, we need to decentralize what should have been decentralized in the first place.
+To liberate DApps from middlemans like walletconnect.com, we need to decentralize what should have been decentralized in the first place.
 
 This is where the Nomo WebOn API comes into play.
 Through Nomo WebOns, DApps and wallets communicate locally on the same phone, eliminating the need for a "connect wallet button."

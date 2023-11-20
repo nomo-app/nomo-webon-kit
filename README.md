@@ -28,6 +28,8 @@ The results are:
 - WebOns are fast and reliable 
 - ethers.js can be setup with only [three lines of JavaScript](https://github.com/nomo-app/nomo-webon-kit/tree/main/ethersjs-nomo-webons#multichain-support)
 
+See our [Decentralized App Vision](https://github.com/nomo-app/nomo-webon-kit/tree/main/advanced-docs/dapp_vision.md) for more details.
+
 # Quick Usage Guide
 
 Before going into more details, we explain a few quick steps for getting a WebOn up and running together with the Nomo App.

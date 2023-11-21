@@ -43,8 +43,8 @@ export default function Home() {
     nomo.localStorage.setItem("foo", "bar");
     nomo.getDeviceHashes().then(console.log).catch(console.error);
     injectNomoCSSVariables();
-    nomo.registerOnWebOnVisible((args: { cardMode: boolean }) => {
-      console.log("onWebOnVisible", args);
+    nomo.registerOnWebOnVisible((_args: { cardMode: boolean }) => {
+      nomo.checkForWebOnUpdate();
     });
   }, []);
 

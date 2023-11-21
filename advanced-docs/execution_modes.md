@@ -41,12 +41,11 @@ In addition, the DevDev mode provides additional features like reload-buttons, b
 
 ## Fallback Mode
 
-Our recommended way of developing WebOns is to connect Chrome DevTools to the Nomo App as explained in the README.
+Our recommended way of developing WebOns is to connect Chrome DevTools to the Nomo App as explained in the debugging-docs.
 Nevertheless, there are some developers who prefer to use a regular browser instead of the Nomo App.
 For those developers, the Nomo-WebOn-Kit provides a _fallback mode_.
 
 In the fallback mode, only a limited subset of the nomo-API is working.
-Many nomo-functions in the fallback mode will simply return a rejected promise.
 
 # Hosting Modes
 
@@ -63,14 +62,11 @@ Integrated hosting has the following advantages:
 - Capability of running WebOns offline
 - Deployments can be easily done with the [nomo-webon-cli](https://github.com/nomo-app/nomo-webon-cli)
 
-For integrated hosting, the Nomo App requires to package WebOns into a tar.gz-file.
-See https://github.com/nomo-app/nomo-webon-kit/blob/main/advanced-docs/packaging.md for details about packaging a tar.gz-file.
-
 ## External Hosting
 
 WebOns with external hosting work similar to a regular website.
 
-As such, externally hosted WebOns are refreshed whenever you restart the Nomo App. If you also need to refresh a WebOn while the Nomo App is running, then you can refresh it with JavaScript, for example by calling `location.reload()`.
+As such, externally hosted WebOns are refreshed whenever you restart the Nomo App.
 
 External hosting is mainly intended for development, where a fast refresh is needed for testing changes of a WebOn.
 

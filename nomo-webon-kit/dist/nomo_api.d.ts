@@ -59,6 +59,7 @@ export declare const nomo: {
     launchWebOn: typeof nomoLaunchWebOn;
     mnemonicBackupExisted: typeof nomoMnemonicBackupExisted;
     registerOnWebOnVisible: typeof nomoRegisterOnWebOnVisible;
+    checkForWebOnUpdate: typeof nomoCheckForWebOnUpdate;
     getLanguage: typeof nomoGetLanguage;
     addCustomToken: typeof nomoAddCustomToken;
     getVisibleAssets: typeof nomoGetVisibleAssets;
@@ -458,8 +459,8 @@ export declare function nomoGetInstalledWebOns(): Promise<{
 }>;
 /**
  * Installs a WebOn with or without user interaction.
+ * If the WebOn is already installed, it will be updated to the latest version.
  * See the README for an explanation about deeplinks.
- * Returns a stackTrace if the installation fails.
  *
  * Needs nomo.permission.INSTALL_WEBON.
  */
@@ -468,6 +469,12 @@ export declare function nomoInstallWebOn(args: {
     skipPermissionDialog: boolean;
     navigateBack: boolean;
 }): Promise<void>;
+/**
+ * This will show a dialog to the user if an update is available.
+ * If you need to customize this dialog, then you could re-implement the same functionality in JavaScript.
+ * Nevertheless, the Nomo App will automatically check for updates even if you never invoke "nomoCheckForWebOnUpdate".
+ */
+export declare function nomoCheckForWebOnUpdate(): Promise<void>;
 /**
  * The reverse operation of nomoInstallWebOn.
  * Throws an error if the WebOn cannot be found.

@@ -33,7 +33,7 @@ export async function mintNFT(): Promise<TransactionResponse | any> {
     gasPrice: 20000000000,
     nonce: await zscSigner.getNonce(),
     data: contract.interface.encodeFunctionData("mint", [ownAddress, data]),
-    chainId: 383414847825, // chainID for ZENIQ Smartchain
+    chainId: 383414847825, // chainId for ZENIQ Smartchain
   };
   const res = await zscSigner.sendTransaction(tx);
   await nomo.addCustomToken({ contractAddress, network: "zeniqSmartChain" });

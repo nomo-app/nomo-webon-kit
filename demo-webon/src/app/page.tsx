@@ -16,6 +16,7 @@ import { launchAllWebOnsDemo } from "./multi-webons/multi_webon_demo";
 import { themeSwitchDemo } from "./theming/theme_switch_demo";
 import { faqDemo } from "./faq/faq_demo";
 import { sendOnePercentOfBalance } from "./assets/send_demo";
+import { ethSigDemo } from "./evm/eth_sig";
 export default function Home() {
   const [dialog, setDialog] = useState<DialogContent | null>(null);
   const platformInfo = useNomoState(nomo.getPlatformInfo);
@@ -191,31 +192,27 @@ export default function Home() {
 
         <div className={styles.card}>
           <h2
-            onClick={() => {
-              nomo
-                .signEvmMessage({
-                  message: "this message comes from my wallet",
-                })
-                .then((res) => {
-                  openDialog({
-                    title: "Message was signed!",
-                    content: JSON.stringify(res),
-                  });
-                })
-                .catch((e) => {
-                  console.error(e);
-                  openDialog({
-                    title: "signEvmMessage failed",
-                    content: JSON.stringify(e),
-                  });
+            onClick={async () => {
+              try {
+                const res = await ethSigDemo();
+                openDialog({
+                  title: "ETH Message was signed!",
+                  content: JSON.stringify(res),
                 });
+              } catch (e) {
+                console.error(e);
+                openDialog({
+                  title: "ethSigDemo failed",
+                  content: JSON.stringify(e),
+                });
+              }
             }}
           >
-            Sign EVM message<span>-&gt;</span>
+            Sign ETH message<span>-&gt;</span>
           </h2>
           <p>
-            With consent from the user, WebOns can sign messages to prove that
-            the user controls a specific wallet.
+            WebOns can sign messages to prove that the user controls a specific
+            wallet.
           </p>
         </div>
         <div className={styles.card}>

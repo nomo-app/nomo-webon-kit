@@ -21,8 +21,9 @@ export async function nomoAuthFetch(args) {
  * a map from nomo-auth-addr to JWT
  */
 const _cachedJWTs = {};
-function _injectNomoAuthHeaders({ nomoAuthAddress, url, headers, }) {
+function _injectNomoAuthHeaders({ nomoAuthAddress, nomoEthAddress, url, headers, }) {
     headers["nomo-auth-addr"] = nomoAuthAddress;
+    headers["nomo-eth-addr"] = nomoEthAddress;
     headers["nomo-auth-version"] = "1.1.0";
     headers["nomo-webon"] = "WebOnName/WebOnVersion";
     const jwt = _cachedJWTs[nomoAuthAddress];
@@ -47,10 +48,17 @@ function _nomoSignMessageSimulation({ jwt, url, }) {
 export async function simulateNomoAuthHttp(args) {
     var _a;
     // We hardcode "nomo-auth-addr" for the simulation mode.
-    // In the real Nomo-App, "nomo-auth-addr" is different for each domain.
+    // In the real Nomo-App, "nomo-auth-addr" will be different for each domain.
+    // In contrast, "nomo-eth-addr" will be the same for all domains and only depend on the wallet.
     const nomoAuthAddress = "cNpBzxornzED1MsBKDupMbwqZnkFtoUVGD";
+    const nomoEthAddress = "0xF1cA9cb74685755965c7458528A36934Df52A3EF";
     const headers = (_a = args.headers) !== null && _a !== void 0 ? _a : {};
-    _injectNomoAuthHeaders({ nomoAuthAddress, url: args.url, headers });
+    _injectNomoAuthHeaders({
+        nomoAuthAddress,
+        nomoEthAddress,
+        url: args.url,
+        headers,
+    });
     let res = await fetch(args.url, {
         method: args.method,
         headers,
@@ -66,7 +74,12 @@ export async function simulateNomoAuthHttp(args) {
             return Promise.reject("got 403 but missing JWT");
         }
         _cachedJWTs[nomoAuthAddress] = jwt;
-        _injectNomoAuthHeaders({ nomoAuthAddress, url: args.url, headers });
+        _injectNomoAuthHeaders({
+            nomoAuthAddress,
+            nomoEthAddress,
+            url: args.url,
+            headers,
+        });
         res = await fetch(args.url, {
             method: args.method,
             headers,

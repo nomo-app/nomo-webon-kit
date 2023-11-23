@@ -10,7 +10,8 @@ export async function ethSigDemo(): Promise<{
   const res = await nomo.signEvmMessage({
     message,
   });
-  const ethSig = res.sigHex; // in a real backend, "ethSig" might come either via the Nomo-ID or via the Nomo-Auth protocol.
+  const ethSig = res.sigHex; // In a real backend, "ethSig" might come either via the Nomo-ID or via the Nomo-Auth protocol.
+  // The function "nomo.authHttp()" will automatically inject an ethSig into the HTTP-headers.
   // See https://github.com/nomo-app/nomo-id or https://github.com/nomo-app/nomo-auth for more details about those protocols.
 
   const ethSignerAddress = await nomo.getEvmAddress(); // in a real backend, "ethSignerAddress" might be stored in a database

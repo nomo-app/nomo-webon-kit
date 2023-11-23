@@ -23,18 +23,23 @@ export async function nomoAuthFetch(args) {
 const _cachedJWTs = {};
 function _injectNomoAuthHeaders({ nomoAuthAddress, url, headers, }) {
     headers["nomo-auth-addr"] = nomoAuthAddress;
-    headers["nomo-auth-version"] = "1.0.0";
+    headers["nomo-auth-version"] = "1.1.0";
     headers["nomo-webon"] = "WebOnName/WebOnVersion";
     const jwt = _cachedJWTs[nomoAuthAddress];
     if (jwt) {
-        headers["nomo-sig"] = _nomoSignMessageSimulation({ jwt, url });
+        const { authSig, ethSig } = _nomoSignMessageSimulation({ jwt, url });
+        headers["nomo-sig"] = authSig;
+        headers["nomo-eth-sig"] = ethSig;
         headers["Authorization"] = `Bearer ${jwt}`;
     }
 }
 function _nomoSignMessageSimulation({ jwt, url, }) {
-    console.log("Nomo-Auth: simulate signature for url " + url);
-    // nomoSignMessage is not implemented in simulation-mode, therefore we return a hardcoded signature
-    return "HCaJ9SEvzyRXGbtDmtvZxErBLgyiOGWtAjBwavyWqhaBFsQB4MzjiHgaF9Ia2MA9IOfZ5W/fUC56UXzE96IN6nk=";
+    console.log("Nomo-Auth: simulate signatures for url " + url);
+    // signing is not implemented in simulation-mode, therefore we return a hardcoded signatures
+    return {
+        authSig: "HCaJ9SEvzyRXGbtDmtvZxErBLgyiOGWtAjBwavyWqhaBFsQB4MzjiHgaF9Ia2MA9IOfZ5W/fUC56UXzE96IN6nk=",
+        ethSig: "0x67d10b371a75ac6d20c2af83c9e14edec60567b3bc181b0b971bbea1888146e87e0b0dd6ca45453749171ec99522ffd061ccebeafff89ed9d95d6a3f8da3660b1b",
+    };
 }
 /**
  * This is a browser-simulation of the Nomo-Auth-Protocol.

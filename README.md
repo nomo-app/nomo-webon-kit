@@ -9,7 +9,7 @@ WebOns are a powerful capability of the Nomo App that unlock the following featu
 - Seamless wallet connection that works even offline
 - A decentralized chat service
 - Optional: Verification that users are real via KYC wallets
-- Authentication via Nomo-Auth or Nomo-ID
+- Authentication via [Nomo-Auth](https://github.com/nomo-app/nomo-auth) or [Nomo-ID](https://github.com/nomo-app/nomo-id)
 - More features are coming with Nomo App updates!
 
 ## Why Nomo WebOns?

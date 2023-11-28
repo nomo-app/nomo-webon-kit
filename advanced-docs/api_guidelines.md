@@ -10,13 +10,13 @@ Almost all Nomo APIs should use *named arguments* instead of positional argument
 See the following example to understand why named arguments are needed:
 
 ````
-await nomoDoSomething(true, false, false, true); // Bad API design: What the hell is the meaning of those bool-arguments?
+await nomoDoSomething(es6Arg, ”eth“, “eth”, ”gwei”); // Bad API design: What the hell is the meaning of those arguments?
 
-await nomoDoSomething({ // Good API design: The bool-arguments are self-explaining  
-    showFees: true,  
-    showData: false,  
-    showGasprice: false,  
-    showGaslimit: true,  
+await nomoDoSomething({ // Good API design: The arguments are self-explaining
+    es6Arg,  
+    asset: ”eth“,  
+    nativeAsset: ”eth“,  
+    feeUnit: “gwei“,  
 });
 ````
 

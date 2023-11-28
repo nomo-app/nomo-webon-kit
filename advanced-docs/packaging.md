@@ -16,9 +16,9 @@ It may depend on your framework how to achieve client site rendering; here are a
 
 ### Next.js
 
-With Next.js-React, static builds may be done by configuring `output: 'export'` and running `next build && next export`.
+With Next.js-React, you can configure static builds by adding `output: 'export'` to your `next.config.js`.
 
-See the following example of a `next.config.js` that can generate static builds: https://github.com/nomo-app/nomo-webon-kit/blob/main/demo-webon/next.config.js
+See the [demo example](https://github.com/nomo-app/nomo-webon-kit/blob/main/demo-webon/next.config.js) of a `next.config.js`.
 
 ### Svelte
 

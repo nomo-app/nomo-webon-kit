@@ -14,6 +14,9 @@ export function isFallbackModeActive(): boolean {
  * A low-level function that aims to be compatible with multiple webviews
  */
 function getDartBridge(): ((arg0: string) => void) | null {
+  if (typeof window === "undefined") {
+    return null; // fallback mode in server-side rendering
+  }
   if (window.webkit) {
     // legacy macOS
     return (payload: string) =>

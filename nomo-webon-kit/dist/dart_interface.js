@@ -7,6 +7,9 @@ export function isFallbackModeActive() {
  */
 function getDartBridge() {
     var _a;
+    if (typeof window === "undefined") {
+        return null; // fallback mode in server-side rendering
+    }
     if (window.webkit) {
         // legacy macOS
         return (payload) => window.webkit.messageHandlers.NOMOJSChannel.postMessage(payload);

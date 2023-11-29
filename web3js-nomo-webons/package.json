@@ -7,7 +7,7 @@
   "scripts": {
     "build": "rm -rf dist && tsc",
     "start": "node dist/web3js_provider.js",
-    "doPublish": "npm uninstall nomo-webon-kit && npm i --save-peer nomo-webon-kit && npm publish"
+    "prepublishOnly": "npm uninstall nomo-webon-kit && npm i --save-peer nomo-webon-kit"
   },
   "repository": {
     "type": "git",

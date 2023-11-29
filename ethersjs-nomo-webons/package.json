@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rm -rf dist && tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "doPublish": "npm uninstall nomo-webon-kit && npm i --save-peer nomo-webon-kit && npm publish"
+    "prepublishOnly": "npm uninstall nomo-webon-kit && npm i --save-peer nomo-webon-kit"
   },
   "repository": {
     "type": "git",

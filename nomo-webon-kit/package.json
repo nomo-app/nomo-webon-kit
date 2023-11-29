@@ -1,11 +1,12 @@
 {
   "name": "nomo-webon-kit",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "description": "Nomo-WebOn-Kit for the Nomo App",
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf dist && tsc",
-    "doPublish": "cp ../README.md README.md && npm publish",
+    "prepublishOnly": "cp ../README.md README.md",
+    "postpublish": "(cd ../demo-webon && npm i) && (cd ../ethersjs-nomo-webons && npm i) && (cd ../web3js-nomo-webons && npm i)",
     "generate_docs": "git checkout main && git diff --exit-code && typedoc src/nomo_api.ts --plugin typedoc-plugin-markdown --out ../api-docs/ --exclude **.ts && rm ../api-docs/README.md"
   },
   "repository": {

@@ -69,6 +69,7 @@ export declare const nomo: {
     launchUrl: typeof nomoLaunchUrl;
     getBalance: typeof nomoGetBalance;
     getAssetIcon: typeof nomoGetAssetIcon;
+    getAssetPrice: typeof nomoGetAssetPrice;
     openFAQPage: typeof nomoOpenFAQPage;
     getInstalledWebOns: typeof nomoGetInstalledWebOns;
     installWebOn: typeof nomoInstallWebOn;
@@ -390,6 +391,20 @@ export declare function nomoGetAssetIcon(args: {
     isPending: boolean;
     symbol: string;
     name: string;
+}>;
+/**
+ * Returns an asset price.
+ * Might be slow if a price is not yet in the Nomo App's cache.
+ */
+export declare function nomoGetAssetPrice(args: {
+    name: string;
+    symbol: string;
+    contractAddress?: string;
+    network?: string;
+}): Promise<{
+    price: number;
+    currencyDisplayName: string;
+    currencySymbol: string;
 }>;
 /**
  * Opens a standardized FAQ page in Nomo design.

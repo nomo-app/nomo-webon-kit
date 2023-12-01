@@ -108,6 +108,7 @@ export const nomo = {
   launchUrl: nomoLaunchUrl,
   getBalance: nomoGetBalance,
   getAssetIcon: nomoGetAssetIcon,
+  getAssetPrice: nomoGetAssetPrice,
   openFAQPage: nomoOpenFAQPage,
   getInstalledWebOns: nomoGetInstalledWebOns,
   installWebOn: nomoInstallWebOn,
@@ -684,6 +685,37 @@ export async function nomoGetAssetIcon(args: { assetSymbol: string }): Promise<{
   name: string;
 }> {
   return await invokeNomoFunction("nomoGetAssetIcon", args);
+}
+
+/**
+ * Returns an asset price.
+ * Might be slow if a price is not yet in the Nomo App's cache.
+ */
+export async function nomoGetAssetPrice(args: {
+  name: string;
+  symbol: string;
+  contractAddress?: string;
+  network?: string;
+}): Promise<{
+  price: number;
+  currencyDisplayName: string;
+  currencySymbol: string;
+}> {
+  if (isFallbackModeActive()) {
+    const baseEndpoint = "https://price.zeniq.services/v2/currentprice";
+    const priceEndpoint =
+      !!args.contractAddress && !!args.network
+        ? `${baseEndpoint}/${args.contractAddress}/USD/${args.network}`
+        : `${baseEndpoint}/${args.name}/USD`;
+    const res = await nomoAuthHttp(priceEndpoint);
+    const price = JSON.parse(res.response).price;
+    return {
+      price,
+      currencyDisplayName: "US Dollar",
+      currencySymbol: "$",
+    };
+  }
+  return await invokeNomoFunction("nomoGetAssetPrice", args);
 }
 
 /**

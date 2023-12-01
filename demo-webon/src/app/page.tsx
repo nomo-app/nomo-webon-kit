@@ -43,6 +43,15 @@ export default function Home() {
     nomo.enableMobileConsoleDebugging();
     nomo.localStorage.setItem("foo", "bar");
     nomo.getDeviceHashes().then(console.log).catch(console.error);
+    nomo
+      .getAssetPrice({
+        name: "AVINOC",
+        symbol: "AVINOC",
+        contractAddress: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",
+        network: "zeniq-smart-chain",
+      })
+      .then(console.log)
+      .catch(console.error);
     injectNomoCSSVariables();
     nomo.registerOnWebOnVisible((_args: { cardMode: boolean }) => {
       nomo.checkForWebOnUpdate();

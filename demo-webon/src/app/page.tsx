@@ -47,7 +47,7 @@ export default function Home() {
       .getAssetPrice({
         symbol: "AVINOC",
         contractAddress: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",
-        network: "zeniqSmartChain",
+        network: "zeniq-smart-chain",
       })
       .then(console.log)
       .catch(console.error);

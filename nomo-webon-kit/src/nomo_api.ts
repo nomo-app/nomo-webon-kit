@@ -4,6 +4,7 @@ import { compareSemanticVersions } from "./util";
 
 export type NomoEvmNetwork =
   | "zeniqSmartChain"
+  | "zeniq-smart-chain"
   | "ethereumMainnet"
   | "binanceSmartChain";
 export type NomoNetwork =

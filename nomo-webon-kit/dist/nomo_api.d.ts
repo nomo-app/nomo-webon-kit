@@ -1,4 +1,4 @@
-export type NomoEvmNetwork = "zeniqSmartChain" | "ethereumMainnet" | "binanceSmartChain";
+export type NomoEvmNetwork = "zeniqSmartChain" | "zeniq-smart-chain" | "ethereumMainnet" | "binanceSmartChain";
 export type NomoNetwork = NomoEvmNetwork | "bitcoin" | "zeniq" | "litecoin" | "bitcoinCash";
 export interface NomoAssetSelector {
     symbol: string;

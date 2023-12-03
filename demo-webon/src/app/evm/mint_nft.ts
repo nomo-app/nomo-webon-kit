@@ -1,9 +1,7 @@
 import { ethers, TransactionResponse } from "ethers";
 import { zscSigner, zscProvider } from "ethersjs-nomo-webons";
 import NomoDev from "../abi/NomoDev.json";
-import {
-  throwIfFundsAreInsufficient,
-} from "./evm_utils";
+import { throwIfFundsAreInsufficient } from "./evm_utils";
 import { nomo } from "nomo-webon-kit";
 
 /**
@@ -17,7 +15,11 @@ export async function mintNFT(): Promise<TransactionResponse | any> {
   await throwIfFundsAreInsufficient();
 
   const contractAddress = "0x6D3bE2Fca848393eE83b2A1d65b312889cacF5e6"; // contract address of the NomoDev token
-  const contract = new ethers.Contract(contractAddress, NomoDev.abi, zscProvider as any);
+  const contract = new ethers.Contract(
+    contractAddress,
+    NomoDev.abi,
+    zscProvider as any
+  );
 
   const data = "0xf34344"; // data could be a hash of an image or something
   const ownAddress = await zscSigner.getAddress(); // we are minting to our own wallet address
@@ -36,7 +38,11 @@ export async function mintNFT(): Promise<TransactionResponse | any> {
     chainId: 383414847825, // chainId for ZENIQ Smartchain
   };
   const res = await zscSigner.sendTransaction(tx);
-  await nomo.addCustomToken({ contractAddress, network: "zeniqSmartChain" });
+  await nomo.addCustomToken({
+    symbol: "NomoDev",
+    contractAddress,
+    network: "zeniqSmartChain",
+  });
 
   return res;
 }

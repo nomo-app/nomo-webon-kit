@@ -351,7 +351,9 @@ export declare function nomoGetEvmAddress(): Promise<string>;
  * If the dialog does not look "correct", WebOns are free to call "nomoGetVisibleAssets" and implement their own dialog.
  */
 export declare function nomoSelectAssetFromDialog(): Promise<{
-    selectedAsset: NomoAsset;
+    selectedAsset: NomoAsset & {
+        balance: string;
+    };
 }>;
 /**
  * Returns the nomo_manifest.json that was used during the installation of the WebOn.

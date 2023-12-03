@@ -619,7 +619,7 @@ export async function nomoGetEvmAddress(): Promise<string> {
  * If the dialog does not look "correct", WebOns are free to call "nomoGetVisibleAssets" and implement their own dialog.
  */
 export async function nomoSelectAssetFromDialog(): Promise<{
-  selectedAsset: NomoAsset;
+  selectedAsset: NomoAsset & { balance: string };
 }> {
   if (isFallbackModeActive()) {
     return {

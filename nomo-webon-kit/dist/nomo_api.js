@@ -361,7 +361,8 @@ export async function nomoAuthHttp(args) {
  * Needs nomo.permission.SEND_ASSETS.
  */
 export async function nomoSendAssets(args) {
-    return await invokeNomoFunction("nomoSendAssets", args);
+    const legacyArgs = Object.assign(Object.assign({}, args), { assetSymbol: args.asset.symbol });
+    return await invokeNomoFunction("nomoSendAssets", legacyArgs);
 }
 /**
  * If true, then the user has made a backup of their 12 words (at some point in the past).
@@ -475,14 +476,16 @@ export async function nomoLaunchUrl(args) {
  * Typically, the decimals are needed to convert a raw balance into a user-readable balance.
  */
 export async function nomoGetBalance(args) {
-    return await invokeNomoFunction("nomoGetBalance", args);
+    const legacyArgs = Object.assign(Object.assign({}, args), { assetSymbol: args.symbol });
+    return await invokeNomoFunction("nomoGetBalance", legacyArgs);
 }
 /**
  * Returns a set of URLs that contain icons of the asset.
  * May throw an error if no icons can be found.
  */
 export async function nomoGetAssetIcon(args) {
-    return await invokeNomoFunction("nomoGetAssetIcon", args);
+    const legacyArgs = Object.assign(Object.assign({}, args), { assetSymbol: args.symbol });
+    return await invokeNomoFunction("nomoGetAssetIcon", legacyArgs);
 }
 /**
  * Returns an asset price.

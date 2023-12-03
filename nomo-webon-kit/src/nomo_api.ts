@@ -2,16 +2,32 @@ import { invokeNomoFunction, isFallbackModeActive } from "./dart_interface";
 import { nomoAuthFetch } from "./nomo_auth";
 import { compareSemanticVersions } from "./util";
 
-export type EvmNetwork =
-  | "zeniqSmartChain"
-  | "ethereumMainnet"
-  | "binanceSmartChain";
-export type Network =
-  | EvmNetwork
+export type NomoEvmNetwork =
+  | "zeniq-smart-chain"
+  | "ethereum"
+  | "binance-smart-chain";
+export type NomoNetwork =
+  | NomoEvmNetwork
   | "bitcoin"
   | "zeniq"
   | "litecoin"
-  | "bitcoinCash";
+  | "bitcoincash";
+
+export interface NomoAssetSelector {
+  symbol: string;
+  name?: string;
+  network?: NomoNetwork;
+  /**
+   * contractAddress is the strongest asset-selector with the highest security.
+   * If contractAddress is specified, then name and symbol will be ignored.
+   */
+  contractAddress?: string;
+}
+export interface NomoAsset extends NomoAssetSelector {
+  decimals: number;
+  receiveAddress?: string | null;
+  balance?: string;
+}
 
 export type NomoExecutionMode = "PRODUCTION" | "DEV" | "DEV_DEV" | "FALLBACK";
 export type NomoHostingMode = "NOMO_INTEGRATED_HOSTING" | "EXTERNAL_HOSTING";
@@ -501,11 +517,12 @@ export async function nomoAuthHttp(
  * Needs nomo.permission.SEND_ASSETS.
  */
 export async function nomoSendAssets(args: {
-  assetSymbol: string;
+  asset: NomoAssetSelector;
   targetAddress: string;
   amount: string;
 }) {
-  return await invokeNomoFunction("nomoSendAssets", args);
+  const legacyArgs = { ...args, assetSymbol: args.asset.symbol };
+  return await invokeNomoFunction("nomoSendAssets", legacyArgs);
 }
 
 /**
@@ -553,10 +570,12 @@ export async function nomoGetLanguage(): Promise<{ language: string }> {
  *
  * Needs nomo.permission.ADD_CUSTOM_TOKEN.
  */
-export async function nomoAddCustomToken(args: {
-  contractAddress: string;
-  network: EvmNetwork;
-}): Promise<void> {
+export async function nomoAddCustomToken(
+  args: NomoAssetSelector & {
+    contractAddress: string;
+    network: NomoEvmNetwork;
+  }
+): Promise<void> {
   return await invokeNomoFunction("nomoAddCustomToken", args);
 }
 
@@ -564,12 +583,7 @@ export async function nomoAddCustomToken(args: {
  * Returns a list of assets that are currently visible in the Nomo Wallet.
  */
 export async function nomoGetVisibleAssets(): Promise<{
-  visibleAssets: Array<{
-    name: string;
-    symbol: string;
-    decimals: number;
-    contractAddress?: string;
-  }>;
+  visibleAssets: Array<NomoAsset>;
 }> {
   if (isFallbackModeActive()) {
     return {
@@ -605,15 +619,7 @@ export async function nomoGetEvmAddress(): Promise<string> {
  * If the dialog does not look "correct", WebOns are free to call "nomoGetVisibleAssets" and implement their own dialog.
  */
 export async function nomoSelectAssetFromDialog(): Promise<{
-  selectedAsset: {
-    name: string;
-    symbol: string;
-    decimals: number;
-    balance: string;
-    contractAddress?: string;
-    receiveAddress: string | null;
-    network?: string | null;
-  };
+  selectedAsset: NomoAsset & { balance: string };
 }> {
   if (isFallbackModeActive()) {
     return {
@@ -660,23 +666,18 @@ export async function nomoLaunchUrl(args: {
  * Returns not only the balance of an asset, but also additional information like the network, a contract-address and a receive-address.
  * Typically, the decimals are needed to convert a raw balance into a user-readable balance.
  */
-export async function nomoGetBalance(args: { assetSymbol: string }): Promise<{
-  symbol: string;
-  name: string;
-  decimals: number;
-  balance: string;
-  contractAddress?: string | null;
-  receiveAddress: string | null;
-  network?: string | null;
-}> {
-  return await invokeNomoFunction("nomoGetBalance", args);
+export async function nomoGetBalance(
+  args: NomoAssetSelector
+): Promise<NomoAsset & { balance: string }> {
+  const legacyArgs = { ...args, assetSymbol: args.symbol };
+  return await invokeNomoFunction("nomoGetBalance", legacyArgs);
 }
 
 /**
  * Returns a set of URLs that contain icons of the asset.
  * May throw an error if no icons can be found.
  */
-export async function nomoGetAssetIcon(args: { assetSymbol: string }): Promise<{
+export async function nomoGetAssetIcon(args: NomoAssetSelector): Promise<{
   large: string;
   small: string;
   thumb: string;
@@ -684,19 +685,15 @@ export async function nomoGetAssetIcon(args: { assetSymbol: string }): Promise<{
   symbol: string;
   name: string;
 }> {
-  return await invokeNomoFunction("nomoGetAssetIcon", args);
+  const legacyArgs = { ...args, assetSymbol: args.symbol };
+  return await invokeNomoFunction("nomoGetAssetIcon", legacyArgs);
 }
 
 /**
  * Returns an asset price.
  * Might be slow if a price is not yet in the Nomo App's cache.
  */
-export async function nomoGetAssetPrice(args: {
-  name: string;
-  symbol: string;
-  contractAddress?: string;
-  network?: string;
-}): Promise<{
+export async function nomoGetAssetPrice(args: NomoAssetSelector): Promise<{
   price: number;
   currencyDisplayName: string;
   currencySymbol: string;

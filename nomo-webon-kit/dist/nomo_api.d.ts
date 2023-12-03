@@ -1,5 +1,20 @@
-export type EvmNetwork = "zeniqSmartChain" | "ethereumMainnet" | "binanceSmartChain";
-export type Network = EvmNetwork | "bitcoin" | "zeniq" | "litecoin" | "bitcoinCash";
+export type NomoEvmNetwork = "zeniqSmartChain" | "ethereumMainnet" | "binanceSmartChain";
+export type NomoNetwork = NomoEvmNetwork | "bitcoin" | "zeniq" | "litecoin" | "bitcoinCash";
+export interface NomoAssetSelector {
+    symbol: string;
+    name?: string;
+    network?: NomoNetwork;
+    /**
+     * contractAddress is the strongest asset-selector with the highest security.
+     * If contractAddress is specified, then name and symbol will be ignored.
+     */
+    contractAddress?: string;
+}
+export interface NomoAsset extends NomoAssetSelector {
+    decimals: number;
+    receiveAddress?: string | null;
+    balance?: string;
+}
 export type NomoExecutionMode = "PRODUCTION" | "DEV" | "DEV_DEV" | "FALLBACK";
 export type NomoHostingMode = "NOMO_INTEGRATED_HOSTING" | "EXTERNAL_HOSTING";
 export type NomoWebView = "webview_flutter" | "webview_cef" | "not_in_nomo_app";
@@ -284,7 +299,7 @@ export declare function nomoAuthHttp(args: {
  * Needs nomo.permission.SEND_ASSETS.
  */
 export declare function nomoSendAssets(args: {
-    assetSymbol: string;
+    asset: NomoAssetSelector;
     targetAddress: string;
     amount: string;
 }): Promise<any>;
@@ -316,20 +331,15 @@ export declare function nomoGetLanguage(): Promise<{
  *
  * Needs nomo.permission.ADD_CUSTOM_TOKEN.
  */
-export declare function nomoAddCustomToken(args: {
+export declare function nomoAddCustomToken(args: NomoAssetSelector & {
     contractAddress: string;
-    network: EvmNetwork;
+    network: NomoEvmNetwork;
 }): Promise<void>;
 /**
  * Returns a list of assets that are currently visible in the Nomo Wallet.
  */
 export declare function nomoGetVisibleAssets(): Promise<{
-    visibleAssets: Array<{
-        name: string;
-        symbol: string;
-        decimals: number;
-        contractAddress?: string;
-    }>;
+    visibleAssets: Array<NomoAsset>;
 }>;
 /**
  * A convenience function to get the Smartchain address of the Nomo Wallet.
@@ -341,15 +351,7 @@ export declare function nomoGetEvmAddress(): Promise<string>;
  * If the dialog does not look "correct", WebOns are free to call "nomoGetVisibleAssets" and implement their own dialog.
  */
 export declare function nomoSelectAssetFromDialog(): Promise<{
-    selectedAsset: {
-        name: string;
-        symbol: string;
-        decimals: number;
-        balance: string;
-        contractAddress?: string;
-        receiveAddress: string | null;
-        network?: string | null;
-    };
+    selectedAsset: NomoAsset;
 }>;
 /**
  * Returns the nomo_manifest.json that was used during the installation of the WebOn.
@@ -367,24 +369,14 @@ export declare function nomoLaunchUrl(args: {
  * Returns not only the balance of an asset, but also additional information like the network, a contract-address and a receive-address.
  * Typically, the decimals are needed to convert a raw balance into a user-readable balance.
  */
-export declare function nomoGetBalance(args: {
-    assetSymbol: string;
-}): Promise<{
-    symbol: string;
-    name: string;
-    decimals: number;
+export declare function nomoGetBalance(args: NomoAssetSelector): Promise<NomoAsset & {
     balance: string;
-    contractAddress?: string | null;
-    receiveAddress: string | null;
-    network?: string | null;
 }>;
 /**
  * Returns a set of URLs that contain icons of the asset.
  * May throw an error if no icons can be found.
  */
-export declare function nomoGetAssetIcon(args: {
-    assetSymbol: string;
-}): Promise<{
+export declare function nomoGetAssetIcon(args: NomoAssetSelector): Promise<{
     large: string;
     small: string;
     thumb: string;
@@ -396,12 +388,7 @@ export declare function nomoGetAssetIcon(args: {
  * Returns an asset price.
  * Might be slow if a price is not yet in the Nomo App's cache.
  */
-export declare function nomoGetAssetPrice(args: {
-    name: string;
-    symbol: string;
-    contractAddress?: string;
-    network?: string;
-}): Promise<{
+export declare function nomoGetAssetPrice(args: NomoAssetSelector): Promise<{
     price: number;
     currencyDisplayName: string;
     currencySymbol: string;

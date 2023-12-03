@@ -3,16 +3,15 @@ import { nomoAuthFetch } from "./nomo_auth";
 import { compareSemanticVersions } from "./util";
 
 export type NomoEvmNetwork =
-  | "zeniqSmartChain"
   | "zeniq-smart-chain"
-  | "ethereumMainnet"
-  | "binanceSmartChain";
+  | "ethereum"
+  | "binance-smart-chain";
 export type NomoNetwork =
   | NomoEvmNetwork
   | "bitcoin"
   | "zeniq"
   | "litecoin"
-  | "bitcoinCash";
+  | "bitcoincash";
 
 export interface NomoAssetSelector {
   symbol: string;

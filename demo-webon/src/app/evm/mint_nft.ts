@@ -41,7 +41,7 @@ export async function mintNFT(): Promise<TransactionResponse | any> {
   await nomo.addCustomToken({
     symbol: "NomoDev",
     contractAddress,
-    network: "zeniqSmartChain",
+    network: "zeniq-smart-chain",
   });
 
   return res;

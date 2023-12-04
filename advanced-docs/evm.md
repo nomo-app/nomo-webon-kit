@@ -16,6 +16,12 @@ The package [web3js-nomo-webons](https://github.com/nomo-app/nomo-webon-kit/tree
 
 Currently, we consider web3js-nomo-webons as experimental, so our recommendation is to prefer ethersjs-nomo-webons if you can.
 
+## window.ethereum API
+
+Through the [window.ethereum API](https://docs.metamask.io/wallet/reference/provider-api/), the Nomo App supports traditional dApps that were built for wallets like MetaMask.
+Compared to MetaMask, the Nomo App provides a much better user experience.
+Internally, this is achieved with a glue-code that maps the window.ethereum-API to the WebOn-API.
+
 ## Custom EVM glue-code
 
 If none of the above-mentioned packages suit your needs, then you could roll your own EVM-glue-code.

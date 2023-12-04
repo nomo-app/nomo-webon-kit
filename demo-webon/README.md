@@ -1,6 +1,9 @@
 This demo-WebOn is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 You can use nextjs for your WebOn, but please feel free to use any other JavaScript-framework as well.
 
+Deeplink to try it out:
+https://nomo.app/webon/w.nomo.app/app.nomo.demowebon/nomo.tar.gz
+
 ## Getting Started
 
 First, run the development server:

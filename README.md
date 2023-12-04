@@ -25,7 +25,7 @@ WebOns and Wallet communicate locally on the same phone.
 The results are:
 
 - WebOns do not need any "connect wallet“ button
-- WebOns are fast and reliable 
+- WebOns are fast and reliable
 - ethers.js can be setup with only [three lines of JavaScript](https://github.com/nomo-app/nomo-webon-kit/tree/main/ethersjs-nomo-webons#multichain-support)
 
 See our [Decentralized App Vision](https://github.com/nomo-app/nomo-webon-kit/tree/main/advanced-docs/dapp_vision.md) for more details.
@@ -114,8 +114,7 @@ In order to use this package, we expect that WebOns are written in JavaScript or
 
 ## Interacting with EVM blockchains
 
-If you want to port a decentralized application, then we recommend the package [ethersjs-nomo-webons](https://github.com/nomo-app/nomo-webon-kit/tree/main/ethersjs-nomo-webons#readme).
-There also exists web3js-nomo-webons, but our web3.js support is not as good as our ethers.js-V6 support.
+See the [EVM docs](https://github.com/nomo-app/nomo-webon-kit/tree/main/advanced-docs/evm.md) if you want to port a decentralized application as a WebOn.
 
 # Debugging WebOns
 

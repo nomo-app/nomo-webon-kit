@@ -43,8 +43,6 @@ Download the Nomo App and create a wallet with it.
 
 ## Step 2: Launch a WebOn locally
 
-> You can skip step 2 and step 4 if you use the following deeplink: <https://nomo.app/webon/demowebon.nomo.app>
-
 Clone one of the [Opensource WebOns](https://github.com/nomo-app/nomo-webon-kit/tree/main/advanced-docs/opensource_webons.md) or alternatively use your own frontend template.
 Install npm dependencies and launch your WebOn on localhost.
 

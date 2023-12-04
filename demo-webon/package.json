@@ -4,27 +4,29 @@
     "dev": "next dev",
     "deploy_all": "npm run deploy_legacy && npm run deploy_tar",
     "deploy_legacy": "rm -f .env.local && ./scripts/deploy_legacy.sh",
-    "deploy_tar": "./scripts/deploy_tar.sh",
-    "deploy_manifest": "./scripts/deploy_manifest.sh",
+    "deploy_tar": "nomo-webon-cli deploy out/nomo.tar.gz production",
     "build_all": "npm run build && npm run build_tar",
     "build": "next build && next export",
-    "build_tar": "rm -f nomo.tar.gz && COPYFILE_DISABLE=1 tar -cv --gzip --file=nomo.tar.gz out",
+    "build_tar": "nomo-webon-cli build out",
     "start": "npx serve@latest out",
     "lint": "next lint"
   },
   "dependencies": {
-    "@types/node": "20.2.3",
-    "@types/react": "18.2.6",
-    "@types/react-dom": "18.2.4",
-    "eslint": "8.41.0",
-    "eslint-config-next": "13.4.3",
     "ethers": "^6.8.1",
     "ethersjs-nomo-webons": "file:../ethersjs-nomo-webons",
     "next": "13.4.3",
     "nomo-webon-kit": "file:../nomo-webon-kit",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "5.0.4",
     "web3js-nomo-webons": "file:../web3js-nomo-webons"
+  },
+  "devDependencies": {
+    "@types/node": "20.2.3",
+    "@types/react": "18.2.6",
+    "@types/react-dom": "18.2.4",
+    "eslint": "8.41.0",
+    "eslint-config-next": "13.4.3",
+    "typescript": "5.0.4",
+    "nomo-webon-cli": "^0.1.1"
   }
 }

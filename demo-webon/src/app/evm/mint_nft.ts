@@ -14,7 +14,7 @@ export async function mintNFT(): Promise<TransactionResponse | any> {
    */
   await throwIfFundsAreInsufficient();
 
-  const contractAddress = "0xC50a16E1e6504b1967f475A9b0783A2242669D64"; // contract address of the NomoDev token
+  const contractAddress = "0x4a9E707fc2AbF8FcF840054F250E5416a3d8608B"; // contract address of the DemoContract token
   const contract = new ethers.Contract(
     contractAddress,
     DemoContract.abi,
@@ -23,6 +23,8 @@ export async function mintNFT(): Promise<TransactionResponse | any> {
 
   const data = "0xf34344"; // data could be a hash of an image or something
   const ownAddress = await zscSigner.getAddress(); // we are minting to our own wallet address
+  const sampleBytesArray = [ethers.toUtf8Bytes('ArrayElement1'), ethers.toUtf8Bytes('ArrayElement2')]; // sample bytes array
+
 
   /**
    * The tx-object needs to be populated with almost all the properties for a transaction to go through.
@@ -34,7 +36,7 @@ export async function mintNFT(): Promise<TransactionResponse | any> {
     gasLimit: 170000,
     gasPrice: 20000000000,
     nonce: await zscSigner.getNonce(),
-    data: contract.interface.encodeFunctionData("mint", [ownAddress, data]),
+    data: contract.interface.encodeFunctionData("mint", [ownAddress, data, sampleBytesArray, true, ['0x742d35Cc6634C0532925a3b844Bc454e4438f44e', '0x742d35Cc6634C0532925a3b844Bc454e4438f44e'], 23]),
     chainId: 383414847825, // chainId for ZENIQ Smartchain
   };
   const res = await zscSigner.sendTransaction(tx);

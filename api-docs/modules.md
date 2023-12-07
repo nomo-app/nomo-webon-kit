@@ -82,7 +82,7 @@
 
 #### Defined in
 
-[nomo_api.ts:9](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L9)
+[nomo_api.ts:9](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L9)
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 #### Defined in
 
-[nomo_api.ts:36](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L36)
+[nomo_api.ts:36](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L36)
 
 ___
 
@@ -102,7 +102,7 @@ ___
 
 #### Defined in
 
-[nomo_api.ts:37](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L37)
+[nomo_api.ts:37](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L37)
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 #### Defined in
 
-[nomo_api.ts:13](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L13)
+[nomo_api.ts:13](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L13)
 
 ___
 
@@ -124,7 +124,7 @@ The themes that are supported by the Nomo App.
 
 #### Defined in
 
-[nomo_theming.ts:6](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_theming.ts#L6)
+[nomo_theming.ts:6](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_theming.ts#L6)
 
 ___
 
@@ -134,7 +134,7 @@ ___
 
 #### Defined in
 
-[nomo_api.ts:38](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L38)
+[nomo_api.ts:38](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L38)
 
 ## Variables
 
@@ -194,7 +194,7 @@ The nomo-object can be used with only one import and supports the auto-completio
 
 #### Defined in
 
-[nomo_api.ts:97](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L97)
+[nomo_api.ts:97](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L97)
 
 ___
 
@@ -217,7 +217,7 @@ console.log/console.error/console.warn/console.info.
 
 #### Defined in
 
-[nomo_api.ts:149](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L149)
+[nomo_api.ts:149](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L149)
 
 ___
 
@@ -239,7 +239,7 @@ nomoLocalStorage can also be used as an alternative to the regular localStorage.
 
 #### Defined in
 
-[nomo_api.ts:66](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L66)
+[nomo_api.ts:66](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L66)
 
 ## Functions
 
@@ -262,7 +262,7 @@ A low-level function. We recommend calling "hasMinimumNomoVersion" instead.
 
 #### Defined in
 
-[util.ts:11](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/util.ts#L11)
+[util.ts:11](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/util.ts#L11)
 
 ___
 
@@ -270,7 +270,7 @@ ___
 
 ▸ **getCurrentNomoTheme**(): `Promise`<{ `colors`: { `background`: `string` ; `disabledColor`: `string` ; `error`: `string` ; `foreground1`: `string` ; `foreground2`: `string` ; `foreground3`: `string` ; `onPrimary`: `string` ; `onSecondary`: `string` ; `primary`: `string` ; `primaryContainer`: `string` ; `secondary`: `string` ; `secondaryContainer`: `string` ; `settingsColumnColor`: `string` ; `settingsTileColor`: `string` ; `snackBarColor`: `string` ; `surface`: `string`  } ; `displayName`: `string` ; `name`: `string`  }\>
 
-Returns the current theme of the Nomo App.
+A low-level function. We recommend using "injectNomoCSSVariables" instead.
 
 #### Returns
 
@@ -278,7 +278,7 @@ Returns the current theme of the Nomo App.
 
 #### Defined in
 
-[nomo_theming.ts:59](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_theming.ts#L59)
+[nomo_theming.ts:59](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_theming.ts#L59)
 
 ___
 
@@ -302,7 +302,7 @@ It is also possible to require a minimum Nomo App version in the manifest.
 
 #### Defined in
 
-[nomo_api.ts:286](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L286)
+[nomo_api.ts:286](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L286)
 
 ___
 
@@ -318,7 +318,7 @@ Injects CSS variables that automatically adjust according to the currently selec
 
 #### Defined in
 
-[nomo_theming.ts:203](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_theming.ts#L203)
+[nomo_theming.ts:203](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_theming.ts#L203)
 
 ___
 
@@ -342,7 +342,7 @@ This is the main entry point into the native layer.
 
 #### Defined in
 
-[dart_interface.ts:74](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/dart_interface.ts#L74)
+[dart_interface.ts:74](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/dart_interface.ts#L74)
 
 ___
 
@@ -366,7 +366,7 @@ For idempotent functions, this cache prevents unnecessary calls to the native la
 
 #### Defined in
 
-[dart_interface.ts:57](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/dart_interface.ts#L57)
+[dart_interface.ts:57](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/dart_interface.ts#L57)
 
 ___
 
@@ -382,7 +382,7 @@ Returns true if the code is not running within a Nomo App WebView.
 
 #### Defined in
 
-[dart_interface.ts:25](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/dart_interface.ts#L25)
+[dart_interface.ts:25](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/dart_interface.ts#L25)
 
 ___
 
@@ -407,7 +407,7 @@ Needs nomo.permission.ADD_CUSTOM_TOKEN.
 
 #### Defined in
 
-[nomo_api.ts:512](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L512)
+[nomo_api.ts:512](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L512)
 
 ___
 
@@ -431,7 +431,7 @@ At a lower level, Nomo-Auth works by injecting a few HTTP-headers into the reque
 
 #### Defined in
 
-[nomo_auth.ts:8](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_auth.ts#L8)
+[nomo_auth.ts:8](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_auth.ts#L8)
 
 ___
 
@@ -449,7 +449,7 @@ Nevertheless, the Nomo App will automatically check for updates even if you neve
 
 #### Defined in
 
-[nomo_api.ts:751](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L751)
+[nomo_api.ts:751](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L751)
 
 ___
 
@@ -467,7 +467,7 @@ For the Desktop DevDev-mode, this function is not necessary.
 
 #### Defined in
 
-[nomo_api.ts:175](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L175)
+[nomo_api.ts:175](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L175)
 
 ___
 
@@ -490,7 +490,7 @@ May throw an error if no icons can be found.
 
 #### Defined in
 
-[nomo_api.ts:624](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L624)
+[nomo_api.ts:624](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L624)
 
 ___
 
@@ -513,7 +513,7 @@ Might be slow if a price is not yet in the Nomo App's cache.
 
 #### Defined in
 
-[nomo_api.ts:640](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L640)
+[nomo_api.ts:640](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L640)
 
 ___
 
@@ -536,7 +536,7 @@ Typically, the decimals are needed to convert a raw balance into a user-readable
 
 #### Defined in
 
-[nomo_api.ts:613](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L613)
+[nomo_api.ts:613](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L613)
 
 ___
 
@@ -555,7 +555,7 @@ Needs nomo.permission.DEVICE_FINGERPRINTING.
 
 #### Defined in
 
-[nomo_api.ts:425](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L425)
+[nomo_api.ts:425](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L425)
 
 ___
 
@@ -573,7 +573,7 @@ Needs nomo.permission.DEVICE_FINGERPRINTING.
 
 #### Defined in
 
-[nomo_api.ts:442](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L442)
+[nomo_api.ts:442](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L442)
 
 ___
 
@@ -590,7 +590,7 @@ Internally, it calls "nomoGetWalletAddresses" and caches the result.
 
 #### Defined in
 
-[nomo_api.ts:546](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L546)
+[nomo_api.ts:546](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L546)
 
 ___
 
@@ -607,7 +607,7 @@ See the advanced docs for more details about execution modes: https://github.com
 
 #### Defined in
 
-[nomo_api.ts:44](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L44)
+[nomo_api.ts:44](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L44)
 
 ___
 
@@ -625,7 +625,7 @@ Needs nomo.permission.GET_INSTALLED_WEBONS.
 
 #### Defined in
 
-[nomo_api.ts:725](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L725)
+[nomo_api.ts:725](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L725)
 
 ___
 
@@ -641,7 +641,7 @@ Returns the currently selected language of the Nomo App.
 
 #### Defined in
 
-[nomo_api.ts:499](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L499)
+[nomo_api.ts:499](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L499)
 
 ___
 
@@ -658,7 +658,7 @@ For example, this can be used by a WebOn for checking its own version.
 
 #### Defined in
 
-[nomo_api.ts:577](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L577)
+[nomo_api.ts:577](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L577)
 
 ___
 
@@ -676,7 +676,7 @@ Needs nomo.permission.SEND_MESSAGE.
 
 #### Defined in
 
-[nomo_api.ts:304](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L304)
+[nomo_api.ts:304](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L304)
 
 ___
 
@@ -694,7 +694,7 @@ See https://nomo.app/ for an overview of supported platforms.
 
 #### Defined in
 
-[nomo_api.ts:263](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L263)
+[nomo_api.ts:263](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L263)
 
 ___
 
@@ -710,7 +710,7 @@ Returns a list of assets that are currently visible in the Nomo Wallet.
 
 #### Defined in
 
-[nomo_api.ts:524](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L524)
+[nomo_api.ts:524](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L524)
 
 ___
 
@@ -726,7 +726,7 @@ Returns blockchain-addresses of the NOMO-user.
 
 #### Defined in
 
-[nomo_api.ts:321](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L321)
+[nomo_api.ts:321](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L321)
 
 ___
 
@@ -752,7 +752,7 @@ Also the NOMO-ID protocol works by injecting QRCodes.
 
 #### Defined in
 
-[nomo_api.ts:340](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L340)
+[nomo_api.ts:340](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L340)
 
 ___
 
@@ -781,7 +781,7 @@ Needs nomo.permission.INSTALL_WEBON.
 
 #### Defined in
 
-[nomo_api.ts:738](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L738)
+[nomo_api.ts:738](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L738)
 
 ___
 
@@ -797,7 +797,7 @@ Launches a free faucet that can be used for paying transaction fees.
 
 #### Defined in
 
-[nomo_api.ts:818](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L818)
+[nomo_api.ts:818](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L818)
 
 ___
 
@@ -821,7 +821,7 @@ Passes a URL to the underlying platform for handling.
 
 #### Defined in
 
-[nomo_api.ts:594](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L594)
+[nomo_api.ts:594](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L594)
 
 ___
 
@@ -849,7 +849,7 @@ Afterwards, the user may navigate back to the current WebOn by pressing the back
 
 #### Defined in
 
-[nomo_api.ts:354](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L354)
+[nomo_api.ts:354](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L354)
 
 ___
 
@@ -874,7 +874,7 @@ Needs nomo.permission.INSTALL_WEBON.
 
 #### Defined in
 
-[nomo_api.ts:790](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L790)
+[nomo_api.ts:790](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L790)
 
 ___
 
@@ -891,7 +891,7 @@ If false, then there exists no backup and the 12 words will get lost with a high
 
 #### Defined in
 
-[nomo_api.ts:473](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L473)
+[nomo_api.ts:473](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L473)
 
 ___
 
@@ -919,7 +919,7 @@ Optionally, a button for contacting support is shown below of the FAQs.
 
 #### Defined in
 
-[nomo_api.ts:667](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L667)
+[nomo_api.ts:667](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L667)
 
 ___
 
@@ -947,7 +947,7 @@ Needs nomo.permission.READ_MEDIA.
 
 #### Defined in
 
-[nomo_api.ts:398](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L398)
+[nomo_api.ts:398](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L398)
 
 ___
 
@@ -966,7 +966,7 @@ Needs nomo.permission.CAMERA.
 
 #### Defined in
 
-[nomo_api.ts:192](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L192)
+[nomo_api.ts:192](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L192)
 
 ___
 
@@ -989,7 +989,7 @@ For example, this can be used to refresh themes or languages when re-opening a W
 
 #### Defined in
 
-[nomo_api.ts:486](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L486)
+[nomo_api.ts:486](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L486)
 
 ___
 
@@ -1016,7 +1016,7 @@ Needs nomo.permission.INSTALL_WEBON.
 
 #### Defined in
 
-[nomo_api.ts:772](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L772)
+[nomo_api.ts:772](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L772)
 
 ___
 
@@ -1033,7 +1033,7 @@ If the dialog does not look "correct", WebOns are free to call "nomoGetVisibleAs
 
 #### Defined in
 
-[nomo_api.ts:555](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L555)
+[nomo_api.ts:555](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L555)
 
 ___
 
@@ -1062,7 +1062,7 @@ Needs nomo.permission.SEND_ASSETS.
 
 #### Defined in
 
-[nomo_api.ts:460](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L460)
+[nomo_api.ts:460](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L460)
 
 ___
 
@@ -1089,7 +1089,7 @@ Needs nomo.permission.SIGN_EVM_MESSAGE.
 
 #### Defined in
 
-[nomo_api.ts:246](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L246)
+[nomo_api.ts:246](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L246)
 
 ___
 
@@ -1115,7 +1115,7 @@ Needs nomo.permission.SIGN_EVM_TRANSACTION.
 
 #### Defined in
 
-[nomo_api.ts:232](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L232)
+[nomo_api.ts:232](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L232)
 
 ___
 
@@ -1143,7 +1143,7 @@ Needs nomo.permission.CAMERA.
 
 #### Defined in
 
-[nomo_api.ts:371](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L371)
+[nomo_api.ts:371](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L371)
 
 ___
 
@@ -1169,7 +1169,7 @@ Needs nomo.permission.INSTALL_WEBON.
 
 #### Defined in
 
-[nomo_api.ts:761](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L761)
+[nomo_api.ts:761](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L761)
 
 ___
 
@@ -1195,7 +1195,7 @@ This is a browser-simulation of the Nomo-Auth-Protocol.
 
 #### Defined in
 
-[nomo_auth.ts:85](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_auth.ts#L85)
+[nomo_auth.ts:85](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_auth.ts#L85)
 
 ___
 
@@ -1217,7 +1217,7 @@ An alternative to JSON.stringify
 
 #### Defined in
 
-[nomo_api.ts:199](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_api.ts#L199)
+[nomo_api.ts:199](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L199)
 
 ___
 
@@ -1241,4 +1241,4 @@ It is recommended to call "injectNomoCSSVariables" after a theme has changed.
 
 #### Defined in
 
-[nomo_theming.ts:12](https://github.com/nomo-app/nomo-webon-kit/blob/3c856a0/nomo-webon-kit/src/nomo_theming.ts#L12)
+[nomo_theming.ts:12](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_theming.ts#L12)

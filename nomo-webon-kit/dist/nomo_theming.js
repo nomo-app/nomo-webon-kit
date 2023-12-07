@@ -23,7 +23,7 @@ async function nomoGetTheme() {
  */
 let fallbackThemeSelector = "LIGHT";
 /**
- * Returns the current theme of the Nomo App.
+ * A low-level function. We recommend using "injectNomoCSSVariables" instead.
  */
 export async function getCurrentNomoTheme() {
     if (isFallbackModeActive()) {

@@ -54,7 +54,7 @@ async function nomoGetTheme(): Promise<{
 let fallbackThemeSelector: NomoTheme = "LIGHT";
 
 /**
- * Returns the current theme of the Nomo App.
+ * A low-level function. We recommend using "injectNomoCSSVariables" instead.
  */
 export async function getCurrentNomoTheme(): Promise<{
   name: string;

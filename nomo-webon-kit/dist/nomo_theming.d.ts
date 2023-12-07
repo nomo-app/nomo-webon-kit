@@ -10,7 +10,7 @@ export declare function switchNomoTheme(args: {
     theme: NomoTheme;
 }): Promise<void>;
 /**
- * Returns the current theme of the Nomo App.
+ * A low-level function. We recommend using "injectNomoCSSVariables" instead.
  */
 export declare function getCurrentNomoTheme(): Promise<{
     name: string;

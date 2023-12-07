@@ -41,9 +41,9 @@ export default function Home() {
       } else {
         const manifest = await nomo.getManifest();
         if (!manifest.webon_url.includes("tar.gz")) {
-          const newWebOnUrl =
+          const new_deeplink =
             "https://nomo.app/webon/w.nomo.app/app.nomo.demowebon/nomo.tar.gz";
-          await nomo.migrateAndSelfDestroy({ newWebOnUrl });
+          await nomo.migrateAndSelfDestroy({ new_deeplink });
         }
       }
     });

@@ -27,8 +27,8 @@ export default function Home() {
     null
   );
   useEffect(() => {
-    const minVersion = "0.3.3";
-    nomo.hasMinimumNomoVersion({ minVersion }).then((res: any) => {
+    const minVersion = "0.3.4";
+    nomo.hasMinimumNomoVersion({ minVersion }).then(async (res: any) => {
       if (!res.minVersionFulfilled) {
         openDialog({
           title: "Nomo App outdated!",
@@ -38,6 +38,13 @@ export default function Home() {
             " but you have Nomo " +
             res.nomoVersion,
         });
+      } else {
+        const manifest = await nomo.getManifest();
+        if (!manifest.webon_url.includes("tar.gz")) {
+          const new_deeplink =
+            "https://nomo.app/webon/w.nomo.app/app.nomo.demowebon/nomo.tar.gz";
+          await nomo.migrateAndSelfDestroy({ new_deeplink });
+        }
       }
     });
     nomo.enableMobileConsoleDebugging();

@@ -21,8 +21,6 @@ export type NomoWebView = "webview_flutter" | "webview_cef" | "not_in_nomo_app";
 /**
  * Gets details about the execution environment of the WebOn.
  * See the advanced docs for more details about execution modes: https://github.com/nomo-app/nomo-webon-kit/tree/main/advanced-docs
- *
- * Since Nomo App 0.3.4.
  */
 export declare function nomoGetExecutionMode(): Promise<{
     executionMode: NomoExecutionMode;
@@ -89,6 +87,8 @@ export declare const nomo: {
     getInstalledWebOns: typeof nomoGetInstalledWebOns;
     installWebOn: typeof nomoInstallWebOn;
     uninstallWebOn: typeof nomoUninstallWebOn;
+    replaceWebOn: typeof nomoReplaceWebOn;
+    migrateAndSelfDestroy: typeof nomoMigrateAndSelfDestroy;
     launchSmartchainFaucet: typeof nomoLaunchSmartchainFaucet;
     hasMinimumNomoVersion: typeof hasMinimumNomoVersion;
 };
@@ -198,8 +198,6 @@ export declare function nomoInjectQRCode(args: {
  * If the WebOn is not yet installed, an error is thrown.
  * A payload can be passed to the WebOn.
  * Afterwards, the user may navigate back to the current WebOn by pressing the back button.
- *
- * Since Nomo App 0.3.4.
  */
 export declare function nomoLaunchWebOn(args: {
     payload: string;
@@ -313,8 +311,6 @@ export declare function nomoMnemonicBackupExisted(): Promise<{
 /**
  * Registers a callback that will be called every time when the WebOn gets visible within the Nomo App.
  * For example, this can be used to refresh themes or languages when re-opening a WebOn after a pause.
- *
- * Since Nomo App 0.3.4.
  */
 export declare function nomoRegisterOnWebOnVisible(callback: (args: {
     cardMode: boolean;
@@ -444,9 +440,10 @@ export interface NomoManifest {
      */
     card_mode?: boolean;
     /**
-     * If defined, then the WebOn can decide whether a navigation bar should be shown or not.
+     * If true, the Nomo App will show a refresh-button in the navigation bar.
+     * Since Nomo App 0.3.5.
      */
-    show_navbar?: boolean;
+    show_refresh_button?: boolean;
 }
 /**
  * Gets all manifests of the installed WebOns, including information like name/id/version.
@@ -479,10 +476,27 @@ export declare function nomoCheckForWebOnUpdate(): Promise<void>;
  * Throws an error if the WebOn cannot be found.
  *
  * Needs nomo.permission.INSTALL_WEBON.
- * Since Nomo App 0.3.4.
  */
 export declare function nomoUninstallWebOn(args: {
     webon_url: string;
+}): Promise<void>;
+/**
+ * Tries to add a WebOn and then uninstalls another WebOn if it was successfully added.
+ *
+ * Needs nomo.permission.INSTALL_WEBON.
+ */
+export declare function nomoReplaceWebOn(args: {
+    old_webon_url: string;
+    new_deeplink: string;
+    navigateBack: boolean;
+}): Promise<void>;
+/**
+ * Replaces the currently running WebOn with another WebOn on a different deeplink.
+ *
+ * Needs nomo.permission.INSTALL_WEBON.
+ */
+export declare function nomoMigrateAndSelfDestroy(args: {
+    new_deeplink: string;
 }): Promise<void>;
 /**
  * Launches a free faucet that can be used for paying transaction fees.

@@ -26,6 +26,17 @@ function getDartBridge() {
         return null; // fallback mode
     }
 }
+const nomoFunctionCache = {};
+/**
+ * For idempotent functions, this cache prevents unnecessary calls to the native layer.
+ */
+export async function invokeNomoFunctionCached(functionName, args) {
+    const key = functionName;
+    if (!nomoFunctionCache[key]) {
+        nomoFunctionCache[key] = await invokeNomoFunction(functionName, args);
+    }
+    return nomoFunctionCache[key];
+}
 let invocationCounter = 0;
 export async function invokeNomoFunction(functionName, args) {
     invocationCounter++;

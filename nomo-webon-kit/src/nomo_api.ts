@@ -1,4 +1,8 @@
-import { invokeNomoFunction, isFallbackModeActive } from "./dart_interface";
+import {
+  invokeNomoFunction,
+  invokeNomoFunctionCached,
+  isFallbackModeActive,
+} from "./dart_interface";
 import { nomoAuthFetch } from "./nomo_auth";
 import { compareSemanticVersions } from "./util";
 
@@ -36,8 +40,6 @@ export type NomoWebView = "webview_flutter" | "webview_cef" | "not_in_nomo_app";
 /**
  * Gets details about the execution environment of the WebOn.
  * See the advanced docs for more details about execution modes: https://github.com/nomo-app/nomo-webon-kit/tree/main/advanced-docs
- *
- * Since Nomo App 0.3.4.
  */
 export async function nomoGetExecutionMode(): Promise<{
   executionMode: NomoExecutionMode;
@@ -53,7 +55,7 @@ export async function nomoGetExecutionMode(): Promise<{
       cardMode: null,
     };
   }
-  return await invokeNomoFunction("nomoGetExecutionMode", null);
+  return await invokeNomoFunctionCached("nomoGetExecutionMode", null);
 }
 
 /**
@@ -129,6 +131,8 @@ export const nomo = {
   getInstalledWebOns: nomoGetInstalledWebOns,
   installWebOn: nomoInstallWebOn,
   uninstallWebOn: nomoUninstallWebOn,
+  replaceWebOn: nomoReplaceWebOn,
+  migrateAndSelfDestroy: nomoMigrateAndSelfDestroy,
   launchSmartchainFaucet: nomoLaunchSmartchainFaucet,
   hasMinimumNomoVersion: hasMinimumNomoVersion,
 };
@@ -252,14 +256,6 @@ export async function nomoSignEvmMessage(args: {
   return await invokeNomoFunction("nomoSignEvmMessage", args);
 }
 
-let _cachedPlatformInfo: {
-  version: string;
-  buildNumber: string;
-  appName: string;
-  clientName: string;
-  operatingSystem: string;
-} | null = null;
-
 /**
  * Returns both the NOMO-version and the operating system where the WebOn runs.
  * Can be used for implementing platform-specific functionality.
@@ -281,10 +277,7 @@ export async function nomoGetPlatformInfo(): Promise<{
       operatingSystem: "unknown",
     };
   }
-  if (!_cachedPlatformInfo) {
-    _cachedPlatformInfo = await invokeNomoFunction("nomoGetPlatformInfo", null);
-  }
-  return _cachedPlatformInfo!;
+  return await invokeNomoFunctionCached("nomoGetPlatformInfo", null);
 }
 
 /**
@@ -320,7 +313,7 @@ export async function nomoGetMessengerAddress(): Promise<{
         "https://nomo.id/@0x6b65b7eadc7544dcf04869136466ba6224e799a2:zeniq.chat",
     };
   }
-  return await invokeNomoFunction("nomoGetMessengerAddress", null);
+  return await invokeNomoFunctionCached("nomoGetMessengerAddress", null);
 }
 
 /**
@@ -337,7 +330,7 @@ export async function nomoGetWalletAddresses(): Promise<{
       },
     };
   }
-  return await invokeNomoFunction("nomoGetWalletAddresses", null);
+  return await invokeNomoFunctionCached("nomoGetWalletAddresses", null);
 }
 
 /**
@@ -358,8 +351,6 @@ export async function nomoInjectQRCode(args: {
  * If the WebOn is not yet installed, an error is thrown.
  * A payload can be passed to the WebOn.
  * Afterwards, the user may navigate back to the current WebOn by pressing the back button.
- *
- * Since Nomo App 0.3.4.
  */
 export async function nomoLaunchWebOn(args: {
   payload: string;
@@ -469,7 +460,7 @@ export async function nomoGetDeviceHashes(): Promise<{
         "b6Qz6EEKg,m2wAyKypQ,d67rq8zvw,pHcGGpnD5,iBFGnwEoE,vBhmQwyos,aGGJKq2QG,o9q6MhCeA,s9KLx6CVa,f7nin76st,rF3JVtwjV,u3txrGJEW",
     };
   }
-  return await invokeNomoFunction("nomoGetDeviceHashes", null);
+  return await invokeNomoFunctionCached("nomoGetDeviceHashes", null);
 }
 
 /**
@@ -485,7 +476,7 @@ export async function nomoGetDeviceName(): Promise<{
       deviceName: "Browser fallback mode: No device name outside of Nomo app",
     };
   }
-  return await invokeNomoFunction("nomoGetDeviceName", null);
+  return await invokeNomoFunctionCached("nomoGetDeviceName", null);
 }
 
 /**
@@ -541,8 +532,6 @@ export async function nomoMnemonicBackupExisted(): Promise<{
 /**
  * Registers a callback that will be called every time when the WebOn gets visible within the Nomo App.
  * For example, this can be used to refresh themes or languages when re-opening a WebOn after a pause.
- *
- * Since Nomo App 0.3.4.
  */
 export async function nomoRegisterOnWebOnVisible(
   callback: (args: { cardMode: boolean }) => void
@@ -551,7 +540,7 @@ export async function nomoRegisterOnWebOnVisible(
   if (isFallbackModeActive()) {
     return;
   }
-  return await invokeNomoFunction("nomoEnableOnWebOnVisible", {});
+  return await invokeNomoFunctionCached("nomoEnableOnWebOnVisible", {});
 }
 
 /**
@@ -600,18 +589,13 @@ export async function nomoGetVisibleAssets(): Promise<{
   return await invokeNomoFunction("nomoGetVisibleAssets", {});
 }
 
-let cachedEvmAddress: string | null = null;
-
 /**
  * A convenience function to get the Smartchain address of the Nomo Wallet.
  * Internally, it calls "nomoGetWalletAddresses" and caches the result.
  */
 export async function nomoGetEvmAddress(): Promise<string> {
-  if (!cachedEvmAddress) {
-    const res = await nomoGetWalletAddresses();
-    cachedEvmAddress = res.walletAddresses["ETH"];
-  }
-  return cachedEvmAddress;
+  const res = await nomoGetWalletAddresses();
+  return res.walletAddresses["ETH"];
 }
 
 /**
@@ -641,7 +625,17 @@ export async function nomoSelectAssetFromDialog(): Promise<{
  * For example, this can be used by a WebOn for checking its own version.
  */
 export async function nomoGetManifest(): Promise<NomoManifest> {
-  return await invokeNomoFunction("nomoGetManifest", {});
+  if (isFallbackModeActive()) {
+    return {
+      nomo_manifest_version: "1.2.0",
+      permissions: [],
+      webon_id: "fallback.nomo.app",
+      webon_name: "Fallback Mode",
+      webon_url: "https://nomo.app/fallbackmode",
+      webon_version: "0.1.0",
+    };
+  }
+  return await invokeNomoFunctionCached("nomoGetManifest", {});
 }
 
 /**
@@ -686,7 +680,7 @@ export async function nomoGetAssetIcon(args: NomoAssetSelector): Promise<{
   name: string;
 }> {
   const legacyArgs = { ...args, assetSymbol: args.symbol };
-  return await invokeNomoFunction("nomoGetAssetIcon", legacyArgs);
+  return await invokeNomoFunctionCached("nomoGetAssetIcon", legacyArgs);
 }
 
 /**
@@ -767,9 +761,10 @@ export interface NomoManifest {
    */
   card_mode?: boolean;
   /**
-   * If defined, then the WebOn can decide whether a navigation bar should be shown or not.
+   * If true, the Nomo App will show a refresh-button in the navigation bar.
+   * Since Nomo App 0.3.5.
    */
-  show_navbar?: boolean;
+  show_refresh_button?: boolean;
 }
 
 /**
@@ -812,12 +807,59 @@ export async function nomoCheckForWebOnUpdate(): Promise<void> {
  * Throws an error if the WebOn cannot be found.
  *
  * Needs nomo.permission.INSTALL_WEBON.
- * Since Nomo App 0.3.4.
  */
 export async function nomoUninstallWebOn(args: {
   webon_url: string;
 }): Promise<void> {
   return await invokeNomoFunction("nomoUninstallWebOn", args);
+}
+
+/**
+ * Tries to add a WebOn and then uninstalls another WebOn if it was successfully added.
+ *
+ * Needs nomo.permission.INSTALL_WEBON.
+ */
+export async function nomoReplaceWebOn(args: {
+  old_webon_url: string;
+  new_deeplink: string;
+  navigateBack: boolean;
+}): Promise<void> {
+  await nomoInstallWebOn({
+    deeplink: args.new_deeplink,
+    skipPermissionDialog: true,
+    navigateBack: args.navigateBack,
+  });
+  await nomoUninstallWebOn({ webon_url: args.old_webon_url });
+}
+
+/**
+ * Replaces the currently running WebOn with another WebOn on a different deeplink.
+ *
+ * Needs nomo.permission.INSTALL_WEBON.
+ */
+export async function nomoMigrateAndSelfDestroy(args: {
+  new_deeplink: string;
+}) {
+  if (isFallbackModeActive()) {
+    return;
+  }
+  if (!hasMinimumNomoVersion({ minVersion: "0.3.4" })) {
+    return;
+  }
+  const mode = await nomoGetExecutionMode();
+  if (mode.executionMode === "DEV_DEV") {
+    return;
+  }
+  const ownManifest = await nomoGetManifest();
+  if (ownManifest.webon_url.includes("http://")) {
+    return; // we only want to migrate https-production-WebOns
+  }
+  const navigateBack = mode.cardMode !== true;
+  await nomoReplaceWebOn({
+    old_webon_url: ownManifest.webon_url,
+    new_deeplink: args.new_deeplink,
+    navigateBack,
+  });
 }
 
 /**

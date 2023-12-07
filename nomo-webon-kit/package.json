@@ -7,7 +7,7 @@
     "build": "rm -rf dist && tsc",
     "prepublishOnly": "cp ../README.md README.md",
     "postpublish": "(cd ../demo-webon && npm i) && (cd ../ethersjs-nomo-webons && npm i) && (cd ../web3js-nomo-webons && npm i)",
-    "generate_docs": "git checkout main && git diff --exit-code && typedoc src/nomo_api.ts --plugin typedoc-plugin-markdown --out ../api-docs/ --exclude **.ts && rm ../api-docs/README.md"
+    "generate_docs": "git checkout main && git diff --exit-code && typedoc src/index.ts --plugin typedoc-plugin-markdown --out ../api-docs/ --exclude **.ts && rm ../api-docs/README.md"
   },
   "repository": {
     "type": "git",

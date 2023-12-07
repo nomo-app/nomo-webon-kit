@@ -1,5 +1,5 @@
 import { invokeNomoFunction, invokeNomoFunctionCached, isFallbackModeActive, } from "./dart_interface";
-import { nomoAuthFetch } from "./nomo_auth";
+import { nomoAuthHttp } from "./nomo_auth";
 import { compareSemanticVersions } from "./util";
 /**
  * Gets details about the execution environment of the WebOn.
@@ -58,7 +58,6 @@ export const nomo = {
     injectQRCode: nomoInjectQRCode,
     takePicture: nomoTakePicture,
     pickFromGallery: nomoPickFromGallery,
-    getTheme: nomoGetTheme,
     getDeviceHashes: nomoGetDeviceHashes,
     getDeviceName: nomoGetDeviceName,
     authHttp: nomoAuthHttp,
@@ -307,12 +306,6 @@ export async function nomoPickFromGallery(args) {
     return Object.assign(Object.assign({}, rawRes), { imageBase64: imagePrefix + rawRes.imageBase64 });
 }
 /**
- * "nomoGetTheme" is a low-level function that should not be called directly. Instead, the functions in "nomo_theming" should be used.
- */
-export async function nomoGetTheme() {
-    return await invokeNomoFunction("nomoGetTheme", null);
-}
-/**
  * Returns a comma-separated list of device hashes.
  * Can be used for fingerprinting devices.
  *
@@ -338,14 +331,6 @@ export async function nomoGetDeviceName() {
         };
     }
     return await invokeNomoFunctionCached("nomoGetDeviceName", null);
-}
-/**
- * A special http-function that implements the Nomo-Auth-Protocol.
- * Moreover, even if you do not use Nomo-Auth, you can still use this function for bypassing CORS/Same-Origin-Policy.
- * At a lower level, Nomo-Auth works by injecting a few HTTP-headers into the request.
- */
-export async function nomoAuthHttp(args) {
-    return await nomoAuthFetch(args);
 }
 /**
  * Opens a confirmation-dialog to send assets away from the Nomo App.

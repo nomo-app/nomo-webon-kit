@@ -131,6 +131,8 @@ export const nomo = {
   getInstalledWebOns: nomoGetInstalledWebOns,
   installWebOn: nomoInstallWebOn,
   uninstallWebOn: nomoUninstallWebOn,
+  replaceWebOn: nomoReplaceWebOn,
+  migrateAndSelfDestroy: nomoMigrateAndSelfDestroy,
   launchSmartchainFaucet: nomoLaunchSmartchainFaucet,
   hasMinimumNomoVersion: hasMinimumNomoVersion,
 };
@@ -623,6 +625,16 @@ export async function nomoSelectAssetFromDialog(): Promise<{
  * For example, this can be used by a WebOn for checking its own version.
  */
 export async function nomoGetManifest(): Promise<NomoManifest> {
+  if (isFallbackModeActive()) {
+    return {
+      nomo_manifest_version: "1.2.0",
+      permissions: [],
+      webon_id: "fallback.nomo.app",
+      webon_name: "Fallback Mode",
+      webon_url: "https://nomo.app/fallbackmode",
+      webon_version: "0.1.0",
+    };
+  }
   return await invokeNomoFunctionCached("nomoGetManifest", {});
 }
 
@@ -825,16 +837,24 @@ export async function nomoReplaceWebOn(args: {
  *
  * Needs nomo.permission.INSTALL_WEBON.
  */
-export async function migrateAndSelfDestroy(args: { new_deeplink: string }) {
+export async function nomoMigrateAndSelfDestroy(args: {
+  new_deeplink: string;
+}) {
   if (isFallbackModeActive()) {
     return;
   }
-  if (!nomo.hasMinimumNomoVersion({ minVersion: "0.3.4" })) {
+  if (!hasMinimumNomoVersion({ minVersion: "0.3.4" })) {
+    return;
+  }
+  const mode = await nomoGetExecutionMode();
+  if (mode.executionMode === "DEV_DEV") {
     return;
   }
   const ownManifest = await nomoGetManifest();
-  const executionMode = await nomoGetExecutionMode();
-  const navigateBack = executionMode.cardMode !== true;
+  if (ownManifest.webon_url.includes("http://")) {
+    return; // we only want to migrate https-production-WebOns
+  }
+  const navigateBack = mode.cardMode !== true;
   await nomoReplaceWebOn({
     old_webon_url: ownManifest.webon_url,
     new_deeplink: args.new_deeplink,

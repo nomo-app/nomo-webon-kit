@@ -87,6 +87,8 @@ export declare const nomo: {
     getInstalledWebOns: typeof nomoGetInstalledWebOns;
     installWebOn: typeof nomoInstallWebOn;
     uninstallWebOn: typeof nomoUninstallWebOn;
+    replaceWebOn: typeof nomoReplaceWebOn;
+    migrateAndSelfDestroy: typeof nomoMigrateAndSelfDestroy;
     launchSmartchainFaucet: typeof nomoLaunchSmartchainFaucet;
     hasMinimumNomoVersion: typeof hasMinimumNomoVersion;
 };
@@ -493,7 +495,7 @@ export declare function nomoReplaceWebOn(args: {
  *
  * Needs nomo.permission.INSTALL_WEBON.
  */
-export declare function migrateAndSelfDestroy(args: {
+export declare function nomoMigrateAndSelfDestroy(args: {
     new_deeplink: string;
 }): Promise<void>;
 /**

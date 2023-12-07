@@ -9,7 +9,7 @@ import { injectNomoCSSVariables } from "nomo-webon-kit";
 import styles from "./page.module.css";
 import "./nomo.css";
 import { testSigning } from "../../test/web3_signing_test";
-import { stringifyWithBigInts } from "nomo-webon-kit/dist/nomo_api";
+import { stringifyWithBigInts } from "nomo-webon-kit";
 import { mintNFT } from "./evm/mint_nft";
 import { openFaucetIfNeeded } from "./evm/evm_utils";
 import { launchAllWebOnsDemo } from "./multi-webons/multi_webon_demo";

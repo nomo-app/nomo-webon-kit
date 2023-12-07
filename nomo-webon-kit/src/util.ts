@@ -1,15 +1,3 @@
-export function decodeBase64UTF16(base64EncodedString: string): string {
-  const binaryString = atob(base64EncodedString);
-  const bytes = new Uint8Array(binaryString.length);
-
-  for (let i = 0; i < binaryString.length; i++) {
-    bytes[i] = binaryString.charCodeAt(i);
-  }
-
-  const decodedString = new TextDecoder("utf-8").decode(bytes);
-  return decodedString;
-}
-
 function isValidVersion(version: string) {
   // Regular expression to validate semantic versions
   const regex =
@@ -17,6 +5,9 @@ function isValidVersion(version: string) {
   return regex.test(version);
 }
 
+/**
+ * A low-level function. We recommend calling "hasMinimumNomoVersion" instead.
+ */
 export function compareSemanticVersions(versionA: string, versionB: string) {
   if (!isValidVersion(versionA)) {
     throw new Error("Invalid semantic versionA: " + versionA);

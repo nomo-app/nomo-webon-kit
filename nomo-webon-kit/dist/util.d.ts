@@ -1,2 +1,4 @@
-export declare function decodeBase64UTF16(base64EncodedString: string): string;
+/**
+ * A low-level function. We recommend calling "hasMinimumNomoVersion" instead.
+ */
 export declare function compareSemanticVersions(versionA: string, versionB: string): 0 | 1 | -1;

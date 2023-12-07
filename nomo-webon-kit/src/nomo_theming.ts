@@ -1,5 +1,4 @@
 import { invokeNomoFunction, isFallbackModeActive } from "./dart_interface";
-import { nomo } from "./nomo_api";
 
 /**
  * The themes that are supported by the Nomo App.
@@ -21,13 +20,41 @@ export async function switchNomoTheme(args: {
 }
 
 /**
+ * "nomoGetTheme" is a low-level function that should not be called directly. Use "getCurrentNomoTheme" instead.
+ */
+async function nomoGetTheme(): Promise<{
+  name: string;
+  displayName: string;
+  colors: {
+    primary: string;
+    onPrimary: string;
+    primaryContainer: string;
+    secondary: string;
+    onSecondary: string;
+    secondaryContainer: string;
+    background: string;
+    surface: string;
+    foreground1: string;
+    foreground2: string;
+    foreground3: string;
+    snackBarColor: string;
+    disabledColor: string;
+    error: string;
+    settingsTileColor: string;
+    settingsColumnColor: string;
+  };
+}> {
+  return await invokeNomoFunction("nomoGetTheme", null);
+}
+
+/**
  * The purpose of "fallbackThemeSelector" is to enable switching between themes while
  * developing in a browser outside of the Nomo App.
  */
 let fallbackThemeSelector: NomoTheme = "LIGHT";
 
 /**
- * Returns the current theme of the NOMO app.
+ * Returns the current theme of the Nomo App.
  */
 export async function getCurrentNomoTheme(): Promise<{
   name: string;
@@ -65,7 +92,7 @@ export async function getCurrentNomoTheme(): Promise<{
     }
   }
 
-  const rawTheme = await nomo.getTheme();
+  const rawTheme = await nomoGetTheme();
   const colors = rawTheme.colors as Record<string, string>;
   for (const color of Object.entries(colors)) {
     colors[color[0]] = convertFlutterColorIntoCSSColor(color[1]);
@@ -170,15 +197,8 @@ const tupanTheme = {
   },
 };
 
-export const themes = {
-  lightTheme,
-  darkTheme,
-  avinocTheme,
-  tupanTheme,
-};
-
 /**
- * Injects css variables that automatically adjust according to the currently selected Nomo theme.
+ * Injects CSS variables that automatically adjust according to the currently selected Nomo theme.
  */
 export async function injectNomoCSSVariables(): Promise<void> {
   const htmlTag = document.getElementsByTagName("html");

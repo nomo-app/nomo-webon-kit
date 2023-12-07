@@ -1,11 +1,27 @@
-import { decodeBase64UTF16 } from "./util";
-
 declare global {
   interface Window {
     [key: string]: any;
   }
 }
 
+/**
+ * Decodes data from the native Nomo layer.
+ */
+function decodeBase64UTF16(base64EncodedString: string): string {
+  const binaryString = atob(base64EncodedString);
+  const bytes = new Uint8Array(binaryString.length);
+
+  for (let i = 0; i < binaryString.length; i++) {
+    bytes[i] = binaryString.charCodeAt(i);
+  }
+
+  const decodedString = new TextDecoder("utf-8").decode(bytes);
+  return decodedString;
+}
+
+/**
+ * Returns true if the code is not running within a Nomo App WebView.
+ */
 export function isFallbackModeActive(): boolean {
   return !getDartBridge();
 }
@@ -35,6 +51,7 @@ function getDartBridge(): ((arg0: string) => void) | null {
 const nomoFunctionCache: Record<string, any> = {};
 
 /**
+ * A cached wrapper on top of "invokeNomoFunction".
  * For idempotent functions, this cache prevents unnecessary calls to the native layer.
  */
 export async function invokeNomoFunctionCached(
@@ -50,6 +67,10 @@ export async function invokeNomoFunctionCached(
 
 let invocationCounter: number = 0;
 
+/**
+ * A low-level function used by other Nomo APIs.
+ * This is the main entry point into the native layer.
+ */
 export async function invokeNomoFunction(
   functionName: string,
   args: object | null

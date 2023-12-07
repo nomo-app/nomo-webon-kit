@@ -1,7 +1,9 @@
 /**
- * An internal function used by nomoAuthHttp
+ * A special http-function that implements the Nomo-Auth-Protocol.
+ * Moreover, even if you do not use Nomo-Auth, you can still use this function for bypassing CORS/Same-Origin-Policy.
+ * At a lower level, Nomo-Auth works by injecting a few HTTP-headers into the request.
  */
-export declare function nomoAuthFetch(args: {
+export declare function nomoAuthHttp(args: {
     url: string;
     method?: "GET" | "POST";
     headers?: {

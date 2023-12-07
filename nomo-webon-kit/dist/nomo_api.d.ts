@@ -1,3 +1,4 @@
+import { nomoAuthHttp } from "./nomo_auth";
 export type NomoEvmNetwork = "zeniq-smart-chain" | "ethereum" | "binance-smart-chain";
 export type NomoNetwork = NomoEvmNetwork | "bitcoin" | "zeniq" | "litecoin" | "bitcoincash";
 export interface NomoAssetSelector {
@@ -54,7 +55,6 @@ export declare const nomo: {
     injectQRCode: typeof nomoInjectQRCode;
     takePicture: typeof nomoTakePicture;
     pickFromGallery: typeof nomoPickFromGallery;
-    getTheme: typeof nomoGetTheme;
     getDeviceHashes: typeof nomoGetDeviceHashes;
     getDeviceName: typeof nomoGetDeviceName;
     authHttp: typeof nomoAuthHttp;
@@ -232,31 +232,6 @@ export declare function nomoPickFromGallery(args?: {
     imageBase64: string;
 }>;
 /**
- * "nomoGetTheme" is a low-level function that should not be called directly. Instead, the functions in "nomo_theming" should be used.
- */
-export declare function nomoGetTheme(): Promise<{
-    name: string;
-    displayName: string;
-    colors: {
-        primary: string;
-        onPrimary: string;
-        primaryContainer: string;
-        secondary: string;
-        onSecondary: string;
-        secondaryContainer: string;
-        background: string;
-        surface: string;
-        foreground1: string;
-        foreground2: string;
-        foreground3: string;
-        snackBarColor: string;
-        disabledColor: string;
-        error: string;
-        settingsTileColor: string;
-        settingsColumnColor: string;
-    };
-}>;
-/**
  * Returns a comma-separated list of device hashes.
  * Can be used for fingerprinting devices.
  *
@@ -272,22 +247,6 @@ export declare function nomoGetDeviceHashes(): Promise<{
  */
 export declare function nomoGetDeviceName(): Promise<{
     deviceName: string;
-}>;
-/**
- * A special http-function that implements the Nomo-Auth-Protocol.
- * Moreover, even if you do not use Nomo-Auth, you can still use this function for bypassing CORS/Same-Origin-Policy.
- * At a lower level, Nomo-Auth works by injecting a few HTTP-headers into the request.
- */
-export declare function nomoAuthHttp(args: {
-    url: string;
-    method?: "GET" | "POST";
-    headers?: {
-        [key: string]: string;
-    };
-    body?: string;
-} | string): Promise<{
-    statusCode: number;
-    response: string;
 }>;
 /**
  * Opens a confirmation-dialog to send assets away from the Nomo App.

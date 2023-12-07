@@ -1,5 +1,4 @@
 import { invokeNomoFunction, isFallbackModeActive } from "./dart_interface";
-import { nomo } from "./nomo_api";
 /**
  * Switches the Nomo App to a different theme.
  * It is recommended to call "injectNomoCSSVariables" after a theme has changed.
@@ -13,12 +12,18 @@ export async function switchNomoTheme(args) {
     }
 }
 /**
+ * "nomoGetTheme" is a low-level function that should not be called directly. Use "getCurrentNomoTheme" instead.
+ */
+async function nomoGetTheme() {
+    return await invokeNomoFunction("nomoGetTheme", null);
+}
+/**
  * The purpose of "fallbackThemeSelector" is to enable switching between themes while
  * developing in a browser outside of the Nomo App.
  */
 let fallbackThemeSelector = "LIGHT";
 /**
- * Returns the current theme of the NOMO app.
+ * Returns the current theme of the Nomo App.
  */
 export async function getCurrentNomoTheme() {
     if (isFallbackModeActive()) {
@@ -38,7 +43,7 @@ export async function getCurrentNomoTheme() {
             return Promise.reject("unknown fallback theme " + fallbackThemeSelector); // should never happen
         }
     }
-    const rawTheme = await nomo.getTheme();
+    const rawTheme = await nomoGetTheme();
     const colors = rawTheme.colors;
     for (const color of Object.entries(colors)) {
         colors[color[0]] = convertFlutterColorIntoCSSColor(color[1]);
@@ -138,14 +143,8 @@ const tupanTheme = {
         settingsColumnColor: "#417030ff",
     },
 };
-export const themes = {
-    lightTheme,
-    darkTheme,
-    avinocTheme,
-    tupanTheme,
-};
 /**
- * Injects css variables that automatically adjust according to the currently selected Nomo theme.
+ * Injects CSS variables that automatically adjust according to the currently selected Nomo theme.
  */
 export async function injectNomoCSSVariables() {
     const htmlTag = document.getElementsByTagName("html");

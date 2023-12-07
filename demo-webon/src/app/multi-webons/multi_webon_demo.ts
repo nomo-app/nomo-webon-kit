@@ -1,5 +1,4 @@
-import { nomo } from "nomo-webon-kit";
-import { NomoManifest } from "nomo-webon-kit/dist/nomo_api";
+import { nomo, NomoManifest } from "nomo-webon-kit";
 
 export async function launchAllWebOnsDemo() {
   const manifests = (await nomo.getInstalledWebOns()).manifests;

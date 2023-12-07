@@ -3,7 +3,7 @@ import {
   getCurrentNomoTheme,
   injectNomoCSSVariables,
   switchNomoTheme,
-} from "nomo-webon-kit/dist/nomo_theming";
+} from "nomo-webon-kit";
 
 export async function themeSwitchDemo() {
   const oldTheme: NomoTheme = (await getCurrentNomoTheme()).name as NomoTheme;

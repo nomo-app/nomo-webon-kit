@@ -1,16 +1,9 @@
 # Nomo WebOn Kit
 
+This package provides an API for [Nomo WebOns](https://nomo.app/webons).
+A WebOn is a web-application that runs within a WebView of the Nomo App.
+
 See the [api-docs](api-docs/modules.md) for a list of individual functions.
-
-This package is designed for developers to develop _WebOns_ for the [Nomo App](https://nomo.app).
-A WebOn is a web-application that runs within the Nomo App.
-WebOns are a powerful capability of the Nomo App that unlock the following features in an easy-to-use way:
-
-- Seamless wallet connection that works even offline
-- A decentralized chat service
-- Optional: Verification that users are real via KYC wallets
-- Authentication via [Nomo-Auth](https://github.com/nomo-app/nomo-auth) or [Nomo-ID](https://github.com/nomo-app/nomo-id)
-- More features are coming with Nomo App updates!
 
 ## Why Nomo WebOns?
 
@@ -118,6 +111,13 @@ See the [EVM docs](https://github.com/nomo-app/nomo-webon-kit/tree/main/advanced
 
 There are multiple ways of debugging WebOns, but our preferred way is to connect Chrome DevTools to a WebOn.
 See the [debugging docs](https://github.com/nomo-app/nomo-webon-kit/tree/main/advanced-docs/debugging.md) for more details.
+
+# Authenticating WebOns
+
+For fullstack-WebOns, the Nomo App offers the following protocols:
+
+- [Nomo-Auth](https://github.com/nomo-app/nomo-auth): Direct authentication from a WebOn to a backend
+- [Nomo-ID](https://github.com/nomo-app/nomo-id): Linking a WebOn to already existing (web2) backends
 
 # Deploying WebOns
 

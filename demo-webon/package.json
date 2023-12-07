@@ -2,12 +2,8 @@
   "name": "nomo-demo-webon",
   "scripts": {
     "dev": "next dev",
-    "deploy_all": "npm run deploy_legacy && npm run deploy_tar",
-    "deploy_legacy": "rm -f .env.local && ./scripts/deploy_legacy.sh",
-    "deploy_tar": "nomo-webon-cli deploy out/nomo.tar.gz production",
-    "build_all": "npm run build && npm run build_tar",
-    "build": "next build && next export",
-    "build_tar": "nomo-webon-cli build out",
+    "build": "next build && nomo-webon-cli build out",
+    "deploy": "nomo-webon-cli deploy out/nomo.tar.gz production",
     "start": "npx serve@latest out",
     "lint": "next lint"
   },

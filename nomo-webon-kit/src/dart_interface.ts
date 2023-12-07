@@ -32,6 +32,22 @@ function getDartBridge(): ((arg0: string) => void) | null {
   }
 }
 
+const nomoFunctionCache: Record<string, any> = {};
+
+/**
+ * For idempotent functions, this cache prevents unnecessary calls to the native layer.
+ */
+export async function invokeNomoFunctionCached(
+  functionName: string,
+  args: object | null
+): Promise<any> {
+  const key = functionName;
+  if (!nomoFunctionCache[key]) {
+    nomoFunctionCache[key] = await invokeNomoFunction(functionName, args);
+  }
+  return nomoFunctionCache[key];
+}
+
 let invocationCounter: number = 0;
 
 export async function invokeNomoFunction(

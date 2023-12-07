@@ -1,11 +1,9 @@
-import { invokeNomoFunction, isFallbackModeActive } from "./dart_interface";
+import { invokeNomoFunction, invokeNomoFunctionCached, isFallbackModeActive, } from "./dart_interface";
 import { nomoAuthFetch } from "./nomo_auth";
 import { compareSemanticVersions } from "./util";
 /**
  * Gets details about the execution environment of the WebOn.
  * See the advanced docs for more details about execution modes: https://github.com/nomo-app/nomo-webon-kit/tree/main/advanced-docs
- *
- * Since Nomo App 0.3.4.
  */
 export async function nomoGetExecutionMode() {
     if (isFallbackModeActive()) {
@@ -16,7 +14,7 @@ export async function nomoGetExecutionMode() {
             cardMode: null,
         };
     }
-    return await invokeNomoFunction("nomoGetExecutionMode", null);
+    return await invokeNomoFunctionCached("nomoGetExecutionMode", null);
 }
 /**
  * nomoLocalStorage provides a mechanism for sharing data between WebOns.
@@ -193,7 +191,6 @@ export async function nomoSignEvmMessage(args) {
     }
     return await invokeNomoFunction("nomoSignEvmMessage", args);
 }
-let _cachedPlatformInfo = null;
 /**
  * Returns both the NOMO-version and the operating system where the WebOn runs.
  * Can be used for implementing platform-specific functionality.
@@ -209,10 +206,7 @@ export async function nomoGetPlatformInfo() {
             operatingSystem: "unknown",
         };
     }
-    if (!_cachedPlatformInfo) {
-        _cachedPlatformInfo = await invokeNomoFunction("nomoGetPlatformInfo", null);
-    }
-    return _cachedPlatformInfo;
+    return await invokeNomoFunctionCached("nomoGetPlatformInfo", null);
 }
 /**
  * This function checks at runtime if the Nomo App has a minimum version.
@@ -241,7 +235,7 @@ export async function nomoGetMessengerAddress() {
             inviteLink: "https://nomo.id/@0x6b65b7eadc7544dcf04869136466ba6224e799a2:zeniq.chat",
         };
     }
-    return await invokeNomoFunction("nomoGetMessengerAddress", null);
+    return await invokeNomoFunctionCached("nomoGetMessengerAddress", null);
 }
 /**
  * Returns blockchain-addresses of the NOMO-user.
@@ -255,7 +249,7 @@ export async function nomoGetWalletAddresses() {
             },
         };
     }
-    return await invokeNomoFunction("nomoGetWalletAddresses", null);
+    return await invokeNomoFunctionCached("nomoGetWalletAddresses", null);
 }
 /**
  * Injecting QRCodes is useful for multiple purposes.
@@ -271,8 +265,6 @@ export async function nomoInjectQRCode(args) {
  * If the WebOn is not yet installed, an error is thrown.
  * A payload can be passed to the WebOn.
  * Afterwards, the user may navigate back to the current WebOn by pressing the back button.
- *
- * Since Nomo App 0.3.4.
  */
 export async function nomoLaunchWebOn(args) {
     return await invokeNomoFunction("nomoLaunchWebOn", args);
@@ -330,7 +322,7 @@ export async function nomoGetDeviceHashes() {
             deviceHashes: "b6Qz6EEKg,m2wAyKypQ,d67rq8zvw,pHcGGpnD5,iBFGnwEoE,vBhmQwyos,aGGJKq2QG,o9q6MhCeA,s9KLx6CVa,f7nin76st,rF3JVtwjV,u3txrGJEW",
         };
     }
-    return await invokeNomoFunction("nomoGetDeviceHashes", null);
+    return await invokeNomoFunctionCached("nomoGetDeviceHashes", null);
 }
 /**
  * Returns a human-readable name of the device.
@@ -343,7 +335,7 @@ export async function nomoGetDeviceName() {
             deviceName: "Browser fallback mode: No device name outside of Nomo app",
         };
     }
-    return await invokeNomoFunction("nomoGetDeviceName", null);
+    return await invokeNomoFunctionCached("nomoGetDeviceName", null);
 }
 /**
  * A special http-function that implements the Nomo-Auth-Protocol.
@@ -377,15 +369,13 @@ export async function nomoMnemonicBackupExisted() {
 /**
  * Registers a callback that will be called every time when the WebOn gets visible within the Nomo App.
  * For example, this can be used to refresh themes or languages when re-opening a WebOn after a pause.
- *
- * Since Nomo App 0.3.4.
  */
 export async function nomoRegisterOnWebOnVisible(callback) {
     window.onWebOnVisible = callback;
     if (isFallbackModeActive()) {
         return;
     }
-    return await invokeNomoFunction("nomoEnableOnWebOnVisible", {});
+    return await invokeNomoFunctionCached("nomoEnableOnWebOnVisible", {});
 }
 /**
  * Returns the currently selected language of the Nomo App.
@@ -423,17 +413,13 @@ export async function nomoGetVisibleAssets() {
     }
     return await invokeNomoFunction("nomoGetVisibleAssets", {});
 }
-let cachedEvmAddress = null;
 /**
  * A convenience function to get the Smartchain address of the Nomo Wallet.
  * Internally, it calls "nomoGetWalletAddresses" and caches the result.
  */
 export async function nomoGetEvmAddress() {
-    if (!cachedEvmAddress) {
-        const res = await nomoGetWalletAddresses();
-        cachedEvmAddress = res.walletAddresses["ETH"];
-    }
-    return cachedEvmAddress;
+    const res = await nomoGetWalletAddresses();
+    return res.walletAddresses["ETH"];
 }
 /**
  * Opens a dialog for the user to select an asset.
@@ -459,7 +445,7 @@ export async function nomoSelectAssetFromDialog() {
  * For example, this can be used by a WebOn for checking its own version.
  */
 export async function nomoGetManifest() {
-    return await invokeNomoFunction("nomoGetManifest", {});
+    return await invokeNomoFunctionCached("nomoGetManifest", {});
 }
 /**
  * Passes a URL to the underlying platform for handling.
@@ -485,7 +471,7 @@ export async function nomoGetBalance(args) {
  */
 export async function nomoGetAssetIcon(args) {
     const legacyArgs = Object.assign(Object.assign({}, args), { assetSymbol: args.symbol });
-    return await invokeNomoFunction("nomoGetAssetIcon", legacyArgs);
+    return await invokeNomoFunctionCached("nomoGetAssetIcon", legacyArgs);
 }
 /**
  * Returns an asset price.
@@ -546,10 +532,43 @@ export async function nomoCheckForWebOnUpdate() {
  * Throws an error if the WebOn cannot be found.
  *
  * Needs nomo.permission.INSTALL_WEBON.
- * Since Nomo App 0.3.4.
  */
 export async function nomoUninstallWebOn(args) {
     return await invokeNomoFunction("nomoUninstallWebOn", args);
+}
+/**
+ * Tries to add a WebOn and then uninstalls another WebOn if it was successfully added.
+ *
+ * Needs nomo.permission.INSTALL_WEBON.
+ */
+export async function nomoReplaceWebOn(args) {
+    await nomoInstallWebOn({
+        deeplink: args.new_deeplink,
+        skipPermissionDialog: true,
+        navigateBack: args.navigateBack,
+    });
+    await nomoUninstallWebOn({ webon_url: args.old_webon_url });
+}
+/**
+ * Replaces the currently running WebOn with another WebOn on a different deeplink.
+ *
+ * Needs nomo.permission.INSTALL_WEBON.
+ */
+export async function migrateAndSelfDestroy(args) {
+    if (isFallbackModeActive()) {
+        return;
+    }
+    if (!nomo.hasMinimumNomoVersion({ minVersion: "0.3.4" })) {
+        return;
+    }
+    const ownManifest = await nomoGetManifest();
+    const executionMode = await nomoGetExecutionMode();
+    const navigateBack = executionMode.cardMode !== true;
+    await nomoReplaceWebOn({
+        old_webon_url: ownManifest.webon_url,
+        new_deeplink: args.new_deeplink,
+        navigateBack,
+    });
 }
 /**
  * Launches a free faucet that can be used for paying transaction fees.

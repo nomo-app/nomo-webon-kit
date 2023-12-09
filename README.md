@@ -43,7 +43,7 @@ Install npm dependencies and launch your WebOn on localhost.
 `npm run dev`
 
 Then your WebOn should run at <http://localhost:3000/> or similar.
-If your frontend is not yet a WebOn, then you will need to add a [nomo_manifest.json](https://demowebon.nomo.app/nomo_manifest.json).
+If your frontend is not yet a WebOn, then you will need to add a [nomo_manifest.json](https://github.com/nomo-app/nomo-webon-kit/blob/main/demo-webon/public/nomo_manifest.json).
 
 ## Step 3: Enable the Nomo Dev Mode
 

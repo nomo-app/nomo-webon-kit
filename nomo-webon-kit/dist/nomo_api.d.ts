@@ -31,7 +31,9 @@ export declare const nomo: {
     };
     launchUrl: typeof multi.nomoLaunchUrl;
     launchWebOn: typeof multi.nomoLaunchWebOn;
+    launchUrlAsWebOn: typeof multi.nomoLaunchUrlAsWebOn;
     installWebOn: typeof multi.nomoInstallWebOn;
+    installUrlAsWebOn: typeof multi.nomoInstallUrlAsWebOn;
     uninstallWebOn: typeof multi.nomoUninstallWebOn;
     getInstalledWebOns: typeof multi.nomoGetInstalledWebOns;
     replaceWebOn: typeof multi.nomoReplaceWebOn;

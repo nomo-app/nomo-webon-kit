@@ -2,7 +2,7 @@
   "nomo_manifest_version": "1.2.0",
   "webon_id": "app.nomo.demowebon",
   "webon_name": "Demo WebOn",
-  "webon_version": "0.2.6",
+  "webon_version": "0.2.9",
   "min_nomo_version": "0.3.4",
   "dependencies": [],
   "permissions": [

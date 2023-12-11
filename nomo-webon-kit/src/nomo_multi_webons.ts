@@ -83,6 +83,20 @@ export async function nomoInstallWebOn(args: {
 }
 
 /**
+ * Installs a URL as a WebOn and grants the permissions that are specified in the manifest.
+ *
+ * Needs nomo.permission.INSTALL_WEBON.
+ * Since Nomo App 0.3.5.
+ */
+export async function nomoInstallUrlAsWebOn(args: {
+  manifest: NomoManifest;
+  skipPermissionDialog: boolean;
+  navigateBack: boolean;
+}): Promise<void> {
+  return await invokeNomoFunction("nomoInstallUrlAsWebOn", args);
+}
+
+/**
  * The reverse operation of nomoInstallWebOn.
  * Throws an error if the WebOn cannot be found.
  *
@@ -169,6 +183,7 @@ export async function nomoLaunchWebOn(args: {
 
 /**
  * Passes a URL to the underlying platform for handling.
+ * Typically, it will launch a system-browser or an in-app-webview.
  */
 export async function nomoLaunchUrl(args: {
   url: string;
@@ -183,6 +198,24 @@ export async function nomoLaunchUrl(args: {
     return;
   }
   return await invokeNomoFunction("nomoLaunchUrl", args);
+}
+
+/**
+ * Launches a URL as a WebOn without installing it.
+ * Grants the permissions that are specified in the manifest.
+ * If possible, please prefer "nomoLaunchUrl" or "nomoLaunchWebOn" over this function.
+ *
+ * Needs nomo.permission.INSTALL_WEBON.
+ * Since Nomo App 0.3.5.
+ */
+export async function nomoLaunchUrlAsWebOn(args: {
+  manifest: NomoManifest;
+}): Promise<any> {
+  if (isFallbackModeActive()) {
+    window.open(args.manifest.webon_url, "_blank");
+    return;
+  }
+  return await invokeNomoFunction("nomoLaunchUrlAsWebOn", args);
 }
 
 /**

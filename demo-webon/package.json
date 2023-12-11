@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && nomo-webon-cli build out",
-    "deploy": "nomo-webon-cli deploy out/nomo.tar.gz production",
+    "deploy": "nomo-webon-cli deploy out/nomo.tar.gz production && ./scripts/clear_cloudflare_cache.sh",
     "start": "npx serve@latest out",
     "lint": "next lint"
   },

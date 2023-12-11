@@ -24,7 +24,7 @@ export async function launchAllWebOnsDemo() {
     webon_version: "0.1.0",
     nomo_manifest_version: "1.2.0",
   };
-  await nomo.launchUrlAsWebOn(urlAsWebOn);
+  await nomo.launchUrlAsWebOn({ manifest: urlAsWebOn });
 
   const urlForInstalling: NomoManifest = {
     webon_url: "https://zeniqscan.com/",

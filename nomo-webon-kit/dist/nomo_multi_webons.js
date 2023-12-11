@@ -115,7 +115,7 @@ export async function nomoLaunchUrl(args) {
     return await invokeNomoFunction("nomoLaunchUrl", args);
 }
 /**
- * Launches a URL as a WebOn and grants the permissions that are specified in the args.
+ * Launches a URL as a WebOn and grants the permissions that are specified in the manifest.
  * If possible, please prefer "nomoLaunchUrl" or "nomoLaunchWebOn" over this function.
  *
  * Needs nomo.permission.INSTALL_WEBON.
@@ -123,7 +123,7 @@ export async function nomoLaunchUrl(args) {
  */
 export async function nomoLaunchUrlAsWebOn(args) {
     if (isFallbackModeActive()) {
-        window.open(args.webon_url, "_blank");
+        window.open(args.manifest.webon_url, "_blank");
         return;
     }
     return await invokeNomoFunction("nomoLaunchUrlAsWebOn", args);

@@ -124,13 +124,15 @@ export declare function nomoLaunchUrl(args: {
     launchMode: "platformDefault" | "inAppWebView" | "externalApplication" | "externalNonBrowserApplication";
 }): Promise<any>;
 /**
- * Launches a URL as a WebOn and grants the permissions that are specified in the args.
+ * Launches a URL as a WebOn and grants the permissions that are specified in the manifest.
  * If possible, please prefer "nomoLaunchUrl" or "nomoLaunchWebOn" over this function.
  *
  * Needs nomo.permission.INSTALL_WEBON.
  * Since Nomo App 0.3.5.
  */
-export declare function nomoLaunchUrlAsWebOn(args: NomoManifest): Promise<any>;
+export declare function nomoLaunchUrlAsWebOn(args: {
+    manifest: NomoManifest;
+}): Promise<any>;
 /**
  * nomoLocalStorage provides a mechanism for sharing data between WebOns.
  * If a webon_id is passed to nomoLocalStorage.getItem, then it tries to read data from another WebOn with the given webon_id.

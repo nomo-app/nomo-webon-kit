@@ -124,7 +124,8 @@ export declare function nomoLaunchUrl(args: {
     launchMode: "platformDefault" | "inAppWebView" | "externalApplication" | "externalNonBrowserApplication";
 }): Promise<any>;
 /**
- * Launches a URL as a WebOn and grants the permissions that are specified in the manifest.
+ * Launches a URL as a WebOn without installing it.
+ * Grants the permissions that are specified in the manifest.
  * If possible, please prefer "nomoLaunchUrl" or "nomoLaunchWebOn" over this function.
  *
  * Needs nomo.permission.INSTALL_WEBON.

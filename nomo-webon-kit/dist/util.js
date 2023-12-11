@@ -28,3 +28,17 @@ export function compareSemanticVersions(versionA, versionB) {
     }
     return 0; // versions are equal
 }
+/**
+ * An alternative to JSON.stringify
+ */
+export function stringifyWithBigInts(obj) {
+    function replacer(_key, value) {
+        // workaround for stringifying an object with bigints
+        if (typeof value === "bigint") {
+            return value.toString();
+        }
+        return value;
+    }
+    const resJson = JSON.stringify(obj, replacer, 1);
+    return resJson;
+}

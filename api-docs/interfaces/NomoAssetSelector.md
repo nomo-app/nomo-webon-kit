@@ -28,7 +28,7 @@ If contractAddress is specified, then name and symbol will be ignored.
 
 #### Defined in
 
-[nomo_api.ts:28](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L28)
+[nomo_web3.ts:28](https://github.com/nomo-app/nomo-webon-kit/blob/ebd2489/nomo-webon-kit/src/nomo_web3.ts#L28)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 #### Defined in
 
-[nomo_api.ts:22](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L22)
+[nomo_web3.ts:22](https://github.com/nomo-app/nomo-webon-kit/blob/ebd2489/nomo-webon-kit/src/nomo_web3.ts#L22)
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 #### Defined in
 
-[nomo_api.ts:23](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L23)
+[nomo_web3.ts:23](https://github.com/nomo-app/nomo-webon-kit/blob/ebd2489/nomo-webon-kit/src/nomo_web3.ts#L23)
 
 ___
 
@@ -58,4 +58,4 @@ ___
 
 #### Defined in
 
-[nomo_api.ts:21](https://github.com/nomo-app/nomo-webon-kit/blob/bf8b1e1/nomo-webon-kit/src/nomo_api.ts#L21)
+[nomo_web3.ts:21](https://github.com/nomo-app/nomo-webon-kit/blob/ebd2489/nomo-webon-kit/src/nomo_web3.ts#L21)

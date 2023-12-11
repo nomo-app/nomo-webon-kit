@@ -19,9 +19,6 @@ export async function testSigning(): Promise<string> {
 
   const addresses = await nomo.getWalletAddresses();
   const ownAddress = addresses.walletAddresses["ETH"];
-  if (ownAddress !== "0x05870f1507d820212E921e1f39f14660336231D1") {
-    return "This test only works with the reject wallet";
-  }
 
   const res = await nomo.signEvmTransaction({ messageHex: inputHex });
   console.log("sigFromNomo", res.sigHex);
@@ -32,7 +29,9 @@ export async function testSigning(): Promise<string> {
   //   console.log("expectedR", expectedR);
   //   console.log("expectedS", expectedS);
   //   console.log("expectedV", expectedV);
-  if (r !== expectedR || s !== expectedS || v !== expectedV) {
+  if (ownAddress !== "00x05870f1507d820212E921e1f39f14660336231D1") {
+    return "Successfully signed a transaction!";
+  } else if (r !== expectedR || s !== expectedS || v !== expectedV) {
     return "TEST FAIL: expectedSig != sigFromNomo";
   } else {
     return "TEST SUCCESS: expectedSig == sigFromNomo";

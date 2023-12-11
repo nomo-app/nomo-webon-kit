@@ -289,7 +289,7 @@ export default function Home() {
               testSigning()
                 .then((res) => {
                   openDialog({
-                    title: "Unittest Result",
+                    title: "Signature Result",
                     content: JSON.stringify(res),
                   });
                 })
@@ -302,9 +302,9 @@ export default function Home() {
                 });
             }}
           >
-            Test transaction signing <span>-&gt;</span>
+            EVM transaction signing <span>-&gt;</span>
           </h2>
-          <p>A unit-test for signing a transaction with the Nomo App.</p>
+          <p>A demo for the sign-security-dialog.</p>
         </div>
         <div
           onClick={() => {

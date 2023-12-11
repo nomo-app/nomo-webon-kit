@@ -15,4 +15,28 @@ export async function launchAllWebOnsDemo() {
       manifest,
     });
   }
+
+  const urlAsWebOn: NomoManifest = {
+    webon_url: "https://www.avinoc.com/",
+    webon_name: "AVINOC Website",
+    webon_id: "com.avinoc.www",
+    permissions: [],
+    webon_version: "0.1.0",
+    nomo_manifest_version: "1.2.0",
+  };
+  await nomo.launchUrlAsWebOn(urlAsWebOn);
+
+  const urlForInstalling: NomoManifest = {
+    webon_url: "https://zeniqscan.com/",
+    webon_name: "zeniqscan.com",
+    webon_id: "com.zeniqscan",
+    permissions: [],
+    webon_version: "0.1.0",
+    nomo_manifest_version: "1.2.0",
+  };
+  await nomo.installUrlAsWebOn({
+    manifest: urlForInstalling,
+    navigateBack: false,
+    skipPermissionDialog: true,
+  });
 }

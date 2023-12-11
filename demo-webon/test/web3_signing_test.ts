@@ -29,8 +29,9 @@ export async function testSigning(): Promise<string> {
   //   console.log("expectedR", expectedR);
   //   console.log("expectedS", expectedS);
   //   console.log("expectedV", expectedV);
-  if (ownAddress !== "00x05870f1507d820212E921e1f39f14660336231D1") {
-    return "Successfully signed a transaction!";
+  if (ownAddress !== "0x05870f1507d820212E921e1f39f14660336231D1") {
+    // this test only works with the reject wallet
+    return "Signed a transaction!";
   } else if (r !== expectedR || s !== expectedS || v !== expectedV) {
     return "TEST FAIL: expectedSig != sigFromNomo";
   } else {

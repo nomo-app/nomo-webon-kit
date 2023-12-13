@@ -33,14 +33,14 @@ See the [minting example](https://github.com/nomo-app/nomo-webon-kit/tree/main/d
 Whatever EVM-chain you are using, you can easily create a signer-object with just a few lines of code.
 For example:
 
-````
+```
 import { EthersjsNomoSigner } from "ethersjs-nomo-webons";
 
 const ethProvider = ethers.getDefaultProvider();
 const ethSigner = new EthersjsNomoSigner(ethProvider);
-````
+```
 
 ## ethers.js-V5/V6
 
-Starting from 0.2.0, this package works with ethers.js-V6.
-An older version of this package works with ethers.js-V5.
+This package only works with ethers.js-V6.
+If you still need to use ethers.js-V5, then you can use the package [ethersjs-nomo-webons-v5](https://github.com/nomo-app/nomo-webon-kit/tree/main/ethersjs-nomo-webons-v5)

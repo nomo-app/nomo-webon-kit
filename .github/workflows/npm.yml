@@ -12,36 +12,42 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18.17.1'
-    - name: Install dependencies and build nomo-webon-kit
-      run: |
-        cd nomo-webon-kit
-        npm install
-        npm run build
-        git diff --exit-code .
-        
-    - name: Install dependencies and build ethersjs-nomo-webons
-      run: |
-        cd ethersjs-nomo-webons
-        npm install
-        npm run build
-        git diff --exit-code .
-         
-    - name: Install dependencies and build web3js-nomo-webons
-      run: |
-        cd web3js-nomo-webons
-        npm install
-        npm run build
-        git diff --exit-code .
-        
-    - name: Install dependencies and build demo-webon
-      run: |
-        cd demo-webon
-        npm install
-        npm run build
-        git diff --exit-code .
-  
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.17.1"
+      - name: Install dependencies and build nomo-webon-kit
+        run: |
+          cd nomo-webon-kit
+          npm install
+          npm run build
+          git diff --exit-code .
+
+      - name: Install dependencies and build ethersjs-nomo-webons
+        run: |
+          cd ethersjs-nomo-webons
+          npm install
+          npm run build
+          git diff --exit-code .
+
+      - name: Install dependencies and build ethersjs-nomo-webons-v5
+        run: |
+          cd ethersjs-nomo-webons-v5
+          npm install
+          npm run build
+          git diff --exit-code .
+
+      - name: Install dependencies and build web3js-nomo-webons
+        run: |
+          cd web3js-nomo-webons
+          npm install
+          npm run build
+          git diff --exit-code .
+
+      - name: Install dependencies and build demo-webon
+        run: |
+          cd demo-webon
+          npm install
+          npm run build
+          git diff --exit-code .

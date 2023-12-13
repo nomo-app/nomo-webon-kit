@@ -4,6 +4,7 @@
  * For example, the address/signature-pairs can be put into HTTP-headers.
  *
  * Needs nomo.permission.SIGN_EVM_MESSAGE.
+ * Since Nomo App 0.3.5.
  */
 export declare function nomoSignAuthMessage(args: {
     message: string;

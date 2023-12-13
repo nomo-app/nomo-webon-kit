@@ -6,6 +6,7 @@ import { nomoGetManifest } from "./nomo_multi_webons";
  * For example, the address/signature-pairs can be put into HTTP-headers.
  *
  * Needs nomo.permission.SIGN_EVM_MESSAGE.
+ * Since Nomo App 0.3.5.
  */
 export async function nomoSignAuthMessage(args) {
     if (isFallbackModeActive()) {

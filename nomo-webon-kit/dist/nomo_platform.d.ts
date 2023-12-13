@@ -85,4 +85,4 @@ export declare const nomoConsole: {
  * mobile DevDev-mode of the Nomo App.
  * For the Desktop DevDev-mode, this function is not necessary.
  */
-export declare function nomoEnableMobileConsoleDebugging(): void;
+export declare function nomoEnableMobileConsoleDebugging(): Promise<void>;

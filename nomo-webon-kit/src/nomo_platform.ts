@@ -174,7 +174,11 @@ let consoleOverwriten: boolean = false;
  * mobile DevDev-mode of the Nomo App.
  * For the Desktop DevDev-mode, this function is not necessary.
  */
-export function nomoEnableMobileConsoleDebugging() {
+export async function nomoEnableMobileConsoleDebugging() {
+  const { executionMode } = await nomoGetExecutionMode();
+  if (executionMode !== "DEV_DEV") {
+    return;
+  }
   if (!consoleOverwriten) {
     consoleOverwriten = true;
     console.log("overwriting console-functions to enable mobile dev mode...");

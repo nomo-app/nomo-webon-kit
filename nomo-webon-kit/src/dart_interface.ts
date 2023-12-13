@@ -83,7 +83,8 @@ export async function invokeNomoFunction(
   args: object | null
 ): Promise<any> {
   invocationCounter++;
-  const invocationID = invocationCounter.toString() + "_" + moduleID;
+  const invocationID =
+    invocationCounter.toString() + "_" + functionName + "_" + moduleID;
   const payload: string = JSON.stringify({
     functionName,
     invocationID,
@@ -95,8 +96,8 @@ export async function invokeNomoFunction(
     resolve: (value: unknown) => void,
     reject: (reason?: any) => void
   ) {
-    pendingPromisesResolve[invocationID] = resolve;
-    pendingPromisesReject[invocationID] = reject;
+    window.nomoResolvePromises[invocationID] = resolve;
+    window.nomoRejectPromises[invocationID] = reject;
   });
 
   try {
@@ -115,13 +116,6 @@ export async function invokeNomoFunction(
   return promise;
 }
 
-const pendingPromisesResolve: Record<
-  string,
-  null | ((value: unknown) => void)
-> = {};
-const pendingPromisesReject: Record<string, null | ((reason?: any) => void)> =
-  {};
-
 const fulfillPromiseFromFlutter = function (base64FromFlutter: string) {
   const jsonFromFlutter = decodeBase64UTF16(base64FromFlutter);
   const obj = JSON.parse(jsonFromFlutter);
@@ -137,13 +131,13 @@ const fulfillPromiseFromFlutter = function (base64FromFlutter: string) {
   }
   let fulfillFunction: null | ((value: any) => void);
   if (status === "resolve") {
-    fulfillFunction = pendingPromisesResolve[invocationID];
+    fulfillFunction = window.nomoResolvePromises[invocationID];
   } else {
-    fulfillFunction = pendingPromisesReject[invocationID];
+    fulfillFunction = window.nomoRejectPromises[invocationID];
   }
   // clean up promises to avoid potential duplicate invocations
-  pendingPromisesResolve[invocationID] = null;
-  pendingPromisesReject[invocationID] = null;
+  window.nomoResolvePromises[invocationID] = null;
+  window.nomoRejectPromises[invocationID] = null;
 
   if (!fulfillFunction) {
     return "unexpected invocationID";
@@ -158,4 +152,10 @@ try {
     );
   }
   window.fulfillPromiseFromFlutter = fulfillPromiseFromFlutter;
+  if (!window.nomoResolvePromises) {
+    window.nomoResolvePromises = {};
+  }
+  if (!window.nomoRejectPromises) {
+    window.nomoRejectPromises = {};
+  }
 } catch (e) {}

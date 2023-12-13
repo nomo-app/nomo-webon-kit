@@ -63,7 +63,7 @@ const moduleID = Array.from({ length: 8 }, () => String.fromCharCode(Math.floor(
  */
 export async function invokeNomoFunction(functionName, args) {
     invocationCounter++;
-    const invocationID = invocationCounter.toString() + "_" + moduleID;
+    const invocationID = invocationCounter.toString() + "_" + functionName + "_" + moduleID;
     const payload = JSON.stringify({
         functionName,
         invocationID,
@@ -71,8 +71,8 @@ export async function invokeNomoFunction(functionName, args) {
     });
     // first create a Promise
     const promise = new Promise(function (resolve, reject) {
-        pendingPromisesResolve[invocationID] = resolve;
-        pendingPromisesReject[invocationID] = reject;
+        window.nomoResolvePromises[invocationID] = resolve;
+        window.nomoRejectPromises[invocationID] = reject;
     });
     try {
         const dartBridge = getDartBridge();
@@ -89,8 +89,6 @@ export async function invokeNomoFunction(functionName, args) {
     }
     return promise;
 }
-const pendingPromisesResolve = {};
-const pendingPromisesReject = {};
 const fulfillPromiseFromFlutter = function (base64FromFlutter) {
     const jsonFromFlutter = decodeBase64UTF16(base64FromFlutter);
     const obj = JSON.parse(jsonFromFlutter);
@@ -105,14 +103,14 @@ const fulfillPromiseFromFlutter = function (base64FromFlutter) {
     }
     let fulfillFunction;
     if (status === "resolve") {
-        fulfillFunction = pendingPromisesResolve[invocationID];
+        fulfillFunction = window.nomoResolvePromises[invocationID];
     }
     else {
-        fulfillFunction = pendingPromisesReject[invocationID];
+        fulfillFunction = window.nomoRejectPromises[invocationID];
     }
     // clean up promises to avoid potential duplicate invocations
-    pendingPromisesResolve[invocationID] = null;
-    pendingPromisesReject[invocationID] = null;
+    window.nomoResolvePromises[invocationID] = null;
+    window.nomoRejectPromises[invocationID] = null;
     if (!fulfillFunction) {
         return "unexpected invocationID";
     }
@@ -124,5 +122,11 @@ try {
         console.error("Duplicate instances of nomo-webon-kit detected! This can trigger promises that never fulfill, please deduplicate your dependencies!");
     }
     window.fulfillPromiseFromFlutter = fulfillPromiseFromFlutter;
+    if (!window.nomoResolvePromises) {
+        window.nomoResolvePromises = {};
+    }
+    if (!window.nomoRejectPromises) {
+        window.nomoRejectPromises = {};
+    }
 }
 catch (e) { }

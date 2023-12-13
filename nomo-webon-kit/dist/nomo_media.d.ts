@@ -32,6 +32,7 @@ export declare function nomoOpenFAQPage(args: {
 /**
  * Opens the camera and returns a picture in base64-encoding.
  * The promise rejects if the user chooses to cancel.
+ * The promise may also reject if the user denied a camera-permission.
  *
  * Needs nomo.permission.CAMERA.
  */

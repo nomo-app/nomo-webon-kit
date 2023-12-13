@@ -1,10 +1,14 @@
-import { invokeNomoFunction, invokeNomoFunctionCached, isFallbackModeActive } from "./dart_interface";
+import {
+  invokeNomoFunction,
+  invokeNomoFunctionCached,
+  isFallbackModeActive,
+} from "./dart_interface";
 
 /**
  * Injecting QRCodes is useful for multiple purposes.
  * For example, new chats can be opened by injecting a chat-invitation-link.
  * Also the Nomo-ID protocol works by injecting QRCodes.
- * 
+ *
  * Needs nomo.permission.INSTALL_WEBON.
  */
 export async function nomoInjectQRCode(args: {
@@ -45,6 +49,7 @@ const fallbackImage =
 /**
  * Opens the camera and returns a picture in base64-encoding.
  * The promise rejects if the user chooses to cancel.
+ * The promise may also reject if the user denied a camera-permission.
  *
  * Needs nomo.permission.CAMERA.
  */

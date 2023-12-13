@@ -13,16 +13,16 @@ export async function switchNomoTheme(args: {
   theme: NomoTheme;
 }): Promise<void> {
   if (isFallbackModeActive()) {
-    fallbackThemeSelector = args.theme;
+    localStorage.setItem("nomoTheme", args.theme);
   } else {
     return await invokeNomoFunction("nomoSwitchTheme", args);
   }
 }
 
 /**
- * "nomoGetTheme" is a low-level function that should not be called directly. Use "getCurrentNomoTheme" instead.
+ * "nomoGetDartColors" is a low-level function that should not be called directly. Use "getCurrentNomoTheme" instead.
  */
-async function nomoGetTheme(): Promise<{
+async function nomoGetDartColors(): Promise<{
   name: string;
   displayName: string;
   colors: {
@@ -46,12 +46,6 @@ async function nomoGetTheme(): Promise<{
 }> {
   return await invokeNomoFunction("nomoGetTheme", null);
 }
-
-/**
- * The purpose of "fallbackThemeSelector" is to enable switching between themes while
- * developing in a browser outside of the Nomo App.
- */
-let fallbackThemeSelector: NomoTheme = "LIGHT";
 
 /**
  * A low-level function. We recommend using "injectNomoCSSVariables" instead.
@@ -79,6 +73,8 @@ export async function getCurrentNomoTheme(): Promise<{
   };
 }> {
   if (isFallbackModeActive()) {
+    const fallbackThemeSelector: NomoTheme =
+      (localStorage.getItem("nomoTheme") as NomoTheme) ?? "LIGHT";
     if (fallbackThemeSelector === "LIGHT") {
       return lightTheme;
     } else if (fallbackThemeSelector === "DARK") {
@@ -92,7 +88,7 @@ export async function getCurrentNomoTheme(): Promise<{
     }
   }
 
-  const rawTheme = await nomoGetTheme();
+  const rawTheme = await nomoGetDartColors();
   const colors = rawTheme.colors as Record<string, string>;
   for (const color of Object.entries(colors)) {
     colors[color[0]] = convertFlutterColorIntoCSSColor(color[1]);

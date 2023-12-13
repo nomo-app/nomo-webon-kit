@@ -58,4 +58,6 @@ export declare const nomo: {
     switchNomoTheme: typeof theming.switchNomoTheme;
     getCurrentNomoTheme: typeof theming.getCurrentNomoTheme;
     authHttp: typeof auth.nomoAuthHttp;
+    authFetch: typeof auth.nomoAuthFetch;
+    signAuthMessage: typeof auth.nomoSignAuthMessage;
 };

@@ -1,5 +1,5 @@
 import { invokeNomoFunction, invokeNomoFunctionCached, isFallbackModeActive, } from "./dart_interface";
-import { nomoAuthHttp } from "./nomo_auth";
+import { nomoAuthFetch } from "./nomo_auth";
 import { nomoInstallWebOn } from "./nomo_multi_webons";
 /**
  * Creates a signature for an EVM-based transaction.
@@ -114,7 +114,7 @@ export async function nomoGetAssetPrice(args) {
         const priceEndpoint = !!args.contractAddress && !!args.network
             ? `${baseEndpoint}/${args.contractAddress}/USD/${args.network}`
             : `${baseEndpoint}/${args.name}/USD`;
-        const res = await nomoAuthHttp(priceEndpoint);
+        const res = await nomoAuthFetch({ url: priceEndpoint });
         const price = JSON.parse(res.response).price;
         return {
             price,

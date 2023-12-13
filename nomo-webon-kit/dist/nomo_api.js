@@ -52,4 +52,6 @@ export const nomo = {
     switchNomoTheme: theming.switchNomoTheme,
     getCurrentNomoTheme: theming.getCurrentNomoTheme,
     authHttp: auth.nomoAuthHttp,
+    authFetch: auth.nomoAuthFetch,
+    signAuthMessage: auth.nomoSignAuthMessage,
 };

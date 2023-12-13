@@ -31,7 +31,7 @@ export async function nomoAuthFetch(args) {
     args = fillMissingArgs(args);
     const signer = (_a = args.signer) !== null && _a !== void 0 ? _a : nomoSignAuthMessage;
     const headers = (_b = args.headers) !== null && _b !== void 0 ? _b : {};
-    _injectNomoAuthHeaders({
+    await _injectNomoAuthHeaders({
         signer,
         url: args.url,
         headers,
@@ -52,7 +52,7 @@ export async function nomoAuthFetch(args) {
         }
         const domain = new URL(args.url).hostname;
         localStorage.set(domain, jwt);
-        _injectNomoAuthHeaders({
+        await _injectNomoAuthHeaders({
             signer,
             url: args.url,
             headers,

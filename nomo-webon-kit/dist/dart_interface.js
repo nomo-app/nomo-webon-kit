@@ -54,12 +54,16 @@ export async function invokeNomoFunctionCached(functionName, args) {
 }
 let invocationCounter = 0;
 /**
+ * By assigning a random moduleID, we guard against duplicate instances of nomo-webon-kit.
+ */
+const moduleID = Array.from({ length: 8 }, () => String.fromCharCode(Math.floor(Math.random() * 26) + 97)).join("");
+/**
  * A low-level function used by other Nomo APIs.
  * This is the main entry point into the native layer.
  */
 export async function invokeNomoFunction(functionName, args) {
     invocationCounter++;
-    const invocationID = invocationCounter.toString();
+    const invocationID = invocationCounter.toString() + "_" + moduleID;
     const payload = JSON.stringify({
         functionName,
         invocationID,

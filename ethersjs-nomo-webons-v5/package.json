@@ -18,6 +18,6 @@
     "typescript": "5.0.4"
   },
   "peerDependencies": {
-    "nomo-webon-kit": "^0.1.18"
+    "nomo-webon-kit": "file:../nomo-webon-kit"
   }
 }

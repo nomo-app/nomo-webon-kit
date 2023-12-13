@@ -91,16 +91,21 @@ export async function invokeNomoFunction(
     args,
   });
 
-  // first create a Promise
-  const promise = new Promise(function (
-    resolve: (value: unknown) => void,
-    reject: (reason?: any) => void
-  ) {
-    window.nomoResolvePromises[invocationID] = resolve;
-    window.nomoRejectPromises[invocationID] = reject;
-  });
+  if (typeof window === "undefined") {
+    return Promise.reject(
+      `the function ${functionName} does not work in NodeJS/CommonJS.`
+    );
+  }
 
   try {
+    const nomoPromise = new Promise(function (
+      resolve: (value: unknown) => void,
+      reject: (reason?: any) => void
+    ) {
+      window.nomoResolvePromises[invocationID] = resolve;
+      window.nomoRejectPromises[invocationID] = reject;
+    });
+
     const dartBridge = getDartBridge();
     if (dartBridge) {
       dartBridge(payload);
@@ -109,11 +114,11 @@ export async function invokeNomoFunction(
         `the function ${functionName} does not work outside of the NOMO-app.`
       );
     }
+    return nomoPromise;
   } catch (e) {
     // @ts-ignore
     return Promise.reject(e.message);
   }
-  return promise;
 }
 
 const fulfillPromiseFromFlutter = function (base64FromFlutter: string) {
@@ -140,7 +145,10 @@ const fulfillPromiseFromFlutter = function (base64FromFlutter: string) {
   window.nomoRejectPromises[invocationID] = null;
 
   if (!fulfillFunction) {
-    return "unexpected invocationID";
+    console.error(
+      "Failed to fulfill the promise with invocationID " + invocationID
+    ); // should never ever happen
+    return "FAIL";
   }
   fulfillFunction(result); // fulfill or reject the promise
   return "OK";

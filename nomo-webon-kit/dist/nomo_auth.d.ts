@@ -1,7 +1,7 @@
 /**
  * Returns address/signature-pairs for the Nomo-Auth-Protocol.
  * This is a primitive that can be used for customized authentication.
- * For example, the address/signature-pairs can be put into an HTTP-header.
+ * For example, the address/signature-pairs can be put into HTTP-headers.
  *
  * Needs nomo.permission.SIGN_EVM_MESSAGE.
  */

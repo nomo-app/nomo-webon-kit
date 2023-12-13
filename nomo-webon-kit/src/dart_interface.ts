@@ -145,5 +145,10 @@ const fulfillPromiseFromFlutter = function (base64FromFlutter: string) {
   return "OK";
 };
 try {
+  if (window.fulfillPromiseFromFlutter) {
+    console.error(
+      "Duplicate instances of nomo-webon-kit detected! This can trigger promises that never fulfill, please deduplicate your dependencies!"
+    );
+  }
   window.fulfillPromiseFromFlutter = fulfillPromiseFromFlutter;
 } catch (e) {}

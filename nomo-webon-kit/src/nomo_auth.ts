@@ -46,7 +46,8 @@ export async function nomoAuthFetch(args: {
   statusCode: number;
   response: string;
 }> {
-  args = fillMissingArgs(args);
+  fillMissingArgs(args);
+
   const signer: typeof nomoSignAuthMessage = args.signer ?? nomoSignAuthMessage;
 
   const headers: { [key: string]: string } = args.headers ?? {};
@@ -135,35 +136,26 @@ export async function nomoAuthHttp(
   statusCode: number;
   response: string;
 }> {
-  args = fillMissingArgs(args);
+  if (typeof args === "string") {
+    args = { url: args };
+  }
+  fillMissingArgs(args);
   if (isFallbackModeActive()) {
     return await nomoAuthFetch(args);
   }
   return await invokeNomoFunction("nomoAuthHttp", args);
 }
 
-function fillMissingArgs(
-  args:
-    | {
-        url: string;
-        method?: "GET" | "POST";
-        headers?: { [key: string]: string };
-        body?: string;
-      }
-    | string
-): {
+function fillMissingArgs(args: {
   url: string;
-  method: "GET" | "POST";
-  headers: { [key: string]: string };
+  method?: "GET" | "POST";
+  headers?: { [key: string]: string };
   body?: string;
-} {
-  if (typeof args === "string") {
-    args = { url: args };
+}) {
+  if (!args.method) {
+    args.method = "GET";
   }
-  return {
-    url: args.url,
-    method: args.method ?? "GET",
-    headers: args.headers ?? {},
-    body: args.body,
-  };
+  if (!args.headers) {
+    args.headers = {};
+  }
 }

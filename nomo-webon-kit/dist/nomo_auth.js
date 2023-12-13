@@ -26,7 +26,7 @@ export async function nomoSignAuthMessage(args) {
  */
 export async function nomoAuthFetch(args) {
     var _a, _b;
-    args = fillMissingArgs(args);
+    fillMissingArgs(args);
     const signer = (_a = args.signer) !== null && _a !== void 0 ? _a : nomoSignAuthMessage;
     const headers = (_b = args.headers) !== null && _b !== void 0 ? _b : {};
     await _injectNomoAuthHeaders({
@@ -91,21 +91,20 @@ async function _injectNomoAuthHeaders({ signer, url, headers, }) {
  * At a lower level, Nomo-Auth works by injecting a few HTTP-headers into the request.
  */
 export async function nomoAuthHttp(args) {
-    args = fillMissingArgs(args);
+    if (typeof args === "string") {
+        args = { url: args };
+    }
+    fillMissingArgs(args);
     if (isFallbackModeActive()) {
         return await nomoAuthFetch(args);
     }
     return await invokeNomoFunction("nomoAuthHttp", args);
 }
 function fillMissingArgs(args) {
-    var _a, _b;
-    if (typeof args === "string") {
-        args = { url: args };
+    if (!args.method) {
+        args.method = "GET";
     }
-    return {
-        url: args.url,
-        method: (_a = args.method) !== null && _a !== void 0 ? _a : "GET",
-        headers: (_b = args.headers) !== null && _b !== void 0 ? _b : {},
-        body: args.body,
-    };
+    if (!args.headers) {
+        args.headers = {};
+    }
 }

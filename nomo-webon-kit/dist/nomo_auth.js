@@ -9,9 +9,7 @@ import { nomoGetManifest } from "./nomo_multi_webons";
  */
 export async function nomoSignAuthMessage(args) {
     if (isFallbackModeActive()) {
-        // We hardcode "authAddr" for the fallback-mode.
-        // In the real Nomo-App, "authAddr" will be different for each domain.
-        // In contrast, "ethAddress" is the same for all domains and only depend on the wallet.
+        // Instead of those hardcoded address/signature-pairs, you could pass a custom signer to "nomoAuthFetch"
         return {
             ethAddress: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",
             ethSig: "0x67d10b371a75ac6d20c2af83c9e14edec60567b3bc181b0b971bbea1888146e87e0b0dd6ca45453749171ec99522ffd061ccebeafff89ed9d95d6a3f8da3660b1b",

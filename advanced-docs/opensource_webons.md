@@ -1,26 +1,29 @@
 # OpenSource WebOns
 
-This document provides a list of WebOns that could be forked for developing a WebOn.
+This document shows a list of WebOns that could be forked.
 
 ## Demo WebOn
 
 Deeplink to try it out: https://nomo.app/webon/w.nomo.app/app.nomo.demowebon/nomo.tar.gz
 
-The [Demo WebOn](https://github.com/nomo-app/nomo-webon-kit/tree/main/demo-webon) is located in this repo and it is written with next.js-React.
-The Demo WebOn showcases a large number of nomo-API-features.
+The [Demo WebOn](https://github.com/nomo-app/nomo-webon-kit/tree/main/demo-webon) in this repo showcases a large number of Nomo-API-features.
+It is written in next.js-React.
 
-After cloning this repo, run the following commands to launch the Demo WebOn:
+## AVINOC DeFi WebOn
 
-`cd ethersjs-nomo-webons && npm i`  
-`cd web3js-nomo-webons && npm i`  
-`cd demo-webon && npm i`  
-`npm run dev`
+Deeplink to try it out: https://nomo.app/webon/w.nomo.app/avinocdefi/nomo.tar.gz
 
-Afterwards, you might need to change the package.json to use the public npm-dependencies instead of the local dependencies from this repo.
+The [AVINOC DeFi WebOn](https://github.com/nomo-app/avinoc-defi-webon) implements real-world use cases for the AVINOC token community, running on multiple chains.
+It is written in next.js-React.
 
 ## Tokengenerator WebOn
 
 Deeplink to try it out: https://nomo.app/webon/tokens.nomo.app
 
-The [Tokengenerator WebOn](https://github.com/nomo-app/tokengenerator) is also written in next.js-React.
-It submits a transaction with ethersjs-nomo-webons to create a new token.
+The [Tokengenerator WebOn](https://github.com/nomo-app/tokengenerator) allows users to easily create tokens with arbitrary names.
+It is written in next.js-React.
+
+## Swap WebOn Flutter
+
+The [Swap WebOn Flutter](https://github.com/nomo-app/swap-webon-flutter) offers swapping-functionality over multiple chains.
+It is written in Dart/Flutter and compiled to JavaScript or WebAssembly.

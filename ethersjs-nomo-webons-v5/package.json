@@ -1,23 +1,23 @@
 {
   "name": "ethersjs-nomo-webons-v5",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "a glue package for ethersjs-V5 and nomo-webon-kit",
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf dist && tsc",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "prepublishOnly": "npm uninstall nomo-webon-kit && npm i --save-peer nomo-webon-kit"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/nomo-app/nomo-webon-kit.git"
   },
-  "dependencies": {
-    "@types/node": "^20.5.9",
+  "peerDependencies": {
     "ethers": "^5.7.2",
+    "nomo-webon-kit": "file:../nomo-webon-kit"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.9",
     "typescript": "5.0.4"
   },
-  "peerDependencies": {
-    "nomo-webon-kit": "file:../nomo-webon-kit"
-  }
+  "license": "ISC"
 }

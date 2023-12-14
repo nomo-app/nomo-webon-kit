@@ -13,8 +13,7 @@
     "next": "13.4.3",
     "nomo-webon-kit": "file:../nomo-webon-kit",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "web3js-nomo-webons": "file:../web3js-nomo-webons"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@types/node": "20.2.3",

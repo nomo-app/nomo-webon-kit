@@ -4,7 +4,7 @@ This document shows a list of WebOns that could be forked.
 
 ## Demo WebOn
 
-Deeplink to try it out: https://nomo.app/webon/w.nomo.app/app.nomo.demowebon/nomo.tar.gz
+Deeplink to try it out: https://nomo.app/webon/w.nomo.app/demowebon/nomo.tar.gz
 
 The [Demo WebOn](https://github.com/nomo-app/nomo-webon-kit/tree/main/demo-webon) in this repo showcases a large number of Nomo-API-features.
 It is written in next.js-React.

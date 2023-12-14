@@ -2,7 +2,7 @@ This Demo-WebOn is a [Next.js](https://nextjs.org/) project bootstrapped with [`
 You can use nextjs for your WebOn, but please feel free to use any other JavaScript-framework as well.
 
 Deeplink to try it out:
-https://nomo.app/webon/w.nomo.app/app.nomo.demowebon/nomo.tar.gz
+https://nomo.app/webon/w.nomo.app/demowebon/nomo.tar.gz
 
 ## Getting Started
 

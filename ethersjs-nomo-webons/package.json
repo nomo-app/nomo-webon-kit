@@ -1,6 +1,6 @@
 {
   "name": "ethersjs-nomo-webons",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "a glue package for ethersjs-V6 and nomo-webon-kit",
   "main": "dist/index.js",
   "scripts": {
@@ -16,8 +16,8 @@
     "nomo-webon-kit": "file:../nomo-webon-kit"
   },
   "devDependencies": {
-    "typescript": "5.0.4",
-    "@types/node": "^20.5.9"
+    "@types/node": "^20.5.9",
+    "typescript": "5.0.4"
   },
   "license": "ISC"
 }

@@ -1,7 +1,7 @@
 {
   "name": "nomo-webon-kit",
   "version": "0.1.20",
-  "description": "Nomo-WebOn-Kit for the Nomo App",
+  "description": "A TypeScript package for the Nomo WebOn API",
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf dist && tsc",

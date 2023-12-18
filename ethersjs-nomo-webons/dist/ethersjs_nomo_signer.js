@@ -1,4 +1,4 @@
-import { Transaction, Wallet, } from "ethers";
+import { AbstractSigner, Transaction, Wallet, } from "ethers";
 import { isFallbackModeActive } from "nomo-webon-kit";
 import { nomo } from "nomo-webon-kit";
 function appendSignatureToTx(unsignedTx, sigHexFromNative) {
@@ -25,47 +25,16 @@ function createFallbackDevSigner() {
     return fallbackDevSigner;
 }
 function signTxDevWallet(txRequest) {
+    console.log("fallback mode: signTxDevWallet", txRequest);
     const devSigner = createFallbackDevSigner();
     return devSigner.signTransaction(txRequest);
 }
-export class EthersjsNomoSigner {
+export class EthersjsNomoSigner extends AbstractSigner {
     constructor(provider) {
-        this.provider = provider;
+        super(provider);
     }
     connect(_provider) {
         return this;
-    }
-    getNonce(blockTag) {
-        return this.provider.getTransactionCount(this.getAddress(), blockTag);
-    }
-    populateCall(tx) {
-        throw new Error("Method not implemented.");
-    }
-    populateTransaction(tx) {
-        const allowedTransactionKeys = {
-            chainId: true,
-            data: true,
-            gasLimit: true,
-            gasPrice: true,
-            nonce: true,
-            to: true,
-            type: true,
-            value: true,
-        }; // ethers.js enforced strict rules on what properties are allowed in unsignedTx
-        const unsignedTx = {};
-        for (const key of Object.keys(allowedTransactionKeys)) {
-            unsignedTx[key] = tx[key];
-        }
-        return Promise.resolve(unsignedTx);
-    }
-    estimateGas(tx) {
-        return this.provider.estimateGas(tx);
-    }
-    call(tx) {
-        throw new Error("Method not implemented.");
-    }
-    resolveName(name) {
-        throw new Error("Method not implemented.");
     }
     sendTransaction(tx) {
         console.log("txToSend", tx);
@@ -91,13 +60,15 @@ export class EthersjsNomoSigner {
         return Promise.reject("signMessage not implemented");
     }
     async signTransaction(txRequest) {
-        console.log("isFallbackModeActive", isFallbackModeActive());
-        if (isFallbackModeActive()) {
-            return signTxDevWallet(txRequest);
-        }
         console.log("unsignedTx", txRequest);
         const unsignedTx = await this.populateTransaction(txRequest);
         console.log("populatedTx", unsignedTx);
+        if (isFallbackModeActive()) {
+            return signTxDevWallet(unsignedTx);
+        }
+        if (unsignedTx.from) {
+            unsignedTx.from = undefined; // prevent TypeError: unsigned transaction cannot define "from"
+        }
         const unsignedRawTx = Transaction.from(unsignedTx).unsignedSerialized;
         console.log("unsignedRawTx", unsignedRawTx);
         const res = await nomo.signEvmTransaction({ messageHex: unsignedRawTx });

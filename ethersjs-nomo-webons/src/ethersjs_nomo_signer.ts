@@ -1,10 +1,9 @@
 import {
-  BlockTag,
+  AbstractSigner,
   HDNodeWallet,
   Provider,
   Signer,
   Transaction,
-  TransactionLike,
   TransactionRequest,
   TransactionResponse,
   TypedDataDomain,
@@ -53,62 +52,26 @@ function createFallbackDevSigner(): HDNodeWallet {
 }
 
 function signTxDevWallet(txRequest: TransactionRequest): Promise<string> {
+  console.log("fallback mode: signTxDevWallet", txRequest);
   const devSigner = createFallbackDevSigner();
   return devSigner.signTransaction(txRequest);
 }
 
-export class EthersjsNomoSigner implements Signer {
+export class EthersjsNomoSigner extends AbstractSigner {
   constructor(provider: Provider) {
-    this.provider = provider;
+    super(provider);
   }
-  provider: Provider;
 
   connect(_provider: Provider): Signer {
     return this;
   }
 
-  getNonce(blockTag?: BlockTag | undefined): Promise<number> {
-    return this.provider.getTransactionCount(this.getAddress(), blockTag);
-  }
-
-  populateCall(tx: TransactionRequest): Promise<TransactionLike<string>> {
-    throw new Error("Method not implemented.");
-  }
-  populateTransaction(
-    tx: TransactionRequest
-  ): Promise<TransactionLike<string>> {
-    const allowedTransactionKeys: { [key: string]: boolean } = {
-      chainId: true,
-      data: true,
-      gasLimit: true,
-      gasPrice: true,
-      nonce: true,
-      to: true,
-      type: true,
-      value: true,
-    }; // ethers.js enforced strict rules on what properties are allowed in unsignedTx
-    const unsignedTx: Record<string, any> = {};
-    for (const key of Object.keys(allowedTransactionKeys)) {
-      unsignedTx[key] = (tx as Record<string, any>)[key];
-    }
-
-    return Promise.resolve(unsignedTx);
-  }
-  estimateGas(tx: TransactionRequest): Promise<bigint> {
-    return this.provider.estimateGas(tx);
-  }
-  call(tx: TransactionRequest): Promise<string> {
-    throw new Error("Method not implemented.");
-  }
-  resolveName(name: string): Promise<string | null> {
-    throw new Error("Method not implemented.");
-  }
   sendTransaction(tx: TransactionRequest): Promise<TransactionResponse> {
     console.log("txToSend", tx);
 
     const txResponse = this.signTransaction(tx)
       .then((res) => {
-        return this.provider.broadcastTransaction(res);
+        return this.provider!.broadcastTransaction(res);
       })
       .catch((err) => {
         throw err;
@@ -136,16 +99,17 @@ export class EthersjsNomoSigner implements Signer {
   }
 
   async signTransaction(txRequest: TransactionRequest): Promise<string> {
-    console.log("isFallbackModeActive", isFallbackModeActive());
-
-    if (isFallbackModeActive()) {
-      return signTxDevWallet(txRequest);
-    }
-
     console.log("unsignedTx", txRequest);
     const unsignedTx = await this.populateTransaction(txRequest);
     console.log("populatedTx", unsignedTx);
 
+    if (isFallbackModeActive()) {
+      return signTxDevWallet(unsignedTx);
+    }
+
+    if (unsignedTx.from) {
+      unsignedTx.from = undefined; // prevent TypeError: unsigned transaction cannot define "from"
+    }
     const unsignedRawTx = Transaction.from(unsignedTx).unsignedSerialized;
     console.log("unsignedRawTx", unsignedRawTx);
 

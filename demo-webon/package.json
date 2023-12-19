@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && nomo-webon-cli build out",
-    "deploy": "nomo-webon-cli deploy out/nomo.tar.gz production && ./scripts/clear_cloudflare_cache.sh",
+    "deploy": "nomo-webon-cli deploy nomo.tar.gz production && ./scripts/clear_cloudflare_cache.sh",
     "start": "npx serve@latest out",
     "lint": "next lint"
   },
@@ -22,6 +22,6 @@
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
     "typescript": "5.0.4",
-    "nomo-webon-cli": "^0.1.4"
+    "nomo-webon-cli": "^0.1.6"
   }
 }

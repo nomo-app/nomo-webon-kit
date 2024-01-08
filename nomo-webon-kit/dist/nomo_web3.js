@@ -102,7 +102,7 @@ export async function nomoGetWalletAddresses() {
  */
 export async function nomoGetAssetIcon(args) {
     const legacyArgs = Object.assign(Object.assign({}, args), { assetSymbol: args.symbol });
-    return await invokeNomoFunctionCached("nomoGetAssetIcon", legacyArgs);
+    return await invokeNomoFunction("nomoGetAssetIcon", legacyArgs);
 }
 /**
  * Returns an asset price.

@@ -163,7 +163,7 @@ export async function nomoGetAssetIcon(args: NomoAssetSelector): Promise<{
   name: string;
 }> {
   const legacyArgs = { ...args, assetSymbol: args.symbol };
-  return await invokeNomoFunctionCached("nomoGetAssetIcon", legacyArgs);
+  return await invokeNomoFunction("nomoGetAssetIcon", legacyArgs);
 }
 
 /**

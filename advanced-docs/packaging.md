@@ -1,20 +1,25 @@
 # WebOn Packaging
 
 For WebOns to be packaged into a tar.gz-archive, there are a few requirements needed.
-For example, WebOns should always be client-site-rendered and include a few mandatory files in their tar.gz-archive.
+For example, WebOns should always be client-side-rendered and include a few mandatory files in their tar.gz-archive.
 
 See https://github.com/nomo-app/nomo-webon-kit/blob/main/demo-webon/package.json for an example of a build_tar script (`npm run build_tar`).
 
-## Client Site Rendering
+## Client Side Rendering
 
 A WebOn should be a "static build" that is rendered on the client.
 WebOns should not include any pages that are rendered on a server.
 The reason for this is that WebOns are hosted on a localhost-server within the Nomo App (in production-mode).
 Only in dev-mode, WebOns may be hosted on remote-servers.
 
-It may depend on your framework how to achieve client site rendering; here are a few examples.
+It may depend on your framework how to achieve client side rendering; here are a few examples.
 
-### Next.js
+### Vite.js-React
+
+At the moment, Vite.js is our preferred way of building React-WebOns.
+Vite.js provides an excellent support for client side rendering as well as a high flexibility and great dev experience.
+
+### Next.js-React
 
 With Next.js-React, you can configure static builds by adding `output: 'export'` to your `next.config.js`.
 

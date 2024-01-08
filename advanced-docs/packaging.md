@@ -22,9 +22,6 @@ Vite.js provides an excellent support for client side rendering as well as a hig
 ### Next.js-React
 
 With Next.js-React, you can configure static builds by adding `output: 'export'` to your `next.config.js`.
-
-See the [demo example](https://github.com/nomo-app/nomo-webon-kit/blob/main/demo-webon/next.config.js) of a `next.config.js`.
-
 Furthermore, your Next.js-pages should be marked with `"use client";`.
 
 ### Svelte

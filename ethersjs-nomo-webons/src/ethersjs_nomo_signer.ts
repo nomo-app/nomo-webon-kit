@@ -33,34 +33,31 @@ function appendSignatureToTx(
 
 let fallbackDevSigner: HDNodeWallet | null = null;
 
-function createFallbackDevSigner(): HDNodeWallet {
+function createFallbackDevSigner(fallbackMnemonic: string | null): HDNodeWallet {
   if (!fallbackDevSigner) {
-    console.warn(
-      "fallback mode: try to read NEXT_PUBLIC_FALLBACK_MNEMONIC from environment"
-    );
-    const mnemonic = process.env.NEXT_PUBLIC_FALLBACK_MNEMONIC;
-
-    if (!mnemonic || !mnemonic.length) {
+    console.warn("fallback mode: try to use fallbackMnemonic");
+    if (!fallbackMnemonic || !fallbackMnemonic.length) {
       throw Error(
-        "NEXT_PUBLIC_FALLBACK_MNEMONIC is not defined. Create a .env.local to define it"
+        "fallbackMnemonic is not defined. Pass it to the constructor of EthersjsNomoSigner."
       );
     }
-
-    fallbackDevSigner = Wallet.fromPhrase(mnemonic);
+    fallbackDevSigner = Wallet.fromPhrase(fallbackMnemonic);
   }
   return fallbackDevSigner;
 }
 
-function signTxDevWallet(txRequest: TransactionRequest): Promise<string> {
+function signTxDevWallet(txRequest: TransactionRequest, fallbackMnemonic: string | null): Promise<string> {
   console.log("fallback mode: signTxDevWallet", txRequest);
-  const devSigner = createFallbackDevSigner();
+  const devSigner = createFallbackDevSigner(fallbackMnemonic);
   return devSigner.signTransaction(txRequest);
 }
 
 export class EthersjsNomoSigner extends AbstractSigner {
-  constructor(provider: Provider) {
+  constructor(provider: Provider, fallbackMnemonic?: string) {
     super(provider);
+    this.fallbackMnemonic = fallbackMnemonic ?? null;
   }
+  fallbackMnemonic: string | null;
 
   connect(_provider: Provider): Signer {
     return this;
@@ -89,7 +86,7 @@ export class EthersjsNomoSigner extends AbstractSigner {
 
   getAddress(): Promise<string> {
     if (isFallbackModeActive()) {
-      return createFallbackDevSigner().getAddress();
+      return createFallbackDevSigner(this.fallbackMnemonic).getAddress();
     }
     return nomo.getEvmAddress();
   }
@@ -104,7 +101,7 @@ export class EthersjsNomoSigner extends AbstractSigner {
     console.log("populatedTx", unsignedTx);
 
     if (isFallbackModeActive()) {
-      return signTxDevWallet(unsignedTx);
+      return signTxDevWallet(unsignedTx, this.fallbackMnemonic);
     }
 
     if (unsignedTx.from) {

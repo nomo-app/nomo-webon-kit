@@ -13,25 +13,25 @@ function appendSignatureToTx(unsignedTx, sigHexFromNative) {
     return Transaction.from(unsignedTx).serialized;
 }
 let fallbackDevSigner = null;
-function createFallbackDevSigner() {
+function createFallbackDevSigner(fallbackMnemonic) {
     if (!fallbackDevSigner) {
-        console.warn("fallback mode: try to read NEXT_PUBLIC_FALLBACK_MNEMONIC from environment");
-        const mnemonic = process.env.NEXT_PUBLIC_FALLBACK_MNEMONIC;
-        if (!mnemonic || !mnemonic.length) {
-            throw Error("NEXT_PUBLIC_FALLBACK_MNEMONIC is not defined. Create a .env.local to define it");
+        console.warn("fallback mode: try to use fallbackMnemonic");
+        if (!fallbackMnemonic || !fallbackMnemonic.length) {
+            throw Error("fallbackMnemonic is not defined. Pass it to the constructor of EthersjsNomoSigner.");
         }
-        fallbackDevSigner = Wallet.fromPhrase(mnemonic);
+        fallbackDevSigner = Wallet.fromPhrase(fallbackMnemonic);
     }
     return fallbackDevSigner;
 }
-function signTxDevWallet(txRequest) {
+function signTxDevWallet(txRequest, fallbackMnemonic) {
     console.log("fallback mode: signTxDevWallet", txRequest);
-    const devSigner = createFallbackDevSigner();
+    const devSigner = createFallbackDevSigner(fallbackMnemonic);
     return devSigner.signTransaction(txRequest);
 }
 export class EthersjsNomoSigner extends AbstractSigner {
-    constructor(provider) {
+    constructor(provider, fallbackMnemonic) {
         super(provider);
+        this.fallbackMnemonic = fallbackMnemonic !== null && fallbackMnemonic !== void 0 ? fallbackMnemonic : null;
     }
     connect(_provider) {
         return this;
@@ -52,7 +52,7 @@ export class EthersjsNomoSigner extends AbstractSigner {
     }
     getAddress() {
         if (isFallbackModeActive()) {
-            return createFallbackDevSigner().getAddress();
+            return createFallbackDevSigner(this.fallbackMnemonic).getAddress();
         }
         return nomo.getEvmAddress();
     }
@@ -64,7 +64,7 @@ export class EthersjsNomoSigner extends AbstractSigner {
         const unsignedTx = await this.populateTransaction(txRequest);
         console.log("populatedTx", unsignedTx);
         if (isFallbackModeActive()) {
-            return signTxDevWallet(unsignedTx);
+            return signTxDevWallet(unsignedTx, this.fallbackMnemonic);
         }
         if (unsignedTx.from) {
             unsignedTx.from = undefined; // prevent TypeError: unsigned transaction cannot define "from"

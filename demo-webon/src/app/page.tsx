@@ -1,13 +1,10 @@
-/* eslint-disable @next/next/no-img-element */
-"use client";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import Dialog, { DialogContent } from "./components/dialog";
 import { useNomoState } from "./hooks/custom_hooks";
 import { nomo } from "nomo-webon-kit";
 import { injectNomoCSSVariables } from "nomo-webon-kit";
 import styles from "./page.module.css";
-import "./nomo.css";
+import "./globals.css";
 import { testSigning } from "../../test/web3_signing_test";
 import { stringifyWithBigInts } from "nomo-webon-kit";
 import { mintNFT } from "./evm/mint_nft";
@@ -69,24 +66,27 @@ export default function Home() {
   };
 
   return (
-    <main className={styles.main}>
+    <main
+      className={styles.main}
+      style={{
+        /* The css variables that are prefixed with "nomo" adjust themselves according to the current Nomo theme */
+        background:
+          "linear-gradient(to bottom right, white, var(--nomoBackground))",
+      }}
+    >
       <div className={styles.description}>
-        <p>
-          Nomo Demo WebOn - Get started by editing src/app/page.tsx. Scroll down
-          to explore features of WebOns!
-        </p>
+        <p>Nomo Dev WebOn - Scroll down to explore features of WebOns!</p>
       </div>
 
       <div className={styles.flex}>
         <Dialog content={dialog} handleClose={() => setDialog(null)} />
         <div style={{ height: "10px" }} />
-        <Image
+        <img
           className={styles.logo}
           src="/nomo-logo-square.jpg"
           alt="NOMO Logo"
           width={180}
           height={37}
-          priority
         />
         <div style={{ height: "10px" }} />
         <div style={{ width: "100%" }}>

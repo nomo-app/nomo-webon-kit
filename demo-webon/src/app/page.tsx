@@ -4,7 +4,6 @@ import { useNomoState } from "./hooks/custom_hooks";
 import { nomo } from "nomo-webon-kit";
 import { injectNomoCSSVariables } from "nomo-webon-kit";
 import styles from "./page.module.css";
-import "./nomo.css";
 import "./globals.css";
 import { testSigning } from "../../test/web3_signing_test";
 import { stringifyWithBigInts } from "nomo-webon-kit";
@@ -67,12 +66,16 @@ export default function Home() {
   };
 
   return (
-    <main className={styles.main}>
+    <main
+      className={styles.main}
+      style={{
+        /* The css variables that are prefixed with "nomo" adjust themselves according to the current Nomo theme */
+        background:
+          "linear-gradient(to bottom right, white, var(--nomoBackground))",
+      }}
+    >
       <div className={styles.description}>
-        <p>
-          Nomo Dev WebOn - Scroll down
-          to explore features of WebOns!
-        </p>
+        <p>Nomo Dev WebOn - Scroll down to explore features of WebOns!</p>
       </div>
 
       <div className={styles.flex}>

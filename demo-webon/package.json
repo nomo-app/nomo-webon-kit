@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && mv dist out && nomo-webon-cli build out",
+    "build": "tsc && vite build && rm -rf out && mv dist out && nomo-webon-cli build out",
     "deploy": "nomo-webon-cli deploy nomo.tar.gz production1 && nomo-webon-cli deploy nomo.tar.gz production2 && ./scripts/clear_cloudflare_cache.sh",
     "start": "npx serve@latest out"
   },

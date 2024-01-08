@@ -1,4 +1,0 @@
-/* The css variables that are prefixed with "nomo" adjust themselves according to the current Nomo theme */
-html, body {
-  background: linear-gradient(to bottom right, white, var(--nomoBackground));
-}

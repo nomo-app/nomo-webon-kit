@@ -241,3 +241,24 @@ export async function nomoMnemonicBackupExisted(): Promise<{
   }
   return await invokeNomoFunction("nomoMnemonicBackupExisted", {});
 }
+
+export interface NomoNFT {
+  blockNumber: number;
+  contractAddress: string;
+  dateTime: number;
+  from: string;
+  hash: string;
+  to: string;
+  tokenID: string;
+  tokenName: string;
+}
+
+/**
+ * Returns a list of NFTs that are owned by the user.
+ * Can be slow if the NFTs are not yet in the Nomo App's cache.
+ */
+export async function nomoGetNFTs(args: {
+  network: NomoEvmNetwork;
+}): Promise<{nfts: NomoNFT[]}> {
+  return await invokeNomoFunction("nomoGetNFTs", args);
+}

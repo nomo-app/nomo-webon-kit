@@ -161,3 +161,10 @@ export async function nomoMnemonicBackupExisted() {
     }
     return await invokeNomoFunction("nomoMnemonicBackupExisted", {});
 }
+/**
+ * Returns a list of NFTs that are owned by the user.
+ * Can be slow if the NFTs are not yet in the Nomo App's cache.
+ */
+export async function nomoGetNFTs(args) {
+    return await invokeNomoFunction("nomoGetNFTs", args);
+}

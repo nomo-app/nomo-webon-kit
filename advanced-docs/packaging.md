@@ -3,7 +3,7 @@
 For WebOns to be packaged into a tar.gz-archive, there are a few requirements needed.
 For example, WebOns should always be client-side-rendered and include a few mandatory files in their tar.gz-archive.
 
-See https://github.com/nomo-app/nomo-webon-kit/blob/main/demo-webon/package.json for an example of a build_tar script (`npm run build_tar`).
+See https://github.com/nomo-app/nomo-webon-cli for guidance on how to build tar.gz-archives.
 
 ## Client Side Rendering
 

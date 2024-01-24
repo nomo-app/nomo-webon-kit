@@ -16,6 +16,13 @@ Deeplink to try it out: https://nomo.app/webon/w.nomo.app/avinocdefi/nomo.tar.gz
 The [AVINOC DeFi WebOn](https://github.com/nomo-app/avinoc-defi-webon) implements real-world use cases for the AVINOC token community, running on multiple chains.
 It is written in Vite.js-React.
 
+## Faucet WebOn
+
+Deeplink to try it out: https://nomo.app/webon/w.nomo.app/faucet/nomo.tar.gz
+
+The [Faucet WebOn](https://github.com/nomo-app/faucet-webon) is a simple WebOn written in Vite.js-React.
+Users can use the Faucet for paying transaction fees.
+
 ## Tokengenerator WebOn
 
 Deeplink to try it out: https://nomo.app/webon/tokens.nomo.app

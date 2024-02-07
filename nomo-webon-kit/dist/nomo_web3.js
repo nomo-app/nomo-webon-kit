@@ -146,7 +146,7 @@ export async function nomoAddCustomToken(args) {
  */
 export async function nomoLaunchSmartchainFaucet() {
     return await nomoInstallWebOn({
-        deeplink: "https://nomo.app/webon/faucet.nomo.app",
+        deeplink: "https://nomo.app/webon/w.nomo.app/faucet/nomo.tar.gz",
         skipPermissionDialog: true,
         navigateBack: false,
     });

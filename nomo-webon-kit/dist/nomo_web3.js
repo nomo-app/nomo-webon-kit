@@ -168,3 +168,11 @@ export async function nomoMnemonicBackupExisted() {
 export async function nomoGetNFTs(args) {
     return await invokeNomoFunction("nomoGetNFTs", args);
 }
+/**
+ * Returns a proof-of-payment for a transaction
+ *
+ * Needs nomo.permission.SIGN_EVM_MESSAGE.
+ */
+export async function nomoProofOfPayment(args) {
+    return await invokeNomoFunction("nomoProofOfPayment", args);
+}

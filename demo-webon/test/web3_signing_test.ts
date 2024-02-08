@@ -1,4 +1,4 @@
-import { nomo } from "nomo-webon-kit";
+import { nomo, NomoProofOfPayment } from "nomo-webon-kit";
 
 function resolveSig(sigHex: string) {
   const r = BigInt("0x" + sigHex.slice(0, 64));
@@ -37,4 +37,16 @@ export async function testSigning(): Promise<string> {
   } else {
     return "TEST SUCCESS: expectedSig == sigFromNomo";
   }
+}
+
+
+
+export async function proofOfPaymentDemo(): Promise<NomoProofOfPayment> {
+
+  let result: NomoProofOfPayment = await nomo.proofOfPayment({
+    coin: "ec8",
+    hash: "0b7868c56ee6e11b0a32eb10cdc6da0bb4a2e37dbbf1ddbfbf7dc3ce3943ebbb",
+  });
+
+  return result;
 }

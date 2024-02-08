@@ -259,6 +259,29 @@ export interface NomoNFT {
  */
 export async function nomoGetNFTs(args: {
   network: NomoEvmNetwork;
-}): Promise<{nfts: NomoNFT[]}> {
+}): Promise<{ nfts: NomoNFT[] }> {
   return await invokeNomoFunction("nomoGetNFTs", args);
+}
+
+
+
+export interface NomoProofOfPayment {
+  uPoP: string;
+  uPoPHash: string;
+  pops: Array<string>;
+}
+
+export type CoinType = "btc" | "ltc" | "ec8" | "bch" | "zeniq";
+
+/**
+ * Returns a proof-of-payment for a transaction
+ * 
+ * Needs nomo.permission.SIGN_EVM_MESSAGE.
+ */
+export async function nomoProofOfPayment(args: {
+  hash: string;
+  nonce?: string;
+  coin: CoinType;
+}): Promise<NomoProofOfPayment> {
+  return await invokeNomoFunction("nomoProofOfPayment", args);
 }

@@ -23,6 +23,7 @@ export declare const nomo: {
     mnemonicBackupExisted: typeof web3.nomoMnemonicBackupExisted;
     launchSmartchainFaucet: typeof web3.nomoLaunchSmartchainFaucet;
     addCustomToken: typeof web3.nomoAddCustomToken;
+    proofOfPayment: typeof web3.nomoProofOfPayment;
     localStorage: {
         getItem: (key: string, options?: {
             webon_id: string;

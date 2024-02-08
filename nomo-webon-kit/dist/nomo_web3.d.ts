@@ -150,6 +150,11 @@ export interface NomoProofOfPayment {
     pops: Array<string>;
 }
 export type CoinType = "btc" | "ltc" | "ec8" | "bch" | "zeniq";
+/**
+ * Returns a proof-of-payment for a transaction
+ *
+ * Needs nomo.permission.SIGN_EVM_MESSAGE.
+ */
 export declare function nomoProofOfPayment(args: {
     hash: string;
     nonce?: string;

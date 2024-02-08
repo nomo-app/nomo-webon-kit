@@ -5,7 +5,7 @@ import { nomo } from "nomo-webon-kit";
 import { injectNomoCSSVariables } from "nomo-webon-kit";
 import styles from "./page.module.css";
 import "./globals.css";
-import { testSigning } from "../../test/web3_signing_test";
+import { proofOfPaymentDemo, testSigning } from "../../test/web3_signing_test";
 import { stringifyWithBigInts } from "nomo-webon-kit";
 import { mintNFT } from "./evm/mint_nft";
 import { openFaucetIfNeeded } from "./evm/evm_utils";
@@ -305,6 +305,30 @@ export default function Home() {
             EVM transaction signing <span>-&gt;</span>
           </h2>
           <p>A demo for the sign-security-dialog.</p>
+        </div>
+        <div className={styles.card}>
+          <h2
+            onClick={() => {
+              proofOfPaymentDemo()
+                .then((res) => {
+                  openDialog({
+                    title: "Signature Result",
+                    content: JSON.stringify(res),
+                  });
+                })
+                .catch((e) => {
+                  console.error(e);
+                  console.log(e);
+                  openDialog({
+                    title: "ProofOfPayment failed",
+                    content: e.nomoProofOfPayment,
+                  });
+                });
+            }}
+          >
+            Proof of Payment for UTXO Assets <span>-&gt;</span>
+          </h2>
+          <p>A demo for the ProofOfPayment Feature.</p>
         </div>
         <div
           onClick={() => {

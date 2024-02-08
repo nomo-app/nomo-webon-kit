@@ -168,3 +168,6 @@ export async function nomoMnemonicBackupExisted() {
 export async function nomoGetNFTs(args) {
     return await invokeNomoFunction("nomoGetNFTs", args);
 }
+export async function nomoProofOfPayment(args) {
+    return await invokeNomoFunction("nomoProofOfPayment", args);
+}

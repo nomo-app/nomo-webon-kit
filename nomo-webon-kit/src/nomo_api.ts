@@ -24,6 +24,7 @@ export const nomo = {
   mnemonicBackupExisted: web3.nomoMnemonicBackupExisted,
   launchSmartchainFaucet: web3.nomoLaunchSmartchainFaucet,
   addCustomToken: web3.nomoAddCustomToken,
+  proofOfPayment: web3.nomoProofOfPayment,
 
   localStorage: multi.nomoLocalStorage,
   launchUrl: multi.nomoLaunchUrl,

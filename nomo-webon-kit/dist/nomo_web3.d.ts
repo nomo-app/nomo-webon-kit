@@ -144,3 +144,14 @@ export declare function nomoGetNFTs(args: {
 }): Promise<{
     nfts: NomoNFT[];
 }>;
+export interface NomoProofOfPayment {
+    uPoP: string;
+    uPoPHash: string;
+    pops: Array<string>;
+}
+export type CoinType = "btc" | "ltc" | "ec8" | "bch" | "zeniq";
+export declare function nomoProofOfPayment(args: {
+    hash: string;
+    nonce?: string;
+    coin: CoinType;
+}): Promise<NomoProofOfPayment>;

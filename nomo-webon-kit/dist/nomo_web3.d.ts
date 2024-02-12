@@ -156,7 +156,7 @@ export interface NomoProofOfPayment {
     uPoPHash: string;
     pops: Array<string>;
 }
-export type CoinType = "btc" | "ltc" | "ec8" | "bch" | "zeniq";
+export type NomoCoinType = "btc" | "ltc" | "ec8" | "bch" | "zeniq";
 /**
  * Returns a proof-of-payment for a transaction
  *
@@ -165,5 +165,5 @@ export type CoinType = "btc" | "ltc" | "ec8" | "bch" | "zeniq";
 export declare function nomoProofOfPayment(args: {
     hash: string;
     nonce?: string;
-    coin: CoinType;
+    coin: NomoCoinType;
 }): Promise<NomoProofOfPayment>;

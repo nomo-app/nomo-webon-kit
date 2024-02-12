@@ -76,7 +76,7 @@ export async function nomoSendAssets(args: {
   asset: NomoAssetSelector;
   targetAddress: string;
   amount: string;
-}) {
+}): Promise<{ hash: string }> {
   const legacyArgs = { ...args, assetSymbol: args.asset.symbol };
   return await invokeNomoFunction("nomoSendAssets", legacyArgs);
 }
@@ -263,8 +263,6 @@ export async function nomoGetNFTs(args: {
   return await invokeNomoFunction("nomoGetNFTs", args);
 }
 
-
-
 export interface NomoProofOfPayment {
   uPoP: string;
   uPoPHash: string;
@@ -275,7 +273,7 @@ export type CoinType = "btc" | "ltc" | "ec8" | "bch" | "zeniq";
 
 /**
  * Returns a proof-of-payment for a transaction
- * 
+ *
  * Needs nomo.permission.SIGN_EVM_MESSAGE.
  */
 export async function nomoProofOfPayment(args: {

@@ -49,7 +49,9 @@ export declare function nomoSendAssets(args: {
     asset: NomoAssetSelector;
     targetAddress: string;
     amount: string;
-}): Promise<any>;
+}): Promise<{
+    hash: string;
+}>;
 /**
  * Opens a dialog for the user to select an asset.
  * If the dialog does not look "correct", WebOns are free to call "nomoGetVisibleAssets" and implement their own dialog.

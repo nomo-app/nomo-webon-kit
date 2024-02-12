@@ -76,7 +76,10 @@ export async function nomoSendAssets(args: {
   asset: NomoAssetSelector;
   targetAddress: string;
   amount: string;
-}): Promise<{ hash: string }> {
+}): Promise<{
+  hash: string;
+  intent: { recipient: string; amount: string; token: string };
+}> {
   const legacyArgs = { ...args, assetSymbol: args.asset.symbol };
   return await invokeNomoFunction("nomoSendAssets", legacyArgs);
 }

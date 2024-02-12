@@ -51,6 +51,11 @@ export declare function nomoSendAssets(args: {
     amount: string;
 }): Promise<{
     hash: string;
+    intent: {
+        recipient: string;
+        amount: string;
+        token: string;
+    };
 }>;
 /**
  * Opens a dialog for the user to select an asset.

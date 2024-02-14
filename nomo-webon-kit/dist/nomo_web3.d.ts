@@ -112,6 +112,20 @@ export declare function nomoGetBalance(args: NomoAssetSelector): Promise<NomoAss
     balance: string;
 }>;
 /**
+ * Returns a list of transactions from the Nomo Wallet's transaction-cache.
+ * Might fail if the transaction-cache is not yet synchronized.
+ *
+ * Since Nomo App 0.3.8.
+ */
+export declare function nomoGetTransactions(args: NomoAssetSelector): Promise<any>;
+/**
+ * An extended public key is a public key that allows to derive all the addresses of a Nomo Wallet.
+ * This is only intended for UTXO-based assets.
+ *
+ * Since Nomo App 0.3.8.
+ */
+export declare function nomoGetExtendedPublicKey(args: NomoAssetSelector): Promise<any>;
+/**
  * Adds a custom token to the list of visible assets in the Nomo Wallet.
  * Before that, it opens a dialog for the user to confirm.
  *

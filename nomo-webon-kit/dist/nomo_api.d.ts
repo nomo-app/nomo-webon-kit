@@ -18,6 +18,8 @@ export declare const nomo: {
     getVisibleAssets: typeof web3.nomoGetVisibleAssets;
     getNFTs: typeof web3.nomoGetNFTs;
     getBalance: typeof web3.nomoGetBalance;
+    getTransactions: typeof web3.nomoGetTransactions;
+    getExtendedPublicKey: typeof web3.nomoGetExtendedPublicKey;
     getAssetIcon: typeof web3.nomoGetAssetIcon;
     getAssetPrice: typeof web3.nomoGetAssetPrice;
     mnemonicBackupExisted: typeof web3.nomoMnemonicBackupExisted;

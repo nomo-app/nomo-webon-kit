@@ -318,7 +318,6 @@ export default function Home() {
                 })
                 .catch((e) => {
                   console.error(e);
-                  console.log(e);
                   openDialog({
                     title: "ProofOfPayment failed",
                     content: e.nomoProofOfPayment,
@@ -329,6 +328,31 @@ export default function Home() {
             Proof of Payment for UTXO Assets <span>-&gt;</span>
           </h2>
           <p>A demo for the ProofOfPayment Feature.</p>
+        </div>
+        <div className={styles.card}>
+          <h2
+            onClick={() => {
+              nomo
+                //.getExtendedPublicKey({ symbol: "BTC" })
+                .getTransactions({ symbol: "BTC" })
+                .then((res: any) => {
+                  openDialog({
+                    title: "Transactions",
+                    content: JSON.stringify(res),
+                  });
+                })
+                .catch((e) => {
+                  console.error(e);
+                  openDialog({
+                    title: "getTransactions failed",
+                    content: e.toString(),
+                  });
+                });
+            }}
+          >
+            Get transactions <span>-&gt;</span>
+          </h2>
+          <p>WebOns can implement fully-functional wallet-UIs.</p>
         </div>
         <div
           onClick={() => {

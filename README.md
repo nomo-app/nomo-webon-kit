@@ -126,8 +126,8 @@ The `nomo-webon-cli` can be used both for production deployments as well as for 
 
 # Sharing WebOns
 
-Once a WebOn is deployed, you can share it by long-pressing on the WebOn-icon within the Nomo App's home screen.
-After long-pressing, you will see a dialog with information like the webon_version and the webon_url.
+You can share WebOns by long-pressing on the WebOn-icon within the Nomo App's home screen.
+After long-pressing, you will see a dialog.
 Within this dialog, the "Share button" will give you a deeplink that can be shared with users or other developers.
 
 If needed, this deeplink can be easily converted into a QRCode with any QRCode-generator.

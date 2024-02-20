@@ -19,8 +19,7 @@ This document aims to clarify all the modes and support WebOn developers through
 ## Production Mode
 
 The primary "feature“ of the production mode are its security restrictions.
-In production mode, the Nomo App only accepts https-deeplinks that are in a set of _trusted domains_.
-Currently, the trusted domains are `nomo.app` as well as subdomains of `nomo.app`.
+In production mode, the Nomo App only accepts https-deeplinks, but no http-deeplinks.
 
 ## Dev Mode
 

@@ -20,6 +20,7 @@ export default function Home() {
   const evmAddress = useNomoState(nomo.getEvmAddress);
   const executionMode = useNomoState(nomo.getExecutionMode);
   const deviceName = useNomoState(nomo.getDeviceName);
+  const manifest = useNomoState(nomo.getManifest);
   const [pictureFromCamera, setPictureFromCamera] = useState<string | null>(
     null
   );
@@ -103,6 +104,10 @@ export default function Home() {
         <div style={{ height: "10px" }} />
         <div style={{ width: "100%" }}>
           <b>Device name:</b> {JSON.stringify(deviceName)}
+        </div>
+        <div style={{ height: "10px" }} />
+        <div style={{ width: "100%" }}>
+          <b>Manifest:</b> {JSON.stringify(manifest)}
         </div>
 
         <div className={styles.card}>

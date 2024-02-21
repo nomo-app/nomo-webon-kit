@@ -107,7 +107,7 @@ export default function Home() {
         </div>
         <div style={{ height: "10px" }} />
         <div style={{ width: "100%" }}>
-          <b>Manifest:</b> {JSON.stringify(manifest)}
+          <b>WebOn version:</b> {manifest?.version}
         </div>
 
         <div className={styles.card}>

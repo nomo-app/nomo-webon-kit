@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build && rm -rf out && mv dist out && nomo-webon-cli build out",
-    "deploy": "nomo-webon-cli deploy nomo.tar.gz production1 && nomo-webon-cli deploy nomo.tar.gz production2 && ./scripts/clear_cloudflare_cache.sh",
+    "deploy": "nomo-webon-cli bumpVersion public/nomo_manifest.json && npm run build && nomo-webon-cli deploy nomo.tar.gz production1 && nomo-webon-cli deploy nomo.tar.gz production2 && ./scripts/clear_cloudflare_cache.sh",
     "start": "npx serve@latest out"
   },
   "dependencies": {
@@ -20,7 +20,7 @@
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
     "@vitejs/plugin-react": "^4.2.1",
-    "nomo-webon-cli": "^0.1.8",
+    "nomo-webon-cli": "^0.1.9",
     "typescript": "5.0.4"
   }
 }

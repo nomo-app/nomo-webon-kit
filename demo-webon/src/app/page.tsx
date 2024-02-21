@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Dialog, { DialogContent } from "./components/dialog";
 import { useNomoState } from "./hooks/custom_hooks";
-import { nomo } from "nomo-webon-kit";
+import { NomoManifest, nomo } from "nomo-webon-kit";
 import { injectNomoCSSVariables } from "nomo-webon-kit";
 import styles from "./page.module.css";
 import "./globals.css";
@@ -20,7 +20,7 @@ export default function Home() {
   const evmAddress = useNomoState(nomo.getEvmAddress);
   const executionMode = useNomoState(nomo.getExecutionMode);
   const deviceName = useNomoState(nomo.getDeviceName);
-  const manifest = useNomoState(nomo.getManifest);
+  const manifest: NomoManifest | null = useNomoState(nomo.getManifest);
   const [pictureFromCamera, setPictureFromCamera] = useState<string | null>(
     null
   );
@@ -107,7 +107,7 @@ export default function Home() {
         </div>
         <div style={{ height: "10px" }} />
         <div style={{ width: "100%" }}>
-          <b>WebOn version:</b> {manifest?.version}
+          <b>WebOn version:</b> {manifest?.webon_version}
         </div>
 
         <div className={styles.card}>

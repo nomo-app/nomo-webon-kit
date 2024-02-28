@@ -14,6 +14,7 @@ import { themeSwitchDemo } from "./theming/theme_switch_demo";
 import { faqDemo } from "./faq/faq_demo";
 import { sendOnePercentOfBalance } from "./assets/send_demo";
 import { ethSigDemo } from "./evm/eth_sig";
+import { nomoFallbackQRCode } from "nomo-webon-kit";
 export default function Home() {
   const [dialog, setDialog] = useState<DialogContent | null>(null);
   const platformInfo = useNomoState(nomo.getPlatformInfo);
@@ -25,6 +26,7 @@ export default function Home() {
     null
   );
   useEffect(() => {
+    nomoFallbackQRCode();
     const minVersion = "0.3.6";
     nomo.hasMinimumNomoVersion({ minVersion }).then(async (res: any) => {
       if (!res.minVersionFulfilled) {

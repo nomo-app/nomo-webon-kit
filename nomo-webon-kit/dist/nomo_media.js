@@ -77,11 +77,14 @@ export async function nomoGetMessengerAddress() {
     }
     return await invokeNomoFunctionCached("nomoGetMessengerAddress", null);
 }
-/**Automatically detects if webon is run in the browser and shows dialog redirecting to the webon.*/
-export async function QRCodeOnWebview() {
-    if ((await nomoGetExecutionMode()).webView !== "not_in_nomo_app" || document.getElementById('not_in_nomo_dialog'))
+/** Detects if a WebOn is running outside of Nomo and shows a fallback-dialog if needed.*/
+export async function nomoFallbackQRCode() {
+    if ((await nomoGetExecutionMode()).webView !== "not_in_nomo_app" ||
+        document.getElementById("not_in_nomo_dialog"))
         return;
-    const url = "https://chart.googleapis.com/chart?cht=qr&chl=" + "http://nomo.app/webon/" + window.location.host +
+    const url = "https://chart.googleapis.com/chart?cht=qr&chl=" +
+        "http://nomo.app/webon/" +
+        window.location.host +
         "&chs=160x160&chld=L|0";
     document.body.innerHTML += `
   <style>
@@ -115,6 +118,6 @@ export async function QRCodeOnWebview() {
     <div style="text-align: center; color: white">You are currently displaying a WebOn outside your NOMO App. Please download the NOMO App here</div>
     <button id="not_in_nomo_dialog__btn" onclick="window.location.href='https://nomo.app/downloads'">Download NOMO App</button>
   </dialog>`;
-    const dialog = document.getElementById('not_in_nomo_dialog');
+    const dialog = document.getElementById("not_in_nomo_dialog");
     dialog.showModal();
 }

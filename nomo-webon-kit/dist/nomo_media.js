@@ -1,5 +1,4 @@
 import { invokeNomoFunction, invokeNomoFunctionCached, isFallbackModeActive, } from "./dart_interface";
-import { nomoGetExecutionMode } from "./nomo_platform";
 /**
  * Injecting QRCodes is useful for multiple purposes.
  * For example, new chats can be opened by injecting a chat-invitation-link.
@@ -78,10 +77,10 @@ export async function nomoGetMessengerAddress() {
     return await invokeNomoFunctionCached("nomoGetMessengerAddress", null);
 }
 /** Detects if a WebOn is running outside of Nomo and shows a fallback-dialog if needed.*/
-export async function nomoFallbackQRCode() {
-    if ((await nomoGetExecutionMode()).webView !== "not_in_nomo_app" ||
-        document.getElementById("not_in_nomo_dialog"))
+export function nomoFallbackQRCode() {
+    if (!isFallbackModeActive()) {
         return;
+    }
     const url = "https://chart.googleapis.com/chart?cht=qr&chl=" +
         "http://nomo.app/webon/" +
         window.location.host +

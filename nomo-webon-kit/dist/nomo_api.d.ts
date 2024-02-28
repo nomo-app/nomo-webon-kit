@@ -49,6 +49,7 @@ export declare const nomo: {
     pickFromGallery: typeof media.nomoPickFromGallery;
     qrScan: typeof media.nomoQrScan;
     injectQRCode: typeof media.nomoInjectQRCode;
+    fallbackQRCode: typeof media.nomoFallbackQRCode;
     hasMinimumNomoVersion: typeof platform.hasMinimumNomoVersion;
     checkForWebOnUpdate: typeof platform.nomoCheckForWebOnUpdate;
     getPlatformInfo: typeof platform.nomoGetPlatformInfo;

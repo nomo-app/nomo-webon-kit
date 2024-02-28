@@ -43,6 +43,7 @@ export const nomo = {
     pickFromGallery: media.nomoPickFromGallery,
     qrScan: media.nomoQrScan,
     injectQRCode: media.nomoInjectQRCode,
+    fallbackQRCode: media.nomoFallbackQRCode,
     hasMinimumNomoVersion: platform.hasMinimumNomoVersion,
     checkForWebOnUpdate: platform.nomoCheckForWebOnUpdate,
     getPlatformInfo: platform.nomoGetPlatformInfo,

@@ -68,4 +68,4 @@ export declare function nomoGetMessengerAddress(): Promise<{
     inviteLink: string;
 }>;
 /** Detects if a WebOn is running outside of Nomo and shows a fallback-dialog if needed.*/
-export declare function nomoFallbackQRCode(): Promise<void>;
+export declare function nomoFallbackQRCode(): void;

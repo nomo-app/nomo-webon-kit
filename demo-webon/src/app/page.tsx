@@ -25,8 +25,8 @@ export default function Home() {
   const [pictureFromCamera, setPictureFromCamera] = useState<string | null>(
     null
   );
-  nomoFallbackQRCode();
   useEffect(() => {
+    nomoFallbackQRCode();
     const minVersion = "0.3.6";
     nomo.hasMinimumNomoVersion({ minVersion }).then(async (res: any) => {
       if (!res.minVersionFulfilled) {

@@ -121,6 +121,7 @@ export async function nomoGetMessengerAddress(): Promise<{
   return await invokeNomoFunctionCached("nomoGetMessengerAddress", null);
 }
 
+/**Automatically detects if webon is run in the browser and shows dialog redirecting to the webon.*/
 export async function QRCodeOnWebview() {
   if ((await nomoGetExecutionMode()).webView !== "not_in_nomo_app" || document.getElementById('not_in_nomo_dialog'))
     return

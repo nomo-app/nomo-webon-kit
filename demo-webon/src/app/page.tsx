@@ -14,6 +14,7 @@ import { themeSwitchDemo } from "./theming/theme_switch_demo";
 import { faqDemo } from "./faq/faq_demo";
 import { sendOnePercentOfBalance } from "./assets/send_demo";
 import { ethSigDemo } from "./evm/eth_sig";
+import {QRCodeOnWebview} from "nomo-webon-kit";
 export default function Home() {
   const [dialog, setDialog] = useState<DialogContent | null>(null);
   const platformInfo = useNomoState(nomo.getPlatformInfo);
@@ -24,6 +25,7 @@ export default function Home() {
   const [pictureFromCamera, setPictureFromCamera] = useState<string | null>(
     null
   );
+  QRCodeOnWebview()
   useEffect(() => {
     const minVersion = "0.3.6";
     nomo.hasMinimumNomoVersion({ minVersion }).then(async (res: any) => {

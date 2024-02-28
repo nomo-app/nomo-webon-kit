@@ -1,4 +1,5 @@
 import { invokeNomoFunction, invokeNomoFunctionCached, isFallbackModeActive, } from "./dart_interface";
+import { nomoGetExecutionMode } from "./nomo_platform";
 /**
  * Injecting QRCodes is useful for multiple purposes.
  * For example, new chats can be opened by injecting a chat-invitation-link.
@@ -75,4 +76,45 @@ export async function nomoGetMessengerAddress() {
         };
     }
     return await invokeNomoFunctionCached("nomoGetMessengerAddress", null);
+}
+/**Automatically detects if webon is run in the browser and shows dialog redirecting to the webon.*/
+export async function QRCodeOnWebview() {
+    if ((await nomoGetExecutionMode()).webView !== "not_in_nomo_app" || document.getElementById('not_in_nomo_dialog'))
+        return;
+    const url = "https://chart.googleapis.com/chart?cht=qr&chl=" + "http://nomo.app/webon/" + window.location.host +
+        "&chs=160x160&chld=L|0";
+    document.body.innerHTML += `
+  <style>
+    #not_in_nomo_dialog{
+        display: flex; justify-content: space-evenly; align-items: center; flex-direction: column;
+        position: fixed; top: 50%; left: 50%;transform: translate(-50%, -50%);
+        width: 500px; height: 500px;  background:#151515; max-height: 100vh; max-width: 100vw; padding: 30px 30px 10px 30px;
+        z-index: 9999;  
+        border: 2px solid white; border-radius: 15px; filter: drop-shadow(0 5px 15px #666);
+     }
+    #not_in_nomo_dialog::backdrop {background: rgb(0 0 0 / 75%);}
+    #not_in_nomo_dialog__btn{
+        height: 55px; width: 70%; margin: 10px; 
+        background: #bca570ff; color: white; font-size: 14px; font-weight: bold;
+        outline: none; border-radius: 5px; border: 1px solid #ffffff88; box-shadow: 0 1px 1px lightgray; 
+        transition: .2s;
+        cursor: pointer;
+    }
+    #not_in_nomo_dialog__btn:hover{
+        background-color: #938259;
+    }
+    #not_in_nomo_dialog__btn:active{
+        border: transparent;
+        box-shadow: none;
+    }
+    
+   </style>
+  <dialog id="not_in_nomo_dialog"> 
+    <img src=${url} alt=${url}> 
+    <h2 style="margin: 10px; color: white">Attention:</h2>
+    <div style="text-align: center; color: white">You are currently displaying a WebOn outside your NOMO App. Please download the NOMO App here</div>
+    <button id="not_in_nomo_dialog__btn" onclick="window.location.href='https://nomo.app/downloads'">Download NOMO App</button>
+  </dialog>`;
+    const dialog = document.getElementById('not_in_nomo_dialog');
+    dialog.showModal();
 }

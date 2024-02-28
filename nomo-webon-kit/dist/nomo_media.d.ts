@@ -67,3 +67,5 @@ export declare function nomoGetMessengerAddress(): Promise<{
     messengerAddress: string;
     inviteLink: string;
 }>;
+/**Automatically detects if webon is run in the browser and shows dialog redirecting to the webon.*/
+export declare function QRCodeOnWebview(): Promise<void>;

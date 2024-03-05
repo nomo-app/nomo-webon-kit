@@ -59,6 +59,11 @@ export interface NomoManifest {
    * cache_url should be a relative path.
    */
   cache_url?: string;
+  /**
+   * If set, the Nomo App will reject a cache if the signature cannot be verified.
+   * cache_sig should be an Ethereum-styled message signature of a tar.gz-cache.
+   */
+  cache_sig?: string;
 }
 
 /**

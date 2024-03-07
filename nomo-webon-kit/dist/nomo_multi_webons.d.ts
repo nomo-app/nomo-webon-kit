@@ -38,11 +38,6 @@ export interface NomoManifest {
      */
     webon_version: string;
     /**
-     * If true, then the WebOn could be displayed in both card-mode and fullscreen-mode.
-     * If false, then the WebOn will only be displayed in fullscreen-mode.
-     */
-    card_mode?: boolean;
-    /**
      * If true, the Nomo App will show a refresh-button in the navigation bar.
      * Since Nomo App 0.3.5.
      */
@@ -57,6 +52,12 @@ export interface NomoManifest {
      * cache_sig should be an Ethereum-styled message signature of a tar.gz-cache.
      */
     cache_sig?: string;
+    /**
+     * A list of additional content for the WebOn; one of the following:
+     * - A JavaScript-URL to be injected into the WebOn.
+     * - A social media link or a link to a website.
+     */
+    dependencies?: string[];
 }
 /**
  * Returns the nomo_manifest.json that was used during the installation of the WebOn.

@@ -89,7 +89,7 @@ export function nomoFallbackQRCode() {
   <style>
     #not_in_nomo_dialog{
         display: flex; justify-content: space-evenly; align-items: center; flex-direction: column;
-        position: fixed; top: 50%; left: 50%;transform: translate(-50%, -50%);
+        position: fixed; top: 50%; left: 50%;transform: translate(-50%, -50%);margin: 0; box-sizing: border-box;
         width: 500px; height: 500px;  background:#151515; max-height: 100vh; max-width: 100vw; padding: 30px 30px 10px 30px;
         z-index: 9999;  
         border: 2px solid white; border-radius: 15px; filter: drop-shadow(0 5px 15px #666);

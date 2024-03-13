@@ -209,7 +209,7 @@ export async function nomoGetBalance(
 /**
  * Returns a list of transactions from the Nomo Wallet's transaction-cache.
  * Might fail if the transaction-cache is not yet synchronized.
- * 
+ *
  * Since Nomo App 0.3.8.
  */
 export async function nomoGetTransactions(
@@ -221,7 +221,7 @@ export async function nomoGetTransactions(
 /**
  * An extended public key is a public key that allows to derive all the addresses of a Nomo Wallet.
  * This is only intended for UTXO-based assets.
- * 
+ *
  * Since Nomo App 0.3.8.
  */
 export async function nomoGetExtendedPublicKey(
@@ -309,4 +309,16 @@ export async function nomoProofOfPayment(args: {
   coin: NomoCoinType;
 }): Promise<NomoProofOfPayment> {
   return await invokeNomoFunction("nomoProofOfPayment", args);
+}
+
+/**
+ * Adds or hides an asset within the Nomo Wallet.
+ *
+ * Since Nomo App 0.4.0.
+ */
+export async function nomoSetAssetVisibility(args: {
+  asset: NomoAssetSelector;
+  visible: boolean;
+}): Promise<void> {
+  return await invokeNomoFunction("nomoSetAssetVisibility", args);
 }

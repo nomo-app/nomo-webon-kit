@@ -181,3 +181,12 @@ export declare function nomoProofOfPayment(args: {
     nonce?: string;
     coin: NomoCoinType;
 }): Promise<NomoProofOfPayment>;
+/**
+ * Adds or hides an asset within the Nomo Wallet.
+ *
+ * Since Nomo App 0.4.0.
+ */
+export declare function nomoSetAssetVisibility(args: {
+    asset: NomoAssetSelector;
+    visible: boolean;
+}): Promise<void>;

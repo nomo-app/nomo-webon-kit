@@ -26,6 +26,7 @@ export declare const nomo: {
     launchSmartchainFaucet: typeof web3.nomoLaunchSmartchainFaucet;
     addCustomToken: typeof web3.nomoAddCustomToken;
     proofOfPayment: typeof web3.nomoProofOfPayment;
+    setAssetVisiblity: typeof web3.nomoSetAssetVisibility;
     localStorage: {
         getItem: (key: string, options?: {
             webon_id: string;

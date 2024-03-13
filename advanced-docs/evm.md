@@ -19,7 +19,7 @@ Currently, we consider web3js-nomo-webons as experimental, so our recommendation
 ## MetaMask API
 
 Through a [Provider-API](https://docs.metamask.io/wallet/reference/provider-api/), the Nomo App supports traditional dApps that were built for wallets like MetaMask.
-See https://github.com/nomo-app/metamask-webons for a glue-code that maps MetaMask to the WebOn-API.
+See https://github.com/nomo-app/webon3.com for a glue-code that maps MetaMask to the WebOn-API.
 Compared to the "real" MetaMask, the Nomo App glue-code provides a much better user experience.
 
 ## Custom EVM glue-code

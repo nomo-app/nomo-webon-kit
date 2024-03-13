@@ -194,3 +194,11 @@ export async function nomoGetNFTs(args) {
 export async function nomoProofOfPayment(args) {
     return await invokeNomoFunction("nomoProofOfPayment", args);
 }
+/**
+ * Adds or hides an asset within the Nomo Wallet.
+ *
+ * Since Nomo App 0.4.0.
+ */
+export async function nomoSetAssetVisibility(args) {
+    return await invokeNomoFunction("nomoSetAssetVisibility", args);
+}

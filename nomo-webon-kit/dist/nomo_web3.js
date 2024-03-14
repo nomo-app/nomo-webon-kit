@@ -87,12 +87,19 @@ export async function nomoGetEvmAddress() {
  */
 export async function nomoGetWalletAddresses() {
     if (isFallbackModeActive()) {
-        return {
-            walletAddresses: {
-                ETH: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",
-                ZENIQ: "meXd5DAdJYadrgssPVY9sTu1Z1YNJGH9R3",
-            },
-        };
+        try {
+            // Use MetaMask API to get wallet addresses
+            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            return {
+                walletAddresses: {
+                    "ETH": accounts[0],
+                }
+            };
+        }
+        catch (error) {
+            console.error('Error accessing MetaMask accounts:', error);
+            throw error;
+        }
     }
     return await invokeNomoFunctionCached("nomoGetWalletAddresses", null);
 }

@@ -16,4 +16,4 @@ export declare function invokeNomoFunctionCached(functionName: string, args: obj
  * A low-level function used by other Nomo APIs.
  * This is the main entry point into the native layer.
  */
-export declare function invokeNomoFunction(functionName: string, args: object | null): Promise<any>;
+export declare function invokeNomoFunction(functionName: string, args: object | null | any): Promise<any>;

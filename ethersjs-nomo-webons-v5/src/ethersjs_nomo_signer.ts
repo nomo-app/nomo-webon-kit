@@ -54,17 +54,21 @@ export class EthersjsNomoSigner extends Signer {
   }
 
   getAddress(): Promise<string> {
-    if (isFallbackModeActive()) {
-      return createFallbackDevSigner().getAddress();
-    }
+    // if (isFallbackModeActive()) {
+    //   return createFallbackDevSigner().getAddress();
+    // }
+
     if (cachedAddress) {
       return Promise.resolve(cachedAddress);
     }
     return new Promise((resolve, reject) => {
       nomo
         .getWalletAddresses()
-        .then((res) => {
+        .then((res: any) => {
           cachedAddress = res.walletAddresses["ETH"];
+          if(!cachedAddress) {
+            throw Error("no ethereum address found");
+          }
           resolve(cachedAddress);
         })
         .catch((err: any) => {
@@ -78,9 +82,9 @@ export class EthersjsNomoSigner extends Signer {
   }
 
   signTransaction(txRequest: Deferrable<TransactionRequest>): Promise<string> {
-    if (isFallbackModeActive()) {
-      return signTxDevWallet(txRequest);
-    }
+    // if (isFallbackModeActive()) {
+    //   return signTxDevWallet(txRequest);
+    // }
 
     const allowedTransactionKeys: { [key: string]: boolean } = {
       chainId: true,
@@ -102,7 +106,7 @@ export class EthersjsNomoSigner extends Signer {
     return new Promise((resolve, reject) => {
       nomo
         .signEvmTransaction({ messageHex: unsignedRawTx })
-        .then((res) => {
+        .then((res: any) => {
           const signedRawTx = appendSignatureToTx(
             unsignedTx as UnsignedTransaction,
             res.sigHex

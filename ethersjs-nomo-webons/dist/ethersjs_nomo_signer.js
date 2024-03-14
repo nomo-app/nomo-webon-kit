@@ -1,5 +1,4 @@
 import { AbstractSigner, Transaction, Wallet, } from "ethers";
-import { isFallbackModeActive } from "nomo-webon-kit";
 import { nomo } from "nomo-webon-kit";
 function appendSignatureToTx(unsignedTx, sigHexFromNative) {
     if (sigHexFromNative.length !== 130) {
@@ -51,9 +50,6 @@ export class EthersjsNomoSigner extends AbstractSigner {
         throw new Error("Method not implemented.");
     }
     getAddress() {
-        if (isFallbackModeActive()) {
-            return createFallbackDevSigner(this.fallbackMnemonic).getAddress();
-        }
         return nomo.getEvmAddress();
     }
     signMessage(_message) {
@@ -63,9 +59,6 @@ export class EthersjsNomoSigner extends AbstractSigner {
         console.log("unsignedTx", txRequest);
         const unsignedTx = await this.populateTransaction(txRequest);
         console.log("populatedTx", unsignedTx);
-        if (isFallbackModeActive()) {
-            return signTxDevWallet(unsignedTx, this.fallbackMnemonic);
-        }
         if (unsignedTx.from) {
             unsignedTx.from = undefined; // prevent TypeError: unsigned transaction cannot define "from"
         }

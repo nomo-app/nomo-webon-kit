@@ -98,10 +98,7 @@ export async function invokeNomoFunction(
   }
 
   try {
-    const nomoPromise = new Promise(function (
-      resolve: (value: unknown) => void,
-      reject: (reason?: any) => void
-    ) {
+    const nomoPromise = new Promise((resolve, reject) => {
       window.nomoResolvePromises[invocationID] = resolve;
       window.nomoRejectPromises[invocationID] = reject;
     });
@@ -115,11 +112,14 @@ export async function invokeNomoFunction(
       );
     }
     return nomoPromise;
-  } catch (e) {
-    // @ts-ignore
-    return Promise.reject(e.message);
+  } catch (e: any) {
+    // Assuming e is an Error object
+    if(e.message) {
+      return Promise.reject(e.message);
+    }
   }
 }
+
 
 const fulfillPromiseFromFlutter = function (base64FromFlutter: string) {
   const jsonFromFlutter = decodeBase64UTF16(base64FromFlutter);

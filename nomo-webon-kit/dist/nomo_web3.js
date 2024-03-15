@@ -8,7 +8,15 @@ import { nomoInstallWebOn } from "./nomo_multi_webons";
  * Needs nomo.permission.SIGN_EVM_TRANSACTION.
  */
 export async function nomoSignEvmTransaction(args) {
-    // a fallback mode is implemented in EthersjsNomoSigner
+    if (isFallbackModeActive()) {
+        // Use MetaMask API to sign transaction
+        const from = (await window.ethereum.request({ method: 'eth_accounts' }))[0];
+        const sigHex = await window.ethereum.request({
+            method: 'personal_sign',
+            params: [args.messageHex, from],
+        });
+        return { sigHex: sigHex };
+    }
     return await invokeNomoFunction("nomoSignEvmTransaction", args);
 }
 /**
@@ -20,9 +28,13 @@ export async function nomoSignEvmTransaction(args) {
  */
 export async function nomoSignEvmMessage(args) {
     if (isFallbackModeActive()) {
-        return {
-            sigHex: "0x1e8fccc1f75eda4ee82adb9b3b0ae8243b418bd8810873b6df696d240267a223105e265189bd2ea0677bfa42f5d9cbba50622d91ef4e4805cd81f9f8715e38101b",
-        };
+        // Use MetaMask API to sign message
+        const from = (await window.ethereum.request({ method: 'eth_accounts' }))[0];
+        const sigHex = await window.ethereum.request({
+            method: 'personal_sign',
+            params: [args.message, from],
+        });
+        return { sigHex: sigHex };
     }
     return await invokeNomoFunction("nomoSignEvmMessage", args);
 }

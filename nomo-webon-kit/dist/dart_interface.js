@@ -46,7 +46,6 @@ const nomoFunctionCache = {};
  * For idempotent functions, this cache prevents unnecessary calls to the native layer.
  */
 export async function invokeNomoFunctionCached(functionName, args) {
-    console.log("invokeNomoFunctionCached", functionName, args);
     const key = functionName;
     if (!nomoFunctionCache[key]) {
         nomoFunctionCache[key] = await invokeNomoFunction(functionName, args);
@@ -63,47 +62,13 @@ const moduleID = Array.from({ length: 8 }, () => String.fromCharCode(Math.floor(
  * This is the main entry point into the native layer.
  */
 export async function invokeNomoFunction(functionName, args) {
-    console.log("invokeNomoFunction", functionName, args);
-    // Handling MetaMask-specific functions
-    if (typeof window.ethereum !== 'undefined') {
-        switch (functionName) {
-            case 'getWalletAddresses':
-                try {
-                    // Use MetaMask API to get wallet addresses
-                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    return accounts;
-                }
-                catch (error) {
-                    console.error('Error accessing MetaMask accounts:', error);
-                    throw error;
-                }
-            case 'nomoSignEvmTransaction':
-                try {
-                    // Assuming args.messageHex is the message to be signed
-                    if (!args || typeof args.messageHex !== 'string') {
-                        throw new Error('Invalid arguments for nomoSignEvmTransaction');
-                    }
-                    const from = (await window.ethereum.request({ method: 'eth_accounts' }))[0];
-                    const sigHex = await window.ethereum.request({
-                        method: 'personal_sign',
-                        params: [args.messageHex, from],
-                    });
-                    return { sigHex };
-                }
-                catch (error) {
-                    console.error('Error signing EVM transaction:', error);
-                    throw error;
-                }
-            // Add other MetaMask-related cases here
-            default:
-                // If functionName doesn't match any case, proceed with the original Flutter-based handling
-                break;
-        }
-    }
-    // Original invokeNomoFunction logic for Flutter-based handling
     invocationCounter++;
     const invocationID = invocationCounter.toString() + "_" + functionName + "_" + moduleID;
-    const payload = JSON.stringify({ functionName, invocationID, args });
+    const payload = JSON.stringify({
+        functionName,
+        invocationID,
+        args,
+    });
     if (typeof window === "undefined") {
         return Promise.reject(`the function ${functionName} does not work in NodeJS/CommonJS.`);
     }

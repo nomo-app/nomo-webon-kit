@@ -194,6 +194,29 @@ export default function Home() {
           <h2
             onClick={async () => {
               try {
+                await nomo.sendAssets({
+
+                });
+              } catch (e) {
+                console.error(e);
+                openDialog({
+                  title: "nomoSendAssets failed",
+                  content: JSON.stringify(e),
+                });
+              }
+            }}
+          >
+            Send asset<span>-&gt;</span>
+          </h2>
+          <p>
+            With consent from the user, WebOns can send assets from the Nomo
+            App.
+          </p>
+        </div>
+        <div className={styles.card}>
+          <h2
+            onClick={async () => {
+              try {
                 await sendOnePercentOfBalance();
               } catch (e) {
                 console.error(e);
@@ -204,7 +227,70 @@ export default function Home() {
               }
             }}
           >
-            Send assets<span>-&gt;</span>
+            Send asset with Asset<span>-&gt;</span>
+          </h2>
+          <p>
+            With consent from the user, WebOns can send assets from the Nomo
+            App.
+          </p>
+        </div>
+        <div className={styles.card}>
+          <h2
+            onClick={async () => {
+              try {
+                await sendOnePercentOfBalance();
+              } catch (e) {
+                console.error(e);
+                openDialog({
+                  title: "nomoSendAssets failed",
+                  content: JSON.stringify(e),
+                });
+              }
+            }}
+          >
+            Send asset with Recipient<span>-&gt;</span>
+          </h2>
+          <p>
+            With consent from the user, WebOns can send assets from the Nomo
+            App.
+          </p>
+        </div>
+        <div className={styles.card}>
+          <h2
+            onClick={async () => {
+              try {
+                await sendOnePercentOfBalance();
+              } catch (e) {
+                console.error(e);
+                openDialog({
+                  title: "nomoSendAssets failed",
+                  content: JSON.stringify(e),
+                });
+              }
+            }}
+          >
+            Send asset with Amount<span>-&gt;</span>
+          </h2>
+          <p>
+            With consent from the user, WebOns can send assets from the Nomo
+            App.
+          </p>
+        </div>
+        <div className={styles.card}>
+          <h2
+            onClick={async () => {
+              try {
+                await sendOnePercentOfBalance();
+              } catch (e) {
+                console.error(e);
+                openDialog({
+                  title: "nomoSendAssets failed",
+                  content: JSON.stringify(e),
+                });
+              }
+            }}
+          >
+            Send asset with Recipient & Amount<span>-&gt;</span>
           </h2>
           <p>
             With consent from the user, WebOns can send assets from the Nomo

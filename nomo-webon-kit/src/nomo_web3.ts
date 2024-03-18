@@ -84,14 +84,14 @@ export async function nomoSignEvmMessage(args: {
  * Needs nomo.permission.SEND_ASSETS.
  */
 export async function nomoSendAssets(args: {
-  asset: NomoAssetSelector;
-  targetAddress: string;
-  amount: string;
+  asset?: NomoAssetSelector;
+  targetAddress?: string;
+  amount?: string;
 }): Promise<{
   hash: string;
   intent: { recipient: string; amount: string; token: string };
 }> {
-  const legacyArgs = { ...args, assetSymbol: args.asset.symbol };
+  const legacyArgs = { ...args, assetSymbol: args.asset?.symbol ?? null };
   return await invokeNomoFunction("nomoSendAssets", legacyArgs);
 }
 

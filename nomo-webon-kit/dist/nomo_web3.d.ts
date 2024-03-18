@@ -46,9 +46,9 @@ export declare function nomoSignEvmMessage(args: {
  * Needs nomo.permission.SEND_ASSETS.
  */
 export declare function nomoSendAssets(args: {
-    asset: NomoAssetSelector;
-    targetAddress: string;
-    amount: string;
+    asset?: NomoAssetSelector;
+    targetAddress?: string;
+    amount?: string;
 }): Promise<{
     hash: string;
     intent: {

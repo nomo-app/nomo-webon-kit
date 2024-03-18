@@ -46,7 +46,8 @@ export async function nomoSignEvmMessage(args) {
  * Needs nomo.permission.SEND_ASSETS.
  */
 export async function nomoSendAssets(args) {
-    const legacyArgs = Object.assign(Object.assign({}, args), { assetSymbol: args.asset.symbol });
+    var _a, _b;
+    const legacyArgs = Object.assign(Object.assign({}, args), { assetSymbol: (_b = (_a = args.asset) === null || _a === void 0 ? void 0 : _a.symbol) !== null && _b !== void 0 ? _b : null });
     return await invokeNomoFunction("nomoSendAssets", legacyArgs);
 }
 /**

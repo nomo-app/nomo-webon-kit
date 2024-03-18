@@ -85,9 +85,6 @@ export class EthersjsNomoSigner extends AbstractSigner {
   }
 
   getAddress(): Promise<string> {
-    if (isFallbackModeActive()) {
-      return createFallbackDevSigner(this.fallbackMnemonic).getAddress();
-    }
     return nomo.getEvmAddress();
   }
 
@@ -99,10 +96,6 @@ export class EthersjsNomoSigner extends AbstractSigner {
     console.log("unsignedTx", txRequest);
     const unsignedTx = await this.populateTransaction(txRequest);
     console.log("populatedTx", unsignedTx);
-
-    if (isFallbackModeActive()) {
-      return signTxDevWallet(unsignedTx, this.fallbackMnemonic);
-    }
 
     if (unsignedTx.from) {
       unsignedTx.from = undefined; // prevent TypeError: unsigned transaction cannot define "from"

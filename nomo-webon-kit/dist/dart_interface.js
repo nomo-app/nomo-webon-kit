@@ -73,7 +73,7 @@ export async function invokeNomoFunction(functionName, args) {
         return Promise.reject(`the function ${functionName} does not work in NodeJS/CommonJS.`);
     }
     try {
-        const nomoPromise = new Promise(function (resolve, reject) {
+        const nomoPromise = new Promise((resolve, reject) => {
             window.nomoResolvePromises[invocationID] = resolve;
             window.nomoRejectPromises[invocationID] = reject;
         });
@@ -87,8 +87,10 @@ export async function invokeNomoFunction(functionName, args) {
         return nomoPromise;
     }
     catch (e) {
-        // @ts-ignore
-        return Promise.reject(e.message);
+        // Assuming e is an Error object
+        if (e.message) {
+            return Promise.reject(e.message);
+        }
     }
 }
 const fulfillPromiseFromFlutter = function (base64FromFlutter) {

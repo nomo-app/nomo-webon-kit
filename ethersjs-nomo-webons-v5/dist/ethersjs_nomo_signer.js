@@ -1,6 +1,6 @@
 import { ethers, Signer, utils } from "ethers";
 import { defineReadOnly } from "@ethersproject/properties";
-import { nomo, isFallbackModeActive } from "nomo-webon-kit";
+import { nomo } from "nomo-webon-kit";
 function appendSignatureToTx(unsignedTx, sigHexFromNative) {
     if (sigHexFromNative.length !== 130) {
         throw Error("unexpected sigHexFromNative length");
@@ -36,9 +36,9 @@ export class EthersjsNomoSigner extends Signer {
         return this;
     }
     getAddress() {
-        if (isFallbackModeActive()) {
-            return createFallbackDevSigner().getAddress();
-        }
+        // if (isFallbackModeActive()) {
+        //   return createFallbackDevSigner().getAddress();
+        // }
         if (cachedAddress) {
             return Promise.resolve(cachedAddress);
         }
@@ -47,6 +47,9 @@ export class EthersjsNomoSigner extends Signer {
                 .getWalletAddresses()
                 .then((res) => {
                 cachedAddress = res.walletAddresses["ETH"];
+                if (!cachedAddress) {
+                    throw Error("no ethereum address found");
+                }
                 resolve(cachedAddress);
             })
                 .catch((err) => {
@@ -58,9 +61,9 @@ export class EthersjsNomoSigner extends Signer {
         return Promise.reject("signMessage not implemented");
     }
     signTransaction(txRequest) {
-        if (isFallbackModeActive()) {
-            return signTxDevWallet(txRequest);
-        }
+        // if (isFallbackModeActive()) {
+        //   return signTxDevWallet(txRequest);
+        // }
         const allowedTransactionKeys = {
             chainId: true,
             data: true,

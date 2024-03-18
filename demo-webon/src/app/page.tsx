@@ -194,9 +194,7 @@ export default function Home() {
           <h2
             onClick={async () => {
               try {
-                await nomo.sendAssets({
-
-                });
+                await nomo.sendAssets({});
               } catch (e) {
                 console.error(e);
                 openDialog({
@@ -210,14 +208,18 @@ export default function Home() {
           </h2>
           <p>
             With consent from the user, WebOns can send assets from the Nomo
-            App.
+            App. Here we have defined no Args.
           </p>
         </div>
         <div className={styles.card}>
           <h2
             onClick={async () => {
               try {
-                await sendOnePercentOfBalance();
+                await nomo.sendAssets({
+                  asset: {
+                    symbol: "zeniq token"
+                  }
+                });
               } catch (e) {
                 console.error(e);
                 openDialog({
@@ -231,14 +233,20 @@ export default function Home() {
           </h2>
           <p>
             With consent from the user, WebOns can send assets from the Nomo
-            App.
+            App. Here we have defined the Asset.
           </p>
         </div>
         <div className={styles.card}>
           <h2
             onClick={async () => {
               try {
-                await sendOnePercentOfBalance();
+                var own = await nomo.getEvmAddress();
+                await nomo.sendAssets({
+                  asset: {
+                    symbol: "zeniq token"
+                  },
+                  targetAddress: own,
+                });
               } catch (e) {
                 console.error(e);
                 openDialog({
@@ -252,14 +260,19 @@ export default function Home() {
           </h2>
           <p>
             With consent from the user, WebOns can send assets from the Nomo
-            App.
+            App. Here we have defined the Assets & Recipient.
           </p>
         </div>
         <div className={styles.card}>
           <h2
             onClick={async () => {
               try {
-                await sendOnePercentOfBalance();
+                await nomo.sendAssets({
+                  asset: {
+                    symbol: "zeniq token"
+                  },
+                  amount: "1",
+                });
               } catch (e) {
                 console.error(e);
                 openDialog({
@@ -273,14 +286,21 @@ export default function Home() {
           </h2>
           <p>
             With consent from the user, WebOns can send assets from the Nomo
-            App.
+            App. Here we have defined the Asset & the Amount.
           </p>
         </div>
         <div className={styles.card}>
           <h2
             onClick={async () => {
               try {
-                await sendOnePercentOfBalance();
+                var own = await nomo.getEvmAddress();
+                await nomo.sendAssets({
+                  asset: {
+                    symbol: "zeniq token"
+                  },
+                  targetAddress: own,
+                  amount: "1",
+                });
               } catch (e) {
                 console.error(e);
                 openDialog({
@@ -294,7 +314,7 @@ export default function Home() {
           </h2>
           <p>
             With consent from the user, WebOns can send assets from the Nomo
-            App.
+            App. Here we have defined the Asset aswell as the Amount and the Recipient.
           </p>
         </div>
 

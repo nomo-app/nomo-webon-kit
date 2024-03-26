@@ -33,7 +33,7 @@ function getDartBridge(): ((arg0: string) => void) | null {
   if (typeof window === "undefined") {
     return null; // fallback mode in server-side rendering
   }
-  if (window.webkit) {
+  if (window.webkit.messageHandlers.NOMOJSChannel.) {
     // legacy macOS
     return (payload: string) =>
       window.webkit.messageHandlers.NOMOJSChannel.postMessage(payload);

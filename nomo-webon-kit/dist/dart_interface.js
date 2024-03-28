@@ -1,25 +1,29 @@
-/**
- * Listen for message from parent window if running in an iframe
- */
-window.addEventListener('message', function (event) {
-    if (event.origin === 'http://localhost:3009') {
-        try {
-            const { status, invocationID, result } = JSON.parse(event.data);
-            const resultMap = {
-                "status": status,
-                "invocationID": invocationID,
-                "result": result,
-            };
-            const responseJson = JSON.stringify(resultMap);
-            const responseBytes = new TextEncoder().encode(responseJson);
-            const responseBase64 = btoa(String.fromCharCode(...responseBytes));
-            fulfillPromiseFromFlutter(responseBase64);
-        }
-        catch (error) {
-            console.error(error);
-        }
+if (typeof window !== "undefined") {
+    if (window.parent !== window) {
+        /**
+         * Listen for message from parent window if running in an iframe
+         */
+        window.addEventListener("message", function (event) {
+            if (event.origin === "http://localhost:3009") {
+                try {
+                    const { status, invocationID, result } = JSON.parse(event.data);
+                    const resultMap = {
+                        status: status,
+                        invocationID: invocationID,
+                        result: result,
+                    };
+                    const responseJson = JSON.stringify(resultMap);
+                    const responseBytes = new TextEncoder().encode(responseJson);
+                    const responseBase64 = btoa(String.fromCharCode(...responseBytes));
+                    fulfillPromiseFromFlutter(responseBase64);
+                }
+                catch (error) {
+                    console.error(error);
+                }
+            }
+        });
     }
-});
+}
 /**
  * Decodes data from the native Nomo layer.
  */
@@ -60,7 +64,7 @@ function getDartBridge() {
     }
     else if (window.parent && window.parent !== window) {
         // parent window
-        return (payload) => window.parent.postMessage(payload, '*');
+        return (payload) => window.parent.postMessage(payload, "*");
     }
     else {
         return null; // fallback mode

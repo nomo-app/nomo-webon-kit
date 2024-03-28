@@ -46,11 +46,11 @@ export function isFallbackModeActive() {
  * A low-level function that aims to be compatible with multiple webviews
  */
 function getDartBridge() {
-    var _a;
+    var _a, _b, _c;
     if (typeof window === "undefined") {
         return null; // fallback mode in server-side rendering
     }
-    if (window.webkit.messageHandlers.NOMOJSChannel) {
+    if ((_b = (_a = window.webkit) === null || _a === void 0 ? void 0 : _a.messageHandlers) === null || _b === void 0 ? void 0 : _b.NOMOJSChannel) {
         // legacy macOS
         return (payload) => window.webkit.messageHandlers.NOMOJSChannel.postMessage(payload);
     }
@@ -58,7 +58,7 @@ function getDartBridge() {
         // mobile + macos
         return (payload) => window.NOMOJSChannel.postMessage(payload);
     }
-    else if ((_a = window.chrome) === null || _a === void 0 ? void 0 : _a.webview) {
+    else if ((_c = window.chrome) === null || _c === void 0 ? void 0 : _c.webview) {
         //windows
         return (payload) => window.chrome.webview.postMessage(payload);
     }

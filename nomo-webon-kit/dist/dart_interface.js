@@ -1,4 +1,26 @@
 /**
+ * Listen for message from parent window if running in an iframe
+ */
+window.addEventListener('message', function (event) {
+    if (event.origin === 'http://localhost:3009') {
+        try {
+            const { status, invocationID, result } = JSON.parse(event.data);
+            const resultMap = {
+                "status": status,
+                "invocationID": invocationID,
+                "result": result,
+            };
+            const responseJson = JSON.stringify(resultMap);
+            const responseBytes = new TextEncoder().encode(responseJson);
+            const responseBase64 = btoa(String.fromCharCode(...responseBytes));
+            fulfillPromiseFromFlutter(responseBase64);
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }
+});
+/**
  * Decodes data from the native Nomo layer.
  */
 function decodeBase64UTF16(base64EncodedString) {
@@ -35,6 +57,10 @@ function getDartBridge() {
     else if ((_a = window.chrome) === null || _a === void 0 ? void 0 : _a.webview) {
         //windows
         return (payload) => window.chrome.webview.postMessage(payload);
+    }
+    else if (window.parent && window.parent !== window) {
+        // parent window
+        return (payload) => window.parent.postMessage(payload, '*');
     }
     else {
         return null; // fallback mode

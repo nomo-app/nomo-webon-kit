@@ -4,31 +4,33 @@ declare global {
   }
 }
 
-/**
- * Listen for message from parent window if running in an iframe
- */
-window.addEventListener('message', function(event) {
-  if (event.origin === 'http://localhost:3009') {
+if (typeof window !== "undefined") {
+  if (window.parent !== window) {
+    /**
+     * Listen for message from parent window if running in an iframe
+     */
+    window.addEventListener("message", function (event) {
+      if (event.origin === "http://localhost:3009") {
+        try {
+          const { status, invocationID, result } = JSON.parse(event.data);
+          const resultMap: Record<string, unknown> = {
+            status: status,
+            invocationID: invocationID,
+            result: result,
+          };
 
-    try {
-      const {status, invocationID, result} = JSON.parse(event.data);
-      const resultMap: Record<string, unknown> = {
-        "status": status,
-        "invocationID": invocationID,
-        "result": result,
-      };
+          const responseJson = JSON.stringify(resultMap);
+          const responseBytes = new TextEncoder().encode(responseJson);
+          const responseBase64 = btoa(String.fromCharCode(...responseBytes));
 
-      const responseJson = JSON.stringify(resultMap);
-      const responseBytes = new TextEncoder().encode(responseJson);
-      const responseBase64 = btoa(String.fromCharCode(...responseBytes));
-
-      fulfillPromiseFromFlutter(responseBase64);
-    }
-    catch (error) {
-      console.error(error);
-    }
+          fulfillPromiseFromFlutter(responseBase64);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    });
   }
-});
+}
 
 /**
  * Decodes data from the native Nomo layer.
@@ -71,7 +73,7 @@ function getDartBridge(): ((arg0: string) => void) | null {
     return (payload: string) => window.chrome.webview.postMessage(payload);
   } else if (window.parent && window.parent !== window) {
     // parent window
-    return (payload: string) => window.parent.postMessage(payload, '*');
+    return (payload: string) => window.parent.postMessage(payload, "*");
   } else {
     return null; // fallback mode
   }
@@ -143,12 +145,11 @@ export async function invokeNomoFunction(
     return nomoPromise;
   } catch (e: any) {
     // Assuming e is an Error object
-    if(e.message) {
+    if (e.message) {
       return Promise.reject(e.message);
     }
   }
 }
-
 
 const fulfillPromiseFromFlutter = function (base64FromFlutter: string) {
   const jsonFromFlutter = decodeBase64UTF16(base64FromFlutter);

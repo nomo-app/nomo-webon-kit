@@ -126,10 +126,9 @@ export function nomoFallbackQRCode() {
     return;
   }
   const url =
-    "https://chart.googleapis.com/chart?cht=qr&chl=" +
+    "https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=" +
     "http://nomo.app/webon/" +
-    window.location.host +
-    "&chs=160x160&chld=L|0";
+    window.location.host
   document.body.innerHTML += `
   <style>
     #not_in_nomo_dialog{

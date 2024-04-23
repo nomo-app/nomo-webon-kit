@@ -165,5 +165,9 @@ export function nomoFallbackQRCode() {
   const dialog = document.getElementById(
     "not_in_nomo_dialog"
   ) as HTMLDialogElement;
-  dialog.showModal();
+  try {
+    dialog.showModal();
+  } catch (e) {
+    dialog.show();
+  }
 }

@@ -10,9 +10,9 @@ import { nomoInstallWebOn } from "./nomo_multi_webons";
 export async function nomoSignEvmTransaction(args) {
     if (isFallbackModeActive()) {
         // Use MetaMask API to sign transaction
-        const from = (await window.ethereum.request({ method: 'eth_accounts' }))[0];
+        const from = (await window.ethereum.request({ method: "eth_accounts" }))[0];
         const sigHex = await window.ethereum.request({
-            method: 'personal_sign',
+            method: "personal_sign",
             params: [args.messageHex, from],
         });
         return { sigHex: sigHex };
@@ -29,9 +29,9 @@ export async function nomoSignEvmTransaction(args) {
 export async function nomoSignEvmMessage(args) {
     if (isFallbackModeActive()) {
         // Use MetaMask API to sign message
-        const from = (await window.ethereum.request({ method: 'eth_accounts' }))[0];
+        const from = (await window.ethereum.request({ method: "eth_accounts" }))[0];
         const sigHex = await window.ethereum.request({
-            method: 'personal_sign',
+            method: "personal_sign",
             params: [args.message, from],
         });
         return { sigHex: sigHex };
@@ -100,17 +100,27 @@ export async function nomoGetEvmAddress() {
  */
 export async function nomoGetWalletAddresses() {
     if (isFallbackModeActive()) {
-        try {
-            // Use MetaMask API to get wallet addresses
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        if (!window.ethereum) {
             return {
                 walletAddresses: {
-                    "ETH": accounts[0],
-                }
+                    ETH: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",
+                    ZENIQ: "meXd5DAdJYadrgssPVY9sTu1Z1YNJGH9R3",
+                },
+            };
+        }
+        try {
+            // Use MetaMask API to get wallet addresses
+            const accounts = await window.ethereum.request({
+                method: "eth_requestAccounts",
+            });
+            return {
+                walletAddresses: {
+                    ETH: accounts[0],
+                },
             };
         }
         catch (error) {
-            console.error('Error accessing MetaMask accounts:', error);
+            console.error("Error accessing MetaMask accounts:", error);
             throw error;
         }
     }

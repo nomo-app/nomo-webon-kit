@@ -117,5 +117,10 @@ export function nomoFallbackQRCode() {
     <button id="not_in_nomo_dialog__btn" onclick="window.location.href='https://nomo.app/downloads'">Download NOMO App</button>
   </dialog>`;
     const dialog = document.getElementById("not_in_nomo_dialog");
-    dialog.showModal();
+    try {
+        dialog.showModal();
+    }
+    catch (e) {
+        dialog.show();
+    }
 }

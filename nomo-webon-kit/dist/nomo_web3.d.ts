@@ -73,6 +73,15 @@ export declare function nomoGetVisibleAssets(): Promise<{
     visibleAssets: Array<NomoAsset>;
 }>;
 /**
+ * Returns a list of supported assets that can be made visible via "nomoSetAssetVisibility".
+ * This might also include custom tokens that the user has added.
+ *
+ * Since Nomo App 0.4.1.
+ */
+export declare function nomoGetAllAssets(): Promise<{
+    assets: Array<NomoAsset>;
+}>;
+/**
  * A convenience function to get the Smartchain address of the Nomo Wallet.
  * Internally, it calls "nomoGetWalletAddresses" and caches the result.
  */

@@ -16,6 +16,7 @@ export declare const nomo: {
     getEvmAddress: typeof web3.nomoGetEvmAddress;
     getWalletAddresses: typeof web3.nomoGetWalletAddresses;
     getVisibleAssets: typeof web3.nomoGetVisibleAssets;
+    getAllAssets: typeof web3.nomoGetAllAssets;
     getNFTs: typeof web3.nomoGetNFTs;
     getBalance: typeof web3.nomoGetBalance;
     getTransactions: typeof web3.nomoGetTransactions;

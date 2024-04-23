@@ -17,6 +17,7 @@ export const nomo = {
   getEvmAddress: web3.nomoGetEvmAddress,
   getWalletAddresses: web3.nomoGetWalletAddresses,
   getVisibleAssets: web3.nomoGetVisibleAssets,
+  getAllAssets: web3.nomoGetAllAssets,
   getNFTs: web3.nomoGetNFTs,
   getBalance: web3.nomoGetBalance,
   getTransactions: web3.nomoGetTransactions,

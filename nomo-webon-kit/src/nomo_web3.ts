@@ -139,6 +139,30 @@ export async function nomoGetVisibleAssets(): Promise<{
 }
 
 /**
+ * Returns a list of supported assets that can be made visible via "nomoSetAssetVisibility".
+ * This might also include custom tokens that the user has added.
+ * 
+ * Since Nomo App 0.4.1.
+ */
+export async function nomoGetAllAssets(): Promise<{
+  assets: Array<NomoAsset>;
+}> {
+  if (isFallbackModeActive()) {
+    return {
+      assets: [
+        {
+          name: "AVINOC",
+          symbol: "AVINOC ZEN20",
+          decimals: 18,
+          contractAddress: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",
+        },
+      ],
+    };
+  }
+  return await invokeNomoFunction("nomoGetAllAssets", {});
+}
+
+/**
  * A convenience function to get the Smartchain address of the Nomo Wallet.
  * Internally, it calls "nomoGetWalletAddresses" and caches the result.
  */

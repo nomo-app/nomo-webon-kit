@@ -23,7 +23,7 @@
 
 #### Defined in
 
-[nomo_web3.ts:290](https://github.com/nomo-app/nomo-webon-kit/blob/5ec08e7/nomo-webon-kit/src/nomo_web3.ts#L290)
+[nomo_web3.ts:324](https://github.com/nomo-app/nomo-webon-kit/blob/de24090/nomo-webon-kit/src/nomo_web3.ts#L324)
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:291](https://github.com/nomo-app/nomo-webon-kit/blob/5ec08e7/nomo-webon-kit/src/nomo_web3.ts#L291)
+[nomo_web3.ts:325](https://github.com/nomo-app/nomo-webon-kit/blob/de24090/nomo-webon-kit/src/nomo_web3.ts#L325)
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:292](https://github.com/nomo-app/nomo-webon-kit/blob/5ec08e7/nomo-webon-kit/src/nomo_web3.ts#L292)
+[nomo_web3.ts:326](https://github.com/nomo-app/nomo-webon-kit/blob/de24090/nomo-webon-kit/src/nomo_web3.ts#L326)
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:293](https://github.com/nomo-app/nomo-webon-kit/blob/5ec08e7/nomo-webon-kit/src/nomo_web3.ts#L293)
+[nomo_web3.ts:327](https://github.com/nomo-app/nomo-webon-kit/blob/de24090/nomo-webon-kit/src/nomo_web3.ts#L327)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:294](https://github.com/nomo-app/nomo-webon-kit/blob/5ec08e7/nomo-webon-kit/src/nomo_web3.ts#L294)
+[nomo_web3.ts:328](https://github.com/nomo-app/nomo-webon-kit/blob/de24090/nomo-webon-kit/src/nomo_web3.ts#L328)
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:295](https://github.com/nomo-app/nomo-webon-kit/blob/5ec08e7/nomo-webon-kit/src/nomo_web3.ts#L295)
+[nomo_web3.ts:329](https://github.com/nomo-app/nomo-webon-kit/blob/de24090/nomo-webon-kit/src/nomo_web3.ts#L329)
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:296](https://github.com/nomo-app/nomo-webon-kit/blob/5ec08e7/nomo-webon-kit/src/nomo_web3.ts#L296)
+[nomo_web3.ts:330](https://github.com/nomo-app/nomo-webon-kit/blob/de24090/nomo-webon-kit/src/nomo_web3.ts#L330)
 
 ___
 
@@ -93,4 +93,4 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:297](https://github.com/nomo-app/nomo-webon-kit/blob/5ec08e7/nomo-webon-kit/src/nomo_web3.ts#L297)
+[nomo_web3.ts:331](https://github.com/nomo-app/nomo-webon-kit/blob/de24090/nomo-webon-kit/src/nomo_web3.ts#L331)

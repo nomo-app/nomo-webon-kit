@@ -1,6 +1,6 @@
 import { invokeNomoFunction, invokeNomoFunctionCached, isFallbackModeActive, } from "./dart_interface";
 import { nomoAuthFetch } from "./nomo_auth";
-import { nomoInstallWebOn } from "./nomo_multi_webons";
+import { nomoGetInstalledWebOns, nomoInstallWebOn, } from "./nomo_multi_webons";
 /**
  * Creates a signature for an EVM-based transaction.
  * See EthersjsNomoSigner for an example on how to use this function.
@@ -233,9 +233,28 @@ export async function nomoMnemonicBackupExisted() {
 /**
  * Returns a list of NFTs that are owned by the user.
  * Can be slow if the NFTs are not yet in the Nomo App's cache.
+ *
+ * @deprecated: Please use "nomoGetNFTContracts" instead.
  */
 export async function nomoGetNFTs(args) {
     return await invokeNomoFunction("nomoGetNFTs", args);
+}
+/**
+ * Returns a list of NFT-contracts that are declared by the currently installed WebOns.
+ * Typically, those NFT-contracts provide some kind of utility for a WebOn.
+ *
+ * Needs nomo.permission.GET_INSTALLED_WEBONS.
+ */
+export async function nomoGetNFTContracts() {
+    const { manifests } = await nomoGetInstalledWebOns();
+    const rawDependencies = manifests
+        .map((manifest) => { var _a; return (_a = manifest.dependencies) !== null && _a !== void 0 ? _a : []; })
+        .reduce((acc, val) => acc.concat(val), []);
+    const nftContractPrefix = "nftcontract:";
+    const nftContracts = rawDependencies
+        .filter((dep) => dep.startsWith(nftContractPrefix))
+        .map((dep) => dep.slice(nftContractPrefix.length));
+    return { nftContracts };
 }
 /**
  * Returns a proof-of-payment for a transaction

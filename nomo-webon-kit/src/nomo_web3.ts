@@ -4,7 +4,10 @@ import {
   isFallbackModeActive,
 } from "./dart_interface";
 import { nomoAuthFetch } from "./nomo_auth";
-import { nomoInstallWebOn } from "./nomo_multi_webons";
+import {
+  nomoGetInstalledWebOns,
+  nomoInstallWebOn,
+} from "./nomo_multi_webons";
 
 export type NomoEvmNetwork =
   | "zeniq-smart-chain"
@@ -141,7 +144,7 @@ export async function nomoGetVisibleAssets(): Promise<{
 /**
  * Returns a list of supported assets that can be made visible via "nomoSetAssetVisibility".
  * This might also include custom tokens that the user has added.
- * 
+ *
  * Since Nomo App 0.4.1.
  */
 export async function nomoGetAllAssets(): Promise<{
@@ -334,11 +337,33 @@ export interface NomoNFT {
 /**
  * Returns a list of NFTs that are owned by the user.
  * Can be slow if the NFTs are not yet in the Nomo App's cache.
+ *
+ * @deprecated: Please use "nomoGetNFTContracts" instead.
  */
 export async function nomoGetNFTs(args: {
   network: NomoEvmNetwork;
 }): Promise<{ nfts: NomoNFT[] }> {
   return await invokeNomoFunction("nomoGetNFTs", args);
+}
+
+/**
+ * Returns a list of NFT-contracts that are declared by the currently installed WebOns.
+ * Typically, those NFT-contracts provide some kind of utility for a WebOn.
+ *
+ * Needs nomo.permission.GET_INSTALLED_WEBONS.
+ */
+export async function nomoGetNFTContracts(): Promise<{
+  nftContracts: string[];
+}> {
+  const { manifests } = await nomoGetInstalledWebOns();
+  const rawDependencies: string[] = manifests
+    .map((manifest) => manifest.dependencies ?? [])
+    .reduce((acc, val) => acc.concat(val), []);
+  const nftContractPrefix = "nftcontract:";
+  const nftContracts = rawDependencies
+    .filter((dep) => dep.startsWith(nftContractPrefix))
+    .map((dep) => dep.slice(nftContractPrefix.length));
+  return { nftContracts };
 }
 
 export interface NomoProofOfPayment {

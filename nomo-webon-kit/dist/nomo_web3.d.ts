@@ -168,11 +168,22 @@ export interface NomoNFT {
 /**
  * Returns a list of NFTs that are owned by the user.
  * Can be slow if the NFTs are not yet in the Nomo App's cache.
+ *
+ * @deprecated: Please use "nomoGetNFTContracts" instead.
  */
 export declare function nomoGetNFTs(args: {
     network: NomoEvmNetwork;
 }): Promise<{
     nfts: NomoNFT[];
+}>;
+/**
+ * Returns a list of NFT-contracts that are declared by the currently installed WebOns.
+ * Typically, those NFT-contracts provide some kind of utility for a WebOn.
+ *
+ * Needs nomo.permission.GET_INSTALLED_WEBONS.
+ */
+export declare function nomoGetNFTContracts(): Promise<{
+    nftContracts: string[];
 }>;
 export interface NomoProofOfPayment {
     uPoP: string;

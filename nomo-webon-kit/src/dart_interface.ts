@@ -4,6 +4,33 @@ declare global {
   }
 }
 
+let focusedElement: HTMLInputElement | null = null;
+
+const attachFocusHandlers = () => {
+  if (window.parent && window.parent !== window) {
+    setTimeout(function() {
+      const inputItems = document.body.querySelectorAll('input');
+      for (let i = 0; i < inputItems.length; i++) {
+        inputItems[i].addEventListener("focus", async (event) => {
+          const target = event.target as HTMLInputElement;
+          focusedElement = target;
+          const args = {
+            currentValue: target.value
+          }
+          await invokeNomoFunction('nomoOpenExternalKeyboard', args);
+        });
+        inputItems[i].addEventListener("blur", async (event) => {
+          const target = event.target as HTMLInputElement;
+          focusedElement = target;
+          await invokeNomoFunction('nomoCloseExternalKeyboard', {})
+        });
+      }
+    }, 60);
+  }
+};
+
+window.addEventListener("load", attachFocusHandlers);
+
 if (typeof window !== "undefined") {
   if (window.parent !== window) {
     /**
@@ -13,17 +40,23 @@ if (typeof window !== "undefined") {
       if (event.origin === "http://localhost:3009") {
         try {
           const { status, invocationID, result } = JSON.parse(event.data);
-          const resultMap: Record<string, unknown> = {
-            status: status,
-            invocationID: invocationID,
-            result: result,
-          };
 
-          const responseJson = JSON.stringify(resultMap);
-          const responseBytes = new TextEncoder().encode(responseJson);
-          const responseBase64 = btoa(String.fromCharCode(...responseBytes));
-
-          fulfillPromiseFromFlutter(responseBase64);
+          if (status === 'input') {
+            if (focusedElement) {
+              focusedElement.value = result.value;
+            }
+          }
+          else {
+            const resultMap = {
+              status: status,
+              invocationID: invocationID,
+              result: result,
+            };
+            const responseJson = JSON.stringify(resultMap);
+            const responseBytes = new TextEncoder().encode(responseJson);
+            const responseBase64 = btoa(String.fromCharCode(...responseBytes));
+            fulfillPromiseFromFlutter(responseBase64);
+          }
         } catch (error) {
           console.error(error);
         }

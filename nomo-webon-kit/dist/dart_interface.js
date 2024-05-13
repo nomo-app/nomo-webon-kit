@@ -1,12 +1,36 @@
-if (typeof window !== "undefined") {
-    if (window.parent !== window) {
-        /**
-         * Listen for message from parent window if running in an iframe
-         */
-        window.addEventListener("message", function (event) {
-            if (event.origin === "http://localhost:3009") {
-                try {
-                    const { status, invocationID, result } = JSON.parse(event.data);
+if (typeof window !== undefined && window.parent && window.parent !== window) {
+    let focusedElement = null;
+    const attachFocusHandlers = () => {
+        setTimeout(function () {
+            const inputItems = document.body.querySelectorAll('input');
+            for (let i = 0; i < inputItems.length; i++) {
+                inputItems[i].addEventListener("focus", async (event) => {
+                    const target = event.target;
+                    focusedElement = target;
+                    const args = {
+                        currentValue: target.value
+                    };
+                    await invokeNomoFunction('nomoOpenExternalKeyboard', args);
+                });
+                inputItems[i].addEventListener("blur", async (event) => {
+                    const target = event.target;
+                    focusedElement = target;
+                    await invokeNomoFunction('nomoCloseExternalKeyboard', {});
+                });
+            }
+        }, 60);
+    };
+    window.addEventListener("load", attachFocusHandlers);
+    window.addEventListener("message", function (event) {
+        if (event.origin === "http://localhost:3009") {
+            try {
+                const { status, invocationID, result } = JSON.parse(event.data);
+                if (status === 'input') {
+                    if (focusedElement) {
+                        focusedElement.value = result.value;
+                    }
+                }
+                else {
                     const resultMap = {
                         status: status,
                         invocationID: invocationID,
@@ -17,12 +41,12 @@ if (typeof window !== "undefined") {
                     const responseBase64 = btoa(String.fromCharCode(...responseBytes));
                     fulfillPromiseFromFlutter(responseBase64);
                 }
-                catch (error) {
-                    console.error(error);
-                }
             }
-        });
-    }
+            catch (error) {
+                console.error(error);
+            }
+        }
+    });
 }
 /**
  * Decodes data from the native Nomo layer.

@@ -1,6 +1,6 @@
-let focusedElement = null;
-const attachFocusHandlers = () => {
-    if (window.parent && window.parent !== window) {
+if (typeof window !== undefined && window.parent && window.parent !== window) {
+    let focusedElement = null;
+    const attachFocusHandlers = () => {
         setTimeout(function () {
             const inputItems = document.body.querySelectorAll('input');
             for (let i = 0; i < inputItems.length; i++) {
@@ -19,41 +19,34 @@ const attachFocusHandlers = () => {
                 });
             }
         }, 60);
-    }
-};
-window.addEventListener("load", attachFocusHandlers);
-if (typeof window !== "undefined") {
-    if (window.parent !== window) {
-        /**
-         * Listen for message from parent window if running in an iframe
-         */
-        window.addEventListener("message", function (event) {
-            if (event.origin === "http://localhost:3009") {
-                try {
-                    const { status, invocationID, result } = JSON.parse(event.data);
-                    if (status === 'input') {
-                        if (focusedElement) {
-                            focusedElement.value = result.value;
-                        }
-                    }
-                    else {
-                        const resultMap = {
-                            status: status,
-                            invocationID: invocationID,
-                            result: result,
-                        };
-                        const responseJson = JSON.stringify(resultMap);
-                        const responseBytes = new TextEncoder().encode(responseJson);
-                        const responseBase64 = btoa(String.fromCharCode(...responseBytes));
-                        fulfillPromiseFromFlutter(responseBase64);
+    };
+    window.addEventListener("load", attachFocusHandlers);
+    window.addEventListener("message", function (event) {
+        if (event.origin === "http://localhost:3009") {
+            try {
+                const { status, invocationID, result } = JSON.parse(event.data);
+                if (status === 'input') {
+                    if (focusedElement) {
+                        focusedElement.value = result.value;
                     }
                 }
-                catch (error) {
-                    console.error(error);
+                else {
+                    const resultMap = {
+                        status: status,
+                        invocationID: invocationID,
+                        result: result,
+                    };
+                    const responseJson = JSON.stringify(resultMap);
+                    const responseBytes = new TextEncoder().encode(responseJson);
+                    const responseBase64 = btoa(String.fromCharCode(...responseBytes));
+                    fulfillPromiseFromFlutter(responseBase64);
                 }
             }
-        });
-    }
+            catch (error) {
+                console.error(error);
+            }
+        }
+    });
 }
 /**
  * Decodes data from the native Nomo layer.

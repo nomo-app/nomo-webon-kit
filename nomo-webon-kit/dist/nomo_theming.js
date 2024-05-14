@@ -33,7 +33,7 @@ export async function getCurrentNomoTheme() {
         else if (fallbackThemeSelector === "AVINOC") {
             return avinocTheme;
         }
-        else if (fallbackThemeSelector === "TUPAN") {
+        else if (fallbackThemeSelector === "XERA") {
             return tupanTheme;
         }
         else {

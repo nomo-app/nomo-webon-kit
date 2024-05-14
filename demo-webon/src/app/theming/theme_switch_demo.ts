@@ -11,8 +11,8 @@ export async function themeSwitchDemo() {
     oldTheme === "LIGHT"
       ? "DARK"
       : oldTheme == "DARK"
-      ? "TUPAN"
-      : oldTheme == "TUPAN"
+      ? "XERA"
+      : oldTheme == "XERA"
       ? "AVINOC"
       : "LIGHT";
   await switchNomoTheme({ theme: newTheme });

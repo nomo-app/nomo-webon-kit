@@ -3,7 +3,7 @@ import { invokeNomoFunction, isFallbackModeActive } from "./dart_interface";
 /**
  * The themes that are supported by the Nomo App.
  */
-export type NomoTheme = "LIGHT" | "DARK" | "AVINOC" | "TUPAN";
+export type NomoTheme = "LIGHT" | "DARK" | "AVINOC" | "XERA";
 
 /**
  * Switches the Nomo App to a different theme.
@@ -81,7 +81,7 @@ export async function getCurrentNomoTheme(): Promise<{
       return darkTheme;
     } else if (fallbackThemeSelector === "AVINOC") {
       return avinocTheme;
-    } else if (fallbackThemeSelector === "TUPAN") {
+    } else if (fallbackThemeSelector === "XERA") {
       return tupanTheme;
     } else {
       return Promise.reject("unknown fallback theme " + fallbackThemeSelector); // should never happen

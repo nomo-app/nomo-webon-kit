@@ -12,9 +12,9 @@ import { openFaucetIfNeeded } from "./evm/evm_utils";
 import { launchAllWebOnsDemo } from "./multi-webons/multi_webon_demo";
 import { themeSwitchDemo } from "./theming/theme_switch_demo";
 import { faqDemo } from "./faq/faq_demo";
-import { sendOnePercentOfBalance } from "./assets/send_demo";
 import { ethSigDemo } from "./evm/eth_sig";
 import { nomoFallbackQRCode } from "nomo-webon-kit";
+import { AsyncButton } from "./components/async_button";
 export default function Home() {
   const [dialog, setDialog] = useState<DialogContent | null>(null);
   const platformInfo = useNomoState(nomo.getPlatformInfo);
@@ -126,7 +126,7 @@ export default function Home() {
           <p>Visit dev.nomo.app to learn more about the Nomo ecosystem.</p>
         </div>
         <div className={styles.card}>
-          <h2
+          <AsyncButton
             onClick={async () => {
               try {
                 const faucetNeeded = await openFaucetIfNeeded();
@@ -149,16 +149,16 @@ export default function Home() {
               }
             }}
           >
-            Demo with ethers.js<span>-&gt;</span>
-          </h2>
+            Demo with ethers.js
+          </AsyncButton>
           <p>
             Mint a NomoDev Token on the ZENIQ Smartchain, signed by the Nomo App
             via ethers.js-V6.
           </p>
         </div>
         <div className={styles.card}>
-          <h2
-            onClick={() => {
+          <AsyncButton
+            onClick={async () => {
               nomo
                 .takePicture({
                   maxWidth: 800,
@@ -177,7 +177,7 @@ export default function Home() {
             }}
           >
             Take picture <span>-&gt;</span>
-          </h2>
+          </AsyncButton>
           <p>Your picture will be instantly shown below.</p>
         </div>
         {!!pictureFromCamera ? (
@@ -191,7 +191,7 @@ export default function Home() {
         )}
 
         <div className={styles.card}>
-          <h2
+          <AsyncButton
             onClick={async () => {
               try {
                 await nomo.sendAssets({});
@@ -205,14 +205,14 @@ export default function Home() {
             }}
           >
             Send asset<span>-&gt;</span>
-          </h2>
+          </AsyncButton>
           <p>
             With consent from the user, WebOns can send assets from the Nomo
             App. Here we have defined no Args.
           </p>
         </div>
         <div className={styles.card}>
-          <h2
+          <AsyncButton
             onClick={async () => {
               try {
                 await nomo.sendAssets({
@@ -230,14 +230,14 @@ export default function Home() {
             }}
           >
             Send asset with Asset<span>-&gt;</span>
-          </h2>
+          </AsyncButton>
           <p>
             With consent from the user, WebOns can send assets from the Nomo
             App. Here we have defined the Asset.
           </p>
         </div>
         <div className={styles.card}>
-          <h2
+          <AsyncButton
             onClick={async () => {
               try {
                 var own = await nomo.getEvmAddress();
@@ -257,14 +257,14 @@ export default function Home() {
             }}
           >
             Send asset with Recipient<span>-&gt;</span>
-          </h2>
+          </AsyncButton>
           <p>
             With consent from the user, WebOns can send assets from the Nomo
             App. Here we have defined the Assets & Recipient.
           </p>
         </div>
         <div className={styles.card}>
-          <h2
+          <AsyncButton
             onClick={async () => {
               try {
                 await nomo.sendAssets({
@@ -283,14 +283,14 @@ export default function Home() {
             }}
           >
             Send asset with Amount<span>-&gt;</span>
-          </h2>
+          </AsyncButton>
           <p>
             With consent from the user, WebOns can send assets from the Nomo
             App. Here we have defined the Asset & the Amount.
           </p>
         </div>
         <div className={styles.card}>
-          <h2
+          <AsyncButton
             onClick={async () => {
               try {
                 var own = await nomo.getEvmAddress();
@@ -311,7 +311,7 @@ export default function Home() {
             }}
           >
             Send asset with Recipient & Amount<span>-&gt;</span>
-          </h2>
+          </AsyncButton>
           <p>
             With consent from the user, WebOns can send assets from the Nomo
             App. Here we have defined the Asset aswell as the Amount and the Recipient.
@@ -319,7 +319,7 @@ export default function Home() {
         </div>
 
         <div className={styles.card}>
-          <h2
+          <AsyncButton
             onClick={async () => {
               try {
                 const res = await ethSigDemo();
@@ -337,15 +337,15 @@ export default function Home() {
             }}
           >
             Sign ETH message<span>-&gt;</span>
-          </h2>
+          </AsyncButton>
           <p>
             WebOns can sign messages to prove that the user controls a specific
             wallet.
           </p>
         </div>
         <div className={styles.card}>
-          <h2
-            onClick={() => {
+          <AsyncButton
+            onClick={async () => {
               nomo
                 .qrScan()
                 .then((res) => {
@@ -364,21 +364,21 @@ export default function Home() {
             }}
           >
             QRScan<span>-&gt;</span>
-          </h2>
+          </AsyncButton>
           <p>Scan a QRCode with rapid speed</p>
         </div>
         <div className={styles.card}>
-          <h2
+          <AsyncButton
             onClick={async () => {
               await themeSwitchDemo();
             }}
           >
             Switch theme<span>-&gt;</span>
-          </h2>
+          </AsyncButton>
           <p>WebOns can switch between different Nomo themes</p>
         </div>
         <div className={styles.card}>
-          <h2
+          <AsyncButton
             onClick={async () => {
               try {
                 await launchAllWebOnsDemo();
@@ -393,12 +393,12 @@ export default function Home() {
             }}
           >
             Launch other WebOns<span>-&gt;</span>
-          </h2>
+          </AsyncButton>
           <p>WebOns can be combined to enable more powerful use cases.</p>
         </div>
         <div className={styles.card}>
-          <h2
-            onClick={() => {
+          <AsyncButton
+            onClick={async () => {
               testSigning()
                 .then((res) => {
                   openDialog({
@@ -416,12 +416,12 @@ export default function Home() {
             }}
           >
             EVM transaction signing <span>-&gt;</span>
-          </h2>
+          </AsyncButton>
           <p>A demo for the sign-security-dialog.</p>
         </div>
         <div className={styles.card}>
-          <h2
-            onClick={() => {
+          <AsyncButton
+            onClick={async () => {
               proofOfPaymentDemo()
                 .then((res) => {
                   openDialog({
@@ -439,12 +439,12 @@ export default function Home() {
             }}
           >
             Proof of Payment for UTXO Assets <span>-&gt;</span>
-          </h2>
+          </AsyncButton>
           <p>A demo for the ProofOfPayment Feature.</p>
         </div>
         <div className={styles.card}>
-          <h2
-            onClick={() => {
+          <AsyncButton
+            onClick={async () => {
               nomo
                 //.getExtendedPublicKey({ symbol: "BTC" })
                 .getTransactions({ symbol: "BTC" })
@@ -464,7 +464,7 @@ export default function Home() {
             }}
           >
             Get transactions <span>-&gt;</span>
-          </h2>
+          </AsyncButton>
           <p>WebOns can implement fully-functional wallet-UIs.</p>
         </div>
         <div

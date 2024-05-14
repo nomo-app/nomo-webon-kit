@@ -4,10 +4,7 @@ import {
   isFallbackModeActive,
 } from "./dart_interface";
 import { nomoAuthFetch } from "./nomo_auth";
-import {
-  nomoGetInstalledWebOns,
-  nomoInstallWebOn,
-} from "./nomo_multi_webons";
+import { nomoGetInstalledWebOns, nomoInstallWebOn } from "./nomo_multi_webons";
 
 export type NomoEvmNetwork =
   | "zeniq-smart-chain"
@@ -46,6 +43,11 @@ export async function nomoSignEvmTransaction(args: {
   messageHex: string;
 }): Promise<{ sigHex: string }> {
   if (isFallbackModeActive()) {
+    if (!window.ethereum) {
+      return Promise.reject(
+        "Fallback mode failed: window.ethereum is undefined!"
+      );
+    }
     // Use MetaMask API to sign transaction
     const from = (await window.ethereum.request({ method: "eth_accounts" }))[0];
     const sigHex = await window.ethereum.request({
@@ -68,6 +70,11 @@ export async function nomoSignEvmMessage(args: {
   message: string;
 }): Promise<{ sigHex: string }> {
   if (isFallbackModeActive()) {
+    if (!window.ethereum) {
+      return Promise.reject(
+        "Fallback mode failed: window.ethereum is undefined!"
+      );
+    }
     // Use MetaMask API to sign message
     const from = (await window.ethereum.request({ method: "eth_accounts" }))[0];
     const sigHex = await window.ethereum.request({
@@ -182,12 +189,9 @@ export async function nomoGetWalletAddresses(): Promise<{
 }> {
   if (isFallbackModeActive()) {
     if (!window.ethereum) {
-      return {
-        walletAddresses: {
-          ETH: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",
-          ZENIQ: "meXd5DAdJYadrgssPVY9sTu1Z1YNJGH9R3",
-        },
-      };
+      return Promise.reject(
+        "Fallback mode failed: window.ethereum is undefined!"
+      );
     }
     try {
       // Use MetaMask API to get wallet addresses

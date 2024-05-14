@@ -1,7 +1,7 @@
 /**
  * The themes that are supported by the Nomo App.
  */
-export type NomoTheme = "LIGHT" | "DARK" | "AVINOC" | "TUPAN";
+export type NomoTheme = "LIGHT" | "DARK" | "AVINOC" | "XERA";
 /**
  * Switches the Nomo App to a different theme.
  * It is recommended to call "injectNomoCSSVariables" after a theme has changed.

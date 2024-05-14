@@ -1,6 +1,6 @@
 import { invokeNomoFunction, invokeNomoFunctionCached, isFallbackModeActive, } from "./dart_interface";
 import { nomoAuthFetch } from "./nomo_auth";
-import { nomoGetInstalledWebOns, nomoInstallWebOn, } from "./nomo_multi_webons";
+import { nomoGetInstalledWebOns, nomoInstallWebOn } from "./nomo_multi_webons";
 /**
  * Creates a signature for an EVM-based transaction.
  * See EthersjsNomoSigner for an example on how to use this function.
@@ -9,6 +9,9 @@ import { nomoGetInstalledWebOns, nomoInstallWebOn, } from "./nomo_multi_webons";
  */
 export async function nomoSignEvmTransaction(args) {
     if (isFallbackModeActive()) {
+        if (!window.ethereum) {
+            return Promise.reject("Fallback mode failed: window.ethereum is undefined!");
+        }
         // Use MetaMask API to sign transaction
         const from = (await window.ethereum.request({ method: "eth_accounts" }))[0];
         const sigHex = await window.ethereum.request({
@@ -28,6 +31,9 @@ export async function nomoSignEvmTransaction(args) {
  */
 export async function nomoSignEvmMessage(args) {
     if (isFallbackModeActive()) {
+        if (!window.ethereum) {
+            return Promise.reject("Fallback mode failed: window.ethereum is undefined!");
+        }
         // Use MetaMask API to sign message
         const from = (await window.ethereum.request({ method: "eth_accounts" }))[0];
         const sigHex = await window.ethereum.request({
@@ -122,12 +128,7 @@ export async function nomoGetEvmAddress() {
 export async function nomoGetWalletAddresses() {
     if (isFallbackModeActive()) {
         if (!window.ethereum) {
-            return {
-                walletAddresses: {
-                    ETH: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",
-                    ZENIQ: "meXd5DAdJYadrgssPVY9sTu1Z1YNJGH9R3",
-                },
-            };
+            return Promise.reject("Fallback mode failed: window.ethereum is undefined!");
         }
         try {
             // Use MetaMask API to get wallet addresses

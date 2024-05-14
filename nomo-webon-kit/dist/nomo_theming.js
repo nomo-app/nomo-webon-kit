@@ -34,7 +34,7 @@ export async function getCurrentNomoTheme() {
             return avinocTheme;
         }
         else if (fallbackThemeSelector === "XERA") {
-            return tupanTheme;
+            return xeraTheme;
         }
         else {
             return Promise.reject("unknown fallback theme " + fallbackThemeSelector); // should never happen
@@ -118,9 +118,9 @@ const avinocTheme = {
         settingsColumnColor: "#232846ff",
     },
 };
-const tupanTheme = {
-    name: "TUPAN",
-    displayName: "TUPAN",
+const xeraTheme = {
+    name: "XERA",
+    displayName: "XERA",
     colors: {
         primary: "#77af22ff",
         onPrimary: "#ffffffff",

@@ -217,8 +217,8 @@ export default function Home() {
               try {
                 await nomo.sendAssets({
                   asset: {
-                    symbol: "zeniq token"
-                  }
+                    symbol: "zeniq token",
+                  },
                 });
               } catch (e) {
                 console.error(e);
@@ -243,7 +243,7 @@ export default function Home() {
                 var own = await nomo.getEvmAddress();
                 await nomo.sendAssets({
                   asset: {
-                    symbol: "zeniq token"
+                    symbol: "zeniq token",
                   },
                   targetAddress: own,
                 });
@@ -269,7 +269,7 @@ export default function Home() {
               try {
                 await nomo.sendAssets({
                   asset: {
-                    symbol: "zeniq token"
+                    symbol: "zeniq token",
                   },
                   amount: "1",
                 });
@@ -296,7 +296,7 @@ export default function Home() {
                 var own = await nomo.getEvmAddress();
                 await nomo.sendAssets({
                   asset: {
-                    symbol: "zeniq token"
+                    symbol: "zeniq token",
                   },
                   targetAddress: own,
                   amount: "1",
@@ -314,7 +314,8 @@ export default function Home() {
           </AsyncButton>
           <p>
             With consent from the user, WebOns can send assets from the Nomo
-            App. Here we have defined the Asset aswell as the Amount and the Recipient.
+            App. Here we have defined the Asset aswell as the Amount and the
+            Recipient.
           </p>
         </div>
 
@@ -477,6 +478,7 @@ export default function Home() {
         >
           Contact support
         </div>
+        <div style={{ height: "10px" }} />
         <div
           onClick={async () => {
             await faqDemo();
@@ -484,6 +486,10 @@ export default function Home() {
         >
           Open FAQs
         </div>
+        <div style={{ height: "10px" }} />
+        <a href={"https://nomo.app/webon/faucet.nomo.zone"}>
+          Click on WebOn deeplinks
+        </a>
       </div>
     </main>
   );

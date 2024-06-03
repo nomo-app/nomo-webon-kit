@@ -28,6 +28,7 @@ if (typeof window !== undefined && window.parent && window.parent !== window) {
                 if (status === 'input') {
                     if (focusedElement) {
                         focusedElement.value = result.value;
+                        focusedElement.dispatchEvent(new Event("input"));
                     }
                 }
                 else {

@@ -28,7 +28,12 @@ if (typeof window !== undefined && window.parent && window.parent !== window) {
       }, 60);
   };
 
-  window.addEventListener("load", attachFocusHandlers);
+  if (document.readyState !== "complete") {
+    window.addEventListener('load',attachFocusHandlers);
+  } 
+  else {
+    attachFocusHandlers();
+  }
 
   window.addEventListener("message", function (event) {
     if (event.origin === "http://localhost:3009") {

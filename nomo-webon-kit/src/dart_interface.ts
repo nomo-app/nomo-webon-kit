@@ -25,7 +25,7 @@ if (typeof window !== undefined && window.parent && window.parent !== window) {
             await invokeNomoFunction('nomoCloseExternalKeyboard', {})
           });
         }
-      }, 60);
+      }, 1000);
   };
 
   if (document.readyState !== "complete") {

@@ -65,16 +65,19 @@ export interface NomoManifest {
  */
 export declare function nomoGetManifest(): Promise<NomoManifest>;
 /**
- * Installs a WebOn with or without user interaction.
- * If the WebOn is already installed, it will be updated to the latest version.
+ * Installs and/or launches a WebOn with or without user interaction.
+ * If the WebOn is already installed, then the behavior depends on whether "backgroundInstall" is set to true.
+ * If "backgroundInstall" is not set, then the already installed WebOn will be launched.
+ * If "backgroundInstall" is set, then the already installed manifest will be replaced (including URL-args).
  * See the README for an explanation about deeplinks.
  *
  * Needs nomo.permission.INSTALL_WEBON.
  */
 export declare function nomoInstallWebOn(args: {
     deeplink: string;
-    skipPermissionDialog: boolean;
-    navigateBack: boolean;
+    skipPermissionDialog?: boolean;
+    navigateBack?: boolean;
+    backgroundInstall?: boolean;
 }): Promise<void>;
 /**
  * Installs a URL as a WebOn and grants the permissions that are specified in the manifest.

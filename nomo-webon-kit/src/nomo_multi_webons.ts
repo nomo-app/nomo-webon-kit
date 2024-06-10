@@ -87,6 +87,16 @@ export async function nomoGetManifest(): Promise<NomoManifest> {
 }
 
 /**
+ * Returns the URL-parameters of the WebOn.
+ */
+export async function nomoGetWebOnParameters(): Promise<URLSearchParams> {
+  const manifest = await nomoGetManifest();
+  const webon_url = manifest.webon_url;
+  const urlParams = new URLSearchParams(webon_url);
+  return urlParams;
+}
+
+/**
  * Installs and/or launches a WebOn with or without user interaction.
  * If the WebOn is already installed, then the behavior depends on whether "backgroundInstall" is set to true.
  * If "backgroundInstall" is not set, then the already installed WebOn will be launched.

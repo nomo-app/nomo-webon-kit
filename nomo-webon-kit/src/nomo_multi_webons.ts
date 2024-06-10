@@ -3,7 +3,6 @@ import {
   invokeNomoFunctionCached,
   isFallbackModeActive,
 } from "./dart_interface";
-import { nomo } from "./nomo_api";
 import { hasMinimumNomoVersion, nomoGetExecutionMode } from "./nomo_platform";
 
 export interface NomoManifest {

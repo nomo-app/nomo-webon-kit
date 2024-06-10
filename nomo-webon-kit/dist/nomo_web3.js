@@ -10,7 +10,7 @@ import { nomoGetInstalledWebOns, nomoInstallWebOn } from "./nomo_multi_webons";
 export async function nomoSignEvmTransaction(args) {
     if (isFallbackModeActive()) {
         if (!window.ethereum) {
-            return Promise.reject("Fallback mode failed: window.ethereum is undefined!");
+            return Promise.reject("nomoSignEvmTransaction fallback mode failed: window.ethereum is undefined!");
         }
         // Use MetaMask API to sign transaction
         const from = (await window.ethereum.request({ method: "eth_accounts" }))[0];
@@ -32,7 +32,7 @@ export async function nomoSignEvmTransaction(args) {
 export async function nomoSignEvmMessage(args) {
     if (isFallbackModeActive()) {
         if (!window.ethereum) {
-            return Promise.reject("Fallback mode failed: window.ethereum is undefined!");
+            return Promise.reject("nomoSignEvmMessage fallback mode failed: window.ethereum is undefined!");
         }
         // Use MetaMask API to sign message
         const from = (await window.ethereum.request({ method: "eth_accounts" }))[0];
@@ -128,7 +128,7 @@ export async function nomoGetEvmAddress() {
 export async function nomoGetWalletAddresses() {
     if (isFallbackModeActive()) {
         if (!window.ethereum) {
-            return Promise.reject("Fallback mode failed: window.ethereum is undefined!");
+            return Promise.reject("nomoGetWalletAddresses fallback mode failed: window.ethereum is undefined!");
         }
         try {
             // Use MetaMask API to get wallet addresses

@@ -45,7 +45,7 @@ export async function nomoSignEvmTransaction(args: {
   if (isFallbackModeActive()) {
     if (!window.ethereum) {
       return Promise.reject(
-        "Fallback mode failed: window.ethereum is undefined!"
+        "nomoSignEvmTransaction fallback mode failed: window.ethereum is undefined!"
       );
     }
     // Use MetaMask API to sign transaction
@@ -72,7 +72,7 @@ export async function nomoSignEvmMessage(args: {
   if (isFallbackModeActive()) {
     if (!window.ethereum) {
       return Promise.reject(
-        "Fallback mode failed: window.ethereum is undefined!"
+        "nomoSignEvmMessage fallback mode failed: window.ethereum is undefined!"
       );
     }
     // Use MetaMask API to sign message
@@ -190,7 +190,7 @@ export async function nomoGetWalletAddresses(): Promise<{
   if (isFallbackModeActive()) {
     if (!window.ethereum) {
       return Promise.reject(
-        "Fallback mode failed: window.ethereum is undefined!"
+        "nomoGetWalletAddresses fallback mode failed: window.ethereum is undefined!"
       );
     }
     try {

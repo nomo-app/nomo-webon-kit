@@ -3,6 +3,7 @@ import {
   invokeNomoFunctionCached,
   isFallbackModeActive,
 } from "./dart_interface";
+import { nomo } from "./nomo_api";
 import { hasMinimumNomoVersion, nomoGetExecutionMode } from "./nomo_platform";
 
 export interface NomoManifest {
@@ -84,6 +85,16 @@ export async function nomoGetManifest(): Promise<NomoManifest> {
     };
   }
   return await invokeNomoFunctionCached("nomoGetManifest", {});
+}
+
+/**
+ * Returns the URL-parameters of the WebOn.
+ */
+export async function nomoGetWebOnParameters(): Promise<URLSearchParams> {
+  const manifest = await nomoGetManifest();
+  const webon_url = manifest.webon_url;
+  const urlParams = new URLSearchParams(webon_url);
+  return urlParams;
 }
 
 /**

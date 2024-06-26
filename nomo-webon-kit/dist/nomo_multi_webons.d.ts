@@ -83,7 +83,9 @@ export declare function nomoUpdateManifest(args: {
  * Please use regular JavaScript for navigation.
  */
 export declare function nomoSetWebOnParameters(args: {
-    urlParams: string;
+    params: {
+        [key: string]: string;
+    };
 }): Promise<void>;
 /**
  * Returns the URL-parameters of the WebOn-manifest.

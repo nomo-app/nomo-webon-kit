@@ -108,14 +108,18 @@ export async function nomoUpdateManifest(args: {
  * Please use regular JavaScript for navigation.
  */
 export async function nomoSetWebOnParameters(args: {
-  urlParams: string;
+  params: { [key: string]: string };
 }): Promise<void> {
-  if (!args.urlParams.startsWith("?")) {
-    throw new Error("urlParams should start with a question mark.");
+  // Convert the params object to a URL query string
+  const urlParams = new URLSearchParams(args.params).toString();
+
+  if (!urlParams) {
+    throw new Error("Params object should not be empty.");
   }
+
   const manifest = await nomoGetManifest();
   const oldUrl = manifest.webon_url;
-  const newUrl = oldUrl.split("?")[0] + args.urlParams;
+  const newUrl = oldUrl.split("?")[0] + "?" + urlParams;
   return await nomoUpdateManifest({ manifest: { webon_url: newUrl } });
 }
 

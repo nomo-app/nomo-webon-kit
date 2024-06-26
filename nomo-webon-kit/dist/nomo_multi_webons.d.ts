@@ -75,7 +75,7 @@ export declare function nomoGetManifest(): Promise<NomoManifest>;
  * - This function does not allow to change the permissions of the WebOn.
  */
 export declare function nomoUpdateManifest(args: {
-    manifest: NomoManifest;
+    manifest: Partial<NomoManifest>;
 }): Promise<void>;
 /**
  * Returns the URL-parameters of the WebOn.

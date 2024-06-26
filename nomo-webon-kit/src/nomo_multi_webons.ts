@@ -97,7 +97,7 @@ export async function nomoGetManifest(): Promise<NomoManifest> {
  * - This function does not allow to change the permissions of the WebOn.
  */
 export async function nomoUpdateManifest(args: {
-  manifest: NomoManifest;
+  manifest: Partial<NomoManifest>;
 }): Promise<void> {
   return await invokeNomoFunction("nomoUpdateManifest", args);
 }

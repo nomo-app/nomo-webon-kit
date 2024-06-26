@@ -78,8 +78,9 @@ export default function Home() {
   }, []);
   useEffect(() => {
     if (manifest) {
-      manifest["webon_url"] = manifest["webon_url"] + "?foo=bar";
-      nomo.updateManifest({ manifest });
+      const newUrl = manifest["webon_url"] + "?foo=bar";
+      const partialManifest: Partial<NomoManifest> = { webon_url: newUrl };
+      nomo.updateManifest({ manifest: partialManifest });
     }
   }, [manifest]);
 

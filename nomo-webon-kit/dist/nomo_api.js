@@ -40,6 +40,7 @@ export const nomo = {
     replaceWebOn: multi.nomoReplaceWebOn,
     migrateAndSelfDestroy: multi.nomoMigrateAndSelfDestroy,
     getManifest: multi.nomoGetManifest,
+    updateManifest: multi.nomoUpdateManifest,
     openFAQPage: media.nomoOpenFAQPage,
     getMessengerAddress: media.nomoGetMessengerAddress,
     takePicture: media.nomoTakePicture,

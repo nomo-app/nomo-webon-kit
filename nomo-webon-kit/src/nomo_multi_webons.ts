@@ -83,7 +83,23 @@ export async function nomoGetManifest(): Promise<NomoManifest> {
       webon_version: "0.1.0",
     };
   }
-  return await invokeNomoFunctionCached("nomoGetManifest", {});
+  return await invokeNomoFunction("nomoGetManifest", {});
+}
+
+/**
+ * Changes the manifest of the currently running WebOn.
+ * Potential use cases:
+ * - Changing the URL or URL-parameters of the WebOn.
+ * - Changing the name of the WebOn.
+ * - Sharing data with other WebOns (via "nomoGetInstalledWebOns").
+ * Sidenotes:
+ * - This function does not affect the currently running page. Please use regular JavaScript for navigation.
+ * - This function does not allow to change the permissions of the WebOn.
+ */
+export async function nomoUpdateManifest(args: {
+  manifest: Partial<NomoManifest>;
+}): Promise<void> {
+  return await invokeNomoFunction("nomoUpdateManifest", args);
 }
 
 /**

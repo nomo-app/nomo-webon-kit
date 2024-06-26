@@ -78,7 +78,15 @@ export declare function nomoUpdateManifest(args: {
     manifest: Partial<NomoManifest>;
 }): Promise<void>;
 /**
- * Returns the URL-parameters of the WebOn.
+ * Changes the URL-parameters in the manifest of the currently running WebOn.
+ * This function does not affect the currently running page.
+ * Please use regular JavaScript for navigation.
+ */
+export declare function nomoSetWebOnParameters(args: {
+    urlParams: string;
+}): Promise<void>;
+/**
+ * Returns the URL-parameters of the WebOn-manifest.
  */
 export declare function nomoGetWebOnParameters(): Promise<URLSearchParams>;
 /**

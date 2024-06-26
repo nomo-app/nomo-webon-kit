@@ -1,4 +1,4 @@
-import { invokeNomoFunction, invokeNomoFunctionCached, isFallbackModeActive, } from "./dart_interface";
+import { invokeNomoFunction, isFallbackModeActive, } from "./dart_interface";
 import { hasMinimumNomoVersion, nomoGetExecutionMode } from "./nomo_platform";
 /**
  * Returns the nomo_manifest.json that was used during the installation of the WebOn.
@@ -15,7 +15,20 @@ export async function nomoGetManifest() {
             webon_version: "0.1.0",
         };
     }
-    return await invokeNomoFunctionCached("nomoGetManifest", {});
+    return await invokeNomoFunction("nomoGetManifest", {});
+}
+/**
+ * Changes the manifest of the currently running WebOn.
+ * Potential use cases:
+ * - Changing the URL or URL-parameters of the WebOn.
+ * - Changing the name of the WebOn.
+ * - Sharing data with other WebOns (via "nomoGetInstalledWebOns").
+ * Sidenotes:
+ * - Changing the URL has an immediate effect on the "share deeplink"-feature, but it does not affect the currently running page.
+ * - This function does not allow to change the permissions of the WebOn.
+ */
+export async function nomoUpdateManifest(args) {
+    return await invokeNomoFunction("nomoUpdateManifest", args);
 }
 /**
  * Returns the URL-parameters of the WebOn.

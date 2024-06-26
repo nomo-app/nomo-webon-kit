@@ -76,6 +76,12 @@ export default function Home() {
       console.log("fetched staking NFTs", res);
     });
   }, []);
+  useEffect(() => {
+    if (manifest) {
+      manifest["webon_url"] = manifest["webon_url"] + "?foo=bar";
+      nomo.updateManifest({ manifest });
+    }
+  }, [manifest]);
 
   const openDialog = (content: DialogContent) => {
     setDialog(content);

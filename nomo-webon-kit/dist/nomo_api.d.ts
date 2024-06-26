@@ -46,6 +46,7 @@ export declare const nomo: {
     replaceWebOn: typeof multi.nomoReplaceWebOn;
     migrateAndSelfDestroy: typeof multi.nomoMigrateAndSelfDestroy;
     getManifest: typeof multi.nomoGetManifest;
+    updateManifest: typeof multi.nomoUpdateManifest;
     openFAQPage: typeof media.nomoOpenFAQPage;
     getMessengerAddress: typeof media.nomoGetMessengerAddress;
     takePicture: typeof media.nomoTakePicture;

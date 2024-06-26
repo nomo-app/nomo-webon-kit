@@ -93,7 +93,7 @@ export async function nomoGetManifest(): Promise<NomoManifest> {
  * - Changing the name of the WebOn.
  * - Sharing data with other WebOns (via "nomoGetInstalledWebOns").
  * Sidenotes:
- * - Changing the URL has an immediate effect on the "share deeplink"-feature, but it does not affect the currently running page.
+ * - This function does not affect the currently running page. Please use regular JavaScript for navigation.
  * - This function does not allow to change the permissions of the WebOn.
  */
 export async function nomoUpdateManifest(args: {

@@ -31,7 +31,23 @@ export async function nomoUpdateManifest(args) {
     return await invokeNomoFunction("nomoUpdateManifest", args);
 }
 /**
- * Returns the URL-parameters of the WebOn.
+ * Changes the URL-parameters in the manifest of the currently running WebOn.
+ * This function does not affect the currently running page.
+ * Please use regular JavaScript for navigation.
+ */
+export async function nomoSetWebOnParameters(args) {
+    // Convert the params object to a URL query string
+    const urlParams = new URLSearchParams(args.params).toString();
+    if (!urlParams) {
+        throw new Error("Params object should not be empty.");
+    }
+    const manifest = await nomoGetManifest();
+    const oldUrl = manifest.webon_url;
+    const newUrl = oldUrl.split("?")[0] + "?" + urlParams;
+    return await nomoUpdateManifest({ manifest: { webon_url: newUrl } });
+}
+/**
+ * Returns the URL-parameters of the WebOn-manifest.
  */
 export async function nomoGetWebOnParameters() {
     const manifest = await nomoGetManifest();

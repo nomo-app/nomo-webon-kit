@@ -1,5 +1,6 @@
-import { invokeNomoFunction, isFallbackModeActive, } from "./dart_interface";
+import { invokeNomoFunction, isFallbackModeActive } from "./dart_interface";
 import { hasMinimumNomoVersion, nomoGetExecutionMode } from "./nomo_platform";
+import { urlSearchParamsToJson } from "./util";
 /**
  * Returns the nomo_manifest.json that was used during the installation of the WebOn.
  * For example, this can be used by a WebOn for checking its own version.
@@ -36,37 +37,9 @@ export async function nomoSetWebOnParameters(args) {
 export async function nomoGetWebOnParameters() {
     const manifest = await nomoGetManifest();
     const webon_url = manifest.webon_url;
-    const urlParams = new URLSearchParams(webon_url);
+    const url = new URL(webon_url);
+    const urlParams = new URLSearchParams(url.searchParams);
     return urlSearchParamsToJson(urlParams);
-}
-function urlSearchParamsToJson(params) {
-    const result = {};
-    params.forEach((value, key) => {
-        const keys = key.split(".");
-        let current = result;
-        keys.forEach((part, index) => {
-            const isLast = index === keys.length - 1;
-            if (isLast) {
-                const decodedValue = decodeURIComponent(value);
-                if (current[part] !== undefined) {
-                    if (!Array.isArray(current[part])) {
-                        current[part] = [current[part]];
-                    }
-                    current[part].push(decodedValue);
-                }
-                else {
-                    current[part] = decodedValue;
-                }
-            }
-            else {
-                if (!current[part] || typeof current[part] !== "object") {
-                    current[part] = isNaN(Number(keys[index + 1])) ? {} : [];
-                }
-                current = current[part];
-            }
-        });
-    });
-    return result;
 }
 /**
  * Installs and/or launches a WebOn with or without user interaction.

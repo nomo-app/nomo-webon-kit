@@ -76,7 +76,6 @@ export function isFallbackModeActive() {
  * A low-level function that aims to be compatible with multiple webviews
  */
 function getDartBridge() {
-    var _a;
     if (typeof window === "undefined") {
         return null; // fallback mode in server-side rendering
     }
@@ -88,7 +87,7 @@ function getDartBridge() {
         // mobile + macos
         return (payload) => window.NOMOJSChannel.postMessage(payload);
     }
-    else if ((_a = window.chrome) === null || _a === void 0 ? void 0 : _a.webview) {
+    else if (window.chrome?.webview) {
         //windows
         return (payload) => window.chrome.webview.postMessage(payload);
     }

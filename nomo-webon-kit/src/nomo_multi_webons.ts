@@ -87,40 +87,18 @@ export async function nomoGetManifest(): Promise<NomoManifest> {
 }
 
 /**
- * Changes the manifest of the currently running WebOn.
- * Potential use cases:
- * - Changing the URL or URL-parameters of the WebOn.
- * - Changing the name of the WebOn.
- * - Sharing data with other WebOns (via "nomoGetInstalledWebOns").
- * Sidenotes:
- * - This function does not affect the currently running page. Please use regular JavaScript for navigation.
- * - This function does not allow to change the permissions of the WebOn.
- */
-export async function nomoUpdateManifest(args: {
-  manifest: Partial<NomoManifest>;
-}): Promise<void> {
-  return await invokeNomoFunction("nomoUpdateManifest", args);
-}
-
-/**
  * Changes the URL-parameters in the manifest of the currently running WebOn.
  * This function does not affect the currently running page.
  * Please use regular JavaScript for navigation.
+ *
+ * @param args.urlParams - A JSON-serializable object that will be converted to a URL query string.
+ *
+ * Since Nomo App 0.5.1.
  */
 export async function nomoSetWebOnParameters(args: {
-  params: { [key: string]: string };
+  urlParams: { [key: string]: any };
 }): Promise<void> {
-  // Convert the params object to a URL query string
-  const urlParams = new URLSearchParams(args.params).toString();
-
-  if (!urlParams) {
-    throw new Error("Params object should not be empty.");
-  }
-
-  const manifest = await nomoGetManifest();
-  const oldUrl = manifest.webon_url;
-  const newUrl = oldUrl.split("?")[0] + "?" + urlParams;
-  return await nomoUpdateManifest({ manifest: { webon_url: newUrl } });
+  return await invokeNomoFunction("nomoSetWebOnParameters", args);
 }
 
 /**

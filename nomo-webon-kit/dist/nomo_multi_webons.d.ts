@@ -65,26 +65,17 @@ export interface NomoManifest {
  */
 export declare function nomoGetManifest(): Promise<NomoManifest>;
 /**
- * Changes the manifest of the currently running WebOn.
- * Potential use cases:
- * - Changing the URL or URL-parameters of the WebOn.
- * - Changing the name of the WebOn.
- * - Sharing data with other WebOns (via "nomoGetInstalledWebOns").
- * Sidenotes:
- * - This function does not affect the currently running page. Please use regular JavaScript for navigation.
- * - This function does not allow to change the permissions of the WebOn.
- */
-export declare function nomoUpdateManifest(args: {
-    manifest: Partial<NomoManifest>;
-}): Promise<void>;
-/**
  * Changes the URL-parameters in the manifest of the currently running WebOn.
  * This function does not affect the currently running page.
  * Please use regular JavaScript for navigation.
+ *
+ * @param args.urlParams - A JSON-serializable object that will be converted to a URL query string.
+ *
+ * Since Nomo App 0.5.1.
  */
 export declare function nomoSetWebOnParameters(args: {
-    params: {
-        [key: string]: string;
+    urlParams: {
+        [key: string]: any;
     };
 }): Promise<void>;
 /**

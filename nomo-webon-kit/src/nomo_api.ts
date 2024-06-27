@@ -42,7 +42,8 @@ export const nomo = {
   replaceWebOn: multi.nomoReplaceWebOn,
   migrateAndSelfDestroy: multi.nomoMigrateAndSelfDestroy,
   getManifest: multi.nomoGetManifest,
-  updateManifest: multi.nomoUpdateManifest,
+  setWebOnParameters: multi.nomoSetWebOnParameters,
+  getWebOnParameters: multi.nomoGetWebOnParameters,
 
   openFAQPage: media.nomoOpenFAQPage,
   getMessengerAddress: media.nomoGetMessengerAddress,

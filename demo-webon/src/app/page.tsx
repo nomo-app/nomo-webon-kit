@@ -63,6 +63,7 @@ export default function Home() {
     nomo.registerOnWebOnVisible((_args: { cardMode: boolean }) => {
       nomo.checkForWebOnUpdate();
     });
+    nomo.setWebOnParameters({ urlParams: { foo: "bar" } });
   }, []);
   useEffect(() => {
     const provider = zscProvider;
@@ -76,13 +77,6 @@ export default function Home() {
       console.log("fetched staking NFTs", res);
     });
   }, []);
-  useEffect(() => {
-    if (manifest) {
-      const newUrl = manifest["webon_url"] + "?foo=bar";
-      const partialManifest: Partial<NomoManifest> = { webon_url: newUrl };
-      nomo.updateManifest({ manifest: partialManifest });
-    }
-  }, [manifest]);
 
   const openDialog = (content: DialogContent) => {
     setDialog(content);

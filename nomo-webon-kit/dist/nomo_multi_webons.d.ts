@@ -80,8 +80,11 @@ export declare function nomoSetWebOnParameters(args: {
 }): Promise<void>;
 /**
  * Returns the URL-parameters of the WebOn-manifest.
+ * This might be a nested object that was previously passed to "nomoSetWebOnParameters".
  */
-export declare function nomoGetWebOnParameters(): Promise<URLSearchParams>;
+export declare function nomoGetWebOnParameters(): Promise<{
+    [key: string]: any;
+}>;
 /**
  * Installs and/or launches a WebOn with or without user interaction.
  * If the WebOn is already installed, then the behavior depends on whether "backgroundInstall" is set to true.

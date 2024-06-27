@@ -26,10 +26,9 @@ export async function nomoSignAuthMessage(args) {
  * Therefore, is much easier to debug or modify, although it cannot bypass CORS.
  */
 export async function nomoAuthFetch(args) {
-    var _a, _b;
     fillMissingArgs(args);
-    const signer = (_a = args.signer) !== null && _a !== void 0 ? _a : nomoSignAuthMessage;
-    const headers = (_b = args.headers) !== null && _b !== void 0 ? _b : {};
+    const signer = args.signer ?? nomoSignAuthMessage;
+    const headers = args.headers ?? {};
     await _injectNomoAuthHeaders({
         signer,
         url: args.url,
@@ -70,10 +69,9 @@ export async function nomoAuthFetch(args) {
     };
 }
 async function _injectNomoAuthHeaders({ signer, url, headers, }) {
-    var _a;
     const domain = new URL(url).hostname;
-    const jwt = (_a = localStorage.getItem(domain)) !== null && _a !== void 0 ? _a : null;
-    const messageToSign = jwt !== null && jwt !== void 0 ? jwt : "dummyMessage";
+    const jwt = localStorage.getItem(domain) ?? null;
+    const messageToSign = jwt ?? "dummyMessage";
     const sigResult = await signer({ message: messageToSign, url });
     const manifest = await nomoGetManifest();
     headers["nomo-auth-addr"] = sigResult.authAddress;

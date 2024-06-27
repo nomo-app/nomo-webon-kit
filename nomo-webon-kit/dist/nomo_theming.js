@@ -21,9 +21,8 @@ async function nomoGetDartColors() {
  * A low-level function. We recommend using "injectNomoCSSVariables" instead.
  */
 export async function getCurrentNomoTheme() {
-    var _a;
     if (isFallbackModeActive()) {
-        const fallbackThemeSelector = (_a = localStorage.getItem("nomoTheme")) !== null && _a !== void 0 ? _a : "LIGHT";
+        const fallbackThemeSelector = localStorage.getItem("nomoTheme") ?? "LIGHT";
         if (fallbackThemeSelector === "LIGHT") {
             return lightTheme;
         }

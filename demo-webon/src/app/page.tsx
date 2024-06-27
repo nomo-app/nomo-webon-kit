@@ -65,7 +65,7 @@ export default function Home() {
     });
     nomo
       .setWebOnParameters({
-        urlParams: { foo: "bar", nested: { foo2: "bar2" } },
+        urlParams: { a: [1, 2, 3], b: { c: 1n, d: { e: [4, "5//%20ss s"] } } },
       })
       .then(() => {
         nomo

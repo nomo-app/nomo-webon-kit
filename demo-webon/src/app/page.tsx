@@ -63,7 +63,16 @@ export default function Home() {
     nomo.registerOnWebOnVisible((_args: { cardMode: boolean }) => {
       nomo.checkForWebOnUpdate();
     });
-    nomo.setWebOnParameters({ urlParams: { foo: "bar" } });
+    nomo
+      .setWebOnParameters({
+        urlParams: { foo: "bar", nested: { foo2: "bar2" } },
+      })
+      .then(() => {
+        nomo
+          .getWebOnParameters()
+          .then((res) => console.log("getWebOnParameters", res))
+          .catch(console.error);
+      });
   }, []);
   useEffect(() => {
     const provider = zscProvider;

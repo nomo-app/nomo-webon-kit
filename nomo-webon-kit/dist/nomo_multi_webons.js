@@ -31,12 +31,42 @@ export async function nomoSetWebOnParameters(args) {
 }
 /**
  * Returns the URL-parameters of the WebOn-manifest.
+ * This might be a nested object that was previously passed to "nomoSetWebOnParameters".
  */
 export async function nomoGetWebOnParameters() {
     const manifest = await nomoGetManifest();
     const webon_url = manifest.webon_url;
     const urlParams = new URLSearchParams(webon_url);
-    return urlParams;
+    return urlSearchParamsToJson(urlParams);
+}
+function urlSearchParamsToJson(params) {
+    const result = {};
+    params.forEach((value, key) => {
+        const keys = key.split(".");
+        let current = result;
+        keys.forEach((part, index) => {
+            const isLast = index === keys.length - 1;
+            if (isLast) {
+                const decodedValue = decodeURIComponent(value);
+                if (current[part] !== undefined) {
+                    if (!Array.isArray(current[part])) {
+                        current[part] = [current[part]];
+                    }
+                    current[part].push(decodedValue);
+                }
+                else {
+                    current[part] = decodedValue;
+                }
+            }
+            else {
+                if (!current[part] || typeof current[part] !== "object") {
+                    current[part] = isNaN(Number(keys[index + 1])) ? {} : [];
+                }
+                current = current[part];
+            }
+        });
+    });
+    return result;
 }
 /**
  * Installs and/or launches a WebOn with or without user interaction.

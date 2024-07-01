@@ -26,13 +26,6 @@ export interface NomoManifest {
      */
     webon_url: string;
     /**
-     * url_args allows to run multiple instances of the same WebOn in parallel.
-     * url_args is intended to be a string that starts with "?" or "#".
-     * This is primarily useful for WebOns that are cached locally and launched programatically (e.g. launched via "nomoLaunchWebOn" from another WebOn).
-     * Since Nomo App 0.3.6.
-     */
-    url_args?: string;
-    /**
      * webon_version should comply with the semantic versioning standard.
      * See https://semver.org/ for details.
      */

@@ -329,7 +329,7 @@ export async function nomoAddCustomToken(
  */
 export async function nomoLaunchSmartchainFaucet(): Promise<void> {
   return await nomoInstallWebOn({
-    deeplink: "https://nomo.app/webon/w.nomo.app/faucet/nomo.tar.gz",
+    deeplink: "https://nomo.app/webon/faucet.nomo.zone",
     skipPermissionDialog: true,
     navigateBack: false,
   });

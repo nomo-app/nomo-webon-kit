@@ -180,6 +180,8 @@ export async function invokeNomoFunction(
     // Assuming e is an Error object
     if (e.message) {
       return Promise.reject(e.message);
+    } else {
+      throw e; // rethrow unknown errors
     }
   }
 }

@@ -42,6 +42,9 @@ export function stringifyWithBigInts(obj) {
     const resJson = JSON.stringify(obj, replacer, 1);
     return resJson;
 }
+/**
+ * Overwrite the default toJSON method of BigInt to make it work with JSON.stringify.
+ */
 BigInt.prototype.toJSON = function () {
     return this.toString();
 };
@@ -76,4 +79,12 @@ export function urlSearchParamsToJson(params) {
         });
     });
     return result;
+}
+/**
+ * An asynchronous sleep function.
+ * @param ms The number of milliseconds to sleep.
+ * @returns A promise that resolves after the specified sleep duration.
+ */
+export function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
 }

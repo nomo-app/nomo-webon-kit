@@ -387,9 +387,24 @@ export default function Home() {
                 });
             }}
           >
-            QRScan<span>-&gt;</span>
+            QR Scan<span>-&gt;</span>
           </AsyncButton>
           <p>Scan a QRCode with rapid speed</p>
+        </div>
+        <div className={styles.card}>
+          <AsyncButton
+            onClick={async () => {
+              const nomoIdTestQRCode =
+                "https://nomo.id/qrtest.zeniq.dev/backend/qrExecuteDefault?n=732341402ea1b483c523f83a2c79fee7&r=/backend/qrScanDefault";
+              nomo.injectQRCode({
+                qrCode: nomoIdTestQRCode,
+                navigateBack: false,
+              });
+            }}
+          >
+            QR Injection<span>-&gt;</span>
+          </AsyncButton>
+          <p>Inject QRCodes to use features like the Nomo-ID protocol</p>
         </div>
         <div className={styles.card}>
           <AsyncButton

@@ -28,7 +28,7 @@
 
 #### Defined in
 
-[nomo_web3.ts:33](https://github.com/nomo-app/nomo-webon-kit/blob/33e2e3d/nomo-webon-kit/src/nomo_web3.ts#L33)
+[nomo_web3.ts:34](https://github.com/nomo-app/nomo-webon-kit/blob/c209de5/nomo-webon-kit/src/nomo_web3.ts#L34)
 
 ___
 
@@ -45,7 +45,7 @@ If contractAddress is specified, then name and symbol will be ignored.
 
 #### Defined in
 
-[nomo_web3.ts:28](https://github.com/nomo-app/nomo-webon-kit/blob/33e2e3d/nomo-webon-kit/src/nomo_web3.ts#L28)
+[nomo_web3.ts:29](https://github.com/nomo-app/nomo-webon-kit/blob/c209de5/nomo-webon-kit/src/nomo_web3.ts#L29)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:31](https://github.com/nomo-app/nomo-webon-kit/blob/33e2e3d/nomo-webon-kit/src/nomo_web3.ts#L31)
+[nomo_web3.ts:32](https://github.com/nomo-app/nomo-webon-kit/blob/c209de5/nomo-webon-kit/src/nomo_web3.ts#L32)
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:22](https://github.com/nomo-app/nomo-webon-kit/blob/33e2e3d/nomo-webon-kit/src/nomo_web3.ts#L22)
+[nomo_web3.ts:23](https://github.com/nomo-app/nomo-webon-kit/blob/c209de5/nomo-webon-kit/src/nomo_web3.ts#L23)
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:23](https://github.com/nomo-app/nomo-webon-kit/blob/33e2e3d/nomo-webon-kit/src/nomo_web3.ts#L23)
+[nomo_web3.ts:24](https://github.com/nomo-app/nomo-webon-kit/blob/c209de5/nomo-webon-kit/src/nomo_web3.ts#L24)
 
 ___
 
@@ -93,7 +93,7 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:32](https://github.com/nomo-app/nomo-webon-kit/blob/33e2e3d/nomo-webon-kit/src/nomo_web3.ts#L32)
+[nomo_web3.ts:33](https://github.com/nomo-app/nomo-webon-kit/blob/c209de5/nomo-webon-kit/src/nomo_web3.ts#L33)
 
 ___
 
@@ -107,4 +107,4 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:21](https://github.com/nomo-app/nomo-webon-kit/blob/33e2e3d/nomo-webon-kit/src/nomo_web3.ts#L21)
+[nomo_web3.ts:22](https://github.com/nomo-app/nomo-webon-kit/blob/c209de5/nomo-webon-kit/src/nomo_web3.ts#L22)

@@ -1,31 +1,24 @@
 if (typeof window !== undefined && window.parent && window.parent !== window) {
     let focusedElement = null;
-    const attachFocusHandlers = () => {
-        setTimeout(function () {
-            const inputItems = document.body.querySelectorAll('input');
-            for (let i = 0; i < inputItems.length; i++) {
-                inputItems[i].addEventListener("focus", async (event) => {
-                    const target = event.target;
-                    focusedElement = target;
-                    const args = {
-                        currentValue: target.value
-                    };
-                    await invokeNomoFunction('nomoOpenExternalKeyboard', args);
-                });
-                inputItems[i].addEventListener("blur", async (event) => {
-                    const target = event.target;
-                    focusedElement = target;
-                    await invokeNomoFunction('nomoCloseExternalKeyboard', {});
-                });
-            }
-        }, 1000);
+    const handleFocusIn = async (event) => {
+        if (event.target.tagName.toLowerCase() === 'input' || event.target.tagName.toLowerCase() === 'textarea') {
+            const target = event.target;
+            focusedElement = target;
+            const args = {
+                currentValue: target.value
+            };
+            await invokeNomoFunction('nomoOpenExternalKeyboard', args);
+        }
     };
-    if (document.readyState !== "complete") {
-        window.addEventListener('load', attachFocusHandlers);
-    }
-    else {
-        attachFocusHandlers();
-    }
+    const handleFocusOut = async (event) => {
+        if (event.target.tagName.toLowerCase() === 'input' || event.target.tagName.toLowerCase() === 'textarea') {
+            const target = event.target;
+            focusedElement = target;
+            await invokeNomoFunction('nomoCloseExternalKeyboard', {});
+        }
+    };
+    window.addEventListener("focusin", handleFocusIn);
+    window.addEventListener("focusout", handleFocusOut);
     window.addEventListener("message", function (event) {
         if (event.origin === "http://localhost:3009") {
             try {

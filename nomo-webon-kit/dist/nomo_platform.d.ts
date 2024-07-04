@@ -2,6 +2,10 @@ export type NomoExecutionMode = "PRODUCTION" | "DEV" | "DEV_DEV" | "FALLBACK";
 export type NomoHostingMode = "NOMO_INTEGRATED_HOSTING" | "EXTERNAL_HOSTING";
 export type NomoWebView = "webview_flutter" | "webview_cef" | "not_in_nomo_app";
 /**
+ * Returns true if the code is running within a Nomo App WebView.
+ */
+export declare function runsAsWebOn(): boolean;
+/**
  * This function checks at runtime if the Nomo App has a minimum version.
  * It is also possible to require a minimum Nomo App version in the manifest.
  */

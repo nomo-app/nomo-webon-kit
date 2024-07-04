@@ -1,6 +1,12 @@
 import { invokeNomoFunction, invokeNomoFunctionCached, isFallbackModeActive, } from "./dart_interface";
 import { compareSemanticVersions, stringifyWithBigInts } from "./util";
 /**
+ * Returns true if the code is running within a Nomo App WebView.
+ */
+export function runsAsWebOn() {
+    return !isFallbackModeActive();
+}
+/**
  * This function checks at runtime if the Nomo App has a minimum version.
  * It is also possible to require a minimum Nomo App version in the manifest.
  */

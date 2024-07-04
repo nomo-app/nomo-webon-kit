@@ -49,6 +49,7 @@ export const nomo = {
     qrScan: media.nomoQrScan,
     injectQRCode: media.nomoInjectQRCode,
     fallbackQRCode: media.nomoFallbackQRCode,
+    runsAsWebOn: platform.runsAsWebOn,
     hasMinimumNomoVersion: platform.hasMinimumNomoVersion,
     checkForWebOnUpdate: platform.nomoCheckForWebOnUpdate,
     getPlatformInfo: platform.nomoGetPlatformInfo,

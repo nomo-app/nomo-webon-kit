@@ -55,6 +55,7 @@ export declare const nomo: {
     qrScan: typeof media.nomoQrScan;
     injectQRCode: typeof media.nomoInjectQRCode;
     fallbackQRCode: typeof media.nomoFallbackQRCode;
+    runsAsWebOn: typeof platform.runsAsWebOn;
     hasMinimumNomoVersion: typeof platform.hasMinimumNomoVersion;
     checkForWebOnUpdate: typeof platform.nomoCheckForWebOnUpdate;
     getPlatformInfo: typeof platform.nomoGetPlatformInfo;

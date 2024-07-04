@@ -26,13 +26,6 @@ export interface NomoManifest {
      */
     webon_url: string;
     /**
-     * url_args allows to run multiple instances of the same WebOn in parallel.
-     * url_args is intended to be a string that starts with "?" or "#".
-     * This is primarily useful for WebOns that are cached locally and launched programatically (e.g. launched via "nomoLaunchWebOn" from another WebOn).
-     * Since Nomo App 0.3.6.
-     */
-    url_args?: string;
-    /**
      * webon_version should comply with the semantic versioning standard.
      * See https://semver.org/ for details.
      */
@@ -65,16 +58,40 @@ export interface NomoManifest {
  */
 export declare function nomoGetManifest(): Promise<NomoManifest>;
 /**
- * Installs a WebOn with or without user interaction.
- * If the WebOn is already installed, it will be updated to the latest version.
+ * Changes the URL-parameters in the manifest of the currently running WebOn.
+ * This function does not affect the currently running page.
+ * Please use regular JavaScript for navigation.
+ *
+ * @param args.urlParams - A JSON-serializable object that will be converted to a URL query string.
+ *
+ * Since Nomo App 0.5.1.
+ */
+export declare function nomoSetWebOnParameters(args: {
+    urlParams: {
+        [key: string]: any;
+    };
+}): Promise<void>;
+/**
+ * Returns the URL-parameters of the WebOn-manifest.
+ * This might be a nested object that was previously passed to "nomoSetWebOnParameters".
+ */
+export declare function nomoGetWebOnParameters(): Promise<{
+    [key: string]: any;
+}>;
+/**
+ * Installs and/or launches a WebOn with or without user interaction.
+ * If the WebOn is already installed, then the behavior depends on whether "backgroundInstall" is set to true.
+ * If "backgroundInstall" is not set, then the already installed WebOn will be launched.
+ * If "backgroundInstall" is set, then the already installed manifest will be replaced (including URL-args).
  * See the README for an explanation about deeplinks.
  *
  * Needs nomo.permission.INSTALL_WEBON.
  */
 export declare function nomoInstallWebOn(args: {
     deeplink: string;
-    skipPermissionDialog: boolean;
-    navigateBack: boolean;
+    skipPermissionDialog?: boolean;
+    navigateBack?: boolean;
+    backgroundInstall?: boolean;
 }): Promise<void>;
 /**
  * Installs a URL as a WebOn and grants the permissions that are specified in the manifest.

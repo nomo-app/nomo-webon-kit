@@ -43,8 +43,11 @@ export async function nomoTakePicture(args) {
             imageBase64: fallbackImage,
         };
     }
-    const rawRes = await invokeNomoFunction("nomoTakePicture", args !== null && args !== void 0 ? args : null);
-    return Object.assign(Object.assign({}, rawRes), { imageBase64: imagePrefix + rawRes.imageBase64 });
+    const rawRes = await invokeNomoFunction("nomoTakePicture", args ?? null);
+    return {
+        ...rawRes,
+        imageBase64: imagePrefix + rawRes.imageBase64,
+    };
 }
 /**
  * Opens an image-picker and returns an image in base64-encoding.
@@ -59,8 +62,11 @@ export async function nomoPickFromGallery(args) {
             imageBase64: fallbackImage,
         };
     }
-    const rawRes = await invokeNomoFunction("nomoPickFromGallery", args !== null && args !== void 0 ? args : null);
-    return Object.assign(Object.assign({}, rawRes), { imageBase64: imagePrefix + rawRes.imageBase64 });
+    const rawRes = await invokeNomoFunction("nomoPickFromGallery", args ?? null);
+    return {
+        ...rawRes,
+        imageBase64: imagePrefix + rawRes.imageBase64,
+    };
 }
 /**
  * Can be used for chatting with other NOMO-users, but also for push-notifications or chat-bots.

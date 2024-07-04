@@ -10,7 +10,7 @@ import { nomoGetInstalledWebOns, nomoInstallWebOn } from "./nomo_multi_webons";
 export async function nomoSignEvmTransaction(args) {
     if (isFallbackModeActive()) {
         if (!window.ethereum) {
-            return Promise.reject("Fallback mode failed: window.ethereum is undefined!");
+            return Promise.reject("nomoSignEvmTransaction fallback mode failed: window.ethereum is undefined!");
         }
         // Use MetaMask API to sign transaction
         const from = (await window.ethereum.request({ method: "eth_accounts" }))[0];
@@ -32,7 +32,7 @@ export async function nomoSignEvmTransaction(args) {
 export async function nomoSignEvmMessage(args) {
     if (isFallbackModeActive()) {
         if (!window.ethereum) {
-            return Promise.reject("Fallback mode failed: window.ethereum is undefined!");
+            return Promise.reject("nomoSignEvmMessage fallback mode failed: window.ethereum is undefined!");
         }
         // Use MetaMask API to sign message
         const from = (await window.ethereum.request({ method: "eth_accounts" }))[0];
@@ -52,8 +52,7 @@ export async function nomoSignEvmMessage(args) {
  * Needs nomo.permission.SEND_ASSETS.
  */
 export async function nomoSendAssets(args) {
-    var _a, _b;
-    const legacyArgs = Object.assign(Object.assign({}, args), { assetSymbol: (_b = (_a = args.asset) === null || _a === void 0 ? void 0 : _a.symbol) !== null && _b !== void 0 ? _b : null });
+    const legacyArgs = { ...args, assetSymbol: args.asset?.symbol ?? null };
     return await invokeNomoFunction("nomoSendAssets", legacyArgs);
 }
 /**
@@ -128,7 +127,7 @@ export async function nomoGetEvmAddress() {
 export async function nomoGetWalletAddresses() {
     if (isFallbackModeActive()) {
         if (!window.ethereum) {
-            return Promise.reject("Fallback mode failed: window.ethereum is undefined!");
+            return Promise.reject("nomoGetWalletAddresses fallback mode failed: window.ethereum is undefined!");
         }
         try {
             // Use MetaMask API to get wallet addresses
@@ -153,7 +152,7 @@ export async function nomoGetWalletAddresses() {
  * May throw an error if no icons can be found.
  */
 export async function nomoGetAssetIcon(args) {
-    const legacyArgs = Object.assign(Object.assign({}, args), { assetSymbol: args.symbol });
+    const legacyArgs = { ...args, assetSymbol: args.symbol };
     return await invokeNomoFunction("nomoGetAssetIcon", legacyArgs);
 }
 /**
@@ -181,7 +180,7 @@ export async function nomoGetAssetPrice(args) {
  * Typically, the decimals are needed to convert a raw balance into a user-readable balance.
  */
 export async function nomoGetBalance(args) {
-    const legacyArgs = Object.assign(Object.assign({}, args), { assetSymbol: args.symbol });
+    const legacyArgs = { ...args, assetSymbol: args.symbol };
     return await invokeNomoFunction("nomoGetBalance", legacyArgs);
 }
 /**
@@ -235,7 +234,9 @@ export async function nomoMnemonicBackupExisted() {
  * Returns a list of NFTs that are owned by the user.
  * Can be slow if the NFTs are not yet in the Nomo App's cache.
  *
- * @deprecated: Please use "nomoGetNFTContracts" instead.
+ * @deprecated: Please use one of the following functions instead:
+ * - "nomoGetNFTContracts" from this package.
+ * - "nomoFetchERC721" from the ethersjs-nomo-webons package.
  */
 export async function nomoGetNFTs(args) {
     return await invokeNomoFunction("nomoGetNFTs", args);
@@ -249,7 +250,7 @@ export async function nomoGetNFTs(args) {
 export async function nomoGetNFTContracts() {
     const { manifests } = await nomoGetInstalledWebOns();
     const rawDependencies = manifests
-        .map((manifest) => { var _a; return (_a = manifest.dependencies) !== null && _a !== void 0 ? _a : []; })
+        .map((manifest) => manifest.dependencies ?? [])
         .reduce((acc, val) => acc.concat(val), []);
     const nftContractPrefix = "nftcontract:";
     const nftContracts = rawDependencies

@@ -15,6 +15,7 @@ import { faqDemo } from "./faq/faq_demo";
 import { ethSigDemo } from "./evm/eth_sig";
 import { nomoFallbackQRCode } from "nomo-webon-kit";
 import { AsyncButton } from "./components/async_button";
+import { nomoFetchERC721, zscProvider } from "ethersjs-nomo-webons";
 export default function Home() {
   const [dialog, setDialog] = useState<DialogContent | null>(null);
   const platformInfo = useNomoState(nomo.getPlatformInfo);
@@ -61,6 +62,28 @@ export default function Home() {
     injectNomoCSSVariables();
     nomo.registerOnWebOnVisible((_args: { cardMode: boolean }) => {
       nomo.checkForWebOnUpdate();
+    });
+    nomo
+      .setWebOnParameters({
+        urlParams: { a: [1, 2, 3], b: { c: 1n, d: { e: [4, "5//%20ss s"] } } },
+      })
+      .then(() => {
+        nomo
+          .getWebOnParameters()
+          .then((res) => console.log("getWebOnParameters", res))
+          .catch(console.error);
+      });
+  }, []);
+  useEffect(() => {
+    const provider = zscProvider;
+    const testWalletAddress = "0x1464935f48ca992d1a0bEAA2358471d7Cb6374E5";
+    const stakingContractAddress = "0x97F51eCDeEdecdb740DD1ff6236D013aFff0417d";
+    nomoFetchERC721({
+      evmAddress: testWalletAddress,
+      provider,
+      nftContractAddress: stakingContractAddress,
+    }).then((res) => {
+      console.log("fetched staking NFTs", res);
     });
   }, []);
 

@@ -149,6 +149,9 @@ export async function invokeNomoFunction(functionName, args) {
         if (e.message) {
             return Promise.reject(e.message);
         }
+        else {
+            throw e; // rethrow unknown errors
+        }
     }
 }
 const fulfillPromiseFromFlutter = function (base64FromFlutter) {

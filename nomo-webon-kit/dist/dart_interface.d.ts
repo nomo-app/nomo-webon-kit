@@ -8,6 +8,10 @@ declare global {
  */
 export declare function isFallbackModeActive(): boolean;
 /**
+ * Returns true if the code is running within an iframe.
+ */
+export declare function isRunningInHub(): boolean;
+/**
  * A cached wrapper on top of "invokeNomoFunction".
  * For idempotent functions, this cache prevents unnecessary calls to the native layer.
  */

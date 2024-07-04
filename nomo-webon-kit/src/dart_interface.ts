@@ -4,7 +4,7 @@ declare global {
   }
 }
 
-if (typeof window !== undefined && window.parent && window.parent !== window) {
+if (isRunningInHub()) {
   let focusedElement: HTMLInputElement | HTMLTextAreaElement | null = null;
 
   const handleFocusIn = async (event: any) => {
@@ -81,6 +81,13 @@ export function isFallbackModeActive(): boolean {
 }
 
 /**
+ * Returns true if the code is running within an iframe.
+ */
+export function isRunningInHub(): boolean {
+  return typeof window !== undefined && window.parent && window.parent !== window;
+}
+
+/**
  * A low-level function that aims to be compatible with multiple webviews
  */
 function getDartBridge(): ((arg0: string) => void) | null {
@@ -97,7 +104,7 @@ function getDartBridge(): ((arg0: string) => void) | null {
   } else if (window.chrome?.webview) {
     //windows
     return (payload: string) => window.chrome.webview.postMessage(payload);
-  } else if (window.parent && window.parent !== window) {
+  } else if (isRunningInHub()) {
     // parent window
     return (payload: string) => window.parent.postMessage(payload, "*");
   } else {

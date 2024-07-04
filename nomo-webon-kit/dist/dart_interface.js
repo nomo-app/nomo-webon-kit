@@ -1,4 +1,4 @@
-if (typeof window !== undefined && window.parent && window.parent !== window) {
+if (isRunningInHub()) {
     let focusedElement = null;
     const handleFocusIn = async (event) => {
         if (event.target.tagName.toLowerCase() === 'input' || event.target.tagName.toLowerCase() === 'textarea') {
@@ -66,6 +66,12 @@ export function isFallbackModeActive() {
     return !getDartBridge();
 }
 /**
+ * Returns true if the code is running within an iframe.
+ */
+export function isRunningInHub() {
+    return typeof window !== undefined && window.parent && window.parent !== window;
+}
+/**
  * A low-level function that aims to be compatible with multiple webviews
  */
 function getDartBridge() {
@@ -84,7 +90,7 @@ function getDartBridge() {
         //windows
         return (payload) => window.chrome.webview.postMessage(payload);
     }
-    else if (window.parent && window.parent !== window) {
+    else if (isRunningInHub()) {
         // parent window
         return (payload) => window.parent.postMessage(payload, "*");
     }

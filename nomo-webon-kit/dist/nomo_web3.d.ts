@@ -117,6 +117,17 @@ export declare function nomoGetAssetPrice(args: NomoAssetSelector): Promise<{
  * Returns not only the balance of an asset, but also additional information like the network, a contract-address and a receive-address.
  * Typically, the decimals are needed to convert a raw balance into a user-readable balance.
  */
+export declare function nomoGetBalanceWaitUntilSynced(args: NomoAssetSelector): Promise<NomoAsset & {
+    balance: string;
+}>;
+/**
+ * A lower-level function to get the balance of an asset.
+ * This function may return a null-balance if the asset is not yet visible or not yet synced.
+ * Please use one of the following replacements instead of this functions:
+ * - For EVM-based assets: Fetch a balance with ethers.js or similar.
+ * - For UTXO-based assets: Use "nomoGetBalanceWaitUntilSynced".
+ * - Else: Implement additional logic with "nomoSetAssetVisibility"/"nomoGetVisibleAssets".
+ */
 export declare function nomoGetBalance(args: NomoAssetSelector): Promise<NomoAsset & {
     balance: string;
 }>;

@@ -20,6 +20,7 @@ export declare const nomo: {
     getNFTs: typeof web3.nomoGetNFTs;
     getNFTContracts: typeof web3.nomoGetNFTContracts;
     getBalance: typeof web3.nomoGetBalance;
+    getBalanceWaitUntilSynced: typeof web3.nomoGetBalanceWaitUntilSynced;
     getTransactions: typeof web3.nomoGetTransactions;
     getExtendedPublicKey: typeof web3.nomoGetExtendedPublicKey;
     getAssetIcon: typeof web3.nomoGetAssetIcon;

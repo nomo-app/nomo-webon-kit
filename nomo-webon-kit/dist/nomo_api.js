@@ -20,6 +20,7 @@ export const nomo = {
     getNFTs: web3.nomoGetNFTs,
     getNFTContracts: web3.nomoGetNFTContracts,
     getBalance: web3.nomoGetBalance,
+    getBalanceWaitUntilSynced: web3.nomoGetBalanceWaitUntilSynced,
     getTransactions: web3.nomoGetTransactions,
     getExtendedPublicKey: web3.nomoGetExtendedPublicKey,
     getAssetIcon: web3.nomoGetAssetIcon,

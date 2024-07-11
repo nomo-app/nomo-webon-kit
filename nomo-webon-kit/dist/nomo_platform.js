@@ -167,3 +167,19 @@ function nomoNativeLog(severity, args) {
         originalConsoleError(e);
     }
 }
+/**
+ * Summons the platform's share sheet to share a text.
+ * If no text is provided, then it will share the deeplink of the WebOn.
+ *
+ * Wraps the platform's native share dialog. Can share a text and/or a URL.
+ * It uses the `ACTION_SEND` Intent on Android and `UIActivityViewController` on iOS.
+ *
+ * The optional [subject] parameter can be used to populate a subject if the user chooses to send an email.
+ */
+export async function nomoShare(args) {
+    if (!runsAsWebOn()) {
+        navigator.share({ text: args.text });
+        return;
+    }
+    return await invokeNomoFunction("nomoShare", args);
+}

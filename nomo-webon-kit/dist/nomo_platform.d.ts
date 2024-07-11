@@ -90,3 +90,16 @@ export declare const nomoConsole: {
  * For the Desktop DevDev-mode, this function is not necessary.
  */
 export declare function nomoEnableMobileConsoleDebugging(): Promise<void>;
+/**
+ * Summons the platform's share sheet to share a text.
+ * If no text is provided, then it will share the deeplink of the WebOn.
+ *
+ * Wraps the platform's native share dialog. Can share a text and/or a URL.
+ * It uses the `ACTION_SEND` Intent on Android and `UIActivityViewController` on iOS.
+ *
+ * The optional [subject] parameter can be used to populate a subject if the user chooses to send an email.
+ */
+export declare function nomoShare(args: {
+    text?: string;
+    subject?: string;
+}): Promise<void>;

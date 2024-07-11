@@ -9,7 +9,6 @@ export type NomoExecutionMode = "PRODUCTION" | "DEV" | "DEV_DEV" | "FALLBACK";
 export type NomoHostingMode = "NOMO_INTEGRATED_HOSTING" | "EXTERNAL_HOSTING";
 export type NomoWebView = "webview_flutter" | "webview_cef" | "not_in_nomo_app";
 
-
 /**
  * Returns true if the code is running within a Nomo App WebView.
  */
@@ -210,4 +209,24 @@ function nomoNativeLog(
   } catch (e) {
     originalConsoleError(e);
   }
+}
+
+/**
+ * Summons the platform's share sheet to share a text.
+ * If no text is provided, then it will share the deeplink of the WebOn.
+ *
+ * Wraps the platform's native share dialog. Can share a text and/or a URL.
+ * It uses the `ACTION_SEND` Intent on Android and `UIActivityViewController` on iOS.
+ *
+ * The optional [subject] parameter can be used to populate a subject if the user chooses to send an email.
+ */
+export async function nomoShare(args: {
+  text?: string;
+  subject?: string;
+}): Promise<void> {
+  if (!runsAsWebOn()) {
+    navigator.share({ text: args.text });
+    return;
+  }
+  return await invokeNomoFunction("nomoShare", args);
 }

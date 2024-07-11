@@ -27,7 +27,7 @@ export default function Home() {
     null
   );
   useEffect(() => {
-    //nomoFallbackQRCode();
+    nomoFallbackQRCode();
     const minVersion = "0.3.6";
     nomo.hasMinimumNomoVersion({ minVersion }).then(async (res: any) => {
       if (!res.minVersionFulfilled) {

@@ -1,6 +1,6 @@
 # Nomo WebOn Kit
 
-This package provides an API for [Nomo WebOns](https://nomo.app/webons).
+This package provides an API for [Nomo WebOns](https://discover.webon.info).
 A WebOn is a web-application that runs within a WebView of the Nomo App.
 
 See the [api-docs](api-docs/modules.md) for a list of individual functions.

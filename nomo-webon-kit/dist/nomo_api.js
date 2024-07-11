@@ -60,6 +60,7 @@ export const nomo = {
     getDeviceName: platform.nomoGetDeviceName,
     registerOnWebOnVisible: platform.nomoRegisterOnWebOnVisible,
     enableMobileConsoleDebugging: platform.nomoEnableMobileConsoleDebugging,
+    share: platform.nomoShare,
     injectNomoCSSVariables: theming.injectNomoCSSVariables,
     switchNomoTheme: theming.switchNomoTheme,
     getCurrentNomoTheme: theming.getCurrentNomoTheme,

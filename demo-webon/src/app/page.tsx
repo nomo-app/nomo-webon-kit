@@ -532,6 +532,14 @@ export default function Home() {
           Open FAQs
         </div>
         <div style={{ height: "10px" }} />
+        <div
+          onClick={() => {
+            nomo.share({}); // uses the deeplink of the current WebOn as default
+          }}
+        >
+          Share deeplinks
+        </div>
+        <div style={{ height: "10px" }} />
         <a href={"https://nomo.app/webon/faucet.nomo.zone"}>
           Click on WebOn deeplinks
         </a>

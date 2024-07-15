@@ -67,5 +67,12 @@ export declare function nomoGetMessengerAddress(): Promise<{
     messengerAddress: string;
     inviteLink: string;
 }>;
+/**
+ * Subscribes Nomo to a notification-topic.
+ * Server-side notifications can then be sent to all subscribers of a topic.
+ */
+export declare function nomoSubscribeNotification(args: {
+    topic: string;
+}): Promise<void>;
 /** Detects if a WebOn is running outside of Nomo and shows a fallback-dialog if needed.*/
 export declare function nomoFallbackQRCode(): void;

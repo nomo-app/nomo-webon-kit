@@ -27,7 +27,9 @@ export default function Home() {
     null
   );
   useEffect(() => {
-    nomoFallbackQRCode();
+    if (window.location.protocol !== "http:") {
+      nomoFallbackQRCode();
+    }
     const minVersion = "0.3.6";
     nomo.hasMinimumNomoVersion({ minVersion }).then(async (res: any) => {
       if (!res.minVersionFulfilled) {

@@ -82,6 +82,13 @@ export async function nomoGetMessengerAddress() {
     }
     return await invokeNomoFunctionCached("nomoGetMessengerAddress", null);
 }
+/**
+ * Subscribes Nomo to a notification-topic.
+ * Server-side notifications can then be sent to all subscribers of a topic.
+ */
+export async function nomoSubscribeNotification(args) {
+    return await invokeNomoFunction("nomoSubscribeNotification", args);
+}
 /** Detects if a WebOn is running outside of Nomo and shows a fallback-dialog if needed.*/
 export function nomoFallbackQRCode() {
     if (!isFallbackModeActive()) {

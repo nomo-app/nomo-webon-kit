@@ -120,6 +120,16 @@ export async function nomoGetMessengerAddress(): Promise<{
   return await invokeNomoFunctionCached("nomoGetMessengerAddress", null);
 }
 
+/**
+ * Subscribes Nomo to a notification-topic.
+ * Server-side notifications can then be sent to all subscribers of a topic.
+ */
+export async function nomoSubscribeNotification(args: {
+  topic: string;
+}): Promise<void> {
+  return await invokeNomoFunction("nomoSubscribeNotification", args);
+}
+
 /** Detects if a WebOn is running outside of Nomo and shows a fallback-dialog if needed.*/
 export function nomoFallbackQRCode() {
   if (!isFallbackModeActive()) {
@@ -128,7 +138,7 @@ export function nomoFallbackQRCode() {
   const url =
     "https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=" +
     "http://nomo.app/webon/" +
-    window.location.host
+    window.location.host;
   document.body.innerHTML += `
   <style>
     #not_in_nomo_dialog{

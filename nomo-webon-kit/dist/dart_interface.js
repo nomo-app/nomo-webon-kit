@@ -27,6 +27,13 @@ if (isRunningInHub()) {
                     if (focusedElement) {
                         focusedElement.value = result.value;
                         focusedElement.dispatchEvent(new Event("input"));
+                        focusedElement.dispatchEvent(new Event("input", { bubbles: true }));
+                        // Trigger React onChange event separately
+                        const tracker = focusedElement._valueTracker;
+                        if (tracker) {
+                            tracker.setValue('tempinputtemp');
+                        }
+                        focusedElement.dispatchEvent(new Event("change", { bubbles: true }));
                     }
                 }
                 else {

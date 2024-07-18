@@ -17,9 +17,12 @@ import { nomoFallbackQRCode } from "nomo-webon-kit";
 import { AsyncButton } from "./components/async_button";
 import { nomoFetchERC721, zscProvider } from "ethersjs-nomo-webons";
 export default function Home() {
+  nomo.disableFallbackWallet(); // remove this line to support fallback-wallets like MetaMask
   const [dialog, setDialog] = useState<DialogContent | null>(null);
   const platformInfo = useNomoState(nomo.getPlatformInfo);
-  const evmAddress = useNomoState(nomo.getEvmAddress);
+  const evmAddress = useNomoState(nomo.getEvmAddress, {
+    errorValue: "fallback wallets are disabled",
+  });
   const executionMode = useNomoState(nomo.getExecutionMode);
   const deviceName = useNomoState(nomo.getDeviceName);
   const manifest: NomoManifest | null = useNomoState(nomo.getManifest);
@@ -133,7 +136,7 @@ export default function Home() {
         </div>
         <div style={{ height: "10px" }} />
         <div style={{ width: "100%" }}>
-          <b>EVM address:</b> {evmAddress}
+          <b>EVM address:</b> {evmAddress ?? null}
         </div>
         <div style={{ height: "10px" }} />
         <div style={{ width: "100%" }}>

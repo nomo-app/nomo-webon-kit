@@ -34,6 +34,18 @@ export interface NomoAsset extends NomoAssetSelector {
   balance?: string;
 }
 
+
+/**
+ * Prevents functions like "nomoGetEvmAddress" from falling back to browser extensions like MetaMask.
+ */
+export function nomoDisableFallbackWallet() {
+  if (!isFallbackModeActive()) {
+    return;
+  }
+  window.fallbackWalletDisabled = true;
+}
+
+
 /**
  * Creates a signature for an EVM-based transaction.
  * See EthersjsNomoSigner for an example on how to use this function.
@@ -44,6 +56,11 @@ export async function nomoSignEvmTransaction(args: {
   messageHex: string;
 }): Promise<{ sigHex: string }> {
   if (isFallbackModeActive()) {
+    if (window.fallbackWalletDisabled) {
+      return Promise.reject(
+        "nomoSignEvmTransaction failed: fallback wallets are disabled!"
+      );
+    }
     if (!window.ethereum) {
       return Promise.reject(
         "nomoSignEvmTransaction fallback mode failed: window.ethereum is undefined!"
@@ -71,6 +88,11 @@ export async function nomoSignEvmMessage(args: {
   message: string;
 }): Promise<{ sigHex: string }> {
   if (isFallbackModeActive()) {
+    if (window.fallbackWalletDisabled) {
+      return Promise.reject(
+        "nomoSignEvmMessage failed: fallback wallets are disabled!"
+      );
+    }
     if (!window.ethereum) {
       return Promise.reject(
         "nomoSignEvmMessage fallback mode failed: window.ethereum is undefined!"
@@ -178,6 +200,19 @@ export async function nomoGetAllAssets(): Promise<{
  * Internally, it calls "nomoGetWalletAddresses" and caches the result.
  */
 export async function nomoGetEvmAddress(): Promise<string> {
+  if (isFallbackModeActive()) {
+    // extra fallback checks to show to the devs which wrapper function fails
+    if (window.fallbackWalletDisabled) {
+      return Promise.reject(
+        "nomoGetEvmAddress failed: fallback wallets are disabled!"
+      );
+    }
+    if (!window.ethereum) {
+      return Promise.reject(
+        "nomoGetEvmAddress fallback mode failed: window.ethereum is undefined!"
+      );
+    }
+  }
   const res = await nomoGetWalletAddresses();
   return res.walletAddresses["ETH"];
 }
@@ -189,6 +224,11 @@ export async function nomoGetWalletAddresses(): Promise<{
   walletAddresses: Record<string, string>;
 }> {
   if (isFallbackModeActive()) {
+    if (window.fallbackWalletDisabled) {
+      return Promise.reject(
+        "nomoGetWalletAddresses failed: fallback wallets are disabled!"
+      );
+    }
     if (!window.ethereum) {
       return Promise.reject(
         "nomoGetWalletAddresses fallback mode failed: window.ethereum is undefined!"

@@ -16,6 +16,10 @@ export interface NomoAsset extends NomoAssetSelector {
     balance?: string;
 }
 /**
+ * Prevents functions like "nomoGetEvmAddress" from falling back to browser extensions like MetaMask.
+ */
+export declare function nomoDisableFallbackWallet(): void;
+/**
  * Creates a signature for an EVM-based transaction.
  * See EthersjsNomoSigner for an example on how to use this function.
  *

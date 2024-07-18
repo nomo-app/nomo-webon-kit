@@ -30,6 +30,7 @@ export declare const nomo: {
     addCustomToken: typeof web3.nomoAddCustomToken;
     proofOfPayment: typeof web3.nomoProofOfPayment;
     setAssetVisiblity: typeof web3.nomoSetAssetVisibility;
+    disableFallbackWallet: typeof web3.nomoDisableFallbackWallet;
     localStorage: {
         getItem: (key: string, options?: {
             webon_id: string;

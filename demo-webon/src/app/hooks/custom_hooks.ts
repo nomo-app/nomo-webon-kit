@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 
-export function useNomoState(nomoGetterFunction: () => Promise<any>) {
+export function useNomoState(
+  nomoGetterFunction: () => Promise<any>,
+  options?: { errorValue?: any }
+) {
   const [nomoState, setNomoState] = useState<any | null>(null);
   useEffect(() => {
     nomoGetterFunction()
@@ -9,7 +12,7 @@ export function useNomoState(nomoGetterFunction: () => Promise<any>) {
       })
       .catch((e) => {
         console.error(e);
-        setNomoState(e);
+        setNomoState(options?.errorValue ?? e);
       });
   }, [nomoGetterFunction]);
   return nomoState;

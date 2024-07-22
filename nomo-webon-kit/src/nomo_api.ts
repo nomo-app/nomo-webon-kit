@@ -18,7 +18,6 @@ export const nomo = {
   getWalletAddresses: web3.nomoGetWalletAddresses,
   getVisibleAssets: web3.nomoGetVisibleAssets,
   getAllAssets: web3.nomoGetAllAssets,
-  getNFTs: web3.nomoGetNFTs,
   getNFTContracts: web3.nomoGetNFTContracts,
   getBalance: web3.nomoGetBalance,
   getBalanceWaitUntilSynced: web3.nomoGetBalanceWaitUntilSynced,

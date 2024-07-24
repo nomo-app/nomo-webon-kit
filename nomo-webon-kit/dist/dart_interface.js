@@ -85,7 +85,7 @@ function getDartBridge() {
     if (typeof window === "undefined") {
         return null; // fallback mode in server-side rendering
     }
-    if (window.webkit) {
+    if (window.webkit?.messageHandlers?.NOMOJSChannel) {
         // legacy macOS
         return (payload) => window.webkit.messageHandlers.NOMOJSChannel.postMessage(payload);
     }

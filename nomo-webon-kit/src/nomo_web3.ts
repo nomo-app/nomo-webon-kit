@@ -27,13 +27,16 @@ export interface NomoAssetSelector {
    * If contractAddress is specified, then name and symbol will be ignored.
    */
   contractAddress?: string;
+  /**
+   * If set, then uuid must be an asset-identifier from the endpoint https://webon.info/api/tokens.
+   */
+  uuid?: string;
 }
 export interface NomoAsset extends NomoAssetSelector {
   decimals: number;
   receiveAddress?: string | null;
   balance?: string;
 }
-
 
 /**
  * Prevents functions like "nomoGetEvmAddress" from falling back to browser extensions like MetaMask.
@@ -44,7 +47,6 @@ export function nomoDisableFallbackWallet() {
   }
   window.fallbackWalletDisabled = true;
 }
-
 
 /**
  * Creates a signature for an EVM-based transaction.

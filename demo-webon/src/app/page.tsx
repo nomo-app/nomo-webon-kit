@@ -17,7 +17,7 @@ import { nomoFallbackQRCode } from "nomo-webon-kit";
 import { AsyncButton } from "./components/async_button";
 import { nomoFetchERC721, zscProvider } from "ethersjs-nomo-webons";
 export default function Home() {
-  nomo.disableFallbackWallet(); // remove this line to support fallback-wallets like MetaMask
+  // nomo.disableFallbackWallet(); // uncomment this line to disable fallback-wallets like MetaMask
   const [dialog, setDialog] = useState<DialogContent | null>(null);
   const platformInfo = useNomoState(nomo.getPlatformInfo);
   const evmAddress = useNomoState(nomo.getEvmAddress, {
@@ -68,6 +68,7 @@ export default function Home() {
         symbol: "AVINOC",
         contractAddress: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",
         network: "zeniq-smart-chain",
+        uuid: "fbe0420d-983c-35f7-8209-e5ac1942c281",
       })
       .then((r) => console.log("getAssetPrice", r))
       .catch(console.error);
@@ -253,6 +254,7 @@ export default function Home() {
                 await nomo.sendAssets({
                   asset: {
                     symbol: "zeniq token",
+                    uuid: "74a3d535-c015-647f-75ab-2b98b9480f01",
                   },
                 });
               } catch (e) {
@@ -332,6 +334,7 @@ export default function Home() {
                 await nomo.sendAssets({
                   asset: {
                     symbol: "zeniq token",
+                    uuid: "74a3d535-c015-647f-75ab-2b98b9480f01",
                   },
                   targetAddress: own,
                   amount: "1",

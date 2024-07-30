@@ -9,6 +9,10 @@ export interface NomoAssetSelector {
      * If contractAddress is specified, then name and symbol will be ignored.
      */
     contractAddress?: string;
+    /**
+     * If set, then uuid must be an asset-identifier from the endpoint https://webon.info/api/tokens.
+     */
+    uuid?: string;
 }
 export interface NomoAsset extends NomoAssetSelector {
     decimals: number;

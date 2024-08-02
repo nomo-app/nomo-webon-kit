@@ -12,6 +12,7 @@ export declare const nomo: {
     signEvmTransaction: typeof web3.nomoSignEvmTransaction;
     signEvmMessage: typeof web3.nomoSignEvmMessage;
     sendAssets: typeof web3.nomoSendAssets;
+    selectAssets: typeof web3.nomoSelectAssets;
     selectAssetFromDialog: typeof web3.nomoSelectAssetFromDialog;
     getEvmAddress: typeof web3.nomoGetEvmAddress;
     getWalletAddresses: typeof web3.nomoGetWalletAddresses;

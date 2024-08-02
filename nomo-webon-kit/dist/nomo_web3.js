@@ -72,6 +72,15 @@ export async function nomoSendAssets(args) {
     return await invokeNomoFunction("nomoSendAssets", legacyArgs);
 }
 /**
+ * Checks whether an asset is available in the Nomo Wallet, and whether the asset is visible.
+ * If it is not available, "nomoAddCustomToken" can be used to add the asset.
+ * If it is not visible, "nomoSetAssetVisibility" can be used to make the asset visible.
+ * May return multiple assets if the NomoAssetSelector is ambiguous.
+ */
+export async function nomoSelectAssets(args) {
+    return await invokeNomoFunction("nomoSelectAssets", args);
+}
+/**
  * Opens a dialog for the user to select an asset.
  * If the dialog does not look "correct", WebOns are free to call "nomoGetVisibleAssets" and implement their own dialog.
  */

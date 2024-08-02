@@ -64,6 +64,9 @@ export default function Home() {
       .then((r) => console.log("getBalanceWaitUntilSynced", r))
       .catch(console.error);
     nomo
+      .selectAssets({ symbol: "AVINOC" })
+      .then((r) => console.log("selectAssets", r));
+    nomo
       .getAssetPrice({
         symbol: "AVINOC",
         contractAddress: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",

@@ -78,7 +78,26 @@ export async function nomoSendAssets(args) {
  * May return multiple assets if the NomoAssetSelector is ambiguous.
  */
 export async function nomoSelectAssets(args) {
-    return await invokeNomoFunction("nomoSelectAssets", args);
+    const { selectedAssets } = await invokeNomoFunction("nomoSelectAssets", args);
+    const { visibleAssets } = await nomoGetVisibleAssets();
+    return {
+        selectedAssets: selectedAssets.map((asset) => {
+            const match = visibleAssets.find((visibleAsset) => {
+                if (asset.network != visibleAsset.network) {
+                    return false;
+                }
+                if (asset.contractAddress) {
+                    return visibleAsset.contractAddress === asset.contractAddress;
+                }
+                return (visibleAsset.symbol === asset.symbol &&
+                    asset.name == visibleAsset.name);
+            });
+            return {
+                ...asset,
+                visible: !!match,
+            };
+        }),
+    };
 }
 /**
  * Opens a dialog for the user to select an asset.

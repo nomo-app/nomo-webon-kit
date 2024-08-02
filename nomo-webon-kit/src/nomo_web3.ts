@@ -140,7 +140,28 @@ export async function nomoSendAssets(args: {
 export async function nomoSelectAssets(args: NomoAssetSelector): Promise<{
   selectedAssets: NomoAsset[];
 }> {
-  return await invokeNomoFunction("nomoSelectAssets", args);
+  const { selectedAssets } = await invokeNomoFunction("nomoSelectAssets", args);
+  const { visibleAssets } = await nomoGetVisibleAssets();
+  return {
+    selectedAssets: selectedAssets.map((asset: NomoAsset) => {
+      const match = visibleAssets.find((visibleAsset: NomoAsset) => {
+        if (asset.network != visibleAsset.network) {
+          return false;
+        }
+        if (asset.contractAddress) {
+          return visibleAsset.contractAddress === asset.contractAddress;
+        }
+        return (
+          visibleAsset.symbol === asset.symbol &&
+          asset.name == visibleAsset.name
+        );
+      });
+      return {
+        ...asset,
+        visible: !!match,
+      };
+    }),
+  };
 }
 
 /**

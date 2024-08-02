@@ -19,6 +19,8 @@
 - [network](NomoAsset.md#network)
 - [receiveAddress](NomoAsset.md#receiveaddress)
 - [symbol](NomoAsset.md#symbol)
+- [uuid](NomoAsset.md#uuid)
+- [visible](NomoAsset.md#visible)
 
 ## Properties
 
@@ -28,7 +30,7 @@
 
 #### Defined in
 
-[nomo_web3.ts:34](https://github.com/nomo-app/nomo-webon-kit/blob/22e7113/nomo-webon-kit/src/nomo_web3.ts#L34)
+[nomo_web3.ts:39](https://github.com/nomo-app/nomo-webon-kit/blob/3ed1c74/nomo-webon-kit/src/nomo_web3.ts#L39)
 
 ___
 
@@ -45,7 +47,7 @@ If contractAddress is specified, then name and symbol will be ignored.
 
 #### Defined in
 
-[nomo_web3.ts:29](https://github.com/nomo-app/nomo-webon-kit/blob/22e7113/nomo-webon-kit/src/nomo_web3.ts#L29)
+[nomo_web3.ts:29](https://github.com/nomo-app/nomo-webon-kit/blob/3ed1c74/nomo-webon-kit/src/nomo_web3.ts#L29)
 
 ___
 
@@ -55,7 +57,7 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:32](https://github.com/nomo-app/nomo-webon-kit/blob/22e7113/nomo-webon-kit/src/nomo_web3.ts#L32)
+[nomo_web3.ts:36](https://github.com/nomo-app/nomo-webon-kit/blob/3ed1c74/nomo-webon-kit/src/nomo_web3.ts#L36)
 
 ___
 
@@ -69,7 +71,7 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:23](https://github.com/nomo-app/nomo-webon-kit/blob/22e7113/nomo-webon-kit/src/nomo_web3.ts#L23)
+[nomo_web3.ts:23](https://github.com/nomo-app/nomo-webon-kit/blob/3ed1c74/nomo-webon-kit/src/nomo_web3.ts#L23)
 
 ___
 
@@ -83,7 +85,7 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:24](https://github.com/nomo-app/nomo-webon-kit/blob/22e7113/nomo-webon-kit/src/nomo_web3.ts#L24)
+[nomo_web3.ts:24](https://github.com/nomo-app/nomo-webon-kit/blob/3ed1c74/nomo-webon-kit/src/nomo_web3.ts#L24)
 
 ___
 
@@ -93,7 +95,7 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:33](https://github.com/nomo-app/nomo-webon-kit/blob/22e7113/nomo-webon-kit/src/nomo_web3.ts#L33)
+[nomo_web3.ts:38](https://github.com/nomo-app/nomo-webon-kit/blob/3ed1c74/nomo-webon-kit/src/nomo_web3.ts#L38)
 
 ___
 
@@ -107,4 +109,30 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:22](https://github.com/nomo-app/nomo-webon-kit/blob/22e7113/nomo-webon-kit/src/nomo_web3.ts#L22)
+[nomo_web3.ts:22](https://github.com/nomo-app/nomo-webon-kit/blob/3ed1c74/nomo-webon-kit/src/nomo_web3.ts#L22)
+
+___
+
+### uuid
+
+• `Optional` **uuid**: `string`
+
+If set, then uuid must be an asset-identifier from the endpoint https://webon.info/api/tokens.
+
+#### Inherited from
+
+[NomoAssetSelector](NomoAssetSelector.md).[uuid](NomoAssetSelector.md#uuid)
+
+#### Defined in
+
+[nomo_web3.ts:33](https://github.com/nomo-app/nomo-webon-kit/blob/3ed1c74/nomo-webon-kit/src/nomo_web3.ts#L33)
+
+___
+
+### visible
+
+• `Optional` **visible**: `boolean`
+
+#### Defined in
+
+[nomo_web3.ts:37](https://github.com/nomo-app/nomo-webon-kit/blob/3ed1c74/nomo-webon-kit/src/nomo_web3.ts#L37)

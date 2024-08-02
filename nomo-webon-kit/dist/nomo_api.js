@@ -12,6 +12,7 @@ export const nomo = {
     signEvmTransaction: web3.nomoSignEvmTransaction,
     signEvmMessage: web3.nomoSignEvmMessage,
     sendAssets: web3.nomoSendAssets,
+    selectAssets: web3.nomoSelectAssets,
     selectAssetFromDialog: web3.nomoSelectAssetFromDialog,
     getEvmAddress: web3.nomoGetEvmAddress,
     getWalletAddresses: web3.nomoGetWalletAddresses,

@@ -76,7 +76,10 @@ export function isFallbackModeActive() {
  * Returns true if the code is running within an iframe.
  */
 export function isRunningInHub() {
-    return typeof window !== undefined && window.parent && window.parent !== window;
+    if (typeof window === "undefined") {
+        return false; // fallback mode in server-side rendering
+    }
+    return !!window && window.parent && window.parent !== window;
 }
 /**
  * A low-level function that aims to be compatible with multiple webviews

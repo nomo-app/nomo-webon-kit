@@ -48,3 +48,14 @@ export declare function nomoAuthHttp(args: {
     statusCode: number;
     response: string;
 }>;
+/**
+ * Some API-endpoints require this proof-of-work in order to make denial-of-service attacks more expensive.
+ */
+export declare function nomoProofOfWork(args: {
+    shaInputPrefix: string;
+    challenge: string;
+}): Promise<{
+    args: {
+        shaInput: string;
+    };
+}>;

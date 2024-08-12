@@ -1,5 +1,6 @@
 import { invokeNomoFunction, isFallbackModeActive } from "./dart_interface";
 import { nomoGetManifest } from "./nomo_multi_webons";
+import { isHexString, sha256 } from "./util";
 /**
  * Returns address/signature-pairs for the Nomo-Auth-Protocol.
  * This is a primitive that can be used for customized authentication.
@@ -106,4 +107,28 @@ function fillMissingArgs(args) {
     if (!args.headers) {
         args.headers = {};
     }
+}
+/**
+ * Some API-endpoints require this proof-of-work in order to make denial-of-service attacks more expensive.
+ */
+export async function nomoProofOfWork(args) {
+    if (!args.shaInputPrefix) {
+        throw new Error("shaInputPrefix must not be empty");
+    }
+    if (!isHexString(args.challenge)) {
+        throw new Error("challenge must be a hex string");
+    }
+    if (args.challenge.length > 8) {
+        throw new Error("challenge must not short enough to keep it fast enough");
+    }
+    if (isFallbackModeActive()) {
+        for (let n = 0;; n++) {
+            const shaInput = args.shaInputPrefix + n.toString();
+            const digest = await sha256(shaInput);
+            if (digest.toLowerCase().startsWith(args.challenge.toLowerCase())) {
+                return { args: { shaInput } };
+            }
+        }
+    }
+    return await invokeNomoFunction("nomoProofOfWork", args);
 }

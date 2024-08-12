@@ -88,3 +88,24 @@ export function urlSearchParamsToJson(params) {
 export function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
+/**
+ * A SHA-256 function based on the Web Crypto API.
+ */
+export async function sha256(message) {
+    const msgBuffer = new TextEncoder().encode(message);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("");
+    return hashHex;
+}
+export async function profile(fn, options) {
+    const name = options.name;
+    console.time(name);
+    await fn();
+    console.timeEnd(name);
+}
+export function isHexString(str) {
+    return /^[0-9a-fA-F]+$/.test(str);
+}

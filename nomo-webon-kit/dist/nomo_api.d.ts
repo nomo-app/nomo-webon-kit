@@ -75,4 +75,5 @@ export declare const nomo: {
     authHttp: typeof auth.nomoAuthHttp;
     authFetch: typeof auth.nomoAuthFetch;
     signAuthMessage: typeof auth.nomoSignAuthMessage;
+    proofOfWork: typeof auth.nomoProofOfWork;
 };

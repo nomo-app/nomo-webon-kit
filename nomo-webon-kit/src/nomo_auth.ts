@@ -168,7 +168,7 @@ function fillMissingArgs(args: {
 export async function nomoProofOfWork(args: {
   shaInputPrefix: string;
   challenge: string;
-}): Promise<{ args: { shaInput: string } }> {
+}): Promise<{ shaInput: string }> {
   if (!args.shaInputPrefix) {
     throw new Error("shaInputPrefix must not be empty");
   }
@@ -184,7 +184,7 @@ export async function nomoProofOfWork(args: {
       const shaInput = args.shaInputPrefix + n.toString();
       const digest = await sha256(shaInput);
       if (digest.toLowerCase().startsWith(args.challenge.toLowerCase())) {
-        return { args: { shaInput } };
+        return { shaInput };
       }
     }
   }

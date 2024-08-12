@@ -16,3 +16,11 @@ export declare function urlSearchParamsToJson(params: URLSearchParams): Record<s
  * @returns A promise that resolves after the specified sleep duration.
  */
 export declare function sleep(ms: number): Promise<void>;
+/**
+ * A SHA-256 function based on the Web Crypto API.
+ */
+export declare function sha256(message: string): Promise<string>;
+export declare function profile(fn: () => Promise<void>, options: {
+    name: string;
+}): Promise<void>;
+export declare function isHexString(str: string): boolean;

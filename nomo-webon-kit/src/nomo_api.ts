@@ -75,4 +75,5 @@ export const nomo = {
   authHttp: auth.nomoAuthHttp,
   authFetch: auth.nomoAuthFetch,
   signAuthMessage: auth.nomoSignAuthMessage,
+  proofOfWork: auth.nomoProofOfWork,
 };

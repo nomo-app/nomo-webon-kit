@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Dialog, { DialogContent } from "./components/dialog";
 import { useNomoState } from "./hooks/custom_hooks";
-import { NomoManifest, nomo } from "nomo-webon-kit";
+import { NomoManifest, nomo, profile } from "nomo-webon-kit";
 import { injectNomoCSSVariables } from "nomo-webon-kit";
 import styles from "./page.module.css";
 import "./globals.css";
@@ -82,6 +82,15 @@ export default function Home() {
     nomo.registerOnWebOnVisible((_args: { cardMode: boolean }) => {
       nomo.checkForWebOnUpdate();
     });
+    profile(
+      async () => {
+        await nomo.proofOfWork({
+          challenge: "0FDA",
+          shaInputPrefix: "demo-webon-" + Date.now(),
+        });
+      },
+      { name: "proofOfWork" }
+    );
     nomo
       .setWebOnParameters({
         urlParams: { a: [1, 2, 3], b: { c: 1n, d: { e: [4, "5//%20ss s"] } } },

@@ -127,7 +127,7 @@ export async function nomoProofOfWork(args) {
             const shaInput = args.shaInputPrefix + n.toString();
             const digest = await sha256(shaInput);
             if (digest.toLowerCase().startsWith(args.challenge.toLowerCase())) {
-                return { args: { shaInput } };
+                return { shaInput };
             }
         }
     }

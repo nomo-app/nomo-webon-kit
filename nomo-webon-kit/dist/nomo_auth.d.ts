@@ -55,7 +55,5 @@ export declare function nomoProofOfWork(args: {
     shaInputPrefix: string;
     challenge: string;
 }): Promise<{
-    args: {
-        shaInput: string;
-    };
+    shaInput: string;
 }>;

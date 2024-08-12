@@ -115,6 +115,7 @@ export async function nomoProofOfWork(args) {
     if (!args.shaInputPrefix) {
         throw new Error("shaInputPrefix must not be empty");
     }
+    args.challenge = args.challenge.replace("0x", "");
     if (!isHexString(args.challenge)) {
         throw new Error("challenge must be a hex string");
     }

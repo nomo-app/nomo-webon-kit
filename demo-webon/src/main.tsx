@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { routes } from "./routes.tsx";
+import { routes } from "./routes.ts";
 
 const Page = lazy(() => import("./app/page.tsx"));
 const UITestPage = lazy(() => import("./ui-tests/ui-tests.tsx"));

@@ -16,6 +16,7 @@ import { ethSigDemo } from "./evm/eth_sig";
 import { nomoFallbackQRCode } from "nomo-webon-kit";
 import { AsyncButton } from "./components/async_button";
 import { nomoFetchERC721, zscProvider } from "ethersjs-nomo-webons";
+import { routes } from "../routes";
 export default function Home() {
   // nomo.disableFallbackWallet(); // uncomment this line to disable fallback-wallets like MetaMask
   const [dialog, setDialog] = useState<DialogContent | null>(null);
@@ -163,6 +164,19 @@ export default function Home() {
           <b>WebOn version:</b> {manifest?.webon_version}
         </div>
 
+        <div className={styles.card}>
+          <h2
+            onClick={async () => {
+              window.location.href = routes.uiTests;
+            }}
+          >
+            UI Tests<span>-&gt;</span>
+          </h2>
+          <p>
+            UI Tests for the WebOn-API. At the moment, those UI Tests need to be
+            run manually.
+          </p>
+        </div>
         <div className={styles.card}>
           <h2
             onClick={async () => {

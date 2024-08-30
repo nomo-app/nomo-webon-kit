@@ -7,6 +7,7 @@
   "dependencies": [
     "social:https://www.youtube.com/channel/UCsBtKDW5QAE4rKU5pmlFf-A"
   ],
+  "sandbox_exceptions": ["https://www.google.com/recaptcha"],
   "permissions": [
     "nomo.permission.CAMERA",
     "nomo.permission.SEND_MESSAGE",

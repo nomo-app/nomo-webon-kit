@@ -1,8 +1,19 @@
-import { UITestRow } from "./test-kit/NomoUITest";
+import { useEffect, useState } from "react";
+import { UITestHeader, UITestRow } from "./test-kit/NomoUITest";
 import { sandBoxingTests } from "./tests/tc-sandboxing";
 import { sendAssetsTests } from "./tests/tc-send-assets";
+import { proofOfWorkTests } from "./tests/tc-proof-of-work";
 
 export default function UITestPage() {
+  const [currentTime, setCurrentTime] = useState(new Date());
+  useEffect(() => {
+    const updateTimer = () => {
+      setCurrentTime(new Date());
+    };
+    const intervalId = setInterval(updateTimer, 50);
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <main
       style={{
@@ -16,11 +27,20 @@ export default function UITestPage() {
     >
       <div>
         <h1>WebOn-API UI Tests</h1>
-        <div>Read the instructions to run the tests!</div>
       </div>
       <div style={{ height: "10px" }} />
-      <UITestRow test={sandBoxingTests.navigateToGitHub} />
-      <UITestRow test={sendAssetsTests.sendAssetsCancel} />
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+        }}
+      >
+        <UITestHeader />
+        <UITestRow test={sandBoxingTests.navigateToGitHub} />
+        <UITestRow test={sendAssetsTests.sendAssetsCancel} />
+        <UITestRow test={sendAssetsTests.sendAssetsAmbiguous} />
+        <UITestRow test={proofOfWorkTests.proofOfWorkTest3Seconds} />
+      </div>
     </main>
   );
 }

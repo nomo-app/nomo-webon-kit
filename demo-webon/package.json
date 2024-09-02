@@ -8,6 +8,7 @@
     "start": "npx serve@latest out"
   },
   "dependencies": {
+    "recaptcha-v3": "^1.10.0",
     "ethers": "^6.8.1",
     "ethersjs-nomo-webons": "file:../ethersjs-nomo-webons",
     "nomo-webon-kit": "file:../nomo-webon-kit",

@@ -1,7 +1,9 @@
 import { sleep } from "nomo-webon-kit";
 import { NomoUITest } from "../test-kit/nomo-ui-test";
+import { load } from "recaptcha-v3";
+
 // TODO: navigation to other WebOn (with deeplink)
-// TODO: window.location, <a href> tag, form navigation
+// TODO: <a href> tag, form navigation
 // TODO: nomo.injectQRCode({ qrCode: "https://nomo.id/stuff" });
 
 class NavigateToGitHub extends NomoUITest {
@@ -18,6 +20,25 @@ class NavigateToGitHub extends NomoUITest {
   }
 }
 
+class RecaptchaV3 extends NomoUITest {
+  constructor() {
+    super({
+      name: "Sandbox Test 2: Google Recaptcha V3",
+      description:
+        "Do a captcha verfication and hopefully stay within the sandbox.",
+    });
+  }
+
+  async run() {
+    const recaptcha_public_key = "6LeMtp4cAAAAAJ-wc7qqFHmfPgqzYA0SNQi_Nz4o";
+    const recaptcha = await load(recaptcha_public_key, { autoHideBadge: true });
+    const token = await recaptcha.execute();
+    console.log("Recaptcha token:", token);
+    await sleep(1000); // test is successful if we stay within the sandbox
+  }
+}
+
 export const sandBoxingTests = {
   navigateToGitHub: new NavigateToGitHub(),
+  recaptchaV3: new RecaptchaV3(),
 };

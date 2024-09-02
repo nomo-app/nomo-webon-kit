@@ -37,6 +37,7 @@ export default function UITestPage() {
       >
         <UITestHeader />
         <UITestRow test={sandBoxingTests.navigateToGitHub} />
+        <UITestRow test={sandBoxingTests.recaptchaV3} />
         <UITestRow test={sendAssetsTests.sendAssetsCancel} />
         <UITestRow test={sendAssetsTests.sendAssetsAmbiguous} />
         <UITestRow test={proofOfWorkTests.proofOfWorkTest3Seconds} />

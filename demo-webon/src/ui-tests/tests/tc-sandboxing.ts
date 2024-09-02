@@ -7,7 +7,7 @@ import { NomoUITest } from "../test-kit/nomo-ui-test";
 class NavigateToGitHub extends NomoUITest {
   constructor() {
     super({
-      name: "Sandbox Test: Navigate to GitHub",
+      name: "Sandbox Test 1: Navigate to GitHub",
       description: "Open GitHub in a new window and then close it.",
     });
   }

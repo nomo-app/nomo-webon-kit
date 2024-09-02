@@ -25,7 +25,11 @@ export abstract class NomoUITest {
       this.state = { state: "PASS", time: new Date() };
     } catch (error: any) {
       console.error(error);
-      this.state = { state: "FAIL", error: error.message, time: new Date() };
+      this.state = {
+        state: "FAIL",
+        error: error.message ?? error,
+        time: new Date(),
+      };
     }
   }
 }

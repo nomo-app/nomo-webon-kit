@@ -38,7 +38,28 @@ class RecaptchaV3 extends NomoUITest {
   }
 }
 
+class IFrameTest extends NomoUITest {
+  constructor() {
+    super({
+      name: "Sandbox Test 3: IFrame injection",
+      description: "Launch an iframe and hopefully stay within the sandbox.",
+    });
+  }
+
+  injectGoogleIFrame() {
+    const iframe = document.createElement("iframe");
+    iframe.src = "https://www.google.com";
+    document.body.appendChild(iframe);
+  }
+
+  async run() {
+    this.injectGoogleIFrame();
+    await sleep(1000); // test is successful if we stay within the sandbox
+  }
+}
+
 export const sandBoxingTests = {
   navigateToGitHub: new NavigateToGitHub(),
   recaptchaV3: new RecaptchaV3(),
+  iframe: new IFrameTest(),
 };

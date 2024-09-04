@@ -15,8 +15,27 @@ class NavigateToGitHub extends NomoUITest {
   }
 
   async run() {
+    alert("If this test works, then GitHub will be shown within a new window!");
+
+    const promise = new Promise<void>((resolve, reject) => {
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") {
+          resolve();
+        }
+      });
+      setTimeout(() => {
+        reject(
+          new Error(
+            "Timeout: You did not come back from GitHub within 10 seconds!"
+          )
+        );
+      }, 10000);
+    });
+
+    // do the navigation to open a new window outside the sandbox
     window.location.href = "https://github.com/nomo-app";
-    await sleep(1000); // test is successful if the user is able to navigate back to the test page
+
+    return promise;
   }
 }
 

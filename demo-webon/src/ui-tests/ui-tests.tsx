@@ -3,29 +3,16 @@ import { UITestHeader, UITestRow } from "./test-kit/NomoUITest";
 import { sandBoxingTests } from "./tests/tc-sandboxing";
 import { sendAssetsTests } from "./tests/tc-send-assets";
 import { proofOfWorkTests } from "./tests/tc-proof-of-work";
-import { nomo } from "nomo-webon-kit";
+import { signTxTests } from "./tests/tc-sign-transactions";
+import { useNomoVersion, useWebOnVersion } from "./test-kit/test-util";
+import { NomoUITest } from "./test-kit/nomo-ui-test";
 
-function useWebOnVersion() {
-  const [version, setVersion] = useState<string | null>(null);
-  useEffect(() => {
-    nomo.getManifest().then((res) => {
-      setVersion(res.webon_version);
-    });
-  }, []);
-  return version;
-}
-
-function useNomoVersion() {
-  const [version, setVersion] = useState<string | null>(null);
-  useEffect(() => {
-    nomo.getPlatformInfo().then((res) => {
-      setVersion(
-        res.version + "-" + res.buildNumber + "-" + res.operatingSystem
-      );
-    });
-  }, []);
-  return version;
-}
+const allTests: Array<NomoUITest> = [
+  ...signTxTests,
+  ...sandBoxingTests,
+  ...sendAssetsTests,
+  ...proofOfWorkTests,
+];
 
 export default function UITestPage() {
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -72,12 +59,9 @@ export default function UITestPage() {
         }}
       >
         <UITestHeader />
-        <UITestRow test={sandBoxingTests.navigateToGitHub} />
-        <UITestRow test={sandBoxingTests.recaptchaV3} />
-        <UITestRow test={sandBoxingTests.iframe} />
-        <UITestRow test={sendAssetsTests.sendAssetsCancel} />
-        <UITestRow test={sendAssetsTests.sendAssetsAmbiguous} />
-        <UITestRow test={proofOfWorkTests.proofOfWorkTest3Seconds} />
+        {Object.values(allTests).map((test) => (
+          <UITestRow test={test} key={test.name} />
+        ))}
       </div>
     </main>
   );

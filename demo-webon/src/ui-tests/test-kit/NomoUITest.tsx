@@ -9,11 +9,11 @@ const gridRowStyle = {
   overflowWrap: "anywhere" as any,
 };
 
-function formatDateWithoutMilliseconds(date: Date | null) {
+function formatDateWithoutMilliseconds(date: Date | string | null) {
   if (!date) return "";
 
   // Convert to ISO string and remove milliseconds
-  const isoString = date.toISOString();
+  const isoString = typeof date === "string" ? date : date.toISOString();
   return isoString.split(".")[0] + "Z"; // Keep the part before the milliseconds and add 'Z' for UTC
 }
 

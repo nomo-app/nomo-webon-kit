@@ -57,7 +57,7 @@ export function nomoDisableFallbackWallet() {
  */
 export async function nomoSignEvmTransaction(args: {
   messageHex: string;
-}): Promise<{ sigHex: string }> {
+}): Promise<{ sigHex: string; txHex: string }> {
   if (isFallbackModeActive()) {
     if (window.fallbackWalletDisabled) {
       return Promise.reject(
@@ -75,7 +75,7 @@ export async function nomoSignEvmTransaction(args: {
       method: "personal_sign",
       params: [args.messageHex, from],
     });
-    return { sigHex: sigHex };
+    return { sigHex, txHex: "" };
   }
   return await invokeNomoFunction("nomoSignEvmTransaction", args);
 }

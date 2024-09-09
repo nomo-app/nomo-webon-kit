@@ -25,7 +25,7 @@ class SendAssetsCancel extends NomoUITest {
         throw e;
       }
     }
-    throw new Error("The user did not cancel the action");
+    throw new Error("The tester did not cancel the action");
   }
 }
 
@@ -46,7 +46,9 @@ class SendAssetsAmbiguous extends NomoUITest {
       const eObject = JSON.parse(e);
       if (
         eObject.nomoSendAssets &&
-        eObject.nomoSendAssets.includes("More than one asset matched the AssetSelector")
+        eObject.nomoSendAssets.includes(
+          "More than one asset matched the AssetSelector"
+        )
       ) {
         return; // pass
       } else {
@@ -57,7 +59,7 @@ class SendAssetsAmbiguous extends NomoUITest {
   }
 }
 
-export const sendAssetsTests = {
-  sendAssetsCancel: new SendAssetsCancel(),
-  sendAssetsAmbiguous: new SendAssetsAmbiguous(),
-};
+export const sendAssetsTests: Array<NomoUITest> = [
+  new SendAssetsCancel(),
+  new SendAssetsAmbiguous(),
+];

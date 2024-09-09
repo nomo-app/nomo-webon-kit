@@ -17,6 +17,6 @@ class ProofOfWorkTest3Seconds extends NomoUITest {
   }
 }
 
-export const proofOfWorkTests = {
-  proofOfWorkTest3Seconds: new ProofOfWorkTest3Seconds(),
-};
+export const proofOfWorkTests: Array<NomoUITest> = [
+  new ProofOfWorkTest3Seconds(),
+];

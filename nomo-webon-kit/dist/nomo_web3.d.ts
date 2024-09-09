@@ -34,6 +34,7 @@ export declare function nomoSignEvmTransaction(args: {
     messageHex: string;
 }): Promise<{
     sigHex: string;
+    txHex: string;
 }>;
 /**
  * Creates an Ethereum-styled message signature.

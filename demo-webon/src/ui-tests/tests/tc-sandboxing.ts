@@ -77,8 +77,8 @@ class IFrameTest extends NomoUITest {
   }
 }
 
-export const sandBoxingTests = {
-  navigateToGitHub: new NavigateToGitHub(),
-  recaptchaV3: new RecaptchaV3(),
-  iframe: new IFrameTest(),
-};
+export const sandBoxingTests: Array<NomoUITest> = [
+  new NavigateToGitHub(),
+  new RecaptchaV3(),
+  new IFrameTest(),
+];

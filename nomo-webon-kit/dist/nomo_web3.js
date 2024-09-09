@@ -31,7 +31,7 @@ export async function nomoSignEvmTransaction(args) {
             method: "personal_sign",
             params: [args.messageHex, from],
         });
-        return { sigHex: sigHex };
+        return { sigHex, txHex: "" };
     }
     return await invokeNomoFunction("nomoSignEvmTransaction", args);
 }

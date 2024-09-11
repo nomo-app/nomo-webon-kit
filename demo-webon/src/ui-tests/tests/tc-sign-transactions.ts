@@ -17,12 +17,9 @@ class SignTxCancel extends NomoUITest {
           "0x02f86c0125830f424085010ffe7d9282ea6094f1ca9cb74685755965c7458528a36934df52a3ef80b844095ea7b30000000000000000000000007561deaf4ecf96dc9f0d50b4136046979acdad3effffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc0",
       });
     } catch (e: any) {
-      if (typeof e === "string") {
-        throw new Error(e);
-      }
       const eObject = JSON.parse(e);
       if (
-        eObject.nomoSignEvmTransaction &&
+        !!eObject.nomoSignEvmTransaction &&
         eObject.nomoSignEvmTransaction.includes("the user did not authorize the EVM transaction")
       ) {
         return; // pass
@@ -37,8 +34,8 @@ class SignTxCancel extends NomoUITest {
 class SignTxERC20Staking extends NomoUITest {
   constructor() {
     super({
-      name: "Sign Tx 2: AVINOC-ERC20 Staking",
-      description: "Simulate a staking of AVINOC-ERC20 for 10 years.",
+      name: "Sign Tx 2: AVINOC-ERC20 Approval",
+      description: "Simulate an approval for AVINOC-ERC20 staking.",
     });
   }
 

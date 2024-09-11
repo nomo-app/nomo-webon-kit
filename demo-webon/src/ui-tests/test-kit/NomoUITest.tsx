@@ -50,7 +50,7 @@ export function UITestRow(props: { test: NomoUITest }) {
         <div style={{ height: "5px" }} />
         {formatDateWithoutMilliseconds(props.test.state.time ?? null)}
         <br />
-        {props.test.state.error ?? ""}
+        {props.test.state.error ? JSON.stringify(props.test.state.error) : ""}
       </div>
       <div
         style={{

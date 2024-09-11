@@ -6,12 +6,14 @@ import { proofOfWorkTests } from "./tests/tc-proof-of-work";
 import { signTxTests } from "./tests/tc-sign-transactions";
 import { useNomoVersion, useWebOnVersion } from "./test-kit/test-util";
 import { NomoUITest } from "./test-kit/nomo-ui-test";
+import { nomoAuthTests } from "./tests/tc-nomo-auth";
 
 const allTests: Array<NomoUITest> = [
   ...signTxTests,
   ...sandBoxingTests,
   ...sendAssetsTests,
   ...proofOfWorkTests,
+  ...nomoAuthTests,
 ];
 
 export default function UITestPage() {

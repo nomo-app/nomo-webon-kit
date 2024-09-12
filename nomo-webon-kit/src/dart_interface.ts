@@ -8,7 +8,10 @@ if (isRunningInHub()) {
   let focusedElement: HTMLInputElement | HTMLTextAreaElement | null = null;
 
   const handleFocusIn = async (event: any) => {
-    if (event.target.tagName.toLowerCase() === 'input' || event.target.tagName.toLowerCase() === 'textarea') {
+    const tagName = event.target.tagName.toLowerCase();
+    const inputType = event.target.type?.toLowerCase();
+  
+    if ((tagName === 'input' && (inputType === 'text' || inputType === 'password' || inputType === 'email' || inputType === 'number')) || tagName === 'textarea') {
       const target = event.target as HTMLInputElement | HTMLTextAreaElement;
       focusedElement = target;
       const args = {
@@ -17,14 +20,18 @@ if (isRunningInHub()) {
       await invokeNomoFunction('nomoOpenExternalKeyboard', args);
     }
   };
-
+  
   const handleFocusOut = async (event: any) => {
-    if (event.target.tagName.toLowerCase() === 'input' || event.target.tagName.toLowerCase() === 'textarea') {
+    const tagName = event.target.tagName.toLowerCase();
+    const inputType = event.target.type?.toLowerCase();
+  
+    if ((tagName === 'input' && (inputType === 'text' || inputType === 'password' || inputType === 'email' || inputType === 'number')) || tagName === 'textarea') {
       const target = event.target as HTMLInputElement | HTMLTextAreaElement;
       focusedElement = target;
       await invokeNomoFunction('nomoCloseExternalKeyboard', {});
     }
   };
+  
 
   window.addEventListener("focusin", handleFocusIn);
   window.addEventListener("focusout", handleFocusOut);

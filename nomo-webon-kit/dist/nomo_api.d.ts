@@ -12,12 +12,12 @@ export declare const nomo: {
     signEvmTransaction: typeof web3.nomoSignEvmTransaction;
     signEvmMessage: typeof web3.nomoSignEvmMessage;
     sendAssets: typeof web3.nomoSendAssets;
+    selectAssets: typeof web3.nomoSelectAssets;
     selectAssetFromDialog: typeof web3.nomoSelectAssetFromDialog;
     getEvmAddress: typeof web3.nomoGetEvmAddress;
     getWalletAddresses: typeof web3.nomoGetWalletAddresses;
     getVisibleAssets: typeof web3.nomoGetVisibleAssets;
     getAllAssets: typeof web3.nomoGetAllAssets;
-    getNFTs: typeof web3.nomoGetNFTs;
     getNFTContracts: typeof web3.nomoGetNFTContracts;
     getBalance: typeof web3.nomoGetBalance;
     getBalanceWaitUntilSynced: typeof web3.nomoGetBalanceWaitUntilSynced;
@@ -30,6 +30,7 @@ export declare const nomo: {
     addCustomToken: typeof web3.nomoAddCustomToken;
     proofOfPayment: typeof web3.nomoProofOfPayment;
     setAssetVisiblity: typeof web3.nomoSetAssetVisibility;
+    disableFallbackWallet: typeof web3.nomoDisableFallbackWallet;
     localStorage: {
         getItem: (key: string, options?: {
             webon_id: string;
@@ -74,4 +75,5 @@ export declare const nomo: {
     authHttp: typeof auth.nomoAuthHttp;
     authFetch: typeof auth.nomoAuthFetch;
     signAuthMessage: typeof auth.nomoSignAuthMessage;
+    proofOfWork: typeof auth.nomoProofOfWork;
 };

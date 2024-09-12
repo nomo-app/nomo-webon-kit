@@ -16,6 +16,7 @@
 - [name](NomoAssetSelector.md#name)
 - [network](NomoAssetSelector.md#network)
 - [symbol](NomoAssetSelector.md#symbol)
+- [uuid](NomoAssetSelector.md#uuid)
 
 ## Properties
 
@@ -28,7 +29,7 @@ If contractAddress is specified, then name and symbol will be ignored.
 
 #### Defined in
 
-[nomo_web3.ts:29](https://github.com/nomo-app/nomo-webon-kit/blob/c209de5/nomo-webon-kit/src/nomo_web3.ts#L29)
+[nomo_web3.ts:29](https://github.com/nomo-app/nomo-webon-kit/blob/c130054/nomo-webon-kit/src/nomo_web3.ts#L29)
 
 ___
 
@@ -38,7 +39,7 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:23](https://github.com/nomo-app/nomo-webon-kit/blob/c209de5/nomo-webon-kit/src/nomo_web3.ts#L23)
+[nomo_web3.ts:23](https://github.com/nomo-app/nomo-webon-kit/blob/c130054/nomo-webon-kit/src/nomo_web3.ts#L23)
 
 ___
 
@@ -48,7 +49,7 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:24](https://github.com/nomo-app/nomo-webon-kit/blob/c209de5/nomo-webon-kit/src/nomo_web3.ts#L24)
+[nomo_web3.ts:24](https://github.com/nomo-app/nomo-webon-kit/blob/c130054/nomo-webon-kit/src/nomo_web3.ts#L24)
 
 ___
 
@@ -58,4 +59,16 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:22](https://github.com/nomo-app/nomo-webon-kit/blob/c209de5/nomo-webon-kit/src/nomo_web3.ts#L22)
+[nomo_web3.ts:22](https://github.com/nomo-app/nomo-webon-kit/blob/c130054/nomo-webon-kit/src/nomo_web3.ts#L22)
+
+___
+
+### uuid
+
+• `Optional` **uuid**: `string`
+
+If set, then uuid must be an asset-identifier from the endpoint https://webon.info/api/tokens.
+
+#### Defined in
+
+[nomo_web3.ts:33](https://github.com/nomo-app/nomo-webon-kit/blob/c130054/nomo-webon-kit/src/nomo_web3.ts#L33)

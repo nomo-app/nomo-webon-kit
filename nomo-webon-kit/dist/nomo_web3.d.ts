@@ -9,12 +9,21 @@ export interface NomoAssetSelector {
      * If contractAddress is specified, then name and symbol will be ignored.
      */
     contractAddress?: string;
+    /**
+     * If set, then uuid must be an asset-identifier from the endpoint https://webon.info/api/tokens.
+     */
+    uuid?: string;
 }
 export interface NomoAsset extends NomoAssetSelector {
     decimals: number;
+    visible?: boolean;
     receiveAddress?: string | null;
     balance?: string;
 }
+/**
+ * Prevents functions like "nomoGetEvmAddress" from falling back to browser extensions like MetaMask.
+ */
+export declare function nomoDisableFallbackWallet(): void;
 /**
  * Creates a signature for an EVM-based transaction.
  * See EthersjsNomoSigner for an example on how to use this function.
@@ -25,6 +34,7 @@ export declare function nomoSignEvmTransaction(args: {
     messageHex: string;
 }): Promise<{
     sigHex: string;
+    txHex: string;
 }>;
 /**
  * Creates an Ethereum-styled message signature.
@@ -56,6 +66,15 @@ export declare function nomoSendAssets(args: {
         amount: string;
         token: string;
     };
+}>;
+/**
+ * Checks whether an asset is available in the Nomo Wallet, and whether the asset is visible.
+ * If it is not available, "nomoAddCustomToken" can be used to add the asset.
+ * If it is not visible, "nomoSetAssetVisibility" can be used to make the asset visible.
+ * May return multiple assets if the NomoAssetSelector is ambiguous.
+ */
+export declare function nomoSelectAssets(args: NomoAssetSelector): Promise<{
+    selectedAssets: NomoAsset[];
 }>;
 /**
  * Opens a dialog for the user to select an asset.
@@ -176,19 +195,6 @@ export interface NomoNFT {
     tokenID: string;
     tokenName: string;
 }
-/**
- * Returns a list of NFTs that are owned by the user.
- * Can be slow if the NFTs are not yet in the Nomo App's cache.
- *
- * @deprecated: Please use one of the following functions instead:
- * - "nomoGetNFTContracts" from this package.
- * - "nomoFetchERC721" from the ethersjs-nomo-webons package.
- */
-export declare function nomoGetNFTs(args: {
-    network: NomoEvmNetwork;
-}): Promise<{
-    nfts: NomoNFT[];
-}>;
 /**
  * Returns a list of NFT-contracts that are declared by the currently installed WebOns.
  * Typically, those NFT-contracts provide some kind of utility for a WebOn.

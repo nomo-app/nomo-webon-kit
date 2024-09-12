@@ -13,12 +13,12 @@ export const nomo = {
   signEvmTransaction: web3.nomoSignEvmTransaction,
   signEvmMessage: web3.nomoSignEvmMessage,
   sendAssets: web3.nomoSendAssets,
+  selectAssets: web3.nomoSelectAssets,
   selectAssetFromDialog: web3.nomoSelectAssetFromDialog,
   getEvmAddress: web3.nomoGetEvmAddress,
   getWalletAddresses: web3.nomoGetWalletAddresses,
   getVisibleAssets: web3.nomoGetVisibleAssets,
   getAllAssets: web3.nomoGetAllAssets,
-  getNFTs: web3.nomoGetNFTs,
   getNFTContracts: web3.nomoGetNFTContracts,
   getBalance: web3.nomoGetBalance,
   getBalanceWaitUntilSynced: web3.nomoGetBalanceWaitUntilSynced,
@@ -31,6 +31,7 @@ export const nomo = {
   addCustomToken: web3.nomoAddCustomToken,
   proofOfPayment: web3.nomoProofOfPayment,
   setAssetVisiblity: web3.nomoSetAssetVisibility,
+  disableFallbackWallet: web3.nomoDisableFallbackWallet,
 
   localStorage: multi.nomoLocalStorage,
   launchUrl: multi.nomoLaunchUrl,
@@ -74,4 +75,5 @@ export const nomo = {
   authHttp: auth.nomoAuthHttp,
   authFetch: auth.nomoAuthFetch,
   signAuthMessage: auth.nomoSignAuthMessage,
+  proofOfWork: auth.nomoProofOfWork,
 };

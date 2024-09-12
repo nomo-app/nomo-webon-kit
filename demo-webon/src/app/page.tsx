@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Dialog, { DialogContent } from "./components/dialog";
 import { useNomoState } from "./hooks/custom_hooks";
-import { NomoManifest, nomo } from "nomo-webon-kit";
+import { NomoManifest, nomo, profile } from "nomo-webon-kit";
 import { injectNomoCSSVariables } from "nomo-webon-kit";
 import styles from "./page.module.css";
 import "./globals.css";
@@ -16,10 +16,14 @@ import { ethSigDemo } from "./evm/eth_sig";
 import { nomoFallbackQRCode } from "nomo-webon-kit";
 import { AsyncButton } from "./components/async_button";
 import { nomoFetchERC721, zscProvider } from "ethersjs-nomo-webons";
+import { routes } from "../routes";
 export default function Home() {
+  // nomo.disableFallbackWallet(); // uncomment this line to disable fallback-wallets like MetaMask
   const [dialog, setDialog] = useState<DialogContent | null>(null);
   const platformInfo = useNomoState(nomo.getPlatformInfo);
-  const evmAddress = useNomoState(nomo.getEvmAddress);
+  const evmAddress = useNomoState(nomo.getEvmAddress, {
+    errorValue: "fallback wallets are disabled",
+  });
   const executionMode = useNomoState(nomo.getExecutionMode);
   const deviceName = useNomoState(nomo.getDeviceName);
   const manifest: NomoManifest | null = useNomoState(nomo.getManifest);
@@ -61,10 +65,17 @@ export default function Home() {
       .then((r) => console.log("getBalanceWaitUntilSynced", r))
       .catch(console.error);
     nomo
+      .selectAssets({
+        symbol: "AVINOC",
+        contractAddress: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",
+      })
+      .then((r) => console.log("selectAssets", r));
+    nomo
       .getAssetPrice({
         symbol: "AVINOC",
         contractAddress: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",
         network: "zeniq-smart-chain",
+        uuid: "fbe0420d-983c-35f7-8209-e5ac1942c281",
       })
       .then((r) => console.log("getAssetPrice", r))
       .catch(console.error);
@@ -72,6 +83,15 @@ export default function Home() {
     nomo.registerOnWebOnVisible((_args: { cardMode: boolean }) => {
       nomo.checkForWebOnUpdate();
     });
+    profile(
+      async () => {
+        await nomo.proofOfWork({
+          challenge: "0FDA",
+          shaInputPrefix: "demo-webon-" + Date.now(),
+        });
+      },
+      { name: "proofOfWork" }
+    );
     nomo
       .setWebOnParameters({
         urlParams: { a: [1, 2, 3], b: { c: 1n, d: { e: [4, "5//%20ss s"] } } },
@@ -133,7 +153,7 @@ export default function Home() {
         </div>
         <div style={{ height: "10px" }} />
         <div style={{ width: "100%" }}>
-          <b>EVM address:</b> {evmAddress}
+          <b>EVM address:</b> {evmAddress ?? null}
         </div>
         <div style={{ height: "10px" }} />
         <div style={{ width: "100%" }}>
@@ -144,6 +164,19 @@ export default function Home() {
           <b>WebOn version:</b> {manifest?.webon_version}
         </div>
 
+        <div className={styles.card}>
+          <h2
+            onClick={async () => {
+              window.location.href = routes.uiTests;
+            }}
+          >
+            UI Tests<span>-&gt;</span>
+          </h2>
+          <p>
+            UI Tests for the WebOn-API. At the moment, those UI Tests need to be
+            run manually.
+          </p>
+        </div>
         <div className={styles.card}>
           <h2
             onClick={async () => {
@@ -250,6 +283,7 @@ export default function Home() {
                 await nomo.sendAssets({
                   asset: {
                     symbol: "zeniq token",
+                    uuid: "74a3d535-c015-647f-75ab-2b98b9480f01",
                   },
                 });
               } catch (e) {
@@ -329,6 +363,7 @@ export default function Home() {
                 await nomo.sendAssets({
                   asset: {
                     symbol: "zeniq token",
+                    uuid: "74a3d535-c015-647f-75ab-2b98b9480f01",
                   },
                   targetAddress: own,
                   amount: "1",

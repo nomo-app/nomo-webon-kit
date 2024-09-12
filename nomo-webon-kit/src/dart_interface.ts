@@ -91,7 +91,10 @@ export function isFallbackModeActive(): boolean {
  * Returns true if the code is running within an iframe.
  */
 export function isRunningInHub(): boolean {
-  return typeof window !== undefined && window.parent && window.parent !== window;
+  if (typeof window === "undefined") {
+    return false; // fallback mode in server-side rendering
+  }
+  return !!window && window.parent && window.parent !== window;
 }
 
 /**
@@ -101,7 +104,7 @@ function getDartBridge(): ((arg0: string) => void) | null {
   if (typeof window === "undefined") {
     return null; // fallback mode in server-side rendering
   }
-  if (window.webkit) {
+  if (window.webkit?.messageHandlers?.NOMOJSChannel) {
     // legacy macOS
     return (payload: string) =>
       window.webkit.messageHandlers.NOMOJSChannel.postMessage(payload);

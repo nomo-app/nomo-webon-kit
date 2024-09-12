@@ -3,6 +3,15 @@ import { nomoAuthFetch } from "./nomo_auth";
 import { nomoGetInstalledWebOns, nomoInstallWebOn } from "./nomo_multi_webons";
 import { sleep } from "./util";
 /**
+ * Prevents functions like "nomoGetEvmAddress" from falling back to browser extensions like MetaMask.
+ */
+export function nomoDisableFallbackWallet() {
+    if (!isFallbackModeActive()) {
+        return;
+    }
+    window.fallbackWalletDisabled = true;
+}
+/**
  * Creates a signature for an EVM-based transaction.
  * See EthersjsNomoSigner for an example on how to use this function.
  *
@@ -10,6 +19,9 @@ import { sleep } from "./util";
  */
 export async function nomoSignEvmTransaction(args) {
     if (isFallbackModeActive()) {
+        if (window.fallbackWalletDisabled) {
+            return Promise.reject("nomoSignEvmTransaction failed: fallback wallets are disabled!");
+        }
         if (!window.ethereum) {
             return Promise.reject("nomoSignEvmTransaction fallback mode failed: window.ethereum is undefined!");
         }
@@ -19,7 +31,7 @@ export async function nomoSignEvmTransaction(args) {
             method: "personal_sign",
             params: [args.messageHex, from],
         });
-        return { sigHex: sigHex };
+        return { sigHex, txHex: "" };
     }
     return await invokeNomoFunction("nomoSignEvmTransaction", args);
 }
@@ -32,6 +44,9 @@ export async function nomoSignEvmTransaction(args) {
  */
 export async function nomoSignEvmMessage(args) {
     if (isFallbackModeActive()) {
+        if (window.fallbackWalletDisabled) {
+            return Promise.reject("nomoSignEvmMessage failed: fallback wallets are disabled!");
+        }
         if (!window.ethereum) {
             return Promise.reject("nomoSignEvmMessage fallback mode failed: window.ethereum is undefined!");
         }
@@ -55,6 +70,34 @@ export async function nomoSignEvmMessage(args) {
 export async function nomoSendAssets(args) {
     const legacyArgs = { ...args, assetSymbol: args.asset?.symbol ?? null };
     return await invokeNomoFunction("nomoSendAssets", legacyArgs);
+}
+/**
+ * Checks whether an asset is available in the Nomo Wallet, and whether the asset is visible.
+ * If it is not available, "nomoAddCustomToken" can be used to add the asset.
+ * If it is not visible, "nomoSetAssetVisibility" can be used to make the asset visible.
+ * May return multiple assets if the NomoAssetSelector is ambiguous.
+ */
+export async function nomoSelectAssets(args) {
+    const { selectedAssets } = await invokeNomoFunction("nomoSelectAssets", args);
+    const { visibleAssets } = await nomoGetVisibleAssets();
+    return {
+        selectedAssets: selectedAssets.map((asset) => {
+            const match = visibleAssets.find((visibleAsset) => {
+                if (asset.network != visibleAsset.network) {
+                    return false;
+                }
+                if (asset.contractAddress) {
+                    return visibleAsset.contractAddress === asset.contractAddress;
+                }
+                return (visibleAsset.symbol === asset.symbol &&
+                    asset.name == visibleAsset.name);
+            });
+            return {
+                ...asset,
+                visible: !!match,
+            };
+        }),
+    };
 }
 /**
  * Opens a dialog for the user to select an asset.
@@ -119,6 +162,15 @@ export async function nomoGetAllAssets() {
  * Internally, it calls "nomoGetWalletAddresses" and caches the result.
  */
 export async function nomoGetEvmAddress() {
+    if (isFallbackModeActive()) {
+        // extra fallback checks to show to the devs which wrapper function fails
+        if (window.fallbackWalletDisabled) {
+            return Promise.reject("nomoGetEvmAddress failed: fallback wallets are disabled!");
+        }
+        if (!window.ethereum) {
+            return Promise.reject("nomoGetEvmAddress fallback mode failed: window.ethereum is undefined!");
+        }
+    }
     const res = await nomoGetWalletAddresses();
     return res.walletAddresses["ETH"];
 }
@@ -127,6 +179,9 @@ export async function nomoGetEvmAddress() {
  */
 export async function nomoGetWalletAddresses() {
     if (isFallbackModeActive()) {
+        if (window.fallbackWalletDisabled) {
+            return Promise.reject("nomoGetWalletAddresses failed: fallback wallets are disabled!");
+        }
         if (!window.ethereum) {
             return Promise.reject("nomoGetWalletAddresses fallback mode failed: window.ethereum is undefined!");
         }
@@ -247,17 +302,6 @@ export async function nomoMnemonicBackupExisted() {
         return { mnemonicBackupExisted: false };
     }
     return await invokeNomoFunction("nomoMnemonicBackupExisted", {});
-}
-/**
- * Returns a list of NFTs that are owned by the user.
- * Can be slow if the NFTs are not yet in the Nomo App's cache.
- *
- * @deprecated: Please use one of the following functions instead:
- * - "nomoGetNFTContracts" from this package.
- * - "nomoFetchERC721" from the ethersjs-nomo-webons package.
- */
-export async function nomoGetNFTs(args) {
-    return await invokeNomoFunction("nomoGetNFTs", args);
 }
 /**
  * Returns a list of NFT-contracts that are declared by the currently installed WebOns.

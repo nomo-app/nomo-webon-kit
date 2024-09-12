@@ -1,7 +1,9 @@
 if (isRunningInHub()) {
     let focusedElement = null;
     const handleFocusIn = async (event) => {
-        if (event.target.tagName.toLowerCase() === 'input' || event.target.tagName.toLowerCase() === 'textarea') {
+        const tagName = event.target.tagName.toLowerCase();
+        const inputType = event.target.type?.toLowerCase();
+        if ((tagName === 'input' && (inputType === 'text' || inputType === 'password' || inputType === 'email' || inputType === 'number')) || tagName === 'textarea') {
             const target = event.target;
             focusedElement = target;
             const args = {
@@ -11,7 +13,9 @@ if (isRunningInHub()) {
         }
     };
     const handleFocusOut = async (event) => {
-        if (event.target.tagName.toLowerCase() === 'input' || event.target.tagName.toLowerCase() === 'textarea') {
+        const tagName = event.target.tagName.toLowerCase();
+        const inputType = event.target.type?.toLowerCase();
+        if ((tagName === 'input' && (inputType === 'text' || inputType === 'password' || inputType === 'email' || inputType === 'number')) || tagName === 'textarea') {
             const target = event.target;
             focusedElement = target;
             await invokeNomoFunction('nomoCloseExternalKeyboard', {});

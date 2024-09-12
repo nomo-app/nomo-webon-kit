@@ -54,10 +54,30 @@ class NomoAuthHttpPost extends NomoUITest {
   }
 }
 
+class NomoAuthHttpPostNested extends NomoUITest {
+  constructor() {
+    super({
+      name: "Nomo Auth 3: nested request",
+      description: "Send a non-JSON-body in a POST-request.",
+    });
+  }
+
+  async run() {
+    const res = await nomo.authHttp({
+      url: "https://price.zeniq.services/v2/currentprice/ZENIQ/USD",
+      method: "POST",
+      body: { foo: { bar: { x: 1, y: "2" } } },
+    });
+    if (typeof res.statusCode !== "number") {
+      throw new Error("statusCode is not a number.");
+    }
+  }
+}
+
 class NomoAuthFetchPost extends NomoUITest {
   constructor() {
     super({
-      name: "Nomo Auth 3: POST-request via fetch",
+      name: "Nomo Auth 4: POST-request via fetch",
       description: "Authenticate via the fetch-API of the browser.",
     });
   }
@@ -78,4 +98,5 @@ export const nomoAuthTests: Array<NomoUITest> = [
   new NomoSignAuthMessage(),
   new NomoAuthHttpPost(),
   new NomoAuthFetchPost(),
+  new NomoAuthHttpPostNested(),
 ];

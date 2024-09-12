@@ -42,7 +42,7 @@ export async function nomoAuthFetch(args: {
   url: string;
   method?: "GET" | "POST";
   headers?: { [key: string]: string };
-  body?: string;
+  body?: string | { [key: string]: any };
   signer?: typeof nomoSignAuthMessage;
 }): Promise<{
   statusCode: number;
@@ -62,7 +62,7 @@ export async function nomoAuthFetch(args: {
   let res = await fetch(args.url, {
     method: args.method,
     headers,
-    body: args.body,
+    body: typeof args.body === "string" ? args.body : JSON.stringify(args.body),
   });
   let statusCode = res.status;
   let resBody = await res.json();
@@ -83,7 +83,8 @@ export async function nomoAuthFetch(args: {
     res = await fetch(args.url, {
       method: args.method,
       headers,
-      body: args.body,
+      body:
+        typeof args.body === "string" ? args.body : JSON.stringify(args.body),
     });
     statusCode = res.status;
     resBody = await res.json();
@@ -131,7 +132,7 @@ export async function nomoAuthHttp(
         url: string;
         method?: "GET" | "POST";
         headers?: { [key: string]: string };
-        body?: string;
+        body?: string | { [key: string]: any };
       }
     | string
 ): Promise<{
@@ -152,7 +153,7 @@ function fillMissingArgs(args: {
   url: string;
   method?: "GET" | "POST";
   headers?: { [key: string]: string };
-  body?: string;
+  body?: string | { [key: string]: any };
 }) {
   if (!args.method) {
     args.method = "GET";

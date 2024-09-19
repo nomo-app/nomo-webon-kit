@@ -26,7 +26,9 @@ export declare function nomoAuthFetch(args: {
     headers?: {
         [key: string]: string;
     };
-    body?: string;
+    body?: string | {
+        [key: string]: any;
+    };
     signer?: typeof nomoSignAuthMessage;
 }): Promise<{
     statusCode: number;
@@ -43,7 +45,9 @@ export declare function nomoAuthHttp(args: {
     headers?: {
         [key: string]: string;
     };
-    body?: string;
+    body?: string | {
+        [key: string]: any;
+    };
 } | string): Promise<{
     statusCode: number;
     response: string;

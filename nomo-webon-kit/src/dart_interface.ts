@@ -31,10 +31,22 @@ if (isRunningInHub()) {
       await invokeNomoFunction('nomoCloseExternalKeyboard', {});
     }
   };
-  
 
+  const postMessageWebOnActivity = () => {
+    const message = {
+      type: 'webOnActivity',
+    };
+    window.parent.postMessage(message, 'http://localhost:3009'); 
+  }
+  
   window.addEventListener("focusin", handleFocusIn);
   window.addEventListener("focusout", handleFocusOut);
+
+
+  // handle other types of input to detect activity
+  window.addEventListener("touchstart", postMessageWebOnActivity);
+  window.addEventListener("touchend", postMessageWebOnActivity);
+  window.addEventListener("touchcancel", postMessageWebOnActivity);
 
   window.addEventListener("message", function (event) {
     if (event.origin === "http://localhost:3009") {

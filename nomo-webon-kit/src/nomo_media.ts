@@ -169,7 +169,7 @@ export function nomoFallbackQRCode() {
     <img src=${url} alt=${url}> 
     <h2 style="margin: 10px; color: white">Attention:</h2>
     <div style="text-align: center; color: white">You are currently displaying a WebOn outside your NOMO App. Please download the NOMO App here</div>
-    <button id="not_in_nomo_dialog__btn" onclick="window.location.href='https://nomo.app/downloads'">Download NOMO App</button>
+    <button id="not_in_nomo_dialog__btn" onclick="window.location.href='https://nomo.app/install'">Download NOMO App</button>
   </dialog>`;
 
   const dialog = document.getElementById(

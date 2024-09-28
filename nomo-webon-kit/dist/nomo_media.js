@@ -94,9 +94,8 @@ export function nomoFallbackQRCode() {
     if (!isFallbackModeActive()) {
         return;
     }
-    const url = "https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=" +
-        "http://nomo.app/webon/" +
-        window.location.host;
+    const deeplink = window.location.protocol + "//nomo.app/webon/" + window.location.host;
+    const url = "https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=" + deeplink;
     document.body.innerHTML += `
   <style>
     #not_in_nomo_dialog{

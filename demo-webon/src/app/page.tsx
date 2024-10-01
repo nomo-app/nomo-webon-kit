@@ -102,8 +102,6 @@ export default function Home() {
           .then((res) => console.log("getWebOnParameters", res))
           .catch(console.error);
       });
-      //throw {message: "a message"}; //"a string"; //{};
-      console.log(Error("a message"));
   }, []);
   useEffect(() => {
     const provider = zscProvider;

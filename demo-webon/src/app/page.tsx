@@ -102,6 +102,8 @@ export default function Home() {
           .then((res) => console.log("getWebOnParameters", res))
           .catch(console.error);
       });
+      //throw {message: "a message"}; //"a string"; //{};
+      console.log(Error("a message"));
   }, []);
   useEffect(() => {
     const provider = zscProvider;
@@ -167,13 +169,13 @@ export default function Home() {
         <div className={styles.card}>
           <h2
             onClick={async () => {
-              window.location.href = routes.uiTests;
+              window.location.href = routes.apiTests;
             }}
           >
-            UI Tests<span>-&gt;</span>
+            API Tests<span>-&gt;</span>
           </h2>
           <p>
-            UI Tests for the WebOn-API. At the moment, those UI Tests need to be
+            Tests for the WebOn-API. At the moment, those tests need to be
             run manually.
           </p>
         </div>

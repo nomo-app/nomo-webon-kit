@@ -1,10 +1,10 @@
 import { nomo } from "nomo-webon-kit";
-import { NomoUITest } from "../test-kit/nomo-ui-test";
+import { NomoTest } from "../test-kit/nomo-test";
 
-class SendAssetsCancel extends NomoUITest {
+class SendAssetsCancel extends NomoTest {
   constructor() {
     super({
-      name: "Send Assets 1: Cancel",
+      name: "Send Assets: Cancel",
       description: "Do NOT send assets, instead click the back-button.",
     });
   }
@@ -29,10 +29,10 @@ class SendAssetsCancel extends NomoUITest {
   }
 }
 
-class SendAssetsAmbiguous extends NomoUITest {
+class SendAssetsAmbiguous extends NomoTest {
   constructor() {
     super({
-      name: "Send Assets 2: Ambiguous asset resolution",
+      name: "Send Assets: Ambiguous asset resolution",
       description: "Symbol ETH with missing network specification.",
     });
   }
@@ -59,7 +59,10 @@ class SendAssetsAmbiguous extends NomoUITest {
   }
 }
 
-export const sendAssetsTests: Array<NomoUITest> = [
+export const sendAssetsManualTests: Array<NomoTest> = [
   new SendAssetsCancel(),
+];
+
+export const sendAssetsUnitTests: Array<NomoTest> = [
   new SendAssetsAmbiguous(),
 ];

@@ -1,7 +1,7 @@
 import { nomo } from "nomo-webon-kit";
-import { NomoUITest } from "../test-kit/nomo-ui-test";
+import { NomoTest } from "../test-kit/nomo-test";
 
-class ProofOfWorkTest3Seconds extends NomoUITest {
+class ProofOfWorkTest3Seconds extends NomoTest {
   constructor() {
     super({
       name: "Proof of work 3 seconds",
@@ -17,6 +17,6 @@ class ProofOfWorkTest3Seconds extends NomoUITest {
   }
 }
 
-export const proofOfWorkTests: Array<NomoUITest> = [
+export const proofOfWorkTests: Array<NomoTest> = [
   new ProofOfWorkTest3Seconds(),
 ];

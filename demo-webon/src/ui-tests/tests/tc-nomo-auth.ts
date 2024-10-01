@@ -1,8 +1,8 @@
 import { nomo } from "nomo-webon-kit";
-import { NomoUITest } from "../test-kit/nomo-ui-test";
+import { NomoTest } from "../test-kit/nomo-test";
 import { ethers } from "ethers";
 
-class NomoSignAuthMessage extends NomoUITest {
+class NomoSignAuthMessage extends NomoTest {
   constructor() {
     super({
       name: "Nomo Auth 1: signAuthMessage",
@@ -34,7 +34,7 @@ class NomoSignAuthMessage extends NomoUITest {
   }
 }
 
-class NomoAuthHttpPost extends NomoUITest {
+class NomoAuthHttpPost extends NomoTest {
   constructor() {
     super({
       name: "Nomo Auth 2: POST-request",
@@ -54,7 +54,7 @@ class NomoAuthHttpPost extends NomoUITest {
   }
 }
 
-class NomoAuthHttpPostNested extends NomoUITest {
+class NomoAuthHttpPostNested extends NomoTest {
   constructor() {
     super({
       name: "Nomo Auth 3: nested request",
@@ -74,7 +74,7 @@ class NomoAuthHttpPostNested extends NomoUITest {
   }
 }
 
-class NomoAuthFetchPost extends NomoUITest {
+class NomoAuthFetchPost extends NomoTest {
   constructor() {
     super({
       name: "Nomo Auth 4: POST-request via fetch",
@@ -94,7 +94,7 @@ class NomoAuthFetchPost extends NomoUITest {
   }
 }
 
-export const nomoAuthTests: Array<NomoUITest> = [
+export const nomoAuthTests: Array<NomoTest> = [
   new NomoSignAuthMessage(),
   new NomoAuthHttpPost(),
   new NomoAuthFetchPost(),

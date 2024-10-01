@@ -1,7 +1,7 @@
 import { nomo } from "nomo-webon-kit";
-import { NomoUITest } from "../test-kit/nomo-ui-test";
+import { NomoTest } from "../test-kit/nomo-test";
 
-class SignTxCancel extends NomoUITest {
+class SignTxCancel extends NomoTest {
   constructor() {
     super({
       name: "Sign Tx 1: Cancel",
@@ -31,7 +31,7 @@ class SignTxCancel extends NomoUITest {
   }
 }
 
-class SignTxERC20Staking extends NomoUITest {
+class SignTxERC20Staking extends NomoTest {
   constructor() {
     super({
       name: "Sign Tx 2: AVINOC-ERC20 Approval",
@@ -50,7 +50,7 @@ class SignTxERC20Staking extends NomoUITest {
   }
 }
 
-class SignTxZEN20Claiming extends NomoUITest {
+class SignTxZEN20Claiming extends NomoTest {
   constructor() {
     super({
       name: "Sign Tx 3: AVINOC-ZEN20 Claiming",
@@ -69,7 +69,7 @@ class SignTxZEN20Claiming extends NomoUITest {
   }
 }
 
-class SignTxUniswap extends NomoUITest {
+class SignTxUniswap extends NomoTest {
   constructor() {
     super({
       name: "Sign Tx 4: Uniswap",
@@ -88,7 +88,7 @@ class SignTxUniswap extends NomoUITest {
   }
 }
 
-export const signTxTests: Array<NomoUITest> = [
+export const signTxTests: Array<NomoTest> = [
   new SignTxCancel(),
   new SignTxERC20Staking(),
   new SignTxZEN20Claiming(),

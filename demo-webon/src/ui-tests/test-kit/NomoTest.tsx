@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { NomoTestState, NomoUITest } from "./nomo-ui-test";
+import { NomoTestState, NomoTest } from "./nomo-test";
 import { LoadingSpinner } from "../../app/components/async_button";
 
 const gridRowStyle = {
@@ -29,7 +29,7 @@ function getStateColor(state: NomoTestState) {
   }
 }
 
-export function UITestRow(props: { test: NomoUITest }) {
+export function NomoTestRow(props: { test: NomoTest; manual: boolean }) {
   useEffect(() => {}, []);
   return (
     <div
@@ -52,25 +52,27 @@ export function UITestRow(props: { test: NomoUITest }) {
         <br />
         {props.test.state.error ? JSON.stringify(props.test.state.error) : ""}
       </div>
-      <div
-        style={{
-          ...gridRowStyle,
-          backgroundColor: "lightblue",
-          padding: "5px",
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-        }}
-        onClick={async () => {
-          if (props.test.state.state !== "PENDING") {
-            await props.test.runTest();
-          }
-        }}
-      >
-        {props.test.state.state === "PENDING" ? <LoadingSpinner /> : "RUN"}
-      </div>
+      {props.manual ? (
+        <div
+          style={{
+            ...gridRowStyle,
+            backgroundColor: "lightblue",
+            padding: "5px",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+          }}
+          onClick={async () => {
+            if (props.test.state.state !== "PENDING") {
+              await props.test.runTest();
+            }
+          }}
+        >
+          {props.test.state.state === "PENDING" ? <LoadingSpinner /> : "RUN"}
+        </div>
+      ) : undefined}
     </div>
   );
 }
@@ -84,7 +86,7 @@ const gridHeaderStyle = {
   overflowWrap: "anywhere" as any,
 };
 
-export function UITestHeader() {
+export function NomoTestHeader(props: { manualTests: boolean }) {
   return (
     <div
       style={{
@@ -94,13 +96,15 @@ export function UITestHeader() {
       <div style={{ ...gridHeaderStyle }}>{"Name"}</div>
       <div style={{ ...gridHeaderStyle }}>{"Description"}</div>
       <div style={{ ...gridHeaderStyle }}>{"State"}</div>
-      <div
-        style={{
-          ...gridHeaderStyle,
-        }}
-      >
-        {"Action"}
-      </div>
+      {props.manualTests ? (
+        <div
+          style={{
+            ...gridHeaderStyle,
+          }}
+        >
+          {"Action"}
+        </div>
+      ) : undefined}
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { routes } from "./routes.ts";
 
 const Page = lazy(() => import("./app/page.tsx"));
-const UITestPage = lazy(() => import("./ui-tests/ui-tests.tsx"));
+const ApiTestPage = lazy(() => import("./api-tests/api-tests.tsx"));
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path={routes.main} element={<Page />} />
-          <Route path={routes.uiTests} element={<UITestPage />} />
+          <Route path={routes.apiTests} element={<ApiTestPage />} />
         </Routes>
       </Suspense>
     </Router>

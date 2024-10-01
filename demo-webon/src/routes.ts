@@ -1,4 +1,4 @@
 export const routes = {
   main: "/",
-  uiTests: "/ui-tests",
+  apiTests: "/api-tests",
 };

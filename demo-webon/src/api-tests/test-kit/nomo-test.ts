@@ -4,7 +4,7 @@ export interface NomoTestState {
   time?: Date;
 }
 
-export abstract class NomoUITest {
+export abstract class NomoTest {
   name: string;
   description: string;
   state: NomoTestState;
@@ -17,8 +17,8 @@ export abstract class NomoUITest {
 
   abstract run(): Promise<void>;
 
-  async runTest(): Promise<void> {
-    if (this.state.state === "PENDING") {
+  async runTest(options?: { allowPending?: boolean }): Promise<void> {
+    if (options?.allowPending !== true && this.state.state === "PENDING") {
       throw new Error("Test is already running");
     }
     this.state = { state: "PENDING" };

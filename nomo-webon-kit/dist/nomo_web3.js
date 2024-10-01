@@ -232,12 +232,12 @@ export async function nomoGetAssetPrice(args) {
     return await invokeNomoFunction("nomoGetAssetPrice", args);
 }
 /**
- * Returns not only the balance of an asset, but also additional information like the network, a contract-address and a receive-address.
- * Typically, the decimals are needed to convert a raw balance into a user-readable balance.
+ * Internally called by "nomoGetBalance".
+ * For EVM-based assets, it is also possible to use ethers.js or similar to fetch a balance.
  */
 export async function nomoGetBalanceWaitUntilSynced(args) {
     while (true) {
-        const ret = await nomoGetBalance(args);
+        const ret = await invokeNomoFunction("nomoGetBalance", args);
         if (ret.balance !== null && ret.balance !== "null") {
             return ret;
         }
@@ -246,21 +246,15 @@ export async function nomoGetBalanceWaitUntilSynced(args) {
     }
 }
 /**
- * A lower-level function to get the balance of an asset.
- * This function may return a null-balance if the asset is not yet visible or not yet synced.
- * Please use one of the following replacements instead of this functions:
- * - For EVM-based assets: Fetch a balance with ethers.js or similar.
- * - For UTXO-based assets: Use "nomoGetBalanceWaitUntilSynced".
- * - Else: Implement additional logic with "nomoSetAssetVisibility"/"nomoGetVisibleAssets".
+ * Returns not only the balance of an asset, but also additional information like the network, a contract-address and a receive-address.
+ * Typically, the decimals are needed to convert a raw balance into a user-readable balance.
  */
 export async function nomoGetBalance(args) {
-    return await invokeNomoFunction("nomoGetBalance", args);
+    return await nomoGetBalanceWaitUntilSynced(args);
 }
 /**
  * Returns a list of transactions from the Nomo Wallet's transaction-cache.
  * Might fail if the transaction-cache is not yet synchronized.
- *
- * Since Nomo App 0.3.8.
  */
 export async function nomoGetTransactions(args) {
     return await invokeNomoFunction("nomoGetTransactions", args);
@@ -268,8 +262,6 @@ export async function nomoGetTransactions(args) {
 /**
  * An extended public key is a public key that allows to derive all the addresses of a Nomo Wallet.
  * This is only intended for UTXO-based assets.
- *
- * Since Nomo App 0.3.8.
  */
 export async function nomoGetExtendedPublicKey(args) {
     return await invokeNomoFunction("nomoGetExtendedPublicKey", args);
@@ -330,8 +322,6 @@ export async function nomoProofOfPayment(args) {
 }
 /**
  * Adds or hides an asset within the Nomo Wallet.
- *
- * Since Nomo App 0.4.0.
  */
 export async function nomoSetAssetVisibility(args) {
     return await invokeNomoFunction("nomoSetAssetVisibility", args);

@@ -156,7 +156,14 @@ export declare function nomoGetBalance(args: NomoAssetSelector): Promise<NomoAss
  *
  * Since Nomo App 0.3.8.
  */
-export declare function nomoGetTransactions(args: NomoAssetSelector): Promise<any>;
+export declare function nomoGetTransactions(args: NomoAssetSelector): Promise<{
+    txs: any[];
+    symbol: string;
+    name: string;
+    decimals: number;
+    contractAddress?: string;
+    network: string;
+}>;
 /**
  * An extended public key is a public key that allows to derive all the addresses of a Nomo Wallet.
  * This is only intended for UTXO-based assets.

@@ -11,6 +11,7 @@ import { useNomoVersion, useWebOnVersion } from "./test-kit/test-util";
 import { NomoTest } from "./test-kit/nomo-test";
 import { nomoAuthTests } from "./tests/tc-nomo-auth";
 import { LoadingSpinner } from "../app/components/async_button";
+import { getTransactionTests } from "./tests/tc-get-transactions";
 
 const manualTests: Array<NomoTest> = [
   ...signTxTests,
@@ -22,6 +23,7 @@ const unitTests: Array<NomoTest> = [
   ...proofOfWorkTests,
   ...nomoAuthTests,
   ...sendAssetsUnitTests,
+  ...getTransactionTests,
 ];
 
 function UnitTestRunner() {

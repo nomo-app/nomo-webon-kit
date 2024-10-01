@@ -369,7 +369,14 @@ export async function nomoGetBalance(
  */
 export async function nomoGetTransactions(
   args: NomoAssetSelector
-): Promise<any> {
+): Promise<{
+  txs: any[];
+  symbol: string;
+  name: string;
+  decimals: number;
+  contractAddress?: string;
+  network: string;
+}> {
   return await invokeNomoFunction("nomoGetTransactions", args);
 }
 

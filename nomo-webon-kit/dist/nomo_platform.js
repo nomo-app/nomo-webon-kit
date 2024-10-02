@@ -48,7 +48,6 @@ export async function nomoGetExecutionMode() {
             executionMode: "FALLBACK",
             hostingMode: null,
             webView: "not_in_nomo_app",
-            cardMode: null,
         };
     }
     return await invokeNomoFunctionCached("nomoGetExecutionMode", null);

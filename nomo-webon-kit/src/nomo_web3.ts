@@ -421,17 +421,6 @@ export async function nomoMnemonicBackupExisted(): Promise<{
   return await invokeNomoFunction("nomoMnemonicBackupExisted", {});
 }
 
-export interface NomoNFT {
-  blockNumber: number;
-  contractAddress: string;
-  dateTime: number;
-  from: string;
-  hash: string;
-  to: string;
-  tokenID: string;
-  tokenName: string;
-}
-
 /**
  * Returns a list of NFT-contracts that are declared by the currently installed WebOns.
  * Typically, those NFT-contracts provide some kind of utility for a WebOn.

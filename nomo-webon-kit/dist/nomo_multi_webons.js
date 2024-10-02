@@ -112,11 +112,10 @@ export async function nomoMigrateAndSelfDestroy(args) {
     if (ownManifest.webon_url.includes("http://")) {
         return; // we only want to migrate https-production-WebOns
     }
-    const navigateBack = mode.cardMode !== true;
     await nomoReplaceWebOn({
         old_webon_url: ownManifest.webon_url,
         new_deeplink: args.new_deeplink,
-        navigateBack,
+        navigateBack: true,
     });
 }
 /**

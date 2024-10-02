@@ -31,11 +31,6 @@ export interface NomoManifest {
      */
     webon_version: string;
     /**
-     * If true, the Nomo App will show a refresh-button in the navigation bar.
-     * Since Nomo App 0.3.5.
-     */
-    show_refresh_button?: boolean;
-    /**
      * If set, the Nomo App will try to obtain a tar.gz-cache.
      * cache_url should be a relative path.
      */

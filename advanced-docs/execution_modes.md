@@ -12,8 +12,6 @@ Moreover, Webons can run in the following _hosting modes_:
 - Nomo integrated hosting
 - External hosting
 
-Finally, WebOns can decide if they want to support the _card mode_.
-
 This document aims to clarify all the modes and support WebOn developers through their journey.
 
 ## Production Mode
@@ -67,10 +65,4 @@ WebOns with external hosting work similar to a regular website.
 
 As such, externally hosted WebOns are refreshed whenever you restart the Nomo App.
 
-External hosting is mainly intended for development, where a fast refresh is needed for testing changes of a WebOn.
-
-# Card Mode
-
-The "cards" are part of the Nomo App's UI design.
-WebOns have the option to run below of a card if they want to support it.
-If card mode is enabled in the manifest, then a WebOn needs to implement a responsive design that works in both fullscreen mode and card mode.
+External hosting is also useful for development, where a fast refresh is needed for testing changes of a WebOn.

@@ -65,14 +65,12 @@ export async function nomoGetExecutionMode(): Promise<{
   executionMode: NomoExecutionMode;
   hostingMode: NomoHostingMode | null;
   webView: NomoWebView;
-  cardMode: boolean | null;
 }> {
   if (isFallbackModeActive()) {
     return {
       executionMode: "FALLBACK",
       hostingMode: null,
       webView: "not_in_nomo_app",
-      cardMode: null,
     };
   }
   return await invokeNomoFunctionCached("nomoGetExecutionMode", null);
@@ -136,7 +134,7 @@ export async function nomoCheckForWebOnUpdate(): Promise<void> {
  * For example, this can be used to refresh themes or languages when re-opening a WebOn after a pause.
  */
 export async function nomoRegisterOnWebOnVisible(
-  callback: (args: { cardMode: boolean }) => void
+  callback: () => void
 ): Promise<void> {
   window.onWebOnVisible = callback;
   if (isFallbackModeActive()) {

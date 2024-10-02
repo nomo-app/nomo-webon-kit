@@ -9,8 +9,6 @@ With this, we hope that you obtain a better judgment whether or not it makes sen
 
 - Excellent usability for Decentralized Apps
 - Ship tailor-made web3 experiences
-- Robustness: Cache the web-assets locally and the data (ideally) on a blockchain
-- Explicit Caching: Change the cached web-assets only if the user accepts it
 - Composition: Make it easy to use services from other WebOns
 - Rapid Development: Promote a Micro Frontend Architecture
 

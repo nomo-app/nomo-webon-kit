@@ -1,7 +1,7 @@
 # WebOn Packaging
 
 For WebOns to be packaged into a tar.gz-archive, there are a few requirements needed.
-For example, WebOns should always be client-side-rendered and include a few mandatory files in their tar.gz-archive.
+For example, WebOns should be client-side-rendered and include a few mandatory files in their tar.gz-archive.
 
 See https://github.com/nomo-app/nomo-webon-cli for guidance on how to build tar.gz-archives.
 
@@ -53,9 +53,4 @@ The tar.gz file should contain an "out" directory, which represents the output o
 ## Icon
 
 To ensure seamless integration, it is imperative to place your WebOn-Icon within the "out" directory, adhering to the specified file name: "nomo_icon.svg". Please note that our system exclusively supports SVG (Scalable Vector Graphics) image files. The anticipated pathway for the Icon should be "out/nomo_icon.svg".
-
-## Card Icon
-
-If a WebOn supports the card mode, then it should also provide a "nomo_card.svg".
-
 

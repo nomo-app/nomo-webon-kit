@@ -12,7 +12,6 @@
 - [min\_nomo\_version](NomoManifest.md#min_nomo_version)
 - [nomo\_manifest\_version](NomoManifest.md#nomo_manifest_version)
 - [permissions](NomoManifest.md#permissions)
-- [show\_refresh\_button](NomoManifest.md#show_refresh_button)
 - [webon\_id](NomoManifest.md#webon_id)
 - [webon\_name](NomoManifest.md#webon_name)
 - [webon\_url](NomoManifest.md#webon_url)
@@ -29,7 +28,7 @@ cache_sig should be an Ethereum-styled message signature of a tar.gz-cache.
 
 #### Defined in
 
-[nomo_multi_webons.ts:51](https://github.com/nomo-app/nomo-webon-kit/blob/2fbd88e/nomo-webon-kit/src/nomo_multi_webons.ts#L51)
+[nomo_multi_webons.ts:46](https://github.com/nomo-app/nomo-webon-kit/blob/399845e/nomo-webon-kit/src/nomo_multi_webons.ts#L46)
 
 ___
 
@@ -42,7 +41,7 @@ cache_url should be a relative path.
 
 #### Defined in
 
-[nomo_multi_webons.ts:46](https://github.com/nomo-app/nomo-webon-kit/blob/2fbd88e/nomo-webon-kit/src/nomo_multi_webons.ts#L46)
+[nomo_multi_webons.ts:41](https://github.com/nomo-app/nomo-webon-kit/blob/399845e/nomo-webon-kit/src/nomo_multi_webons.ts#L41)
 
 ___
 
@@ -56,7 +55,7 @@ A list of additional content for the WebOn; one of the following:
 
 #### Defined in
 
-[nomo_multi_webons.ts:58](https://github.com/nomo-app/nomo-webon-kit/blob/2fbd88e/nomo-webon-kit/src/nomo_multi_webons.ts#L58)
+[nomo_multi_webons.ts:53](https://github.com/nomo-app/nomo-webon-kit/blob/399845e/nomo-webon-kit/src/nomo_multi_webons.ts#L53)
 
 ___
 
@@ -68,7 +67,7 @@ If min_nomo_version is set, then outdated versions of the Nomo App will refuse t
 
 #### Defined in
 
-[nomo_multi_webons.ts:9](https://github.com/nomo-app/nomo-webon-kit/blob/2fbd88e/nomo-webon-kit/src/nomo_multi_webons.ts#L9)
+[nomo_multi_webons.ts:9](https://github.com/nomo-app/nomo-webon-kit/blob/399845e/nomo-webon-kit/src/nomo_multi_webons.ts#L9)
 
 ___
 
@@ -80,7 +79,7 @@ nomo_manifest_version should be 1.1.0.
 
 #### Defined in
 
-[nomo_multi_webons.ts:13](https://github.com/nomo-app/nomo-webon-kit/blob/2fbd88e/nomo-webon-kit/src/nomo_multi_webons.ts#L13)
+[nomo_multi_webons.ts:13](https://github.com/nomo-app/nomo-webon-kit/blob/399845e/nomo-webon-kit/src/nomo_multi_webons.ts#L13)
 
 ___
 
@@ -92,20 +91,7 @@ A list of permissions for security-critical features.
 
 #### Defined in
 
-[nomo_multi_webons.ts:17](https://github.com/nomo-app/nomo-webon-kit/blob/2fbd88e/nomo-webon-kit/src/nomo_multi_webons.ts#L17)
-
-___
-
-### show\_refresh\_button
-
-• `Optional` **show\_refresh\_button**: `boolean`
-
-If true, the Nomo App will show a refresh-button in the navigation bar.
-Since Nomo App 0.3.5.
-
-#### Defined in
-
-[nomo_multi_webons.ts:41](https://github.com/nomo-app/nomo-webon-kit/blob/2fbd88e/nomo-webon-kit/src/nomo_multi_webons.ts#L41)
+[nomo_multi_webons.ts:17](https://github.com/nomo-app/nomo-webon-kit/blob/399845e/nomo-webon-kit/src/nomo_multi_webons.ts#L17)
 
 ___
 
@@ -118,7 +104,7 @@ See https://en.wikipedia.org/wiki/Reverse_domain_name_notation for more details 
 
 #### Defined in
 
-[nomo_multi_webons.ts:22](https://github.com/nomo-app/nomo-webon-kit/blob/2fbd88e/nomo-webon-kit/src/nomo_multi_webons.ts#L22)
+[nomo_multi_webons.ts:22](https://github.com/nomo-app/nomo-webon-kit/blob/399845e/nomo-webon-kit/src/nomo_multi_webons.ts#L22)
 
 ___
 
@@ -130,7 +116,7 @@ webon_name is the user-visible name of the WebOn.
 
 #### Defined in
 
-[nomo_multi_webons.ts:26](https://github.com/nomo-app/nomo-webon-kit/blob/2fbd88e/nomo-webon-kit/src/nomo_multi_webons.ts#L26)
+[nomo_multi_webons.ts:26](https://github.com/nomo-app/nomo-webon-kit/blob/399845e/nomo-webon-kit/src/nomo_multi_webons.ts#L26)
 
 ___
 
@@ -143,7 +129,7 @@ Typically, webon_url gets extracted out of a deeplink that is supplied to the No
 
 #### Defined in
 
-[nomo_multi_webons.ts:31](https://github.com/nomo-app/nomo-webon-kit/blob/2fbd88e/nomo-webon-kit/src/nomo_multi_webons.ts#L31)
+[nomo_multi_webons.ts:31](https://github.com/nomo-app/nomo-webon-kit/blob/399845e/nomo-webon-kit/src/nomo_multi_webons.ts#L31)
 
 ___
 
@@ -156,4 +142,4 @@ See https://semver.org/ for details.
 
 #### Defined in
 
-[nomo_multi_webons.ts:36](https://github.com/nomo-app/nomo-webon-kit/blob/2fbd88e/nomo-webon-kit/src/nomo_multi_webons.ts#L36)
+[nomo_multi_webons.ts:36](https://github.com/nomo-app/nomo-webon-kit/blob/399845e/nomo-webon-kit/src/nomo_multi_webons.ts#L36)

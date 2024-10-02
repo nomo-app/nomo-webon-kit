@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[nomo_web3.ts:458](https://github.com/nomo-app/nomo-webon-kit/blob/2fbd88e/nomo-webon-kit/src/nomo_web3.ts#L458)
+[nomo_web3.ts:447](https://github.com/nomo-app/nomo-webon-kit/blob/399845e/nomo-webon-kit/src/nomo_web3.ts#L447)
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:456](https://github.com/nomo-app/nomo-webon-kit/blob/2fbd88e/nomo-webon-kit/src/nomo_web3.ts#L456)
+[nomo_web3.ts:445](https://github.com/nomo-app/nomo-webon-kit/blob/399845e/nomo-webon-kit/src/nomo_web3.ts#L445)
 
 ___
 
@@ -38,4 +38,4 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:457](https://github.com/nomo-app/nomo-webon-kit/blob/2fbd88e/nomo-webon-kit/src/nomo_web3.ts#L457)
+[nomo_web3.ts:446](https://github.com/nomo-app/nomo-webon-kit/blob/399845e/nomo-webon-kit/src/nomo_web3.ts#L446)

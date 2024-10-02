@@ -80,7 +80,7 @@ export default function Home() {
       .then((r) => console.log("getAssetPrice", r))
       .catch(console.error);
     injectNomoCSSVariables();
-    nomo.registerOnWebOnVisible((_args: { cardMode: boolean }) => {
+    nomo.registerOnWebOnVisible(() => {
       nomo.checkForWebOnUpdate();
     });
     profile(

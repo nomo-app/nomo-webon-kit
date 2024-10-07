@@ -1,28 +1,26 @@
 require('dotenv').config();
 
-const mnemonic = process.env.CACHE_SIGN_MNEMONIC;
-if (!mnemonic) {
-  throw new Error("Please configure a CACHE_SIGN_MNEMONIC in a .env file");
+const sshHost = process.env.SSH_TARGET;
+if (!sshHost) {
+  throw new Error("SSH_TARGET not set");
 }
 
 const nomoCliConfig = {
   deployTargets: {
     production1: {
       rawSSH: {
-        sshHost: process.env.SSH_TARGET,
+        sshHost,
         sshBaseDir: "/var/www/production_webons/demowebon/",
-        publicBaseUrl: "https://w.nomo.app/demowebon",
+        publicBaseUrl: "https://demowebon.nomo.zone",
         hybrid: true,
-        mnemonic,
       },
     },
     production2: {
       rawSSH: {
-        sshHost: process.env.SSH_TARGET,
+        sshHost,
         sshBaseDir: "/var/www/production_webons/devwebon/",
-        publicBaseUrl: "https://w.nomo.app/devwebon",
+        publicBaseUrl: "https://demowebon.nomo.app",
         hybrid: true,
-        mnemonic,
       },
     },
   },

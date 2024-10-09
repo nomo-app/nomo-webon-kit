@@ -136,3 +136,9 @@ export function nomoFallbackQRCode() {
         dialog.show();
     }
 }
+/**
+ * Uses the ZENIQ Name Service (.znq) or the Ethereum Name Service (.eth) to resolve a name to an address.
+ */
+export async function nomoResolveName(args) {
+    return await invokeNomoFunction("nomoResolveName", args);
+}

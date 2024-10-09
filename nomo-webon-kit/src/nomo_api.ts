@@ -55,6 +55,7 @@ export const nomo = {
   injectQRCode: media.nomoInjectQRCode,
   fallbackQRCode: media.nomoFallbackQRCode,
   subscribeNotification: media.nomoSubscribeNotification,
+  resolveName: media.nomoResolveName,
 
   runsAsWebOn: platform.runsAsWebOn,
   hasMinimumNomoVersion: platform.hasMinimumNomoVersion,

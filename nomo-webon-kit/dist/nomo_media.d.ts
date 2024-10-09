@@ -76,3 +76,12 @@ export declare function nomoSubscribeNotification(args: {
 }): Promise<void>;
 /** Detects if a WebOn is running outside of Nomo and shows a fallback-dialog if needed.*/
 export declare function nomoFallbackQRCode(): void;
+/**
+ * Uses the ZENIQ Name Service (.znq) or the Ethereum Name Service (.eth) to resolve a name to an address.
+ */
+export declare function nomoResolveName(args: {
+    name: string;
+}): Promise<{
+    address: string | null;
+    nameService: string;
+}>;

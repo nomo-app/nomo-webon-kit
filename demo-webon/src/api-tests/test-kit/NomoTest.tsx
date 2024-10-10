@@ -38,7 +38,7 @@ export function NomoTestRow(props: { test: NomoTest; manual: boolean }) {
       }}
     >
       <div style={{ ...gridRowStyle }}>{props.test.name}</div>
-      <div style={{ ...gridRowStyle }}>{props.test.description}</div>
+      <div style={{ ...gridRowStyle, fontSize: "small" }}>{props.test.description}</div>
       <div
         style={{
           ...gridRowStyle,

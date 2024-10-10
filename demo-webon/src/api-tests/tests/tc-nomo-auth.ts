@@ -97,6 +97,6 @@ class NomoAuthFetchPost extends NomoTest {
 export const nomoAuthTests: Array<NomoTest> = [
   new NomoSignAuthMessage(),
   new NomoAuthHttpPost(),
-  new NomoAuthFetchPost(),
   new NomoAuthHttpPostNested(),
+  new NomoAuthFetchPost(),
 ];

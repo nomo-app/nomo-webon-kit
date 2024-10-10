@@ -12,6 +12,7 @@ import { NomoTest } from "./test-kit/nomo-test";
 import { nomoAuthTests } from "./tests/tc-nomo-auth";
 import { LoadingSpinner } from "../app/components/async_button";
 import { getTransactionTests } from "./tests/tc-get-transactions";
+import { resolveNameTests } from "./tests/tc-resolve-names";
 
 const manualTests: Array<NomoTest> = [
   ...signTxTests,
@@ -24,6 +25,7 @@ const unitTests: Array<NomoTest> = [
   ...nomoAuthTests,
   ...sendAssetsUnitTests,
   ...getTransactionTests,
+  ...resolveNameTests,
 ];
 
 function UnitTestRunner() {

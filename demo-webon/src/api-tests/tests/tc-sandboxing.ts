@@ -9,7 +9,7 @@ import { load } from "recaptcha-v3";
 class NavigateToGitHub extends NomoTest {
   constructor() {
     super({
-      name: "Sandbox Test 1: Navigate to GitHub",
+      name: "Sandbox 1: Navigate to GitHub",
       description: "Open GitHub in a new window and then close it.",
     });
   }
@@ -42,7 +42,7 @@ class NavigateToGitHub extends NomoTest {
 class RecaptchaV3 extends NomoTest {
   constructor() {
     super({
-      name: "Sandbox Test 2: Google Recaptcha V3",
+      name: "Sandbox 2: Google Recaptcha V3",
       description:
         "Do a captcha verfication and hopefully stay within the sandbox.",
     });
@@ -60,7 +60,7 @@ class RecaptchaV3 extends NomoTest {
 class IFrameTest extends NomoTest {
   constructor() {
     super({
-      name: "Sandbox Test 3: IFrame injection",
+      name: "Sandbox 3: IFrame injection",
       description: "Launch an iframe and hopefully stay within the sandbox.",
     });
   }

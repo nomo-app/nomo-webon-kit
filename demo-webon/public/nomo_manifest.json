@@ -2,7 +2,7 @@
   "nomo_manifest_version": "1.2.0",
   "webon_id": "app.nomo.demowebon",
   "webon_name": "Dev WebOn",
-  "webon_version": "0.2.92",
+  "webon_version": "0.2.93",
   "min_nomo_version": "0.3.6",
   "dependencies": [
     "social:https://www.youtube.com/channel/UCsBtKDW5QAE4rKU5pmlFf-A"

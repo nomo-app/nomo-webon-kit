@@ -21,11 +21,6 @@ See <https://developer.chrome.com/docs/devtools/remote-debugging/webviews/> for 
 It should be possible to connect Safari DevTools to a Nomo WebOn.
 Consult Apple documentation for details on how to connect to an iPhone WebView.
 
-## DevDev Mode on Android/iOS
-
-On Android/iOS, the DevDev mode includes a small window for the functions console.log/console.info/console.error/console.warn.
-Moreover, the DevDev mode includes auxiliary features like refreshing the page or clearing local storage.
-
 ## Desktop Debugging
 
 On Desktop, the Nomo App offers an integrated DevTool that looks almost the same as Chrome DevTools.

@@ -71,23 +71,6 @@ export declare function nomoCheckForWebOnUpdate(): Promise<void>;
  */
 export declare function nomoRegisterOnWebOnVisible(callback: () => void): Promise<void>;
 /**
- * A set of logging-functions to enable debugging with the Nomo dev mode.
- * You should not need to call this directly, since it will be called automatically when calling
- * console.log/console.error/console.warn/console.info.
- */
-export declare const nomoConsole: {
-    log: (...args: any[]) => void;
-    info: (...args: any[]) => void;
-    warn: (...args: any[]) => void;
-    error: (...args: any[]) => void;
-};
-/**
- * After calling this function, console logs are visible in the
- * mobile DevDev-mode of the Nomo App.
- * For the Desktop DevDev-mode, this function is not necessary.
- */
-export declare function nomoEnableMobileConsoleDebugging(): Promise<void>;
-/**
  * Summons the platform's share sheet to share a text.
  * If no text is provided, then it will share the deeplink of the WebOn.
  *

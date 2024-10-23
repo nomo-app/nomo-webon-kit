@@ -130,10 +130,30 @@ class SignTxRawValue extends NomoTest {
   }
 }
 
+class SignTxUndecodable extends NomoTest {
+  constructor() {
+    super({
+      name: "Sign Tx: Cannot decode",
+      description: "Sign a tx that cannot be analyzed by Nomo.",
+    });
+  }
+
+  async run() {
+    const res = await nomo.signEvmTransaction({
+      messageHex:
+        "0x02f86c0125830f424085010ffe7d9282ea6094f1ca9cb74685755965c7458528a36934df52a3ef80b844deadbeef0000000000000000000000007561deaf4ecf96dc9f0d50b4136046979acdad3effffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc0",
+    });
+    if (res.sigHex.length !== 130) {
+      throw new Error("sigHex length mismatch");
+    }
+  }
+}
+
 export const signTxTests: Array<NomoTest> = [
   new SignTxCancel(),
   new SignTxERC20Approval(),
   new SignTxZEN20Claiming(),
   new SignTxUniswap(),
   new SignTxRawValue(),
+  new SignTxUndecodable(),
 ];

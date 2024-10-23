@@ -3,7 +3,7 @@ import {
   invokeNomoFunctionCached,
   isFallbackModeActive,
 } from "./dart_interface";
-import { compareSemanticVersions, stringifyWithBigInts } from "./util";
+import { compareSemanticVersions } from "./util";
 
 export type NomoExecutionMode = "PRODUCTION" | "DEV" | "DEV_DEV" | "FALLBACK";
 export type NomoHostingMode = "NOMO_INTEGRATED_HOSTING" | "EXTERNAL_HOSTING";

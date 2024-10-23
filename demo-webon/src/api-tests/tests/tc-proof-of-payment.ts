@@ -19,9 +19,13 @@ class ProofOfPaymentDemo extends NomoTest {
     const res = await nomo.getTransactions(assetState);
     console.log("res", res);
     if (res.txs.length === 0) {
-      throw new Error("No Eurocoin transactions found in this wallet -> cannot prove a payment.");
+      throw new Error("No Eurocoin txs found in this wallet -> cannot prove a payment.");
     }
-    const firstTx = res.txs[0];
+    const sentTxs = res.txs.filter((tx) => tx.transferMethod === 1);
+    if (sentTxs.length === 0) {
+      throw new Error("No sent Eurocoin txs found in this wallet -> cannot prove a payment.");
+    }
+    const firstTx = sentTxs[0];
     const hash = firstTx.hash;
     if (!hash) {
       throw new Error("No hash in first tx");

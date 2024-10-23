@@ -21,7 +21,6 @@ const manualTests: Array<NomoTest> = [
   ...signTxTests,
   ...sandBoxingTests,
   ...deeplinkTests,
-  ...proofOfPaymentTests,
 ];
 
 const unitTests: Array<NomoTest> = [
@@ -29,6 +28,7 @@ const unitTests: Array<NomoTest> = [
   ...nomoAuthTests,
   ...sendAssetsUnitTests,
   ...getTransactionTests,
+  ...proofOfPaymentTests,
   ...resolveNameTests,
 ];
 

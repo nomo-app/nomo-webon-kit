@@ -1,4 +1,4 @@
-import { nomo, NomoProofOfPayment } from "nomo-webon-kit";
+import { nomo, NomoAssetSelector, NomoProofOfPayment } from "nomo-webon-kit";
 import { NomoTest } from "../test-kit/nomo-test";
 
 class ProofOfPaymentDemo extends NomoTest {
@@ -11,9 +11,25 @@ class ProofOfPaymentDemo extends NomoTest {
   }
 
   async run() {
+    const asset: NomoAssetSelector = {
+      symbol: "EURO",
+      name: "Eurocoin",
+    };
+    const assetState = await nomo.getBalanceWaitUntilSynced(asset);
+    const res = await nomo.getTransactions(assetState);
+    console.log("res", res);
+    if (res.txs.length === 0) {
+      throw new Error("No Eurocoin transactions found in this wallet -> cannot prove a payment.");
+    }
+    const firstTx = res.txs[0];
+    const hash = firstTx.hash;
+    if (!hash) {
+      throw new Error("No hash in first tx");
+    }
+
     let result: NomoProofOfPayment = await nomo.proofOfPayment({
       coin: "ec8",
-      hash: "0b7868c56ee6e11b0a32eb10cdc6da0bb4a2e37dbbf1ddbfbf7dc3ce3943ebbb",
+      hash,
     });
     if (!result.pops.length) {
       throw new Error("pops.length is zero");

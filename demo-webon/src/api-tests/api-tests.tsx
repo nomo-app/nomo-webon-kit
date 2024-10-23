@@ -14,12 +14,14 @@ import { LoadingSpinner } from "../app/components/async_button";
 import { getTransactionTests } from "./tests/tc-get-transactions";
 import { resolveNameTests } from "./tests/tc-resolve-names";
 import { deeplinkTests } from "./tests/tc-deeplinks";
+import { proofOfPaymentTests } from "./tests/tc-proof-of-payment";
 
 const manualTests: Array<NomoTest> = [
   ...sendAssetsManualTests,
   ...signTxTests,
   ...sandBoxingTests,
   ...deeplinkTests,
+  ...proofOfPaymentTests,
 ];
 
 const unitTests: Array<NomoTest> = [

@@ -5,7 +5,6 @@ import { NomoManifest, nomo, profile } from "nomo-webon-kit";
 import { injectNomoCSSVariables } from "nomo-webon-kit";
 import styles from "./page.module.css";
 import "./globals.css";
-import { proofOfPaymentDemo, testSigning } from "../../test/web3_signing_test";
 import { stringifyWithBigInts } from "nomo-webon-kit";
 import { mintNFT } from "./evm/mint_nft";
 import { openFaucetIfNeeded } from "./evm/evm_utils";
@@ -477,52 +476,6 @@ export default function Home() {
             Launch other WebOns<span>-&gt;</span>
           </AsyncButton>
           <p>WebOns can be combined to enable more powerful use cases.</p>
-        </div>
-        <div className={styles.card}>
-          <AsyncButton
-            onClick={async () => {
-              testSigning()
-                .then((res) => {
-                  openDialog({
-                    title: "Signature Result",
-                    content: JSON.stringify(res),
-                  });
-                })
-                .catch((e) => {
-                  console.error(e);
-                  openDialog({
-                    title: "sign transaction failed",
-                    content: e.toString(),
-                  });
-                });
-            }}
-          >
-            EVM transaction signing <span>-&gt;</span>
-          </AsyncButton>
-          <p>A demo for the sign-security-dialog.</p>
-        </div>
-        <div className={styles.card}>
-          <AsyncButton
-            onClick={async () => {
-              proofOfPaymentDemo()
-                .then((res) => {
-                  openDialog({
-                    title: "Signature Result",
-                    content: JSON.stringify(res),
-                  });
-                })
-                .catch((e) => {
-                  console.error(e);
-                  openDialog({
-                    title: "ProofOfPayment failed",
-                    content: e.nomoProofOfPayment,
-                  });
-                });
-            }}
-          >
-            Proof of Payment for UTXO Assets <span>-&gt;</span>
-          </AsyncButton>
-          <p>A demo for the ProofOfPayment Feature.</p>
         </div>
         <div className={styles.card}>
           <AsyncButton

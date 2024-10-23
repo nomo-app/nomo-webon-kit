@@ -54,7 +54,6 @@ export default function Home() {
         }
       }
     });
-    nomo.enableMobileConsoleDebugging();
     nomo.localStorage.setItem("foo", "bar");
     nomo
       .getDeviceHashes()

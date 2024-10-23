@@ -68,7 +68,6 @@ export declare const nomo: {
     getDeviceHashes: typeof platform.nomoGetDeviceHashes;
     getDeviceName: typeof platform.nomoGetDeviceName;
     registerOnWebOnVisible: typeof platform.nomoRegisterOnWebOnVisible;
-    enableMobileConsoleDebugging: typeof platform.nomoEnableMobileConsoleDebugging;
     share: typeof platform.nomoShare;
     injectNomoCSSVariables: typeof theming.injectNomoCSSVariables;
     switchNomoTheme: typeof theming.switchNomoTheme;

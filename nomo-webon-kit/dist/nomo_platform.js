@@ -1,5 +1,5 @@
 import { invokeNomoFunction, invokeNomoFunctionCached, isFallbackModeActive, } from "./dart_interface";
-import { compareSemanticVersions, stringifyWithBigInts } from "./util";
+import { compareSemanticVersions } from "./util";
 /**
  * Returns true if the code is running within a Nomo App WebView.
  */
@@ -106,65 +106,6 @@ export async function nomoRegisterOnWebOnVisible(callback) {
         return;
     }
     return await invokeNomoFunctionCached("nomoEnableOnWebOnVisible", {});
-}
-const originalConsoleLog = console.log;
-const originalConsoleInfo = console.info;
-const originalConsoleWarn = console.warn;
-const originalConsoleError = console.error;
-/**
- * A set of logging-functions to enable debugging with the Nomo dev mode.
- * You should not need to call this directly, since it will be called automatically when calling
- * console.log/console.error/console.warn/console.info.
- */
-export const nomoConsole = {
-    log: function (...args) {
-        originalConsoleLog(...args);
-        nomoNativeLog("LOG", args);
-    },
-    info: function (...args) {
-        originalConsoleInfo(...args);
-        nomoNativeLog("INFO", args);
-    },
-    warn: function (...args) {
-        originalConsoleWarn(...args);
-        nomoNativeLog("WARN", args);
-    },
-    error: function (...args) {
-        originalConsoleError(...args);
-        nomoNativeLog("ERROR", args);
-    },
-};
-let consoleOverwriten = false;
-/**
- * After calling this function, console logs are visible in the
- * mobile DevDev-mode of the Nomo App.
- * For the Desktop DevDev-mode, this function is not necessary.
- */
-export async function nomoEnableMobileConsoleDebugging() {
-    const { executionMode } = await nomoGetExecutionMode();
-    if (executionMode !== "DEV_DEV") {
-        return;
-    }
-    if (!consoleOverwriten) {
-        consoleOverwriten = true;
-        console.log("overwriting console-functions to enable mobile dev mode...");
-        console.log = nomoConsole.log;
-        console.info = nomoConsole.info;
-        console.warn = nomoConsole.warn;
-        console.error = nomoConsole.error;
-    }
-}
-function nomoNativeLog(severity, args) {
-    if (isFallbackModeActive()) {
-        return;
-    }
-    try {
-        const argsArray = args.map((arg) => stringifyWithBigInts(arg));
-        invokeNomoFunction("nomoNativeLog", { argsArray, severity });
-    }
-    catch (e) {
-        originalConsoleError(e);
-    }
 }
 /**
  * Summons the platform's share sheet to share a text.

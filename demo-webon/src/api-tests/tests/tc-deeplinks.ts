@@ -1,3 +1,4 @@
+import { nomo } from "nomo-webon-kit";
 import { NomoTest } from "../test-kit/nomo-test";
 
 class NomoIdDeeplinkTest extends NomoTest {
@@ -37,7 +38,27 @@ class WebOnDeeplinkTest extends NomoTest {
   }
 }
 
+class MessengerDeeplinkTest extends NomoTest {
+  constructor() {
+    super({
+      name: "Messenger Deeplink",
+      description: "Opening a chat with nomo.injectQRCode().",
+    });
+  }
+
+  async run() {
+    alert("If this test works, then the Decentralized Messenger will open!");
+
+    const messengerDeeplink = "https://nomo.id/@0xa2fdd6ef00d6aaa3c136df06f37e4d9151197944";
+    await nomo.injectQRCode({
+      qrCode: messengerDeeplink,
+      navigateBack: false,
+    });
+  }
+}
+
 export const deeplinkTests: Array<NomoTest> = [
   new NomoIdDeeplinkTest(),
   new WebOnDeeplinkTest(),
+  new MessengerDeeplinkTest(),
 ];

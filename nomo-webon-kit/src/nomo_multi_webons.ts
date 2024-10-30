@@ -40,12 +40,6 @@ export interface NomoManifest {
    */
   cache_url?: string;
   /**
-   * If set, the Nomo App will reject a cache if the signature cannot be verified.
-   * cache_sig should be an Ethereum-styled message signature of a tar.gz-cache.
-   */
-  cache_sig?: string;
-
-  /**
    * A list of additional content for the WebOn; one of the following:
    * - A JavaScript-URL to be injected into the WebOn.
    * - A social media link or a link to a website.

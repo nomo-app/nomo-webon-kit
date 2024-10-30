@@ -1,4 +1,4 @@
-import { nomo } from "nomo-webon-kit";
+import { nomo, NomoAssetSelector } from "nomo-webon-kit";
 import { NomoTest } from "../test-kit/nomo-test";
 
 class SendAssetsCancel extends NomoTest {
@@ -32,8 +32,9 @@ class SendAssetsCancel extends NomoTest {
 class SendAssetsAmbiguous extends NomoTest {
   constructor() {
     super({
-      name: "Send Assets: Ambiguous asset resolution",
-      description: "Symbol ETH with missing network specification.",
+      name: "Ambiguous asset",
+      description:
+        "Ambiguous asset resolution: Symbol 'ETH' with missing network specification.",
     });
   }
 
@@ -59,10 +60,38 @@ class SendAssetsAmbiguous extends NomoTest {
   }
 }
 
-export const sendAssetsManualTests: Array<NomoTest> = [
-  new SendAssetsCancel(),
-];
+class GetBalanceUUID extends NomoTest {
+  constructor() {
+    super({
+      name: "getBalance: uuid",
+      description: "NomoAssetSelector with uuid for asset resolution.",
+    });
+  }
+
+  async run() {
+    const asset: NomoAssetSelector = {
+      uuid: "bec85c96-16fe-95ee-0e89-24c5af79675f",
+      symbol: "BNB",
+    };
+    const res = await nomo.getBalance(asset);
+    if ((res.network as string) !== "bsc") {
+      throw new Error("unexpected network: " + res.network);
+    }
+    if (res.name !== "ZENIQ") {
+      throw new Error("unexpected name: " + res.name);
+    }
+    if (res.contractAddress !== "0x5b52bfB8062Ce664D74bbCd4Cd6DC7Df53Fd7233") {
+      throw new Error("unexpected contractAddress: " + res.contractAddress);
+    }
+    if (res.decimals !== 18) {
+      throw new Error("unexpected decimals: " + res.decimals);
+    }
+  }
+}
+
+export const sendAssetsManualTests: Array<NomoTest> = [new SendAssetsCancel()];
 
 export const sendAssetsUnitTests: Array<NomoTest> = [
   new SendAssetsAmbiguous(),
+  new GetBalanceUUID(),
 ];

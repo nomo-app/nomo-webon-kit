@@ -72,18 +72,20 @@ function UnitTestRunner() {
 function BackButton() {
   const navigate = useNavigate();
   return (
-    <button
+    <div
       onClick={() => navigate(-1)}
       style={{
         textAlign: "center",
         marginRight: "5px",
+        padding: "0px 10px",
         fontSize: "x-large",
         backgroundColor: "lightblue",
+        border: "2px solid black",
         borderRadius: "5px",
       }}
     >
       {"←"}
-    </button>
+    </div>
   );
 }
 

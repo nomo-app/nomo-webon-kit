@@ -10,7 +10,6 @@ import * as auth from "./nomo_auth";
  */
 export const nomo = {
     signEvmTransaction: web3.nomoSignEvmTransaction,
-    signEvmMessage: web3.nomoSignEvmMessage,
     sendAssets: web3.nomoSendAssets,
     selectAssets: web3.nomoSelectAssets,
     selectAssetFromDialog: web3.nomoSelectAssetFromDialog,

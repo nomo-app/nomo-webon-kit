@@ -5,6 +5,10 @@ import { isHexString, sha256 } from "./util";
  * Returns address/signature-pairs for the Nomo-Auth-Protocol.
  * This is a primitive that can be used for customized authentication.
  * For example, the address/signature-pairs can be put into HTTP-headers.
+ * See https://github.com/nomo-app/nomo-auth for more information.
+ *
+ * @param message A message to sign.
+ * @param url By hardcoding your own url, you can create authAddress/authSig-pairs that cannot be tracked across different services.
  *
  * Needs nomo.permission.SIGN_EVM_MESSAGE.
  * Since Nomo App 0.3.5.

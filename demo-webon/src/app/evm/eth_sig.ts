@@ -7,10 +7,11 @@ export async function ethSigDemo(): Promise<{
 }> {
   const message = "this message might be a JWT or a QRCode or something else";
 
-  const res = await nomo.signEvmMessage({
+  const res = await nomo.signAuthMessage({
     message,
+    url: "nomo.zone",
   });
-  const ethSig = res.sigHex; // In a real backend, "ethSig" might come either via the Nomo-ID or via the Nomo-Auth protocol.
+  const ethSig = res.ethSig; // In a real backend, "ethSig" might come either via the Nomo-ID or via the Nomo-Auth protocol.
   // The function "nomo.authHttp()" will automatically inject an ethSig into the HTTP-headers.
   // See https://github.com/nomo-app/nomo-id or https://github.com/nomo-app/nomo-auth for more details about those protocols.
 

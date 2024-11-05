@@ -87,7 +87,6 @@ export declare function nomoInstallWebOn(args: {
  * Installs a URL as a WebOn and grants the permissions that are specified in the manifest.
  *
  * Needs nomo.permission.INSTALL_WEBON.
- * Since Nomo App 0.3.5.
  */
 export declare function nomoInstallUrlAsWebOn(args: {
     manifest: NomoManifest;
@@ -154,7 +153,6 @@ export declare function nomoLaunchUrl(args: {
  * If possible, please prefer "nomoLaunchUrl" or "nomoLaunchWebOn" over this function.
  *
  * Needs nomo.permission.INSTALL_WEBON.
- * Since Nomo App 0.3.5.
  */
 export declare function nomoLaunchUrlAsWebOn(args: {
     manifest: NomoManifest;

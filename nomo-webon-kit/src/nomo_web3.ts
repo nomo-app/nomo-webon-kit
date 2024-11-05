@@ -178,8 +178,6 @@ export async function nomoGetVisibleAssets(): Promise<{
 /**
  * Returns a list of supported assets that can be made visible via "nomoSetAssetVisibility".
  * This might also include custom tokens that the user has added.
- *
- * Since Nomo App 0.4.1.
  */
 export async function nomoGetAllAssets(): Promise<{
   assets: Array<NomoAsset>;
@@ -200,8 +198,7 @@ export async function nomoGetAllAssets(): Promise<{
 }
 
 /**
- * A convenience function to get the Smartchain address of the Nomo Wallet.
- * Internally, it calls "nomoGetWalletAddresses" and caches the result.
+ * Returns the Smartchain address of a Nomo Wallet.
  */
 export async function nomoGetEvmAddress(): Promise<string> {
   if (isFallbackModeActive()) {
@@ -217,8 +214,14 @@ export async function nomoGetEvmAddress(): Promise<string> {
       );
     }
   }
-  const res = await nomoGetWalletAddresses();
-  return res.walletAddresses["ETH"];
+  try {
+    const res = await invokeNomoFunctionCached("nomoGetEvmAddress", null);
+    return res.evmAddress;
+  } catch (e) {
+    // fallback for older versions of the Nomo App
+    const res = await nomoGetWalletAddresses();
+    return res.walletAddresses["ETH"];
+  }
 }
 
 /**

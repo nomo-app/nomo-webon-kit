@@ -8,11 +8,10 @@ import { isHexString, sha256 } from "./util";
  * For example, the address/signature-pairs can be put into HTTP-headers.
  * See https://github.com/nomo-app/nomo-auth for more information.
  *
- * @param message A message to sign.
- * @param url By hardcoding your own url, you can create authAddress/authSig-pairs that cannot be tracked across different services.
+ * param message: A message to sign.
+ * param url: By hardcoding your own url, you can create authAddress/authSig-pairs that cannot be tracked across different services.
  *
  * Needs nomo.permission.SIGN_EVM_MESSAGE.
- * Since Nomo App 0.3.5.
  */
 export async function nomoSignAuthMessage(args: {
   message: string;

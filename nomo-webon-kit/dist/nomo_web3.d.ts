@@ -1,12 +1,20 @@
 export type NomoEvmNetwork = "zeniq-smart-chain" | "ethereum" | "binance-smart-chain";
 export type NomoNetwork = NomoEvmNetwork | "bitcoin" | "zeniq" | "litecoin" | "bitcoincash";
 export interface NomoAssetSelector {
+    /**
+     * symbol will be ignored if contractAddress or uuid is specified.
+     * symbol should be only used together with other selectors.
+     */
     symbol: string;
+    /**
+     * name will be ignored if contractAddress or uuid is specified.
+     * name should be only used together with other selectors.
+     */
     name?: string;
     network?: NomoNetwork;
     /**
-     * contractAddress is the strongest asset-selector with the highest security.
-     * If contractAddress is specified, then name and symbol will be ignored.
+     * contractAddress in combination with network is the strongest asset-selector with the highest security.
+     * There are rare cases where a contractAddress is not unique across different networks (e.g. AVINOC-ZEN20/AVINOC-ERC20).
      */
     contractAddress?: string;
     /**

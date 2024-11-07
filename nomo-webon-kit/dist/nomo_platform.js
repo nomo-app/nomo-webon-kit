@@ -80,11 +80,11 @@ export async function nomoGetDeviceName() {
     return await invokeNomoFunctionCached("nomoGetDeviceName", null);
 }
 /**
- * Returns the currently selected language of the Nomo App.
+ * Returns the currently selected language of the Nomo App as well as the systemLanguage of the underlying device.
  */
 export async function nomoGetLanguage() {
     if (isFallbackModeActive()) {
-        return { language: "en" };
+        return { language: "en", systemLanguage: "en" };
     }
     return await invokeNomoFunction("nomoGetLanguage", {});
 }

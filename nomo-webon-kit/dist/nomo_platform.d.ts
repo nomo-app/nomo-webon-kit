@@ -54,10 +54,11 @@ export declare function nomoGetDeviceName(): Promise<{
     deviceName: string;
 }>;
 /**
- * Returns the currently selected language of the Nomo App.
+ * Returns the currently selected language of the Nomo App as well as the systemLanguage of the underlying device.
  */
 export declare function nomoGetLanguage(): Promise<{
     language: string;
+    systemLanguage: string;
 }>;
 /**
  * This will show a dialog to the user if an update is available.

@@ -111,11 +111,14 @@ export async function nomoGetDeviceName(): Promise<{
 }
 
 /**
- * Returns the currently selected language of the Nomo App.
+ * Returns the currently selected language of the Nomo App as well as the systemLanguage of the underlying device.
  */
-export async function nomoGetLanguage(): Promise<{ language: string }> {
+export async function nomoGetLanguage(): Promise<{
+  language: string;
+  systemLanguage: string;
+}> {
   if (isFallbackModeActive()) {
-    return { language: "en" };
+    return { language: "en", systemLanguage: "en" };
   }
   return await invokeNomoFunction("nomoGetLanguage", {});
 }

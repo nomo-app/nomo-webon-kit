@@ -34,7 +34,6 @@ export const nomo = {
 
   localStorage: multi.nomoLocalStorage,
   launchUrl: multi.nomoLaunchUrl,
-  launchWebOn: multi.nomoLaunchWebOn,
   launchUrlAsWebOn: multi.nomoLaunchUrlAsWebOn,
   installWebOn: multi.nomoInstallWebOn,
   installUrlAsWebOn: multi.nomoInstallUrlAsWebOn,

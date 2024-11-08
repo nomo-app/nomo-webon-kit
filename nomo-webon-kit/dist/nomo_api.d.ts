@@ -38,7 +38,6 @@ export declare const nomo: {
         removeItem: (key: string) => Promise<void>;
     };
     launchUrl: typeof multi.nomoLaunchUrl;
-    launchWebOn: typeof multi.nomoLaunchWebOn;
     launchUrlAsWebOn: typeof multi.nomoLaunchUrlAsWebOn;
     installWebOn: typeof multi.nomoInstallWebOn;
     installUrlAsWebOn: typeof multi.nomoInstallUrlAsWebOn;

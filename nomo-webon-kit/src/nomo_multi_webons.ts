@@ -196,20 +196,6 @@ export async function nomoMigrateAndSelfDestroy(args: {
 }
 
 /**
- * Opens another WebOn on top of the current WebOn.
- * If the WebOn is not yet running, the WebOn will be launched.
- * If the WebOn is not yet installed, an error is thrown.
- * A payload can be passed to the WebOn.
- * Afterwards, the user may navigate back to the current WebOn by pressing the back button.
- */
-export async function nomoLaunchWebOn(args: {
-  payload: string;
-  manifest: NomoManifest;
-}): Promise<void> {
-  return await invokeNomoFunction("nomoLaunchWebOn", args);
-}
-
-/**
  * Passes a URL to the underlying platform for handling.
  * Typically, it will launch a system-browser or an in-app-webview.
  */
@@ -231,7 +217,6 @@ export async function nomoLaunchUrl(args: {
 /**
  * Launches a URL as a WebOn without installing it.
  * Grants the permissions that are specified in the manifest.
- * If possible, please prefer "nomoLaunchUrl" or "nomoLaunchWebOn" over this function.
  *
  * Needs nomo.permission.INSTALL_WEBON.
  */

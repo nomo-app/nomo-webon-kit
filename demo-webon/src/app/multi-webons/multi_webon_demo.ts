@@ -9,10 +9,12 @@ export async function launchAllWebOnsDemo() {
   if (!otherManifests.length) {
     throw Error("You need to install other WebOns to test this feature.");
   }
-  for (const manifest of otherManifests) {
-    await nomo.launchWebOn({
-      payload: "",
-      manifest,
+  const webOnsToLaunch = otherManifests.slice(0, 5);
+  for (const manifest of webOnsToLaunch) {
+    // nomo.installWebon launches a WebOn if already installed
+    await nomo.installWebOn({
+      deeplink: manifest.webon_url,
+      skipPermissionDialog: true,
     });
   }
 

@@ -32,7 +32,6 @@ export const nomo = {
     disableFallbackWallet: web3.nomoDisableFallbackWallet,
     localStorage: multi.nomoLocalStorage,
     launchUrl: multi.nomoLaunchUrl,
-    launchWebOn: multi.nomoLaunchWebOn,
     launchUrlAsWebOn: multi.nomoLaunchUrlAsWebOn,
     installWebOn: multi.nomoInstallWebOn,
     installUrlAsWebOn: multi.nomoInstallUrlAsWebOn,

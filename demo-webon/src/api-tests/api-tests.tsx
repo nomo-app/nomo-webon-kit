@@ -17,6 +17,7 @@ import { deeplinkTests } from "./tests/tc-deeplinks";
 import { proofOfPaymentTests } from "./tests/tc-proof-of-payment";
 import { useNavigate } from "react-router-dom";
 import { getLanguageTests } from "./tests/tc-get-language";
+import { clipboardTests } from "./tests/tc-clipboard";
 
 const manualTests: Array<NomoTest> = [
   ...sendAssetsManualTests,
@@ -33,6 +34,7 @@ const unitTests: Array<NomoTest> = [
   ...proofOfPaymentTests,
   ...resolveNameTests,
   ...getLanguageTests,
+  ...clipboardTests,
 ];
 
 function UnitTestRunner() {

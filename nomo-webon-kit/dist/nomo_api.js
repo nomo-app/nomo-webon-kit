@@ -61,6 +61,8 @@ export const nomo = {
     getDeviceName: platform.nomoGetDeviceName,
     registerOnWebOnVisible: platform.nomoRegisterOnWebOnVisible,
     share: platform.nomoShare,
+    getClipboard: platform.nomoGetClipboard,
+    setClipboard: platform.nomoSetClipboard,
     injectNomoCSSVariables: theming.injectNomoCSSVariables,
     switchNomoTheme: theming.switchNomoTheme,
     getCurrentNomoTheme: theming.getCurrentNomoTheme,

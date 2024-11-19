@@ -108,6 +108,36 @@ export async function nomoRegisterOnWebOnVisible(callback) {
     return await invokeNomoFunctionCached("nomoEnableOnWebOnVisible", {});
 }
 /**
+ * Reads a text from the user's clipboard.
+ * Might open a dialog to ask for permission to access the clipboard.
+ */
+export async function nomoGetClipboard() {
+    try {
+        return await invokeNomoFunction("nomoGetClipboard", {});
+    }
+    catch (e) {
+        // fallback for browser and older Nomo versions
+        const text = await navigator.clipboard.readText();
+        return { clipboard: text };
+    }
+}
+/**
+ * Stores a text into the user's clipboard.
+ * Might open a dialog to ask for permission to access the clipboard.
+ */
+export async function nomoSetClipboard(args) {
+    try {
+        await invokeNomoFunction("nomoSetClipboard", args);
+    }
+    catch (e) {
+        // fallback for browser and older Nomo versions
+        if (args.text === undefined) {
+            throw new Error("nomo.setClipboard: text is undefined");
+        }
+        await navigator.clipboard.writeText(args.text);
+    }
+}
+/**
  * Summons the platform's share sheet to share a text.
  * If no text is provided, then it will share the deeplink of the WebOn.
  *
@@ -117,9 +147,11 @@ export async function nomoRegisterOnWebOnVisible(callback) {
  * The optional [subject] parameter can be used to populate a subject if the user chooses to send an email.
  */
 export async function nomoShare(args) {
-    if (!runsAsWebOn()) {
-        navigator.share({ text: args.text });
-        return;
+    try {
+        await invokeNomoFunction("nomoShare", args);
     }
-    return await invokeNomoFunction("nomoShare", args);
+    catch (e) {
+        // fallback for browser and older Nomo versions
+        navigator.share({ text: args.text });
+    }
 }

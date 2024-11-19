@@ -72,6 +72,20 @@ export declare function nomoCheckForWebOnUpdate(): Promise<void>;
  */
 export declare function nomoRegisterOnWebOnVisible(callback: () => void): Promise<void>;
 /**
+ * Reads a text from the user's clipboard.
+ * Might open a dialog to ask for permission to access the clipboard.
+ */
+export declare function nomoGetClipboard(): Promise<{
+    clipboard: string | null;
+}>;
+/**
+ * Stores a text into the user's clipboard.
+ * Might open a dialog to ask for permission to access the clipboard.
+ */
+export declare function nomoSetClipboard(args: {
+    text: string;
+}): Promise<void>;
+/**
  * Summons the platform's share sheet to share a text.
  * If no text is provided, then it will share the deeplink of the WebOn.
  *

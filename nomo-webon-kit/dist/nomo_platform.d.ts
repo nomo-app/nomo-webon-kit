@@ -80,7 +80,6 @@ export declare function nomoGetClipboard(): Promise<{
 }>;
 /**
  * Stores a text into the user's clipboard.
- * Might open a dialog to ask for permission to access the clipboard.
  */
 export declare function nomoSetClipboard(args: {
     text: string;

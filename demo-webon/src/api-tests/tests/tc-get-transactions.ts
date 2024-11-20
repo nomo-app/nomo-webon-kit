@@ -1,6 +1,46 @@
 import { nomo, NomoAssetSelector } from "nomo-webon-kit";
 import { NomoTest } from "../test-kit/nomo-test";
 
+class GetEPubKeyEuro extends NomoTest {
+  constructor() {
+    super({
+      name: "ePubKey EURO",
+      description: "Get an extended public key to derive Eurocoin-addresses.",
+    });
+  }
+
+  async run() {
+    const asset: NomoAssetSelector = {
+      symbol: "EURO",
+      name: "Eurocoin",
+    };
+    const res = await nomo.getExtendedPublicKey(asset);
+    if (!res.ePubKey.length) {
+      throw new Error("returned ePubKey empty.");
+    }
+  }
+}
+
+class GetEPubKeyBitcoin extends NomoTest {
+  constructor() {
+    super({
+      name: "ePubKey BTC",
+      description: "Get an extended public key to derive Bitcoin-addresses.",
+    });
+  }
+
+  async run() {
+    const asset: NomoAssetSelector = {
+      symbol: "BTC",
+      name: "Bitcoin",
+    };
+    const res = await nomo.getExtendedPublicKey(asset);
+    if (!res.ePubKey.length) {
+      throw new Error("returned ePubKey empty.");
+    }
+  }
+}
+
 class GetEurocoinTest extends NomoTest {
   constructor() {
     super({
@@ -46,4 +86,6 @@ class GetZSCTest extends NomoTest {
 export const getTransactionTests: Array<NomoTest> = [
   new GetEurocoinTest(),
   new GetZSCTest(),
+  new GetEPubKeyEuro(),
+  new GetEPubKeyBitcoin(),
 ];

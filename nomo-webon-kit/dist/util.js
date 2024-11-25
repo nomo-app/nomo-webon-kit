@@ -109,3 +109,54 @@ export async function profile(fn, options) {
 export function isHexString(str) {
     return /^[0-9a-fA-F]+$/.test(str);
 }
+function encodeLength(len, offset) {
+    if (len < 56) {
+        return (len + offset).toString(16).padStart(2, "0");
+    }
+    const hexLength = len.toString(16);
+    return (hexLength.length / 2 + offset + 55).toString(16) + hexLength;
+}
+export function rlpEncodeElement(input) {
+    if (typeof input === "string" && input.startsWith("0x")) {
+        input = input.slice(2); // Remove '0x' if present
+    }
+    if (typeof input === "number" || typeof input === "bigint") {
+        input = input.toString(16); // Convert to hex string
+    }
+    if (!input || input === "0" || input === "") {
+        return "80"; // Encodes empty or zero as 0x80
+    }
+    if (input.length % 2 !== 0) {
+        input = "0" + input; // Ensure even-length hex
+    }
+    const length = input.length / 2;
+    if (length < 56) {
+        return (128 + length).toString(16) + input;
+    }
+    else {
+        return encodeLength(length, 128) + input;
+    }
+}
+export function rlpEncodeList(elements) {
+    const encoded = elements.map(rlpEncodeElement).join(""); // Encode each element
+    const totalLength = encoded.length / 2; // Total byte length of the concatenated elements
+    if (totalLength < 56)
+        return (192 + totalLength).toString(16) + encoded; // Short form
+    const lenHex = totalLength.toString(16); // Length in hex
+    return (247 + lenHex.length / 2).toString(16) + lenHex + encoded; // Long form
+}
+export async function nomoJsonRPC(args) {
+    const res = await fetch(args.url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            jsonrpc: "2.0",
+            id: 1,
+            method: args.method,
+            params: args.params,
+        }),
+    });
+    return await res.json();
+}

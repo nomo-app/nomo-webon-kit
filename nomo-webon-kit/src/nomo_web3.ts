@@ -5,11 +5,13 @@ import {
 } from "./dart_interface";
 import { nomoAuthFetch } from "./nomo_auth";
 import { nomoGetInstalledWebOns, nomoInstallWebOn } from "./nomo_multi_webons";
-import { sleep } from "./util";
+import { hasMinimumNomoVersion } from "./nomo_platform";
+import { nomoJsonRPC, rlpEncodeList, sleep } from "./util";
 
 export type NomoEvmNetwork =
   | "zeniq-smart-chain"
   | "ethereum"
+  | "polygon"
   | "binance-smart-chain";
 export type NomoNetwork =
   | NomoEvmNetwork
@@ -103,8 +105,115 @@ export async function nomoSendAssets(args: {
   hash: string;
   intent: { recipient: string; amount: string; token: string };
 }> {
-  const legacyArgs = { ...args, assetSymbol: args.asset?.symbol ?? null };
-  return await invokeNomoFunction("nomoSendAssets", legacyArgs);
+  if (
+    args.asset?.network !== "ethereum" &&
+    args.targetAddress?.startsWith("0x") &&
+    args.amount &&
+    args.asset?.contractAddress &&
+    args.asset?.network
+  ) {
+    if (
+      (await hasMinimumNomoVersion({ minVersion: "0.6.4" })).minVersionFulfilled
+    ) {
+      return await nomoSendERC20({
+        targetAddress: args.targetAddress,
+        amount: args.amount,
+        contractAddress: args.asset?.contractAddress,
+        network: args.asset?.network as NomoEvmNetwork,
+      });
+    }
+  }
+  return await invokeNomoFunction("nomoSendAssets", args);
+}
+
+function nomoGetChainId(network: NomoEvmNetwork): number {
+  switch (network) {
+    case "ethereum":
+      return 1;
+    case "polygon":
+      return 137;
+    case "binance-smart-chain":
+      return 56;
+    case "zeniq-smart-chain":
+      return 383414847825;
+    default:
+      throw Error("Unknown chainID for network: " + network);
+  }
+}
+
+function nomoGetFreeRPCUrl(network: NomoEvmNetwork): string {
+  switch (network) {
+    case "binance-smart-chain":
+      return "https://bsc-dataseed.binance.org";
+    case "zeniq-smart-chain":
+      return "https://api.zeniq.network";
+    case "polygon":
+      return "https://polygon.llamarpc.com";
+    default:
+      throw Error("No free open-source RPC-URL for network: " + network);
+  }
+}
+
+/**
+ * Sends an ERC20-token to a target address.
+ * For EVM-based tokens, this is a third alternative to "ethersjs-nomo-webons" and "nomoSendAssets".
+ */
+export async function nomoSendERC20(args: {
+  contractAddress: string;
+  targetAddress: string;
+  amount: string;
+  network: NomoEvmNetwork;
+}): Promise<{
+  hash: string;
+  intent: { recipient: string; amount: string; token: string };
+}> {
+  function toHex(value: bigint, padding = 32) {
+    return value.toString(16).padStart(padding * 2, "0");
+  }
+  const transferMethodId = "a9059cbb"; // First 4 bytes of keccak256("transfer(address,uint256)")
+  const targetAddressEncoded = toHex(BigInt(args.targetAddress), 32);
+  const amountEncoded = toHex(BigInt(args.amount), 32);
+  const data = "0x" + transferMethodId + targetAddressEncoded + amountEncoded;
+  const gasLimit = 75000;
+  const rpcUrl = nomoGetFreeRPCUrl(args.network);
+  const nonce = await nomoJsonRPC({
+    method: "eth_getTransactionCount",
+    params: [await nomoGetEvmAddress(), "latest"],
+    url: rpcUrl,
+  });
+  const gasPrice = await nomoJsonRPC({
+    method: "eth_gasPrice",
+    params: [],
+    url: rpcUrl,
+  });
+  const txFields = [
+    nonce.result,
+    gasPrice.result,
+    gasLimit,
+    args.contractAddress, // To
+    "0x", // Value (native value is zero for ERC20)
+    data,
+    nomoGetChainId(args.network),
+    "0x", // Empty v (placeholder for signing)
+    "0x", // Empty r (placeholder for signing)
+  ];
+  const rlpEncodedTx = rlpEncodeList(txFields);
+  const { txHex } = await nomoSignEvmTransaction({
+    messageHex: rlpEncodedTx,
+  });
+  const hash = await nomoJsonRPC({
+    method: "eth_sendRawTransaction",
+    params: [txHex],
+    url: rpcUrl,
+  });
+  return {
+    hash,
+    intent: {
+      recipient: args.targetAddress,
+      amount: args.amount,
+      token: args.contractAddress,
+    },
+  };
 }
 
 /**
@@ -279,8 +388,7 @@ export async function nomoGetAssetIcon(args: NomoAssetSelector): Promise<{
   symbol: string;
   name: string;
 }> {
-  const legacyArgs = { ...args, assetSymbol: args.symbol };
-  return await invokeNomoFunction("nomoGetAssetIcon", legacyArgs);
+  return await invokeNomoFunction("nomoGetAssetIcon", args);
 }
 
 /**

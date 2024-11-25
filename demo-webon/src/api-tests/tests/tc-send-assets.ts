@@ -44,7 +44,7 @@ class SendAssetsBEP20USDT extends NomoTest {
   constructor() {
     super({
       name: "Send Assets: BEP20-USDT",
-      description: "Do not send, click the back-button.",
+      description: "Send USDT to yourself.",
     });
   }
 
@@ -59,6 +59,29 @@ class SendAssetsBEP20USDT extends NomoTest {
       asset,
       targetAddress,
       amount: "100000", // in wei
+    });
+  }
+}
+
+class SendAssetsBEP20BUSD extends NomoTest {
+  constructor() {
+    super({
+      name: "Send Assets: BEP20-BUSD",
+      description: "Send BUSD to yourself.",
+    });
+  }
+
+  async run() {
+    const targetAddress = await nomo.getEvmAddress();
+    const asset: NomoAssetSelector = {
+      symbol: "BUSD",
+      contractAddress: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+      network: "binance-smart-chain",
+    };
+    await nomo.sendAssets({
+      asset,
+      targetAddress,
+      amount: "10000", // in wei
     });
   }
 }
@@ -126,6 +149,7 @@ class GetBalanceUUID extends NomoTest {
 export const sendAssetsManualTests: Array<NomoTest> = [
   new SendAssetsEthereum(),
   new SendAssetsBEP20USDT(),
+  new SendAssetsBEP20BUSD(),
 ];
 
 export const sendAssetsUnitTests: Array<NomoTest> = [

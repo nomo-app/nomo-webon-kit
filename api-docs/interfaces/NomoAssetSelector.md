@@ -24,12 +24,12 @@
 
 • `Optional` **contractAddress**: `string`
 
-contractAddress is the strongest asset-selector with the highest security.
-If contractAddress is specified, then name and symbol will be ignored.
+contractAddress in combination with network is the strongest asset-selector with the highest security.
+There are rare cases where a contractAddress is not unique across different networks (e.g. AVINOC-ZEN20/AVINOC-ERC20).
 
 #### Defined in
 
-[nomo_web3.ts:29](https://github.com/nomo-app/nomo-webon-kit/blob/b9ca80f/nomo-webon-kit/src/nomo_web3.ts#L29)
+[nomo_web3.ts:39](https://github.com/nomo-app/nomo-webon-kit/blob/374f17e/nomo-webon-kit/src/nomo_web3.ts#L39)
 
 ___
 
@@ -37,9 +37,12 @@ ___
 
 • `Optional` **name**: `string`
 
+name will be ignored if contractAddress or uuid is specified.
+name should be only used together with other selectors.
+
 #### Defined in
 
-[nomo_web3.ts:23](https://github.com/nomo-app/nomo-webon-kit/blob/b9ca80f/nomo-webon-kit/src/nomo_web3.ts#L23)
+[nomo_web3.ts:33](https://github.com/nomo-app/nomo-webon-kit/blob/374f17e/nomo-webon-kit/src/nomo_web3.ts#L33)
 
 ___
 
@@ -49,7 +52,7 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:24](https://github.com/nomo-app/nomo-webon-kit/blob/b9ca80f/nomo-webon-kit/src/nomo_web3.ts#L24)
+[nomo_web3.ts:34](https://github.com/nomo-app/nomo-webon-kit/blob/374f17e/nomo-webon-kit/src/nomo_web3.ts#L34)
 
 ___
 
@@ -57,9 +60,12 @@ ___
 
 • **symbol**: `string`
 
+symbol will be ignored if contractAddress or uuid is specified.
+symbol should be only used together with other selectors.
+
 #### Defined in
 
-[nomo_web3.ts:22](https://github.com/nomo-app/nomo-webon-kit/blob/b9ca80f/nomo-webon-kit/src/nomo_web3.ts#L22)
+[nomo_web3.ts:28](https://github.com/nomo-app/nomo-webon-kit/blob/374f17e/nomo-webon-kit/src/nomo_web3.ts#L28)
 
 ___
 
@@ -71,4 +77,4 @@ If set, then uuid must be an asset-identifier from the endpoint https://webon.in
 
 #### Defined in
 
-[nomo_web3.ts:33](https://github.com/nomo-app/nomo-webon-kit/blob/b9ca80f/nomo-webon-kit/src/nomo_web3.ts#L33)
+[nomo_web3.ts:43](https://github.com/nomo-app/nomo-webon-kit/blob/374f17e/nomo-webon-kit/src/nomo_web3.ts#L43)

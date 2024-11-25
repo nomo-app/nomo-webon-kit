@@ -1,6 +1,7 @@
 import { invokeNomoFunction, invokeNomoFunctionCached, isFallbackModeActive, } from "./dart_interface";
 import { nomoAuthFetch } from "./nomo_auth";
 import { nomoGetInstalledWebOns, nomoInstallWebOn } from "./nomo_multi_webons";
+import { hasMinimumNomoVersion } from "./nomo_platform";
 import { nomoJsonRPC, rlpEncodeList, sleep } from "./util";
 /**
  * Prevents functions like "nomoGetEvmAddress" from falling back to browser extensions like MetaMask.
@@ -48,12 +49,14 @@ export async function nomoSendAssets(args) {
         args.amount &&
         args.asset?.contractAddress &&
         args.asset?.network) {
-        return await nomoSendERC20({
-            targetAddress: args.targetAddress,
-            amount: args.amount,
-            contractAddress: args.asset?.contractAddress,
-            network: args.asset?.network,
-        });
+        if ((await hasMinimumNomoVersion({ minVersion: "0.6.4" })).minVersionFulfilled) {
+            return await nomoSendERC20({
+                targetAddress: args.targetAddress,
+                amount: args.amount,
+                contractAddress: args.asset?.contractAddress,
+                network: args.asset?.network,
+            });
+        }
     }
     return await invokeNomoFunction("nomoSendAssets", args);
 }

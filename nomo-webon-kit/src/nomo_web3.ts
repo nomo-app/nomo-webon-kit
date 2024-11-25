@@ -5,6 +5,7 @@ import {
 } from "./dart_interface";
 import { nomoAuthFetch } from "./nomo_auth";
 import { nomoGetInstalledWebOns, nomoInstallWebOn } from "./nomo_multi_webons";
+import { hasMinimumNomoVersion } from "./nomo_platform";
 import { nomoJsonRPC, rlpEncodeList, sleep } from "./util";
 
 export type NomoEvmNetwork =
@@ -111,12 +112,16 @@ export async function nomoSendAssets(args: {
     args.asset?.contractAddress &&
     args.asset?.network
   ) {
-    return await nomoSendERC20({
-      targetAddress: args.targetAddress,
-      amount: args.amount,
-      contractAddress: args.asset?.contractAddress,
-      network: args.asset?.network as NomoEvmNetwork,
-    });
+    if (
+      (await hasMinimumNomoVersion({ minVersion: "0.6.4" })).minVersionFulfilled
+    ) {
+      return await nomoSendERC20({
+        targetAddress: args.targetAddress,
+        amount: args.amount,
+        contractAddress: args.asset?.contractAddress,
+        network: args.asset?.network as NomoEvmNetwork,
+      });
+    }
   }
   return await invokeNomoFunction("nomoSendAssets", args);
 }

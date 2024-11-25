@@ -111,11 +111,11 @@ export async function nomoSendERC20(args) {
         url: rpcUrl,
     });
     const txFields = [
-        nonce,
-        gasPrice,
+        nonce.result,
+        gasPrice.result,
         gasLimit,
         args.contractAddress,
-        "0x0",
+        "0x",
         data,
         nomoGetChainId(args.network),
         "0x",

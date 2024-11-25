@@ -187,11 +187,11 @@ export async function nomoSendERC20(args: {
     url: rpcUrl,
   });
   const txFields = [
-    nonce,
-    gasPrice,
+    nonce.result,
+    gasPrice.result,
     gasLimit,
     args.contractAddress, // To
-    "0x0", // Value (native value is zero for ERC20)
+    "0x", // Value (native value is zero for ERC20)
     data,
     nomoGetChainId(args.network),
     "0x", // Empty v (placeholder for signing)

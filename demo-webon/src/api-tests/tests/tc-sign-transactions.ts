@@ -94,7 +94,7 @@ class SignTxRawValue extends NomoTest {
   constructor() {
     super({
       name: "Sign Tx: Raw Value",
-      description: "Simulate a swapping of ETH into AVINOC-ERC20.",
+      description: "A minimal transaction with a native value.",
     });
   }
 

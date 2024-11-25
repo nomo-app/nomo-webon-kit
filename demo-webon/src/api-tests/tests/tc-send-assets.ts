@@ -1,31 +1,65 @@
 import { nomo, NomoAssetSelector } from "nomo-webon-kit";
 import { NomoTest } from "../test-kit/nomo-test";
 
-class SendAssetsCancel extends NomoTest {
+async function nomoSendAssetExpectCancel(args: {
+  asset?: NomoAssetSelector;
+  targetAddress?: string;
+  amount?: string;
+}) {
+  try {
+    await nomo.sendAssets(args);
+  } catch (e: any) {
+    const eObject = JSON.parse(e);
+    if (
+      eObject.nomoSendAssets &&
+      eObject.nomoSendAssets.includes("User cancelled the Action")
+    ) {
+      return; // pass
+    } else {
+      throw e;
+    }
+  }
+  throw new Error("The tester did not cancel the action");
+}
+
+class SendAssetsEthereum extends NomoTest {
   constructor() {
     super({
-      name: "Send Assets: Cancel",
-      description: "Do NOT send assets, instead click the back-button.",
+      name: "Send Assets: Ethereum",
+      description: "Do not send, click the back-button.",
     });
   }
 
   async run() {
-    try {
-      await nomo.sendAssets({
-        asset: { symbol: "ETH", name: "Ethereum", network: "ethereum" },
-      });
-    } catch (e: any) {
-      const eObject = JSON.parse(e);
-      if (
-        eObject.nomoSendAssets &&
-        eObject.nomoSendAssets.includes("User cancelled the Action")
-      ) {
-        return; // pass
-      } else {
-        throw e;
-      }
-    }
-    throw new Error("The tester did not cancel the action");
+    const asset: NomoAssetSelector = {
+      symbol: "ETH",
+      name: "Ethereum",
+      network: "ethereum",
+    };
+    await nomoSendAssetExpectCancel({ asset });
+  }
+}
+
+class SendAssetsBEP20USDT extends NomoTest {
+  constructor() {
+    super({
+      name: "Send Assets: BEP20-USDT",
+      description: "Do not send, click the back-button.",
+    });
+  }
+
+  async run() {
+    const targetAddress = await nomo.getEvmAddress();
+    const asset: NomoAssetSelector = {
+      symbol: "USDT",
+      contractAddress: "0x55d398326f99059fF775485246999027B3197955",
+      network: "binance-smart-chain",
+    };
+    await nomo.sendAssets({
+      asset,
+      targetAddress,
+      amount: "100000", // in wei
+    });
   }
 }
 
@@ -89,7 +123,10 @@ class GetBalanceUUID extends NomoTest {
   }
 }
 
-export const sendAssetsManualTests: Array<NomoTest> = [new SendAssetsCancel()];
+export const sendAssetsManualTests: Array<NomoTest> = [
+  new SendAssetsEthereum(),
+  new SendAssetsBEP20USDT(),
+];
 
 export const sendAssetsUnitTests: Array<NomoTest> = [
   new SendAssetsAmbiguous(),

@@ -1,4 +1,4 @@
-export type NomoEvmNetwork = "zeniq-smart-chain" | "ethereum" | "binance-smart-chain";
+export type NomoEvmNetwork = "zeniq-smart-chain" | "ethereum" | "polygon" | "binance-smart-chain";
 export type NomoNetwork = NomoEvmNetwork | "bitcoin" | "zeniq" | "litecoin" | "bitcoincash";
 export interface NomoAssetSelector {
     /**
@@ -55,6 +55,23 @@ export declare function nomoSendAssets(args: {
     asset?: NomoAssetSelector;
     targetAddress?: string;
     amount?: string;
+}): Promise<{
+    hash: string;
+    intent: {
+        recipient: string;
+        amount: string;
+        token: string;
+    };
+}>;
+/**
+ * Sends an ERC20-token to a target address.
+ * For EVM-based tokens, this is a third alternative to "ethersjs-nomo-webons" and "nomoSendAssets".
+ */
+export declare function nomoSendERC20(args: {
+    contractAddress: string;
+    targetAddress: string;
+    amount: string;
+    network: NomoEvmNetwork;
 }): Promise<{
     hash: string;
     intent: {

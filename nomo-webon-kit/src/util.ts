@@ -125,3 +125,54 @@ export async function profile(
 export function isHexString(str: string) {
   return /^[0-9a-fA-F]+$/.test(str);
 }
+
+function encodeLength(len: number, offset: number) {
+  if (len < 56) return (len + offset).toString(16).padStart(2, "0");
+  const hexLength = len.toString(16);
+  return (hexLength.length / 2 + offset + 55).toString(16) + hexLength;
+}
+
+function rlpEncode(input: any) {
+  if (typeof input === "string" && input.startsWith("0x")) {
+    input = input.slice(2);
+  }
+  if (typeof input === "number" || typeof input === "bigint") {
+    input = input.toString(16);
+  }
+  if (input.length === 0 || input === "00") {
+    return "80"; // Empty value
+  }
+  if (input.length % 2 !== 0) {
+    input = "0" + input; // Ensure even-length hex
+  }
+  const length = input.length / 2;
+  return length < 56
+    ? (128 + length).toString(16) + input
+    : encodeLength(length, 128) + input;
+}
+
+export function rlpEncodeList(elements: any[]) {
+  const encodedElements = elements.map(rlpEncode).join("");
+  const length = encodedElements.length / 2;
+  return encodeLength(length, 192) + encodedElements;
+}
+
+export async function nomoJsonRPC(args: {
+  method: string;
+  params: any[];
+  url: string;
+}): Promise<any> {
+  const res = await fetch(args.url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      jsonrpc: "2.0",
+      id: 1,
+      method: args.method,
+      params: args.params,
+    }),
+  });
+  return await res.json();
+}

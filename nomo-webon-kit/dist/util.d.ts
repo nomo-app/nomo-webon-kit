@@ -24,3 +24,9 @@ export declare function profile(fn: () => Promise<void>, options: {
     name: string;
 }): Promise<void>;
 export declare function isHexString(str: string): boolean;
+export declare function rlpEncodeList(elements: any[]): string;
+export declare function nomoJsonRPC(args: {
+    method: string;
+    params: any[];
+    url: string;
+}): Promise<any>;

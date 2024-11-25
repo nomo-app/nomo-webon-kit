@@ -95,8 +95,8 @@ export async function nomoSendERC20(args) {
         return value.toString(16).padStart(padding * 2, "0");
     }
     const transferMethodId = "a9059cbb"; // First 4 bytes of keccak256("transfer(address,uint256)")
-    const targetAddressEncoded = toHex(BigInt(args.targetAddress), 20); // Address is 20 bytes
-    const amountEncoded = toHex(BigInt(args.amount)); // Amount is 32 bytes
+    const targetAddressEncoded = toHex(BigInt(args.targetAddress), 32);
+    const amountEncoded = toHex(BigInt(args.amount), 32);
     const data = "0x" + transferMethodId + targetAddressEncoded + amountEncoded;
     const gasLimit = 75000;
     const rpcUrl = nomoGetFreeRPCUrl(args.network);

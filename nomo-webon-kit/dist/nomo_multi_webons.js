@@ -1,4 +1,4 @@
-import { invokeNomoFunction, isFallbackModeActive } from "./dart_interface";
+import { invokeNomoFunction, invokeNomoFunctionCached, isFallbackModeActive } from "./dart_interface";
 import { hasMinimumNomoVersion, nomoGetExecutionMode } from "./nomo_platform";
 import { urlSearchParamsToJson } from "./util";
 /**
@@ -16,7 +16,7 @@ export async function nomoGetManifest() {
             webon_version: "0.1.0",
         };
     }
-    return await invokeNomoFunction("nomoGetManifest", {});
+    return await invokeNomoFunctionCached("nomoGetManifest", {});
 }
 /**
  * Changes the URL-parameters in the manifest of the currently running WebOn.

@@ -10,38 +10,51 @@ if (isRunningInHub()) {
   const handleFocusIn = async (event: any) => {
     const tagName = event.target.tagName.toLowerCase();
     const inputType = event.target.type?.toLowerCase();
-  
-    if ((tagName === 'input' && (inputType === 'text' || inputType === 'password' || inputType === 'email' || inputType === 'number')) || tagName === 'textarea') {
+
+    if (
+      (tagName === "input" &&
+        (inputType === "text" ||
+          inputType === "password" ||
+          inputType === "email" ||
+          inputType === "number")) ||
+      tagName === "textarea"
+    ) {
       const target = event.target as HTMLInputElement | HTMLTextAreaElement;
       focusedElement = target;
       const args = {
-        currentValue: target.value
-      }
-      await invokeNomoFunction('nomoOpenExternalKeyboard', args);
+        currentValue: target.value,
+      };
+      await invokeNomoFunction("nomoOpenExternalKeyboard", args);
     }
   };
-  
+
   const handleFocusOut = async (event: any) => {
     const tagName = event.target.tagName.toLowerCase();
     const inputType = event.target.type?.toLowerCase();
-  
-    if ((tagName === 'input' && (inputType === 'text' || inputType === 'password' || inputType === 'email' || inputType === 'number')) || tagName === 'textarea') {
+
+    if (
+      (tagName === "input" &&
+        (inputType === "text" ||
+          inputType === "password" ||
+          inputType === "email" ||
+          inputType === "number")) ||
+      tagName === "textarea"
+    ) {
       const target = event.target as HTMLInputElement | HTMLTextAreaElement;
       focusedElement = target;
-      await invokeNomoFunction('nomoCloseExternalKeyboard', {});
+      await invokeNomoFunction("nomoCloseExternalKeyboard", {});
     }
   };
 
   const postMessageWebOnActivity = () => {
     const message = {
-      type: 'webOnActivity',
+      type: "webOnActivity",
     };
-    window.parent.postMessage(message, 'http://localhost:3009'); 
-  }
-  
+    window.parent.postMessage(message, "http://localhost:3009");
+  };
+
   window.addEventListener("focusin", handleFocusIn);
   window.addEventListener("focusout", handleFocusOut);
-
 
   // handle other types of input to detect activity
   window.addEventListener("touchstart", postMessageWebOnActivity);
@@ -53,7 +66,7 @@ if (isRunningInHub()) {
       try {
         const { status, invocationID, result } = JSON.parse(event.data);
 
-        if (status === 'input') {
+        if (status === "input") {
           if (focusedElement) {
             focusedElement.value = result.value;
             focusedElement.dispatchEvent(new Event("input"));
@@ -61,12 +74,13 @@ if (isRunningInHub()) {
             // Trigger React onChange event separately
             const tracker = (focusedElement as any)._valueTracker;
             if (tracker) {
-              tracker.setValue('tempinputtemp')
+              tracker.setValue("tempinputtemp");
             }
-            focusedElement.dispatchEvent(new Event("change", { bubbles: true }));
+            focusedElement.dispatchEvent(
+              new Event("change", { bubbles: true })
+            );
           }
-        }
-        else {
+        } else {
           const resultMap = {
             status: status,
             invocationID: invocationID,
@@ -83,7 +97,7 @@ if (isRunningInHub()) {
     }
   });
 }
-  
+
 /**
  * Decodes data from the native Nomo layer.
  */
@@ -168,6 +182,13 @@ const moduleID: string = Array.from({ length: 8 }, () =>
 ).join("");
 
 /**
+ * Installs a hook for errors that are thrown by the native Nomo layer.
+ */
+export async function nomoInstallErrorHook(hook: (e: any) => void) {
+  window.nomoErrorHook = hook;
+}
+
+/**
  * A low-level function used by other Nomo APIs.
  * This is the main entry point into the native layer.
  */
@@ -206,6 +227,13 @@ export async function invokeNomoFunction(
     }
     return nomoPromise;
   } catch (e: any) {
+    if (window.nomoErrorHook) {
+      try {
+        window.nomoErrorHook(e);
+      } catch (e) {
+        console.error("nomoErrorHook failed", e);
+      }
+    }
     // Assuming e is an Error object
     if (e.message) {
       return Promise.reject(e.message);

@@ -4,6 +4,7 @@ import * as media from "./nomo_media";
 import * as platform from "./nomo_platform";
 import * as theming from "./nomo_theming";
 import * as auth from "./nomo_auth";
+import { nomoInstallErrorHook } from "./dart_interface";
 /**
  * The nomo-object exposes WebOn-functions in an easy-to-use way.
  * The nomo-object can be used with only one import and supports the auto-completion of IDEs.
@@ -71,4 +72,5 @@ export const nomo = {
     authFetch: auth.nomoAuthFetch,
     signAuthMessage: auth.nomoSignAuthMessage,
     proofOfWork: auth.nomoProofOfWork,
+    installErrorHook: nomoInstallErrorHook,
 };

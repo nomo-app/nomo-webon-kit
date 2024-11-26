@@ -1,4 +1,4 @@
-import { invokeNomoFunction, isFallbackModeActive } from "./dart_interface";
+import { invokeNomoFunction, invokeNomoFunctionCached, isFallbackModeActive } from "./dart_interface";
 import { hasMinimumNomoVersion, nomoGetExecutionMode } from "./nomo_platform";
 import { urlSearchParamsToJson } from "./util";
 
@@ -62,7 +62,7 @@ export async function nomoGetManifest(): Promise<NomoManifest> {
       webon_version: "0.1.0",
     };
   }
-  return await invokeNomoFunction("nomoGetManifest", {});
+  return await invokeNomoFunctionCached("nomoGetManifest", {});
 }
 
 /**

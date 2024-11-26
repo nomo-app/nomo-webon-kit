@@ -3,29 +3,39 @@ if (isRunningInHub()) {
     const handleFocusIn = async (event) => {
         const tagName = event.target.tagName.toLowerCase();
         const inputType = event.target.type?.toLowerCase();
-        if ((tagName === 'input' && (inputType === 'text' || inputType === 'password' || inputType === 'email' || inputType === 'number')) || tagName === 'textarea') {
+        if ((tagName === "input" &&
+            (inputType === "text" ||
+                inputType === "password" ||
+                inputType === "email" ||
+                inputType === "number")) ||
+            tagName === "textarea") {
             const target = event.target;
             focusedElement = target;
             const args = {
-                currentValue: target.value
+                currentValue: target.value,
             };
-            await invokeNomoFunction('nomoOpenExternalKeyboard', args);
+            await invokeNomoFunction("nomoOpenExternalKeyboard", args);
         }
     };
     const handleFocusOut = async (event) => {
         const tagName = event.target.tagName.toLowerCase();
         const inputType = event.target.type?.toLowerCase();
-        if ((tagName === 'input' && (inputType === 'text' || inputType === 'password' || inputType === 'email' || inputType === 'number')) || tagName === 'textarea') {
+        if ((tagName === "input" &&
+            (inputType === "text" ||
+                inputType === "password" ||
+                inputType === "email" ||
+                inputType === "number")) ||
+            tagName === "textarea") {
             const target = event.target;
             focusedElement = target;
-            await invokeNomoFunction('nomoCloseExternalKeyboard', {});
+            await invokeNomoFunction("nomoCloseExternalKeyboard", {});
         }
     };
     const postMessageWebOnActivity = () => {
         const message = {
-            type: 'webOnActivity',
+            type: "webOnActivity",
         };
-        window.parent.postMessage(message, 'http://localhost:3009');
+        window.parent.postMessage(message, "http://localhost:3009");
     };
     window.addEventListener("focusin", handleFocusIn);
     window.addEventListener("focusout", handleFocusOut);
@@ -37,7 +47,7 @@ if (isRunningInHub()) {
         if (event.origin === "http://localhost:3009") {
             try {
                 const { status, invocationID, result } = JSON.parse(event.data);
-                if (status === 'input') {
+                if (status === "input") {
                     if (focusedElement) {
                         focusedElement.value = result.value;
                         focusedElement.dispatchEvent(new Event("input"));
@@ -45,7 +55,7 @@ if (isRunningInHub()) {
                         // Trigger React onChange event separately
                         const tracker = focusedElement._valueTracker;
                         if (tracker) {
-                            tracker.setValue('tempinputtemp');
+                            tracker.setValue("tempinputtemp");
                         }
                         focusedElement.dispatchEvent(new Event("change", { bubbles: true }));
                     }
@@ -140,6 +150,12 @@ let invocationCounter = 0;
  */
 const moduleID = Array.from({ length: 8 }, () => String.fromCharCode(Math.floor(Math.random() * 26) + 97)).join("");
 /**
+ * Installs a hook for errors that are thrown by the native Nomo layer.
+ */
+export async function nomoInstallErrorHook(hook) {
+    window.nomoErrorHook = hook;
+}
+/**
  * A low-level function used by other Nomo APIs.
  * This is the main entry point into the native layer.
  */
@@ -196,6 +212,14 @@ const fulfillPromiseFromFlutter = function (base64FromFlutter) {
     }
     else {
         fulfillFunction = window.nomoRejectPromises[invocationID];
+        if (window.nomoErrorHook) {
+            try {
+                window.nomoErrorHook(result);
+            }
+            catch (e) {
+                console.error("nomoErrorHook failed", e);
+            }
+        }
     }
     // clean up promises to avoid potential duplicate invocations
     window.nomoResolvePromises[invocationID] = null;

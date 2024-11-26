@@ -17,6 +17,10 @@ export declare function isRunningInHub(): boolean;
  */
 export declare function invokeNomoFunctionCached(functionName: string, args: object | null): Promise<any>;
 /**
+ * Installs a hook for errors that are thrown by the native Nomo layer.
+ */
+export declare function nomoInstallErrorHook(hook: (e: any) => void): Promise<void>;
+/**
  * A low-level function used by other Nomo APIs.
  * This is the main entry point into the native layer.
  */

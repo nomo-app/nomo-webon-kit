@@ -227,13 +227,6 @@ export async function invokeNomoFunction(
     }
     return nomoPromise;
   } catch (e: any) {
-    if (window.nomoErrorHook) {
-      try {
-        window.nomoErrorHook(e);
-      } catch (e) {
-        console.error("nomoErrorHook failed", e);
-      }
-    }
     // Assuming e is an Error object
     if (e.message) {
       return Promise.reject(e.message);
@@ -261,6 +254,13 @@ const fulfillPromiseFromFlutter = function (base64FromFlutter: string) {
     fulfillFunction = window.nomoResolvePromises[invocationID];
   } else {
     fulfillFunction = window.nomoRejectPromises[invocationID];
+    if (window.nomoErrorHook) {
+      try {
+        window.nomoErrorHook(result);
+      } catch (e) {
+        console.error("nomoErrorHook failed", e);
+      }
+    }
   }
   // clean up promises to avoid potential duplicate invocations
   window.nomoResolvePromises[invocationID] = null;

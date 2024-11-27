@@ -1,6 +1,6 @@
 {
   "name": "nomo-webon-kit",
-  "version": "0.1.36",
+  "version": "0.1.37",
   "description": "A TypeScript package for the Nomo WebOn API",
   "main": "dist/index.js",
   "scripts": {

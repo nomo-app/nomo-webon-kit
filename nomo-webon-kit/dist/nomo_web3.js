@@ -26,10 +26,9 @@ export async function nomoSignEvmTransaction(args) {
         if (!window.ethereum) {
             return Promise.reject("nomoSignEvmTransaction fallback mode failed: window.ethereum is undefined!");
         }
-        // Use MetaMask API to sign transaction
         const from = (await window.ethereum.request({ method: "eth_accounts" }))[0];
         const sigHex = await window.ethereum.request({
-            method: "personal_sign",
+            method: "eth_sign",
             params: [args.messageHex, from],
         });
         return { sigHex, txHex: "" };
@@ -44,6 +43,15 @@ export async function nomoSignEvmTransaction(args) {
  * Needs nomo.permission.SEND_ASSETS.
  */
 export async function nomoSendAssets(args) {
+    const uuid = args.asset?.uuid;
+    if (uuid) {
+        const assets = await nomoFetchAssets();
+        const assetFromOmonDB = assets.find((a) => a.asset === uuid);
+        if (!assetFromOmonDB) {
+            throw new Error("Could not find an asset with uuid: " + uuid);
+        }
+        args.asset = { ...assetFromOmonDB, ...args.asset, uuid };
+    }
     if (args.asset?.network !== "ethereum" &&
         args.targetAddress?.startsWith("0x") &&
         args.amount &&
@@ -59,6 +67,14 @@ export async function nomoSendAssets(args) {
         }
     }
     return await invokeNomoFunction("nomoSendAssets", args);
+}
+let _cachedAssets = null;
+async function nomoFetchAssets() {
+    if (!_cachedAssets) {
+        const res = await fetch("https://webon.info/api/tokens");
+        _cachedAssets = await res.json();
+    }
+    return _cachedAssets;
 }
 function nomoGetChainId(network) {
     switch (network) {

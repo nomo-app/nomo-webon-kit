@@ -51,9 +51,10 @@ class SendAssetsBEP20USDT extends NomoTest {
   async run() {
     const targetAddress = await nomo.getEvmAddress();
     const asset: NomoAssetSelector = {
+      uuid: "f5ed1cc1-c854-564f-9fa7-ffa7f2d73bc5",
       symbol: "USDT",
-      contractAddress: "0x55d398326f99059fF775485246999027B3197955",
-      network: "binance-smart-chain",
+      //contractAddress: "0x55d398326f99059fF775485246999027B3197955",
+      //network: "binance-smart-chain",
     };
     await nomo.sendAssets({
       asset,
@@ -116,6 +117,32 @@ class SendAssetsAmbiguous extends NomoTest {
     throw new Error("expected to throw but did not throw");
   }
 }
+class SendAssetsUnknownUUID extends NomoTest {
+  constructor() {
+    super({
+      name: "Unknown uuid",
+      description:
+        "Failed asset resolution: Try to send an asset with a non-existing uuid.",
+    });
+  }
+
+  async run() {
+    try {
+      await nomo.sendAssets({
+        asset: { symbol: "ETH", uuid: "some-garbage-uuid" },
+      });
+    } catch (e: any) {
+      if (
+        e.message === "Could not find an asset with uuid: some-garbage-uuid"
+      ) {
+        return; // pass
+      } else {
+        throw e;
+      }
+    }
+    throw new Error("expected to throw but did not throw");
+  }
+}
 
 class GetBalanceUUID extends NomoTest {
   constructor() {
@@ -154,5 +181,6 @@ export const sendAssetsManualTests: Array<NomoTest> = [
 
 export const sendAssetsUnitTests: Array<NomoTest> = [
   new SendAssetsAmbiguous(),
+  new SendAssetsUnknownUUID(),
   new GetBalanceUUID(),
 ];

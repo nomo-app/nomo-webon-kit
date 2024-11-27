@@ -105,6 +105,15 @@ export async function nomoSendAssets(args: {
   hash: string;
   intent: { recipient: string; amount: string; token: string };
 }> {
+  const uuid = args.asset?.uuid;
+  if (uuid) {
+    const assets = await nomoFetchAssets();
+    const assetFromOmonDB = assets.find((a) => (a as any).asset === uuid);
+    if (!assetFromOmonDB) {
+      throw new Error("Could not find an asset with uuid: " + uuid);
+    }
+    args.asset = { ...assetFromOmonDB, ...args.asset, uuid };
+  }
   if (
     args.asset?.network !== "ethereum" &&
     args.targetAddress?.startsWith("0x") &&
@@ -124,6 +133,16 @@ export async function nomoSendAssets(args: {
     }
   }
   return await invokeNomoFunction("nomoSendAssets", args);
+}
+
+let _cachedAssets: NomoAsset[] | null = null;
+
+async function nomoFetchAssets(): Promise<NomoAsset[]> {
+  if (!_cachedAssets) {
+    const res = await fetch("https://webon.info/api/tokens");
+    _cachedAssets = await res.json();
+  }
+  return _cachedAssets!;
 }
 
 function nomoGetChainId(network: NomoEvmNetwork): number {

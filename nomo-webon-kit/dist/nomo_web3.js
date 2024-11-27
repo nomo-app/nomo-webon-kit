@@ -26,9 +26,10 @@ export async function nomoSignEvmTransaction(args) {
         if (!window.ethereum) {
             return Promise.reject("nomoSignEvmTransaction fallback mode failed: window.ethereum is undefined!");
         }
+        // Use MetaMask API to sign transaction
         const from = (await window.ethereum.request({ method: "eth_accounts" }))[0];
         const sigHex = await window.ethereum.request({
-            method: "eth_sign",
+            method: "personal_sign",
             params: [args.messageHex, from],
         });
         return { sigHex, txHex: "" };

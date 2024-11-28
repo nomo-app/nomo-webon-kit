@@ -36,6 +36,35 @@ export async function nomoSignEvmTransaction(args) {
     }
     return await invokeNomoFunction("nomoSignEvmTransaction", args);
 }
+function canSendWithOpenSource(network) {
+    if (!network) {
+        return false;
+    }
+    switch (network) {
+        case "polygon":
+            return true;
+        case "binance-smart-chain":
+            return true;
+        case "zeniq-smart-chain":
+            return true;
+        default:
+            return false;
+    }
+}
+function nomoNormalizeNetwork(network) {
+    if (network === "bsc") {
+        return "binance-smart-chain";
+    }
+    else if (network === "zsc") {
+        return "zeniq-smart-chain";
+    }
+    else if (network === "eth") {
+        return "ethereum";
+    }
+    else {
+        return network;
+    }
+}
 /**
  * Opens a confirmation-dialog to send assets away from the Nomo App.
  * Assets are only sent if the user confirms the dialog.
@@ -53,7 +82,10 @@ export async function nomoSendAssets(args) {
         }
         args.asset = { ...assetFromOmonDB, ...args.asset, uuid };
     }
-    if (args.asset?.network !== "ethereum" &&
+    if (args.asset?.network) {
+        args.asset.network = nomoNormalizeNetwork(args.asset.network);
+    }
+    if (canSendWithOpenSource(args.asset?.network) &&
         args.targetAddress?.startsWith("0x") &&
         args.amount &&
         args.asset?.contractAddress &&
@@ -108,6 +140,15 @@ function nomoGetFreeRPCUrl(network) {
  * For EVM-based tokens, this is a third alternative to "ethersjs-nomo-webons" and "nomoSendAssets".
  */
 export async function nomoSendERC20(args) {
+    if (!canSendWithOpenSource) {
+        return await nomoSendAssets({
+            asset: {
+                contractAddress: args.contractAddress,
+                network: args.network,
+            },
+            ...args,
+        });
+    }
     function toHex(value, padding = 32) {
         return value.toString(16).padStart(padding * 2, "0");
     }

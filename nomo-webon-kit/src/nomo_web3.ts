@@ -90,6 +90,34 @@ export async function nomoSignEvmTransaction(args: {
   return await invokeNomoFunction("nomoSignEvmTransaction", args);
 }
 
+function canSendWithOpenSource(network?: NomoNetwork): boolean {
+  if (!network) {
+    return false;
+  }
+  switch (network) {
+    case "polygon":
+      return true;
+    case "binance-smart-chain":
+      return true;
+    case "zeniq-smart-chain":
+      return true;
+    default:
+      return false;
+  }
+}
+
+function nomoNormalizeNetwork(network: NomoNetwork): NomoNetwork {
+  if ((network as string) === "bsc") {
+    return "binance-smart-chain";
+  } else if ((network as string) === "zsc") {
+    return "zeniq-smart-chain";
+  } else if ((network as string) === "eth") {
+    return "ethereum";
+  } else {
+    return network;
+  }
+}
+
 /**
  * Opens a confirmation-dialog to send assets away from the Nomo App.
  * Assets are only sent if the user confirms the dialog.
@@ -114,8 +142,11 @@ export async function nomoSendAssets(args: {
     }
     args.asset = { ...assetFromOmonDB, ...args.asset, uuid };
   }
+  if (args.asset?.network) {
+    args.asset.network = nomoNormalizeNetwork(args.asset.network);
+  }
   if (
-    args.asset?.network !== "ethereum" &&
+    canSendWithOpenSource(args.asset?.network) &&
     args.targetAddress?.startsWith("0x") &&
     args.amount &&
     args.asset?.contractAddress &&
@@ -186,6 +217,15 @@ export async function nomoSendERC20(args: {
   hash: string;
   intent: { recipient: string; amount: string; token: string };
 }> {
+  if (!canSendWithOpenSource) {
+    return await nomoSendAssets({
+      asset: {
+        contractAddress: args.contractAddress,
+        network: args.network,
+      } as NomoAssetSelector,
+      ...args,
+    });
+  }
   function toHex(value: bigint, padding = 32) {
     return value.toString(16).padStart(padding * 2, "0");
   }

@@ -217,7 +217,7 @@ export async function nomoSendERC20(args: {
   hash: string;
   intent: { recipient: string; amount: string; token: string };
 }> {
-  if (!canSendWithOpenSource) {
+  if (!canSendWithOpenSource()) {
     return await nomoSendAssets({
       asset: {
         contractAddress: args.contractAddress,

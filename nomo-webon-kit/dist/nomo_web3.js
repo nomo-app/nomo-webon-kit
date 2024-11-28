@@ -140,7 +140,7 @@ function nomoGetFreeRPCUrl(network) {
  * For EVM-based tokens, this is a third alternative to "ethersjs-nomo-webons" and "nomoSendAssets".
  */
 export async function nomoSendERC20(args) {
-    if (!canSendWithOpenSource) {
+    if (!canSendWithOpenSource()) {
         return await nomoSendAssets({
             asset: {
                 contractAddress: args.contractAddress,

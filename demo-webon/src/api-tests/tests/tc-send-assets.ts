@@ -1,4 +1,4 @@
-import { nomo, NomoAssetSelector } from "nomo-webon-kit";
+import { nomo, NomoAssetSelector, NomoEvmNetwork } from "nomo-webon-kit";
 import { NomoTest } from "../test-kit/nomo-test";
 
 async function nomoSendAssetExpectCancel(args: {
@@ -78,6 +78,29 @@ class SendAssetsBEP20BUSD extends NomoTest {
       symbol: "BUSD",
       contractAddress: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
       network: "binance-smart-chain",
+    };
+    await nomo.sendAssets({
+      asset,
+      targetAddress,
+      amount: "10000", // in wei
+    });
+  }
+}
+
+class SendAssetsZEN205RINGS extends NomoTest {
+  constructor() {
+    super({
+      name: "Send Assets: ZEN20-5RINGS",
+      description: "Send 5RINGS to yourself.",
+    });
+  }
+
+  async run() {
+    const targetAddress = await nomo.getEvmAddress();
+    const asset: NomoAssetSelector = {
+      symbol: "5RINGS",
+      contractAddress: "0x1F23F743aB71b38919b40c9CAECBA3B1296767de",
+      network: "zsc" as NomoEvmNetwork,
     };
     await nomo.sendAssets({
       asset,
@@ -177,6 +200,7 @@ export const sendAssetsManualTests: Array<NomoTest> = [
   new SendAssetsEthereum(),
   new SendAssetsBEP20USDT(),
   new SendAssetsBEP20BUSD(),
+  new SendAssetsZEN205RINGS(),
 ];
 
 export const sendAssetsUnitTests: Array<NomoTest> = [

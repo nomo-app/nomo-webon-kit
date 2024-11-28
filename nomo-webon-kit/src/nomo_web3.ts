@@ -217,15 +217,6 @@ export async function nomoSendERC20(args: {
   hash: string;
   intent: { recipient: string; amount: string; token: string };
 }> {
-  if (!canSendWithOpenSource()) {
-    return await nomoSendAssets({
-      asset: {
-        contractAddress: args.contractAddress,
-        network: args.network,
-      } as NomoAssetSelector,
-      ...args,
-    });
-  }
   function toHex(value: bigint, padding = 32) {
     return value.toString(16).padStart(padding * 2, "0");
   }

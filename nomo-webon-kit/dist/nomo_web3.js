@@ -36,21 +36,6 @@ export async function nomoSignEvmTransaction(args) {
     }
     return await invokeNomoFunction("nomoSignEvmTransaction", args);
 }
-function canSendWithOpenSource(network) {
-    if (!network) {
-        return false;
-    }
-    switch (network) {
-        case "polygon":
-            return true;
-        case "binance-smart-chain":
-            return true;
-        case "zeniq-smart-chain":
-            return true;
-        default:
-            return false;
-    }
-}
 function nomoNormalizeNetwork(network) {
     if (network === "bsc") {
         return "binance-smart-chain";
@@ -85,7 +70,7 @@ export async function nomoSendAssets(args) {
     if (args.asset?.network) {
         args.asset.network = nomoNormalizeNetwork(args.asset.network);
     }
-    if (canSendWithOpenSource(args.asset?.network) &&
+    if (nomoGetFreeRPCUrl(args.asset?.network) &&
         args.targetAddress?.startsWith("0x") &&
         args.amount &&
         args.asset?.contractAddress &&
@@ -124,6 +109,9 @@ function nomoGetChainId(network) {
     }
 }
 function nomoGetFreeRPCUrl(network) {
+    if (!network) {
+        return null;
+    }
     switch (network) {
         case "binance-smart-chain":
             return "https://bsc-dataseed.binance.org";
@@ -132,7 +120,7 @@ function nomoGetFreeRPCUrl(network) {
         case "polygon":
             return "https://polygon.llamarpc.com";
         default:
-            throw Error("No free open-source RPC-URL for network: " + network);
+            return null;
     }
 }
 /**
@@ -149,6 +137,9 @@ export async function nomoSendERC20(args) {
     const data = "0x" + transferMethodId + targetAddressEncoded + amountEncoded;
     const gasLimit = 75000;
     const rpcUrl = nomoGetFreeRPCUrl(args.network);
+    if (!rpcUrl) {
+        throw Error("No open-source support for network " + args.network);
+    }
     const nonce = await nomoJsonRPC({
         method: "eth_getTransactionCount",
         params: [await nomoGetEvmAddress(), "latest"],

@@ -22,7 +22,7 @@ async function nomoSendAssetExpectCancel(args: {
   throw new Error("The tester did not cancel the action");
 }
 
-class SendAssetsEthereum extends NomoTest {
+class SendAssetsNativeEthereumCancel extends NomoTest {
   constructor() {
     super({
       name: "Send Assets: Ethereum",
@@ -37,6 +37,99 @@ class SendAssetsEthereum extends NomoTest {
       network: "ethereum",
     };
     await nomoSendAssetExpectCancel({ asset });
+  }
+}
+
+class SendAssetsNativePolygon extends NomoTest {
+  constructor() {
+    super({
+      name: "Send Assets: Polygon",
+      description: "Send native Polygon to yourself.",
+    });
+  }
+
+  async run() {
+    const asset: NomoAssetSelector = {
+      symbol: "Polygon",
+      name: "Polygon",
+      network: "polygon",
+    };
+    const targetAddress = await nomo.getEvmAddress();
+    await nomo.sendAssets({
+      asset,
+      targetAddress,
+      amount: "100000000000000000", // in wei
+    });
+  }
+}
+
+class SendAssetsNativeZENIQ extends NomoTest {
+  constructor() {
+    super({
+      name: "Send Assets: ZENIQ Smartchain",
+      description: "Send native ZENIQ to yourself.",
+    });
+  }
+
+  async run() {
+    const asset: NomoAssetSelector = {
+      symbol: "ZENIQ",
+      name: "ZENIQ",
+      network: "zeniq-smart-chain",
+    };
+    const targetAddress = await nomo.getEvmAddress();
+    await nomo.sendAssets({
+      asset,
+      targetAddress,
+      amount: "100000000000000000", // in wei
+    });
+  }
+}
+
+class SendAssetsNativeBNB extends NomoTest {
+  constructor() {
+    super({
+      name: "Send Assets: BNB",
+      description: "Send native BNB to yourself.",
+    });
+  }
+
+  async run() {
+    const asset: NomoAssetSelector = {
+      symbol: "BNB",
+      name: "BNB",
+      network: "binance-smart-chain",
+    };
+    const targetAddress = await nomo.getEvmAddress();
+    await nomo.sendAssets({
+      asset,
+      targetAddress,
+      amount: "10000000000000000", // in wei
+    });
+  }
+}
+
+class SendAssetsPoly20BRZ extends NomoTest {
+  constructor() {
+    super({
+      name: "Send Assets: POLY20-BRZ",
+      description: "Send BRZ to yourself.",
+    });
+  }
+
+  async run() {
+    const targetAddress = await nomo.getEvmAddress();
+    const asset: NomoAssetSelector = {
+      name: "BRZ Token",
+      symbol: "BRZ",
+      contractAddress: "0x4eD141110F6EeeAbA9A1df36d8c26f684d2475Dc",
+      network: "polygon",
+    };
+    await nomo.sendAssets({
+      asset,
+      targetAddress,
+      amount: "500000000000000000000",
+    });
   }
 }
 
@@ -197,7 +290,11 @@ class GetBalanceUUID extends NomoTest {
 }
 
 export const sendAssetsManualTests: Array<NomoTest> = [
-  new SendAssetsEthereum(),
+  new SendAssetsNativeEthereumCancel(),
+  new SendAssetsNativePolygon(),
+  new SendAssetsNativeBNB(),
+  new SendAssetsNativeZENIQ(),
+  new SendAssetsPoly20BRZ(),
   new SendAssetsBEP20USDT(),
   new SendAssetsBEP20BUSD(),
   new SendAssetsZEN205RINGS(),

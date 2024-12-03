@@ -44,7 +44,6 @@ class NomoCloseTest extends NomoTest {
   }
 }
 
-export const nomoCoreTests: Array<NomoTest> = [
-  new NomoCloseTest(),
-  new EvmChecksumTest(),
-];
+export const nomoCoreTests: Array<NomoTest> = [new EvmChecksumTest()];
+
+export const nomoCoreManualTests: Array<NomoTest> = [new NomoCloseTest()];

@@ -81,25 +81,6 @@ export default function Home() {
     nomo.registerOnWebOnVisible(() => {
       nomo.checkForWebOnUpdate();
     });
-    profile(
-      async () => {
-        await nomo.proofOfWork({
-          challenge: "0FDA",
-          shaInputPrefix: "demo-webon-" + Date.now(),
-        });
-      },
-      { name: "proofOfWork" }
-    );
-    nomo
-      .setWebOnParameters({
-        urlParams: { a: [1, 2, 3], b: { c: 1n, d: { e: [4, "5//%20ss s"] } } },
-      })
-      .then(() => {
-        nomo
-          .getWebOnParameters()
-          .then((res) => console.log("getWebOnParameters", res))
-          .catch(console.error);
-      });
   }, []);
   useEffect(() => {
     const provider = zscProvider;

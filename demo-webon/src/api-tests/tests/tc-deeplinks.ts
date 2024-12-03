@@ -49,7 +49,7 @@ class MessengerDeeplinkTest extends NomoTest {
   async run() {
     alert("If this test works, then the Decentralized Messenger will open!");
 
-    const messengerDeeplink = "https://nomo.id/@0xa2fdd6ef00d6aaa3c136df06f37e4d9151197944";
+    const messengerDeeplink = "https://nomo.id/@0xcb70cc866077dd5f4c9c98eafb44e10d7eb6c58d";
     await nomo.injectQRCode({
       qrCode: messengerDeeplink,
       navigateBack: false,

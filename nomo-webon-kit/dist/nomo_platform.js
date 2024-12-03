@@ -154,3 +154,10 @@ export async function nomoShare(args) {
         navigator.share({ text: args.text });
     }
 }
+/**
+ * Closes the current WebOn.
+ * Afterwards, it will launch a deeplink if provided.
+ */
+export async function nomoClose(args) {
+    await invokeNomoFunction("nomoClose", args);
+}

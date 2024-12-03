@@ -1,31 +1,6 @@
 import { nomo } from "nomo-webon-kit";
 import { NomoTest } from "../test-kit/nomo-test";
 
-class CheckIfRealNomoTest extends NomoTest {
-  constructor() {
-    super({
-      name: "Anti-spam",
-      description:
-        "Check if a request comes from a real Nomo-wallet and not from some automated script.",
-    });
-  }
-
-  async run() {
-    const evmAddress = await nomo.getEvmAddress();
-    const res = await nomo.authHttp({
-      url: "https://nomoplus.com/api/has-nomo",
-      method: "POST",
-      body: { eth_addr: evmAddress },
-    });
-    const resJson = JSON.parse(res.response);
-    if (!resJson.has_nomo) {
-      throw new Error(
-        "has_nomo is not true. Is this a real Nomo wallet? " + res.response
-      );
-    }
-  }
-}
-
 class EvmChecksumTest extends NomoTest {
   constructor() {
     super({
@@ -51,7 +26,25 @@ class EvmChecksumTest extends NomoTest {
   }
 }
 
+class NomoCloseTest extends NomoTest {
+  constructor() {
+    super({
+      name: "nomo.close()",
+      description: "Closes the current WebOn and then launches a deeplink.",
+    });
+  }
+
+  async run() {
+    const manifest = await nomo.getManifest();
+    const url = manifest.webon_url;
+    const deeplink = url
+      .replace("https://", "https://nomo.app/webon/")
+      .replace("http://", "http://nomo.app/webon/");
+    await nomo.close({ deeplink }); // re-open the current WebOn after closing it
+  }
+}
+
 export const nomoCoreTests: Array<NomoTest> = [
-  new CheckIfRealNomoTest(),
+  new NomoCloseTest(),
   new EvmChecksumTest(),
 ];

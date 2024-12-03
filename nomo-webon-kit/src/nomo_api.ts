@@ -69,6 +69,7 @@ export const nomo = {
   share: platform.nomoShare,
   getClipboard: platform.nomoGetClipboard,
   setClipboard: platform.nomoSetClipboard,
+  close: platform.nomoClose,
 
   injectNomoCSSVariables: theming.injectNomoCSSVariables,
   switchNomoTheme: theming.switchNomoTheme,

@@ -18,6 +18,7 @@ import { proofOfPaymentTests } from "./tests/tc-proof-of-payment";
 import { useNavigate } from "react-router-dom";
 import { getLanguageTests } from "./tests/tc-get-language";
 import { clipboardTests } from "./tests/tc-clipboard";
+import { nomoCoreTests } from "./tests/tc-nomo-core";
 
 const manualTests: Array<NomoTest> = [
   ...sendAssetsManualTests,
@@ -27,6 +28,7 @@ const manualTests: Array<NomoTest> = [
 ];
 
 const unitTests: Array<NomoTest> = [
+  ...nomoCoreTests,
   ...proofOfWorkTests,
   ...nomoAuthTests,
   ...sendAssetsUnitTests,

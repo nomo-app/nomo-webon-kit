@@ -97,3 +97,10 @@ export declare function nomoShare(args: {
     text?: string;
     subject?: string;
 }): Promise<void>;
+/**
+ * Closes the current WebOn.
+ * Afterwards, it will launch a deeplink if provided.
+ */
+export declare function nomoClose(args: {
+    deeplink: string | null;
+}): Promise<void>;

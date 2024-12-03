@@ -71,6 +71,7 @@ export declare const nomo: {
     share: typeof platform.nomoShare;
     getClipboard: typeof platform.nomoGetClipboard;
     setClipboard: typeof platform.nomoSetClipboard;
+    close: typeof platform.nomoClose;
     injectNomoCSSVariables: typeof theming.injectNomoCSSVariables;
     switchNomoTheme: typeof theming.switchNomoTheme;
     getCurrentNomoTheme: typeof theming.getCurrentNomoTheme;

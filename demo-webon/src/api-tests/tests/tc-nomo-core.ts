@@ -40,7 +40,7 @@ class NomoCloseTest extends NomoTest {
     const deeplink = url
       .replace("https://", "https://nomo.app/webon/")
       .replace("http://", "http://nomo.app/webon/");
-    await nomo.close({ deeplink }); // re-open the current WebOn after closing it
+    await nomo.close({ deeplink, launchMode: null }); // re-open the current WebOn after closing it
   }
 }
 

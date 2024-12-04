@@ -100,7 +100,9 @@ export declare function nomoShare(args: {
 /**
  * Closes the current WebOn.
  * Afterwards, it will launch a deeplink if provided.
+ * A launchMode can be specified to control how the deeplink is opened.
  */
 export declare function nomoClose(args: {
     deeplink: string | null;
+    launchMode: null | "platformDefault" | "inAppWebView" | "externalApplication" | "externalNonBrowserApplication";
 }): Promise<void>;

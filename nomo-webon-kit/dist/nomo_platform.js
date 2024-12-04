@@ -157,6 +157,7 @@ export async function nomoShare(args) {
 /**
  * Closes the current WebOn.
  * Afterwards, it will launch a deeplink if provided.
+ * A launchMode can be specified to control how the deeplink is opened.
  */
 export async function nomoClose(args) {
     await invokeNomoFunction("nomoClose", args);

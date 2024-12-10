@@ -124,7 +124,7 @@ class QrInjectionTest extends NomoTest {
   async run() {
     const nomoIdTestQRCode =
       "https://nomo.id/qrtest.zeniq.dev/backend/qrExecuteDefault?n=732341402ea1b483c523f83a2c79fee7&r=/backend/qrScanDefault";
-    nomo.injectQRCode({
+    await nomo.injectQRCode({
       qrCode: nomoIdTestQRCode,
       navigateBack: false,
     });

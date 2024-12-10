@@ -161,10 +161,7 @@ class MintNFTDemo extends NomoTest {
   }
 
   async run() {
-    const faucetNeeded = await openFaucetIfNeeded();
-    if (faucetNeeded) {
-      return;
-    }
+    await openFaucetIfNeeded();
     await mintNFT();
   }
 }

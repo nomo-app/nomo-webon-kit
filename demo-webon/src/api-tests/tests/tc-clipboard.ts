@@ -27,13 +27,16 @@ class NomoLocalStorageTest extends NomoTest {
 
   async run() {
     const testText = "bar";
-    await nomo.localStorage.setItem("foo", testText);
-    const res = await nomo.localStorage.getItem("foo");
+    const testKey = "test_foo_" + Date.now(); // Unique key
+    await nomo.localStorage.setItem(testKey, testText);
+    const res = await nomo.localStorage.getItem(testKey);
     if (res !== testText) {
       throw new Error(
         `localStorage content mismatch. Expected: "${testText}", but got: "${res}"`
       );
     }
+    // Cleanup
+    await nomo.localStorage.removeItem(testKey);
   }
 }
 

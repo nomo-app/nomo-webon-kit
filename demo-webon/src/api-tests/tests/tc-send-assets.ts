@@ -172,6 +172,7 @@ class SendAssetsBEP20BUSD extends NomoTest {
       contractAddress: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
       network: "binance-smart-chain",
     };
+    await nomo.selectAssets(asset);
     await nomo.sendAssets({
       asset,
       targetAddress,
@@ -195,6 +196,7 @@ class SendAssetsZEN205RINGS extends NomoTest {
       contractAddress: "0x1F23F743aB71b38919b40c9CAECBA3B1296767de",
       network: "zsc" as NomoEvmNetwork,
     };
+    await nomo.selectAssets(asset);
     await nomo.sendAssets({
       asset,
       targetAddress,

@@ -1,6 +1,6 @@
 import { nomo, NomoManifest } from "nomo-webon-kit";
 
-export async function launchAllWebOnsDemo() {
+export async function launchOtherWebOnsDemo() {
   const manifests = (await nomo.getInstalledWebOns()).manifests;
   const ownManifest = await nomo.getManifest();
   const otherManifests = manifests.filter(
@@ -9,7 +9,7 @@ export async function launchAllWebOnsDemo() {
   if (!otherManifests.length) {
     throw Error("You need to install other WebOns to test this feature.");
   }
-  const webOnsToLaunch = otherManifests.slice(0, 5);
+  const webOnsToLaunch = otherManifests.slice(0, 2);
   for (const manifest of webOnsToLaunch) {
     // nomo.installWebon launches a WebOn if already installed
     await nomo.installWebOn({
@@ -35,7 +35,6 @@ export async function launchAllWebOnsDemo() {
     permissions: [],
     webon_version: "0.1.0",
     nomo_manifest_version: "1.2.0",
-    dependencies: ["https://webon3.com/js/hello_world.js"],
   };
   await nomo.installUrlAsWebOn({
     manifest: urlForInstalling,

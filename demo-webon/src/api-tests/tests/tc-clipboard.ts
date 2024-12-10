@@ -1,6 +1,45 @@
 import { nomo, sleep } from "nomo-webon-kit";
 import { NomoTest } from "../test-kit/nomo-test";
 
+class GetDeviceHashesTest extends NomoTest {
+  constructor() {
+    super({
+      name: "nomo.getDeviceHashes()",
+      description: "Test for device hashes.",
+    });
+  }
+
+  async run() {
+    const res = await nomo.getDeviceHashes();
+    if (!res.deviceHashes.length) {
+      throw new Error("deviceHashes is empty");
+    }
+  }
+}
+
+class NomoLocalStorageTest extends NomoTest {
+  constructor() {
+    super({
+      name: "nomo.localStorage",
+      description: "Check if setItem/getItem are working.",
+    });
+  }
+
+  async run() {
+    const testText = "bar";
+    const testKey = "test_foo_" + Date.now(); // Unique key
+    await nomo.localStorage.setItem(testKey, testText);
+    const res = await nomo.localStorage.getItem(testKey);
+    if (res !== testText) {
+      throw new Error(
+        `localStorage content mismatch. Expected: "${testText}", but got: "${res}"`
+      );
+    }
+    // Cleanup
+    await nomo.localStorage.removeItem(testKey);
+  }
+}
+
 class SetGetClipboardTest extends NomoTest {
   constructor() {
     super({
@@ -54,6 +93,8 @@ class SetClipboardInvalidInputTest extends NomoTest {
 }
 
 export const clipboardTests: Array<NomoTest> = [
+  new GetDeviceHashesTest(),
+  new NomoLocalStorageTest(),
   new SetGetClipboardTest(),
   new SetClipboardInvalidInputTest(),
 ];

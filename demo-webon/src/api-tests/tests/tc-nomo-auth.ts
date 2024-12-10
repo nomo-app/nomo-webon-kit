@@ -1,6 +1,7 @@
 import { nomo } from "nomo-webon-kit";
 import { NomoTest } from "../test-kit/nomo-test";
 import { ethers } from "ethers";
+import { ethSigDemo } from "../../app/evm/eth_sig";
 
 class NomoSignAuthMessage extends NomoTest {
   constructor() {
@@ -94,9 +95,25 @@ class NomoAuthFetchPost extends NomoTest {
   }
 }
 
+class EthSigDemo extends NomoTest {
+  constructor() {
+    super({
+      name: "Sign ETH message",
+      description:
+        "WebOns can sign messages to prove that the user controls a specific wallet.",
+    });
+  }
+
+  async run() {
+    // this test is part of linked documentation
+    await ethSigDemo();
+  }
+}
+
 export const nomoAuthTests: Array<NomoTest> = [
   new NomoSignAuthMessage(),
   new NomoAuthHttpPost(),
   new NomoAuthHttpPostNested(),
   new NomoAuthFetchPost(),
+  new EthSigDemo(),
 ];

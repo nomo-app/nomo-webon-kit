@@ -1,5 +1,7 @@
 import { nomo } from "nomo-webon-kit";
 import { NomoTest } from "../test-kit/nomo-test";
+import { mintNFT } from "../../app/evm/mint_nft";
+import { openFaucetIfNeeded } from "../../app/evm/evm_utils";
 
 class SignTxCancel extends NomoTest {
   constructor() {
@@ -149,6 +151,24 @@ class SignTxUndecodable extends NomoTest {
   }
 }
 
+class MintNFTDemo extends NomoTest {
+  constructor() {
+    super({
+      name: "Demo with ethers.js",
+      description:
+        "Mint a NomoDev Token on the ZENIQ Smartchain, signed by the Nomo App via ethers.js-V6.",
+    });
+  }
+
+  async run() {
+    const faucetNeeded = await openFaucetIfNeeded();
+    if (faucetNeeded) {
+      return;
+    }
+    await mintNFT();
+  }
+}
+
 export const signTxTests: Array<NomoTest> = [
   new SignTxCancel(),
   new SignTxERC20Approval(),
@@ -156,4 +176,5 @@ export const signTxTests: Array<NomoTest> = [
   new SignTxUniswap(),
   new SignTxRawValue(),
   new SignTxUndecodable(),
+  new MintNFTDemo(),
 ];

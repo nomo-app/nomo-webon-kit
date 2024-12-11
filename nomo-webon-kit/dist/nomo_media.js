@@ -69,6 +69,15 @@ export async function nomoPickFromGallery(args) {
     };
 }
 /**
+ * Opens a file-picker for selecting one or multiple files.
+ *
+ * Needs nomo.permission.READ_MEDIA.
+ * Since Nomo 0.6.10.
+ */
+export async function nomoPickFiles(args) {
+    return await invokeNomoFunction("nomoPickFiles", args);
+}
+/**
  * Can be used for chatting with other NOMO-users, but also for push-notifications or chat-bots.
  *
  * Needs nomo.permission.SEND_MESSAGE.

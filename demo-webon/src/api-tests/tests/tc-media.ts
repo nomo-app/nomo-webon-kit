@@ -46,7 +46,7 @@ class NomoPickMultipleFilesTest extends NomoTest {
   async run() {
     // Test 2: Pick multiple image files with specific extensions
     const multiImageResult = await nomo.pickFiles({
-      fileType: "image",
+      fileType: "custom", // custom is needed for allowedExtensions
       dialogTitle: "Select multiple image files",
       allowMultiple: true,
       allowedExtensions: [".jpg", ".png"],
@@ -94,7 +94,7 @@ class NomoTakePictureTest extends NomoTest {
   constructor() {
     super({
       name: "nomo.takePicture()",
-      description: "Test taking a picture with various configurations",
+      description: "Test taking a picture",
     });
   }
 

@@ -58,6 +58,28 @@ export declare function nomoPickFromGallery(args?: {
     path: string;
     imageBase64: string;
 }>;
+export interface NomoPlatformFile {
+    path?: string;
+    name: string;
+    size: number;
+    bytesBase64: string;
+    identifier?: string;
+}
+/**
+ * Opens a file-picker for selecting one or multiple files.
+ *
+ * Needs nomo.permission.READ_MEDIA.
+ * Since Nomo 0.6.10.
+ */
+export declare function nomoPickFiles(args: {
+    fileType: "any" | "media" | "image" | "video" | "audio" | "custom";
+    dialogTitle: string;
+    allowedExtensions?: string[];
+    allowMultiple?: boolean;
+    allowCompression?: boolean;
+}): Promise<{
+    files: NomoPlatformFile[];
+}>;
 /**
  * Can be used for chatting with other NOMO-users, but also for push-notifications or chat-bots.
  *

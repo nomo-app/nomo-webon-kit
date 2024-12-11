@@ -48,6 +48,7 @@ export const nomo = {
     getMessengerAddress: media.nomoGetMessengerAddress,
     takePicture: media.nomoTakePicture,
     pickFromGallery: media.nomoPickFromGallery,
+    pickFiles: media.nomoPickFiles,
     qrScan: media.nomoQrScan,
     injectQRCode: media.nomoInjectQRCode,
     fallbackQRCode: media.nomoFallbackQRCode,

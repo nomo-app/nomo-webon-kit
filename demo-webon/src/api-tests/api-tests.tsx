@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { getLanguageTests } from "./tests/tc-get-language";
 import { clipboardTests } from "./tests/tc-clipboard";
 import { nomoCoreManualTests, nomoCoreTests } from "./tests/tc-nomo-core";
+import { nomoMediaTests } from "./tests/tc-media";
 
 const manualTests: Array<NomoTest> = [
   ...sendAssetsManualTests,
@@ -26,6 +27,7 @@ const manualTests: Array<NomoTest> = [
   ...sandBoxingTests,
   ...deeplinkTests,
   ...nomoCoreManualTests,
+  ...nomoMediaTests,
 ];
 
 const unitTests: Array<NomoTest> = [

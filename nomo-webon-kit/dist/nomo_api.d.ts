@@ -54,6 +54,7 @@ export declare const nomo: {
     getMessengerAddress: typeof media.nomoGetMessengerAddress;
     takePicture: typeof media.nomoTakePicture;
     pickFromGallery: typeof media.nomoPickFromGallery;
+    pickFiles: typeof media.nomoPickFiles;
     qrScan: typeof media.nomoQrScan;
     injectQRCode: typeof media.nomoInjectQRCode;
     fallbackQRCode: typeof media.nomoFallbackQRCode;

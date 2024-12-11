@@ -49,7 +49,7 @@ class NomoPickMultipleFilesTest extends NomoTest {
       fileType: "custom", // custom is needed for allowedExtensions
       dialogTitle: "Select multiple image files",
       allowMultiple: true,
-      allowedExtensions: [".jpg", ".png"],
+      allowedExtensions: ["jpg", "png"], // use extensions without dot
       allowCompression: true,
     });
 

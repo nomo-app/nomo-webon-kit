@@ -1,5 +1,9 @@
 export type NomoEvmNetwork = "zeniq-smart-chain" | "ethereum" | "polygon" | "binance-smart-chain";
 export type NomoNetwork = NomoEvmNetwork | "bitcoin" | "zeniq" | "litecoin" | "bitcoincash";
+/**
+ * This is the contract address where native ZENIQ token get automatically wrapped into ZENIQ-ZEN20.
+ */
+export declare const contractAddressZENIQZEN20 = "0x5b52bfB8062Ce664D74bbCd4Cd6DC7Df53Fd7233";
 export interface NomoAssetSelector {
     /**
      * symbol will be ignored if contractAddress or uuid is specified.

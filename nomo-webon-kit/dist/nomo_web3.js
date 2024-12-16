@@ -4,6 +4,10 @@ import { nomoGetInstalledWebOns, nomoInstallWebOn } from "./nomo_multi_webons";
 import { hasMinimumNomoVersion } from "./nomo_platform";
 import { nomoJsonRPC, rlpEncodeList, sleep } from "./util";
 /**
+ * This is the contract address where native ZENIQ token get automatically wrapped into ZENIQ-ZEN20.
+ */
+export const contractAddressZENIQZEN20 = "0x5b52bfB8062Ce664D74bbCd4Cd6DC7Df53Fd7233";
+/**
  * Prevents functions like "nomoGetEvmAddress" from falling back to browser extensions like MetaMask.
  */
 export function nomoDisableFallbackWallet() {

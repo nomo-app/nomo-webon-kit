@@ -1,4 +1,9 @@
-import { nomo, NomoAssetSelector, NomoEvmNetwork } from "nomo-webon-kit";
+import {
+  contractAddressZENIQZEN20,
+  nomo,
+  NomoAssetSelector,
+  NomoEvmNetwork,
+} from "nomo-webon-kit";
 import { NomoTest } from "../test-kit/nomo-test";
 
 async function nomoSendAssetExpectCancel(args: {
@@ -76,6 +81,30 @@ class SendAssetsNativeZENIQ extends NomoTest {
       symbol: "ZENIQ",
       name: "ZENIQ",
       network: "zeniq-smart-chain",
+    };
+    const targetAddress = await nomo.getEvmAddress();
+    await nomo.sendAssets({
+      asset,
+      targetAddress,
+      amount: "100000000000000000", // in wei
+    });
+  }
+}
+
+class SendAssetsAutoWrappedNativeZENIQZEN20 extends NomoTest {
+  constructor() {
+    super({
+      name: "Send Assets: ZENIQ Smartchain ZEN20",
+      description: "Send auto-wrapped ZENIQ-ZEN20 to yourself.",
+    });
+  }
+
+  async run() {
+    const asset: NomoAssetSelector = {
+      symbol: "ZENIQ",
+      name: "ZENIQ",
+      network: "zeniq-smart-chain",
+      contractAddress: contractAddressZENIQZEN20,
     };
     const targetAddress = await nomo.getEvmAddress();
     await nomo.sendAssets({
@@ -296,6 +325,7 @@ export const sendAssetsManualTests: Array<NomoTest> = [
   new SendAssetsNativePolygon(),
   new SendAssetsNativeBNB(),
   new SendAssetsNativeZENIQ(),
+  new SendAssetsAutoWrappedNativeZENIQZEN20(),
   new SendAssetsPoly20BRZ(),
   new SendAssetsBEP20USDT(),
   new SendAssetsBEP20BUSD(),

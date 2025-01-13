@@ -1,4 +1,4 @@
-import { invokeNomoFunction, invokeNomoFunctionCached, isFallbackModeActive } from "./dart_interface";
+import { invokeNomoFunction, invokeNomoFunctionCached, isFallbackModeActive, } from "./dart_interface";
 import { hasMinimumNomoVersion, nomoGetExecutionMode } from "./nomo_platform";
 import { urlSearchParamsToJson } from "./util";
 /**

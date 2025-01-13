@@ -26,6 +26,11 @@ export interface NomoManifest {
      */
     webon_url: string;
     /**
+     * webon_icon should be a URL to a png-icon.
+     * If not specified, Nomo App will use the default URL "/nomo_icon.png".
+     */
+    webon_icon?: string;
+    /**
      * webon_version should comply with the semantic versioning standard.
      * See https://semver.org/ for details.
      */

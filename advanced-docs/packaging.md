@@ -38,7 +38,7 @@ export const prerender = true // enable prerender
 
 # Required files
 
-The following files are required to be in a tar.gz-archive, otherwise the Nomo App could refuse to install the WebOn.
+The following files are required to be in a tar.gz-archive, otherwise the Nomo App could refuse to add a WebOn.
 
 ## Manifest
 
@@ -52,5 +52,5 @@ The tar.gz file should contain an "out" directory, which represents the output o
 
 ## Icon
 
-To ensure seamless integration, it is imperative to place your WebOn-Icon within the "out" directory, adhering to the specified file name: "nomo_icon.svg". Please note that our system exclusively supports SVG (Scalable Vector Graphics) image files. The anticipated pathway for the Icon should be "out/nomo_icon.svg".
-
+To ensure seamless integration, it is imperative to place your WebOn-Icon within the "out" directory, adhering to the specified file name: "nomo_icon.png".
+The anticipated pathway for the Icon should be "out/nomo_icon.png".

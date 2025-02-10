@@ -445,3 +445,6 @@ export async function nomoGetWallets() {
     const wallets = await invokeNomoFunction("nomoGetWallets", {});
     return wallets;
 }
+export async function nomoSwitchWallet(args) {
+    return await invokeNomoFunction("nomoSwitchWallet", args);
+}

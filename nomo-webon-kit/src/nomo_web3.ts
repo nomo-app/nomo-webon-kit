@@ -605,15 +605,33 @@ export async function nomoSetAssetVisibility(args: {
   return await invokeNomoFunction("nomoSetAssetVisibility", args);
 }
 
-/**
- *  
- */
-export interface NomoWallet{
+export interface NomoWallet {
+  /**
+   * The EVM-address of the wallet.
+   */
   evmAddress: string;
+  /**
+   * The derivation path of the wallet.
+   */
   derivationPath: string;
 }
 
+/**
+ * Returns a list of all wallets that are currently available in the Nomo Wallet.
+ */
 export async function nomoGetWallets(): Promise<NomoWallet[]> {
- const wallets =  await invokeNomoFunction("nomoGetWallets", {}) as NomoWallet[];
-return wallets;
+  const wallets = (await invokeNomoFunction(
+    "nomoGetWallets",
+    {}
+  )) as NomoWallet[];
+  return wallets;
+}
+
+/**
+ * Switches the wallet to the one with the given derivation path.
+ */
+export async function nomoSwitchWallet(args: {
+  derivationPath: string;
+}): Promise<void> {
+  return await invokeNomoFunction("nomoSwitchWallet", args);
 }

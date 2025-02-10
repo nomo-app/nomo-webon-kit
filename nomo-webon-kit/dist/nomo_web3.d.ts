@@ -238,3 +238,6 @@ export interface NomoWallet {
     derivationPath: string;
 }
 export declare function nomoGetWallets(): Promise<NomoWallet[]>;
+export declare function nomoSwitchWallet(args: {
+    derivationPath: string;
+}): Promise<void>;

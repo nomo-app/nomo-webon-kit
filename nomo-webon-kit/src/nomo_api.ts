@@ -33,6 +33,7 @@ export const nomo = {
   proofOfPayment: web3.nomoProofOfPayment,
   setAssetVisiblity: web3.nomoSetAssetVisibility,
   disableFallbackWallet: web3.nomoDisableFallbackWallet,
+  getWallets: web3.nomoGetWallets,
 
   localStorage: multi.nomoLocalStorage,
   launchUrl: multi.nomoLaunchUrl,

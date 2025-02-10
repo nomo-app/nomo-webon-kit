@@ -230,3 +230,11 @@ export declare function nomoSetAssetVisibility(args: {
     asset: NomoAssetSelector;
     visible: boolean;
 }): Promise<void>;
+/**
+ *
+ */
+export interface NomoWallet {
+    evmAddress: string;
+    derivationPath: string;
+}
+export declare function nomoGetWallets(): Promise<NomoWallet[]>;

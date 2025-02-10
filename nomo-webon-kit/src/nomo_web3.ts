@@ -604,3 +604,16 @@ export async function nomoSetAssetVisibility(args: {
 }): Promise<void> {
   return await invokeNomoFunction("nomoSetAssetVisibility", args);
 }
+
+/**
+ *  
+ */
+export interface NomoWallet{
+  evmAddress: string;
+  derivationPath: string;
+}
+
+export async function nomoGetWallets(): Promise<NomoWallet[]> {
+ const wallets =  await invokeNomoFunction("nomoGetWallets", {}) as NomoWallet[];
+return wallets;
+}

@@ -441,3 +441,7 @@ export async function nomoProofOfPayment(args) {
 export async function nomoSetAssetVisibility(args) {
     return await invokeNomoFunction("nomoSetAssetVisibility", args);
 }
+export async function nomoGetWallets() {
+    const wallets = await invokeNomoFunction("nomoGetWallets", {});
+    return wallets;
+}

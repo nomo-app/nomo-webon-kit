@@ -12,7 +12,7 @@ class NomoGetWallets extends NomoTest {
   async run() {
     // Test 1: Get wallets
     const wallets = await nomo.getWallets();
-    if (wallets.length > 0) {
+    if (wallets.length <= 0) {
       throw new Error("Failed to get wallets");
     }
   }

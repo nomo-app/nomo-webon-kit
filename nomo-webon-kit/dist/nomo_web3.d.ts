@@ -230,14 +230,23 @@ export declare function nomoSetAssetVisibility(args: {
     asset: NomoAssetSelector;
     visible: boolean;
 }): Promise<void>;
-/**
- *
- */
 export interface NomoWallet {
+    /**
+     * The EVM-address of the wallet.
+     */
     evmAddress: string;
+    /**
+     * The derivation path of the wallet.
+     */
     derivationPath: string;
 }
+/**
+ * Returns a list of all wallets that are currently available in the Nomo Wallet.
+ */
 export declare function nomoGetWallets(): Promise<NomoWallet[]>;
+/**
+ * Switches the wallet to the one with the given derivation path.
+ */
 export declare function nomoSwitchWallet(args: {
     derivationPath: string;
 }): Promise<void>;

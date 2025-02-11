@@ -441,10 +441,16 @@ export async function nomoProofOfPayment(args) {
 export async function nomoSetAssetVisibility(args) {
     return await invokeNomoFunction("nomoSetAssetVisibility", args);
 }
+/**
+ * Returns a list of all wallets that are currently available in the Nomo Wallet.
+ */
 export async function nomoGetWallets() {
-    const wallets = await invokeNomoFunction("nomoGetWallets", {});
+    const wallets = (await invokeNomoFunction("nomoGetWallets", {}));
     return wallets;
 }
+/**
+ * Switches the wallet to the one with the given derivation path.
+ */
 export async function nomoSwitchWallet(args) {
     return await invokeNomoFunction("nomoSwitchWallet", args);
 }

@@ -20,7 +20,7 @@ import { getLanguageTests } from "./tests/tc-get-language";
 import { clipboardTests } from "./tests/tc-clipboard";
 import { nomoCoreManualTests, nomoCoreTests } from "./tests/tc-nomo-core";
 import { nomoMediaTests } from "./tests/tc-media";
-import { nomoWalletsTest } from "./tests/tc-get-wallets";
+import { nomoWalletsTest } from "./tests/tc-multi-wallets";
 
 const manualTests: Array<NomoTest> = [
   ...sendAssetsManualTests,

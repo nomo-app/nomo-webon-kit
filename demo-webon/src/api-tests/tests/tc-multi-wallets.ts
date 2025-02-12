@@ -15,6 +15,7 @@ class NomoGetWallets extends NomoTest {
     if (wallets.length <= 0) {
       throw new Error("Failed to get wallets");
     }
+    console.log("Wallets", wallets);
     const firstWallet = wallets[0];
     if (typeof firstWallet.hdPathIndex !== "number") {
       throw new Error("Wallet should have hdPathIndex as number");

@@ -231,9 +231,21 @@ export declare function nomoSetAssetVisibility(args: {
     visible: boolean;
 }): Promise<void>;
 export interface NomoWallet {
+    /**
+     * The name of the wallet.
+     */
     name: string;
+    /**
+     * The EVM address of the wallet.
+     */
     evmAddress: string;
+    /**
+     * The index of the HD path.
+     */
     hdPathIndex: number;
+    /**
+     * The derivation path of the wallet.
+     */
     derivationPath: string;
 }
 /**

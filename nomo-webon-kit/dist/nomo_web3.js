@@ -452,5 +452,18 @@ export async function nomoGetWallets() {
  * Switches the wallet to the one with the given derivation path.
  */
 export async function nomoSwitchWallet(args) {
-    return await invokeNomoFunction("nomoSwitchWallet", args);
+    if (typeof args.hdPathIndex !== "number" || args.hdPathIndex < 0) {
+        throw new Error("hdPathIndex must be a number greater than or equal to 0");
+    }
+    const wallets = await nomoGetWallets();
+    console.log(wallets);
+    if (!wallets.some(wallet => wallet.hdPathIndex === args.hdPathIndex)) {
+        throw new Error("Wallet with hdPathIndex " + args.hdPathIndex + " not found");
+    }
+    try {
+        return await invokeNomoFunction("nomoSwitchWallet", args);
+    }
+    catch (error) {
+        throw new Error("Error switching wallet: " + error);
+    }
 }

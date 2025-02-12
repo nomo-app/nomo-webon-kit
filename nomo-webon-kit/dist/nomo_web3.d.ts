@@ -246,7 +246,7 @@ export interface NomoWallet {
     hdPathIndex: number;
     /**
      * The BIP44 derivation path of the wallet.
-     * Typically, the first wallet will have the derivaation path "m/44'/60'/0'/0/0".
+     * Typically, the first wallet will have the derivation path "m/44'/60'/0'/0/0".
      */
     derivationPath: string;
 }

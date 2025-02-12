@@ -2,6 +2,8 @@ import { nomo } from "nomo-webon-kit";
 import { NomoTest } from "../test-kit/nomo-test";
 import { mintNFT } from "../../app/evm/mint_nft";
 import { openFaucetIfNeeded } from "../../app/evm/evm_utils";
+import { EthersjsNomoSigner } from "ethersjs-nomo-webons";
+import { ethers } from "ethers";
 
 class SignTxCancel extends NomoTest {
   constructor() {
@@ -154,7 +156,7 @@ class SignTxUndecodable extends NomoTest {
 class MintNFTDemo extends NomoTest {
   constructor() {
     super({
-      name: "Demo with ethers.js",
+      name: "ethers.js minting demo",
       description:
         "Mint a NomoDev Token on the ZENIQ Smartchain, signed by the Nomo App via ethers.js-V6.",
     });
@@ -166,6 +168,31 @@ class MintNFTDemo extends NomoTest {
   }
 }
 
+class SepoliaEthersJs extends NomoTest {
+  constructor() {
+    super({
+      name: "ethers.js Sepolia Testnet",
+      description: "Send something on Sepolia Testnet using ethers.js.",
+    });
+  }
+
+  async run() {
+    const provider: ethers.Provider = new ethers.JsonRpcProvider(
+      "https://sepolia.infura.io/v3/518a99f43c4546ac8134e9d633b788ea",
+      11155111
+    );
+    const signer = new EthersjsNomoSigner(provider as any);
+    
+    const ownAddress = await nomo.getEvmAddress();
+    const tx = {
+      from: ownAddress,
+      to: ownAddress,
+      value: ethers.parseUnits("1", "wei"),
+    };
+    await signer.sendTransaction(tx);
+  }
+}
+
 export const signTxTests: Array<NomoTest> = [
   new SignTxCancel(),
   new SignTxERC20Approval(),
@@ -174,4 +201,5 @@ export const signTxTests: Array<NomoTest> = [
   new SignTxRawValue(),
   new SignTxUndecodable(),
   new MintNFTDemo(),
+  new SepoliaEthersJs(),
 ];

@@ -233,7 +233,7 @@ export declare function nomoSetAssetVisibility(args: {
 export interface NomoWallet {
     /**
      * The name of the wallet that is visible within the Nomo App.
-     * The name be changed by the user.
+     * The name can be changed by the user.
      */
     name: string;
     /**

@@ -638,5 +638,12 @@ export async function nomoGetWallets(): Promise<NomoWallet[]> {
 export async function nomoSwitchWallet(args: {
   hdPathIndex: number;
 }): Promise<void> {
-  return await invokeNomoFunction("nomoSwitchWallet", args);
+  if (typeof args.hdPathIndex !== "number" || args.hdPathIndex < 0) {
+    throw new Error("hdPathIndex must be a number greater than or equal to 0");
+  }
+  try {
+    return await invokeNomoFunction("nomoSwitchWallet", args);
+  } catch (error) {
+    throw new Error("Error switching wallet: " + error);
+  }
 }

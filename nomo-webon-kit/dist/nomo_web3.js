@@ -441,3 +441,24 @@ export async function nomoProofOfPayment(args) {
 export async function nomoSetAssetVisibility(args) {
     return await invokeNomoFunction("nomoSetAssetVisibility", args);
 }
+/**
+ * Returns a list of all wallets that are currently available in the Nomo Wallet.
+ */
+export async function nomoGetWallets() {
+    const response = await invokeNomoFunction("nomoGetWallets", {});
+    return response.wallets;
+}
+/**
+ * Switches the wallet to the one with the given derivation path.
+ */
+export async function nomoSwitchWallet(args) {
+    if (typeof args.hdPathIndex !== "number" || args.hdPathIndex < 0) {
+        throw new Error("hdPathIndex must be a number greater than or equal to 0");
+    }
+    const wallets = await nomoGetWallets();
+    // console.log(wallets);
+    if (!wallets.some((wallet) => wallet.hdPathIndex === args.hdPathIndex)) {
+        throw new Error("Wallet with hdPathIndex " + args.hdPathIndex + " not found");
+    }
+    return await invokeNomoFunction("nomoSwitchWallet", args);
+}

@@ -604,3 +604,51 @@ export async function nomoSetAssetVisibility(args: {
 }): Promise<void> {
   return await invokeNomoFunction("nomoSetAssetVisibility", args);
 }
+
+export interface NomoWallet {
+  /**
+   * The name of the wallet that is visible within the Nomo App.
+   * The name can be changed by the user.
+   */
+  name: string;
+  /**
+   * The EVM address of the wallet according to the BIP44 derivation path.
+   */
+  evmAddress: string;
+  /**
+   * An index within the derivation path.
+   */
+  hdPathIndex: number;
+  /**
+   * The BIP44 derivation path of the wallet.
+   * Typically, the first wallet will have the derivation path "m/44'/60'/0'/0/0".
+   */
+  derivationPath: string;
+}
+
+/**
+ * Returns a list of all wallets that are currently available in the Nomo Wallet.
+ */
+export async function nomoGetWallets(): Promise<NomoWallet[]> {
+  const response = await invokeNomoFunction("nomoGetWallets", {});
+  return response.wallets as NomoWallet[];
+}
+
+/**
+ * Switches the wallet to the one with the given derivation path.
+ */
+export async function nomoSwitchWallet(args: {
+  hdPathIndex: number;
+}): Promise<void> {
+  if (typeof args.hdPathIndex !== "number" || args.hdPathIndex < 0) {
+    throw new Error("hdPathIndex must be a number greater than or equal to 0");
+  }
+  const wallets = await nomoGetWallets();
+  // console.log(wallets);
+  if (!wallets.some((wallet) => wallet.hdPathIndex === args.hdPathIndex)) {
+    throw new Error(
+      "Wallet with hdPathIndex " + args.hdPathIndex + " not found"
+    );
+  }
+  return await invokeNomoFunction("nomoSwitchWallet", args);
+}

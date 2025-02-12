@@ -230,3 +230,33 @@ export declare function nomoSetAssetVisibility(args: {
     asset: NomoAssetSelector;
     visible: boolean;
 }): Promise<void>;
+export interface NomoWallet {
+    /**
+     * The name of the wallet that is visible within the Nomo App.
+     * The name can be changed by the user.
+     */
+    name: string;
+    /**
+     * The EVM address of the wallet according to the BIP44 derivation path.
+     */
+    evmAddress: string;
+    /**
+     * An index within the derivation path.
+     */
+    hdPathIndex: number;
+    /**
+     * The BIP44 derivation path of the wallet.
+     * Typically, the first wallet will have the derivation path "m/44'/60'/0'/0/0".
+     */
+    derivationPath: string;
+}
+/**
+ * Returns a list of all wallets that are currently available in the Nomo Wallet.
+ */
+export declare function nomoGetWallets(): Promise<NomoWallet[]>;
+/**
+ * Switches the wallet to the one with the given derivation path.
+ */
+export declare function nomoSwitchWallet(args: {
+    hdPathIndex: number;
+}): Promise<void>;

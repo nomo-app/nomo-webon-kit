@@ -1,28 +1,20 @@
 require('dotenv').config();
 
-const sshHost = process.env.SSH_TARGET;
+const sshHost = process.env.SSH_TARGET_DEV_WEBON;
 if (!sshHost) {
-  throw new Error("SSH_TARGET not set");
+  throw new Error("SSH_TARGET_DEV_WEBON not set");
 }
 
 const nomoCliConfig = {
   deployTargets: {
-    production1: {
+    production: {
       rawSSH: {
         sshHost,
-        sshBaseDir: "/var/www/production_webons/demowebon/",
+        sshBaseDir: "/var/www/html",
         publicBaseUrl: "https://demowebon.nomo.zone",
         hybrid: true,
       },
-    },
-    production2: {
-      rawSSH: {
-        sshHost,
-        sshBaseDir: "/var/www/production_webons/devwebon/",
-        publicBaseUrl: "https://demowebon.nomo.app",
-        hybrid: true,
-      },
-    },
+    }
   },
 };
 

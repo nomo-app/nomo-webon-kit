@@ -25,9 +25,6 @@ class NomoGetWallets extends NomoTest {
     if (typeof firstWallet.evmAddress !== "string") {
       throw new Error("Wallet should have evmAddress as string");
     }
-    if (typeof firstWallet.evmAddress !== "string") {
-      throw new Error("Wallet should have evmAddress as string");
-    }
     if (typeof firstWallet.derivationPath !== "string") {
       throw new Error("Wallet should have bscAddress as string");
     }

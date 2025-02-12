@@ -37,7 +37,7 @@ export declare const nomo: {
     localStorage: {
         getItem: (key: string, options?: {
             webon_id: string;
-        } | undefined) => Promise<String | null>;
+        }) => Promise<String | null>;
         setItem: (key: string, value: string) => Promise<void>;
         removeItem: (key: string) => Promise<void>;
     };

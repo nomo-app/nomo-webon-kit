@@ -3,7 +3,7 @@
   "webon_id": "app.nomo.demowebon",
   "webon_name": "Dev WebOn",
   "webon_icon": "/nomo_icon.png",
-  "webon_version": "0.2.152",
+  "webon_version": "0.2.153",
   "min_nomo_version": "0.3.6",
   "dependencies": [
     "social:https://www.youtube.com/channel/UCsBtKDW5QAE4rKU5pmlFf-A"

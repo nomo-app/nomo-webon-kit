@@ -606,17 +606,8 @@ export async function nomoSetAssetVisibility(args: {
 }
 
 export interface NomoWallet {
-  /**
-   * The name of the wallet.
-   */
   name: string;
-  /**
-   * The EVM-address of the wallet.
-   */
   evmAddress: string;
-  /**
-   * The derivation path of the wallet.
-   */
   derivationPath: string;
 }
 

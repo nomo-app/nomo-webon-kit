@@ -21,6 +21,7 @@ import { clipboardTests } from "./tests/tc-clipboard";
 import { nomoCoreManualTests, nomoCoreTests } from "./tests/tc-nomo-core";
 import { nomoMediaTests } from "./tests/tc-media";
 import { nomoWalletsTest } from "./tests/tc-multi-wallets";
+import { nomo } from "nomo-webon-kit";
 
 const manualTests: Array<NomoTest> = [
   ...sendAssetsManualTests,
@@ -46,6 +47,9 @@ const unitTests: Array<NomoTest> = [
 
 function UnitTestRunner() {
   const [isRunning, setIsRunning] = useState(false);
+  nomo.registerOnWebOnVisible(() => {
+    window.onWebOnVisibleCalled = true;
+  });
   const runTests = async () => {
     if (isRunning) {
       return;

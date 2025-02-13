@@ -2,15 +2,12 @@ import { sleep } from "nomo-webon-kit";
 import { NomoTest } from "../test-kit/nomo-test";
 import { load } from "recaptcha-v3";
 
-// TODO: navigation to other WebOn (with deeplink)
-// TODO: <a href> tag, form navigation
-// TODO: nomo.injectQRCode({ qrCode: "https://nomo.id/stuff" });
-
 class NavigateToGitHub extends NomoTest {
   constructor() {
     super({
       name: "Sandbox 1: Navigate to GitHub",
-      description: "Open GitHub in a new window and then close it.",
+      description:
+        "Open GitHub in a new window and then close it. Also check if nomo.onWebOnVisible() is called.",
     });
   }
 
@@ -20,6 +17,9 @@ class NavigateToGitHub extends NomoTest {
     const promise = new Promise<void>((resolve, reject) => {
       document.addEventListener("visibilitychange", () => {
         if (document.visibilityState === "visible") {
+          if (!window.onWebOnVisibleCalled) {
+            reject(new Error("onWebOnVisible was not called"));
+          }
           resolve();
         }
       });

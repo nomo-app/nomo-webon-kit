@@ -1,4 +1,4 @@
-import { nomo } from "nomo-webon-kit";
+import { nomo, sleep } from "nomo-webon-kit";
 import { NomoTest } from "../test-kit/nomo-test";
 import { launchOtherWebOnsDemo } from "../../app/multi-webons/multi_webon_demo";
 import { themeSwitchDemo } from "../../app/theming/theme_switch_demo";
@@ -38,6 +38,8 @@ class GetPriceTest extends NomoTest {
   }
 
   async run() {
+    await nomo.getBalance({ symbol: "ZENIQ Token", network: "zeniq-smart-chain" }); // trigger a wallet sync before
+    await sleep(3000);
     const res = await nomo.getAssetPrice({
       symbol: "AVINOC",
       contractAddress: "0xF1cA9cb74685755965c7458528A36934Df52A3EF",

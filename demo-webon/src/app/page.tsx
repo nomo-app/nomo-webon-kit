@@ -23,9 +23,6 @@ export default function Home() {
       nomoFallbackQRCode();
     }
     injectNomoCSSVariables();
-    nomo.registerOnWebOnVisible(() => {
-      nomo.checkForWebOnUpdate();
-    });
   }, []);
 
   const openDialog = (content: DialogContent) => {

@@ -1,7 +1,7 @@
 import { TransactionResponse, ethers, TransactionRequest, BigNumberish } from "ethers";
 import { EthersjsNomoSigner } from "./ethersjs_nomo_signer";
 
-const rpcUrlZeniqSmartChain = "https://smart.zeniq.network:9545";
+const rpcUrlZeniqSmartChain = "https://api.zeniq.network";
 const chainIdZeniqSmartChain = 383414847825;
 
 export const zscProvider = new ethers.JsonRpcProvider(

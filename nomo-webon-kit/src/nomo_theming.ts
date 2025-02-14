@@ -3,7 +3,7 @@ import { invokeNomoFunction, isFallbackModeActive } from "./dart_interface";
 /**
  * The themes that are supported by the Nomo App.
  */
-export type NomoTheme = "LIGHT" | "DARK" | "AVINOC" | "XERA";
+export type NomoTheme = "LIGHT" | "DARK" | "AVINOC";
 
 /**
  * Switches the Nomo App to a different theme.
@@ -81,8 +81,6 @@ export async function getCurrentNomoTheme(): Promise<{
       return darkTheme;
     } else if (fallbackThemeSelector === "AVINOC") {
       return avinocTheme;
-    } else if (fallbackThemeSelector === "XERA") {
-      return xeraTheme;
     } else {
       return Promise.reject("unknown fallback theme " + fallbackThemeSelector); // should never happen
     }
@@ -167,29 +165,6 @@ const avinocTheme = {
     error: "#ff5252ff",
     settingsTileColor: "#333a66ff",
     settingsColumnColor: "#232846ff",
-  },
-};
-
-const xeraTheme = {
-  name: "XERA",
-  displayName: "XERA",
-  colors: {
-    primary: "#77af22ff",
-    onPrimary: "#ffffffff",
-    primaryContainer: "#efffd8ff",
-    secondary: "#77af22ff",
-    onSecondary: "#1c1c1cff",
-    secondaryContainer: "#1c1c1cff",
-    background: "#417030ff",
-    surface: "#346231ff",
-    foreground1: "#ffffffea",
-    foreground2: "#fffffff0",
-    foreground3: "#fffffffa",
-    snackBarColor: "#4a8037ff",
-    disabledColor: "#e0e0e0ff",
-    error: "#ff5252ff",
-    settingsTileColor: "#4a8037ff",
-    settingsColumnColor: "#417030ff",
   },
 };
 

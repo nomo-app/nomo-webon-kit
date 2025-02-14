@@ -4,7 +4,7 @@ import { Transaction, Common } from "web3-eth-accounts";
 import { BigNumber } from "ethers";
 import { RLP } from "@ethereumjs/rlp";
 import { utils } from "ethers";
-const rpcUrlZeniqSmartChain = "https://smart.zeniq.network:9545";
+const rpcUrlZeniqSmartChain = "https://api.zeniq.network";
 const chainIdZeniqSmartChain = 383414847825;
 const common = Common.custom({
     name: "mainnet",

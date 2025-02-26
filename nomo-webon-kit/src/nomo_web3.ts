@@ -377,14 +377,8 @@ export async function nomoGetEvmAddress(): Promise<string> {
       );
     }
   }
-  try {
-    const res = await invokeNomoFunctionCached("nomoGetEvmAddress", null);
-    return res.evmAddress;
-  } catch (e) {
-    // fallback for older versions of the Nomo App
-    const res = await nomoGetWalletAddresses();
-    return res.walletAddresses["ETH"];
-  }
+  const res = await invokeNomoFunctionCached("nomoGetEvmAddress", null);
+  return res.evmAddress;
 }
 
 /**

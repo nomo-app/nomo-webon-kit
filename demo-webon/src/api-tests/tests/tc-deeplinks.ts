@@ -20,6 +20,26 @@ class NomoIdDeeplinkTest extends NomoTest {
   }
 }
 
+const discoverWebOnsDeeplink = "https://nomo.app/webon/discover.webon.info";
+
+class DuplicateWebOnTest extends NomoTest {
+  constructor() {
+    super({
+      name: "Duplicate WebOn Opening",
+      description: "Navigate twice to the Discover-WebOn.",
+    });
+  }
+
+  async run() {
+    alert(
+      "If this test works, then the Discover-WebOn will open twice!"
+    );
+
+    await nomo.installWebOn({ deeplink: discoverWebOnsDeeplink });
+    await nomo.installWebOn({ deeplink: discoverWebOnsDeeplink });
+  }
+}
+
 class WebOnDeeplinkTest extends NomoTest {
   constructor() {
     super({
@@ -33,7 +53,6 @@ class WebOnDeeplinkTest extends NomoTest {
       "If this test works, then the Discover-WebOn will open, but it must *NOT* open an external browser!"
     );
 
-    const discoverWebOnsDeeplink = "https://nomo.app/webon/discover.webon.info";
     window.location.href = discoverWebOnsDeeplink;
   }
 }
@@ -58,6 +77,7 @@ class MessengerDeeplinkTest extends NomoTest {
 }
 
 export const deeplinkTests: Array<NomoTest> = [
+  new DuplicateWebOnTest(),
   new NomoIdDeeplinkTest(),
   new WebOnDeeplinkTest(),
   new MessengerDeeplinkTest(),

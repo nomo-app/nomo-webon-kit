@@ -119,6 +119,7 @@ export async function nomoSendAssets(args: {
   asset?: NomoAssetSelector;
   targetAddress?: string;
   amount?: string;
+  wallet?: NomoWallet;
 }): Promise<{
   hash: string;
   intent: { recipient: string; amount: string; token: string };

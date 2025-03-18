@@ -59,6 +59,7 @@ export declare function nomoSendAssets(args: {
     asset?: NomoAssetSelector;
     targetAddress?: string;
     amount?: string;
+    wallet?: NomoWallet;
 }): Promise<{
     hash: string;
     intent: {

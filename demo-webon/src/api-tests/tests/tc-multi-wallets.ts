@@ -29,12 +29,9 @@ class NomoGetWallets extends NomoTest {
       throw new Error("Wallet should have derivationPath as string");
     }
     const evmAddress = await nomo.getEvmAddress();
-    if (
-      firstWallet.evmAddress.toLocaleLowerCase() !==
-      evmAddress.toLocaleLowerCase()
-    ) {
+    if (firstWallet.evmAddress !== evmAddress) {
       throw new Error(
-        "nomo.getEvmAddress does not match with the first wallet"
+        `nomo.getEvmAddress ${evmAddress} does not match with the first wallet ${firstWallet.evmAddress}`
       );
     }
     if (firstWallet.hdPathIndex !== 0) {

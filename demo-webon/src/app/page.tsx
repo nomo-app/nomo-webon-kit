@@ -122,16 +122,6 @@ export default function Home() {
         ) : (
           <div></div>
         )}
-        <div
-          onClick={() => {
-            nomo.launchUrl({
-              url: "mailto:support@nomo.app",
-              launchMode: "platformDefault",
-            });
-          }}
-        >
-          Contact support
-        </div>
         <div style={{ height: "10px" }} />
         <a href={"https://nomo.app/webon/faucet.nomo.zone"}>
           Click on WebOn deeplinks

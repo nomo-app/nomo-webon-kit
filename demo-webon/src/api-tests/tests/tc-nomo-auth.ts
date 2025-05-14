@@ -88,6 +88,7 @@ class NomoAuthFetchPost extends NomoTest {
       url: "https://price.zeniq.services/v2/currentprice/ZENIQ/USD",
       method: "POST",
       body: JSON.stringify({ foo: "bar" }),
+      instantAuth: true,
     });
     if (typeof res.statusCode !== "number") {
       throw new Error("statusCode is not a number.");

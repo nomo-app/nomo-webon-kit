@@ -28,6 +28,7 @@ export async function nomoSignAuthMessage(args) {
  * A browser-implementation of the Nomo-Auth-Protocol.
  * It is similar to nomoAuthHttp, but it is implemented in JavaScript instead of the native layer.
  * Therefore, is much easier to debug or modify, although it cannot bypass CORS.
+ * If instantAuth is set to true, then it will sign a timestamp instead of doing the full Nomo-Auth-Protocol.
  */
 export async function nomoAuthFetch(args) {
     fillMissingArgs(args);
@@ -37,6 +38,7 @@ export async function nomoAuthFetch(args) {
         signer,
         url: args.url,
         headers,
+        instantAuth: args.instantAuth ?? null,
     });
     let res = await fetch(args.url, {
         method: args.method,
@@ -58,6 +60,7 @@ export async function nomoAuthFetch(args) {
             signer,
             url: args.url,
             headers,
+            instantAuth: args.instantAuth ?? null,
         });
         res = await fetch(args.url, {
             method: args.method,
@@ -72,9 +75,12 @@ export async function nomoAuthFetch(args) {
         response: JSON.stringify(resBody),
     };
 }
-async function _injectNomoAuthHeaders({ signer, url, headers, }) {
+async function _injectNomoAuthHeaders({ signer, url, headers, instantAuth, }) {
     const domain = new URL(url).hostname;
-    const jwt = localStorage.getItem(domain) ?? null;
+    let jwt = localStorage.getItem(domain) ?? null;
+    if (instantAuth) {
+        jwt = new Date().getTime().toString();
+    }
     const messageToSign = jwt ?? "dummyMessage";
     const sigResult = await signer({ message: messageToSign, url });
     const manifest = await nomoGetManifest();

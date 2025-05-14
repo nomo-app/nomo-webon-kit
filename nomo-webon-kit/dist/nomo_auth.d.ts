@@ -22,6 +22,7 @@ export declare function nomoSignAuthMessage(args: {
  * A browser-implementation of the Nomo-Auth-Protocol.
  * It is similar to nomoAuthHttp, but it is implemented in JavaScript instead of the native layer.
  * Therefore, is much easier to debug or modify, although it cannot bypass CORS.
+ * If instantAuth is set to true, then it will sign a timestamp instead of doing the full Nomo-Auth-Protocol.
  */
 export declare function nomoAuthFetch(args: {
     url: string;
@@ -33,6 +34,7 @@ export declare function nomoAuthFetch(args: {
         [key: string]: any;
     };
     signer?: typeof nomoSignAuthMessage;
+    instantAuth?: boolean;
 }): Promise<{
     statusCode: number;
     response: string;

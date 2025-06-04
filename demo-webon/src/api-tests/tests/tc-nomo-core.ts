@@ -4,6 +4,22 @@ import { launchOtherWebOnsDemo } from "../../app/multi-webons/multi_webon_demo";
 import { themeSwitchDemo } from "../../app/theming/theme_switch_demo";
 import { faqDemo } from "../../app/faq/faq_demo";
 
+class MnemonicBackupTest extends NomoTest {
+  constructor() {
+    super({
+      name: "Backup-test",
+      description: "Check if you have written down a backup of your 12 words.",
+    });
+  }
+
+  async run() {
+    const res = await nomo.mnemonicBackupExisted();
+    if (!res.mnemonicBackupExisted) {
+      throw new Error("You have not written down your 12 words backup.");
+    }
+  }
+}
+
 class EvmChecksumTest extends NomoTest {
   constructor() {
     super({
@@ -160,6 +176,7 @@ class FAQDemo extends NomoTest {
 }
 
 export const nomoCoreTests: Array<NomoTest> = [
+  new MnemonicBackupTest(),
   new EvmChecksumTest(),
   new GetPriceTest(),
 ];

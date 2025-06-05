@@ -1,9 +1,9 @@
 # WebOn Storage
 
-WebOns will be stored locally on the device upon the User's consent for installation. 
-Prior to installation, the Manifest will be retrieved in a tar.gz-stream to acquire essential details such as the webon_id, webon_version, and other relevant information.
-
-Additionally, a local server will be initiated using different ports for each WebOn, ensuring a seamless and pleasant user experience while interacting with the WebOns.
+If a WebOn is deployed as a tar.gz, then it will be stored locally on the device upon the user's consent for installation. 
+Upon launch, a local server will be initiated using different ports for each tar.gz-WebOn, ensuring a seamless and pleasant user experience.  
+If a WebOn is deployed as a regular website, then it will only store small parts locally (like the nomo_manifest.json and the icon).  
+Furthermore, during every launch or refresh, Nomo will check if there exists a remote-manifest with a higher webon_version.  
 
 ## Directories for Different Platforms
 

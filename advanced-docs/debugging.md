@@ -29,3 +29,8 @@ This DevTool can be used even in production mode; the only prerequisite is that 
 ## Debugging via breakpoints
 
 When running a local dev server, your IDE can be configured to enable breakpoints (e.g. Visual Studio Code).
+
+
+## Debugging Nomo API
+
+Within the console of the DevTools, the `window.nomo` object is available for debugging invocations of the Nomo WebOn API.

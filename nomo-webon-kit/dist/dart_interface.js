@@ -175,6 +175,7 @@ export async function invokeNomoFunction(functionName, args) {
             window.nomoResolvePromises[invocationID] = resolve;
             window.nomoRejectPromises[invocationID] = reject;
         });
+        window.nomo[invocationID] = { args: args, status: "pending" };
         const dartBridge = getDartBridge();
         if (dartBridge) {
             dartBridge(payload);
@@ -229,6 +230,8 @@ const fulfillPromiseFromFlutter = function (base64FromFlutter) {
         return "FAIL";
     }
     fulfillFunction(result); // fulfill or reject the promise
+    window.nomo[invocationID]["result"] = result;
+    window.nomo[invocationID]["status"] = status;
     return "OK";
 };
 try {
@@ -241,6 +244,9 @@ try {
     }
     if (!window.nomoRejectPromises) {
         window.nomoRejectPromises = {};
+    }
+    if (!window.nomo) {
+        window.nomo = {};
     }
 }
 catch (e) { }

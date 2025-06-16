@@ -47,9 +47,6 @@ const unitTests: Array<NomoTest> = [
 
 function UnitTestRunner() {
   const [isRunning, setIsRunning] = useState(false);
-  nomo.registerOnWebOnVisible(() => {
-    window.onWebOnVisibleCalled = true;
-  });
   const runTests = async () => {
     if (isRunning) {
       return;

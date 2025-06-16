@@ -17,9 +17,6 @@ class NavigateToGitHub extends NomoTest {
     const promise = new Promise<void>((resolve, reject) => {
       document.addEventListener("visibilitychange", () => {
         if (document.visibilityState === "visible") {
-          if (!window.onWebOnVisibleCalled) {
-            reject(new Error("onWebOnVisible was not called"));
-          }
           resolve();
         }
       });

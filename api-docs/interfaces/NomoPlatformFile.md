@@ -20,7 +20,7 @@
 
 #### Defined in
 
-[nomo_media.ts:108](https://github.com/nomo-app/nomo-webon-kit/blob/c91383b/nomo-webon-kit/src/nomo_media.ts#L108)
+[nomo_media.ts:108](https://github.com/nomo-app/nomo-webon-kit/blob/da5aa9f/nomo-webon-kit/src/nomo_media.ts#L108)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[nomo_media.ts:109](https://github.com/nomo-app/nomo-webon-kit/blob/c91383b/nomo-webon-kit/src/nomo_media.ts#L109)
+[nomo_media.ts:109](https://github.com/nomo-app/nomo-webon-kit/blob/da5aa9f/nomo-webon-kit/src/nomo_media.ts#L109)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 #### Defined in
 
-[nomo_media.ts:106](https://github.com/nomo-app/nomo-webon-kit/blob/c91383b/nomo-webon-kit/src/nomo_media.ts#L106)
+[nomo_media.ts:106](https://github.com/nomo-app/nomo-webon-kit/blob/da5aa9f/nomo-webon-kit/src/nomo_media.ts#L106)
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 #### Defined in
 
-[nomo_media.ts:105](https://github.com/nomo-app/nomo-webon-kit/blob/c91383b/nomo-webon-kit/src/nomo_media.ts#L105)
+[nomo_media.ts:105](https://github.com/nomo-app/nomo-webon-kit/blob/da5aa9f/nomo-webon-kit/src/nomo_media.ts#L105)
 
 ___
 
@@ -60,4 +60,4 @@ ___
 
 #### Defined in
 
-[nomo_media.ts:107](https://github.com/nomo-app/nomo-webon-kit/blob/c91383b/nomo-webon-kit/src/nomo_media.ts#L107)
+[nomo_media.ts:107](https://github.com/nomo-app/nomo-webon-kit/blob/da5aa9f/nomo-webon-kit/src/nomo_media.ts#L107)

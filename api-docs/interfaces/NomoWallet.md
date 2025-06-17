@@ -22,7 +22,7 @@ Typically, the first wallet will have the derivation path "m/44'/60'/0'/0/0".
 
 #### Defined in
 
-[nomo_web3.ts:620](https://github.com/nomo-app/nomo-webon-kit/blob/c91383b/nomo-webon-kit/src/nomo_web3.ts#L620)
+[nomo_web3.ts:621](https://github.com/nomo-app/nomo-webon-kit/blob/da5aa9f/nomo-webon-kit/src/nomo_web3.ts#L621)
 
 ___
 
@@ -34,7 +34,7 @@ The EVM address of the wallet according to the BIP44 derivation path.
 
 #### Defined in
 
-[nomo_web3.ts:611](https://github.com/nomo-app/nomo-webon-kit/blob/c91383b/nomo-webon-kit/src/nomo_web3.ts#L611)
+[nomo_web3.ts:612](https://github.com/nomo-app/nomo-webon-kit/blob/da5aa9f/nomo-webon-kit/src/nomo_web3.ts#L612)
 
 ___
 
@@ -46,7 +46,7 @@ An index within the derivation path.
 
 #### Defined in
 
-[nomo_web3.ts:615](https://github.com/nomo-app/nomo-webon-kit/blob/c91383b/nomo-webon-kit/src/nomo_web3.ts#L615)
+[nomo_web3.ts:616](https://github.com/nomo-app/nomo-webon-kit/blob/da5aa9f/nomo-webon-kit/src/nomo_web3.ts#L616)
 
 ___
 
@@ -59,4 +59,4 @@ The name can be changed by the user.
 
 #### Defined in
 
-[nomo_web3.ts:607](https://github.com/nomo-app/nomo-webon-kit/blob/c91383b/nomo-webon-kit/src/nomo_web3.ts#L607)
+[nomo_web3.ts:608](https://github.com/nomo-app/nomo-webon-kit/blob/da5aa9f/nomo-webon-kit/src/nomo_web3.ts#L608)

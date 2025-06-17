@@ -30,7 +30,7 @@
 
 #### Defined in
 
-[nomo_web3.ts:55](https://github.com/nomo-app/nomo-webon-kit/blob/c91383b/nomo-webon-kit/src/nomo_web3.ts#L55)
+[nomo_web3.ts:55](https://github.com/nomo-app/nomo-webon-kit/blob/da5aa9f/nomo-webon-kit/src/nomo_web3.ts#L55)
 
 ___
 
@@ -47,7 +47,7 @@ There are rare cases where a contractAddress is not unique across different netw
 
 #### Defined in
 
-[nomo_web3.ts:45](https://github.com/nomo-app/nomo-webon-kit/blob/c91383b/nomo-webon-kit/src/nomo_web3.ts#L45)
+[nomo_web3.ts:45](https://github.com/nomo-app/nomo-webon-kit/blob/da5aa9f/nomo-webon-kit/src/nomo_web3.ts#L45)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:52](https://github.com/nomo-app/nomo-webon-kit/blob/c91383b/nomo-webon-kit/src/nomo_web3.ts#L52)
+[nomo_web3.ts:52](https://github.com/nomo-app/nomo-webon-kit/blob/da5aa9f/nomo-webon-kit/src/nomo_web3.ts#L52)
 
 ___
 
@@ -74,7 +74,7 @@ name should be only used together with other selectors.
 
 #### Defined in
 
-[nomo_web3.ts:39](https://github.com/nomo-app/nomo-webon-kit/blob/c91383b/nomo-webon-kit/src/nomo_web3.ts#L39)
+[nomo_web3.ts:39](https://github.com/nomo-app/nomo-webon-kit/blob/da5aa9f/nomo-webon-kit/src/nomo_web3.ts#L39)
 
 ___
 
@@ -88,7 +88,7 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:40](https://github.com/nomo-app/nomo-webon-kit/blob/c91383b/nomo-webon-kit/src/nomo_web3.ts#L40)
+[nomo_web3.ts:40](https://github.com/nomo-app/nomo-webon-kit/blob/da5aa9f/nomo-webon-kit/src/nomo_web3.ts#L40)
 
 ___
 
@@ -98,7 +98,7 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:54](https://github.com/nomo-app/nomo-webon-kit/blob/c91383b/nomo-webon-kit/src/nomo_web3.ts#L54)
+[nomo_web3.ts:54](https://github.com/nomo-app/nomo-webon-kit/blob/da5aa9f/nomo-webon-kit/src/nomo_web3.ts#L54)
 
 ___
 
@@ -115,7 +115,7 @@ symbol should be only used together with other selectors.
 
 #### Defined in
 
-[nomo_web3.ts:34](https://github.com/nomo-app/nomo-webon-kit/blob/c91383b/nomo-webon-kit/src/nomo_web3.ts#L34)
+[nomo_web3.ts:34](https://github.com/nomo-app/nomo-webon-kit/blob/da5aa9f/nomo-webon-kit/src/nomo_web3.ts#L34)
 
 ___
 
@@ -131,7 +131,7 @@ If set, then uuid must be an asset-identifier from the endpoint https://webon.in
 
 #### Defined in
 
-[nomo_web3.ts:49](https://github.com/nomo-app/nomo-webon-kit/blob/c91383b/nomo-webon-kit/src/nomo_web3.ts#L49)
+[nomo_web3.ts:49](https://github.com/nomo-app/nomo-webon-kit/blob/da5aa9f/nomo-webon-kit/src/nomo_web3.ts#L49)
 
 ___
 
@@ -141,4 +141,4 @@ ___
 
 #### Defined in
 
-[nomo_web3.ts:53](https://github.com/nomo-app/nomo-webon-kit/blob/c91383b/nomo-webon-kit/src/nomo_web3.ts#L53)
+[nomo_web3.ts:53](https://github.com/nomo-app/nomo-webon-kit/blob/da5aa9f/nomo-webon-kit/src/nomo_web3.ts#L53)

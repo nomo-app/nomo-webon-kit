@@ -5,6 +5,7 @@ import {
 } from "./dart_interface";
 import { hasMinimumNomoVersion, nomoGetExecutionMode } from "./nomo_platform";
 import { urlSearchParamsToJson } from "./util";
+import { NomoAsset } from "./nomo_web3";
 
 export interface NomoManifest {
   /**
@@ -54,6 +55,14 @@ export interface NomoManifest {
    * - A social media link or a link to a website.
    */
   dependencies?: string[];
+  /**
+   * If set, this WebOn acts as a wallet provider.
+   * Installing the WebOn auto-creates a wallet; uninstalling removes it.
+   */
+  webon_wallet?: {
+    name: string;
+    assets: NomoAsset[];
+  };
 }
 
 /**

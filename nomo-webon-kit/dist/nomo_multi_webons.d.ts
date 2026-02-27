@@ -1,3 +1,4 @@
+import { WebonWalletManifest } from "./nomo_webon_wallet";
 export interface NomoManifest {
     /**
      * If min_nomo_version is set, then outdated versions of the Nomo App will refuse to install the WebOn.
@@ -46,6 +47,11 @@ export interface NomoManifest {
      * - A social media link or a link to a website.
      */
     dependencies?: string[];
+    /**
+     * If set, this WebOn acts as a wallet provider.
+     * Installing the WebOn auto-creates a wallet; uninstalling removes it.
+     */
+    webon_wallet?: WebonWalletManifest;
 }
 /**
  * Returns the nomo_manifest.json that was used during the installation of the WebOn.

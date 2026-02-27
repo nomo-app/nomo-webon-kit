@@ -4,6 +4,7 @@ import * as media from "./nomo_media";
 import * as platform from "./nomo_platform";
 import * as theming from "./nomo_theming";
 import * as auth from "./nomo_auth";
+import * as wallet from "./nomo_webon_wallet";
 import { nomoInstallErrorHook } from "./dart_interface";
 /**
  * The nomo-object exposes WebOn-functions in an easy-to-use way.
@@ -77,4 +78,12 @@ export const nomo = {
     signAuthMessage: auth.nomoSignAuthMessage,
     proofOfWork: auth.nomoProofOfWork,
     installErrorHook: nomoInstallErrorHook,
+    // WebOn Wallet push functions
+    provideAssets: wallet.nomoProvideAssets,
+    provideBalance: wallet.nomoProvideBalance,
+    providePrice: wallet.nomoProvidePrice,
+    provideTransactions: wallet.nomoProvideTransactions,
+    provideReceiveAddress: wallet.nomoProvideReceiveAddress,
+    provideSendResult: wallet.nomoProvideSendResult,
+    registerSendRequestHandler: wallet.nomoRegisterSendRequestHandler,
 };

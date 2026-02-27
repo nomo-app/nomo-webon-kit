@@ -122,14 +122,17 @@ For fullstack-WebOns, the Nomo App offers the following protocols:
 # WebOn Wallet Provider
 
 A WebOn can act as an **external wallet provider** for the Nomo App.
-This allows third-party wallets to integrate their assets, balances, prices, transactions, and send functionality directly into the Nomo App UI.
+This allows third-party wallets to integrate their assets, balances, prices, transactions, and send functionality directly into the Nomo App UI — no WalletConnect or middleman needed.
 
 ## How it works
 
 1. Declare a `webon_wallet` section in your `nomo_manifest.json` with a wallet name and supported assets.
-2. When the WebOn is installed, the Nomo App creates a wallet entry for it.
-3. The WebOn pushes data to the app via the functions below.
-4. When the user initiates a send, the app calls `window.nomoRequestSend` in the WebOn's JS context.
+2. When the WebOn is installed, the Nomo App automatically creates a wallet entry for it.
+3. The WebOn **pushes** data (assets, balances, prices, transactions) to the app via `nomo.wallet*` functions.
+4. The app can **request** fresh data from the WebOn via callback handlers (`registerUpdateBalanceHandler`, etc.).
+5. When the user initiates a send, the app calls `window.nomoRequestSend` in the WebOn's JS context.
+
+The WebOn is the **source of truth** — the app does not persist external wallet data. The WebOn re-pushes on load.
 
 ## Manifest example
 
@@ -151,14 +154,27 @@ This allows third-party wallets to integrate their assets, balances, prices, tra
 
 ## Push functions (WebOn → App)
 
-| Function | Description |
-|----------|-------------|
-| `nomoProvideAssets` | Push the wallet's asset list. Call on load or when assets change. |
-| `nomoProvideBalance` | Push a balance update for a specific asset. |
-| `nomoProvidePrice` | Push a price for a specific asset. |
-| `nomoProvideTransactions` | Push transaction history for a specific asset. |
-| `nomoProvideReceiveAddress` | Push a receive address to display in the app. |
-| `nomoProvideSendResult` | Respond to a send request with success or error. |
+| `nomo.*` name | Function | Description |
+|----------------|----------|-------------|
+| `nomo.walletSetAllAssets` | `nomoWalletSetAllAssets` | Replace the entire asset list. Call on load or when assets change. |
+| `nomo.walletSetVisibleAsset` | `nomoWalletSetVisibleAsset` | Add or update a single asset (deduped by `contractAddress+network` or `symbol+network`). |
+| `nomo.walletRemoveAsset` | `nomoWalletRemoveAsset` | Remove an asset from the wallet's asset list. |
+| `nomo.walletSetBalance` | `nomoWalletSetBalance` | Push a balance for one asset. Balance is a raw string in the smallest unit (e.g., wei). |
+| `nomo.walletSetPrice` | `nomoWalletSetPrice` | Push a price for one asset. Optional `currency` defaults to the app's selected currency. |
+| `nomo.walletSetTransactions` | `nomoWalletSetTransactions` | Push transaction history for one asset. |
+| `nomo.walletRemoveTransaction` | `nomoWalletRemoveTransaction` | Remove a single transaction by hash. |
+| `nomo.walletSetReceiveAddress` | `nomoWalletSetReceiveAddress` | Push a receive address to display in the app. |
+| `nomo.walletSendAssets` | `nomoWalletSendAssets` | Respond to a send request with `requestId`, `txHash`, and `status`. |
+
+## Callback handlers (App → WebOn)
+
+The app can request the WebOn to push fresh data. Register handlers so the app can trigger updates (e.g., on pull-to-refresh or wallet switch):
+
+| `nomo.*` name | Function | Triggered when |
+|----------------|----------|----------------|
+| `nomo.registerSendRequestHandler` | `nomoRegisterSendRequestHandler` | User taps "Send" on an external wallet token |
+| `nomo.registerUpdateBalanceHandler` | `nomoRegisterUpdateBalanceHandler` | App needs a fresh balance (pull-to-refresh, token detail) |
+| `nomo.registerUpdateTransactionsHandler` | `nomoRegisterUpdateTransactionsHandler` | App needs fresh transaction history |
 
 ## Handling send requests (App → WebOn)
 
@@ -172,13 +188,13 @@ nomo.registerSendRequestHandler(async (request) => {
   // request: { requestId, symbol, destination, amount, decimals }
   try {
     const txHash = await myWallet.send(request.destination, request.amount);
-    await nomo.provideSendResult({
+    await nomo.walletSendAssets({
       requestId: request.requestId,
       txHash,
       status: "success",
     });
   } catch (e) {
-    await nomo.provideSendResult({
+    await nomo.walletSendAssets({
       requestId: request.requestId,
       txHash: "",
       status: "error",
@@ -193,21 +209,26 @@ nomo.registerSendRequestHandler(async (request) => {
 ```typescript
 import { nomo } from "nomo-webon-kit";
 
-// Push assets, balance, price, and address on load
-await nomo.provideAssets({
+// 1. Push assets on load
+await nomo.walletSetAllAssets({
   assets: [{ symbol: "TOKEN", name: "My Token", decimals: 18 }],
 });
-await nomo.provideBalance({
-  symbol: "TOKEN",
-  balance: "1000000000000000000",
-  decimals: 18,
-});
-await nomo.providePrice({ symbol: "TOKEN", price: 2.5 });
-await nomo.provideReceiveAddress({ address: "0x..." });
 
-// Push transactions
-await nomo.provideTransactions({
-  symbol: "TOKEN",
+// 2. Push balance (raw value in smallest unit, e.g., wei for 18 decimals)
+await nomo.walletSetBalance({
+  asset: { symbol: "TOKEN" },
+  balance: "1000000000000000000", // = 1 TOKEN
+});
+
+// 3. Push price
+await nomo.walletSetPrice({ asset: { symbol: "TOKEN" }, price: 2.5 });
+
+// 4. Push receive address
+await nomo.walletSetReceiveAddress({ address: "0x..." });
+
+// 5. Push transactions
+await nomo.walletSetTransactions({
+  asset: { symbol: "TOKEN" },
   transactions: [
     {
       hash: "0xabc...",
@@ -215,25 +236,76 @@ await nomo.provideTransactions({
       to: "0x222...",
       value: "500000000000000000",
       timestamp: 1708000000,
+      status: "confirmed",
     },
   ],
 });
 
-// Handle send requests
+// 6. Handle send requests from the app
 nomo.registerSendRequestHandler(async (request) => {
   const txHash = await sendTransaction(request);
-  await nomo.provideSendResult({
+  await nomo.walletSendAssets({
     requestId: request.requestId,
     txHash,
     status: "success",
   });
 });
+
+// 7. Handle refresh requests from the app
+nomo.registerUpdateBalanceHandler(async ({ asset }) => {
+  const balance = await fetchBalance(asset);
+  await nomo.walletSetBalance({ asset, balance });
+});
+
+nomo.registerUpdateTransactionsHandler(async ({ asset }) => {
+  const transactions = await fetchTransactions(asset);
+  await nomo.walletSetTransactions({ asset, transactions });
+});
+```
+
+## Key types
+
+```typescript
+// Identifies a token — use symbol alone or contractAddress+network for precision
+interface NomoAssetSelector {
+  symbol: string;
+  name?: string;
+  network?: NomoNetwork; // "ethereum" | "polygon" | "binance-smart-chain" | ...
+  contractAddress?: string;
+}
+
+// Full asset descriptor (extends selector with decimals)
+interface NomoAsset extends NomoAssetSelector {
+  decimals: number;
+  visible?: boolean;
+  balance?: string;
+}
+
+// Transaction pushed via walletSetTransactions
+interface NomoWalletTransaction {
+  hash: string;
+  from: string;
+  to: string;
+  value: string;        // raw value in smallest unit
+  timestamp: number;    // unix seconds
+  status?: "pending" | "confirmed";
+}
+
+// Payload received by registerSendRequestHandler
+interface NomoSendRequest {
+  requestId: string;
+  symbol: string;
+  destination: string;
+  amount: string;       // raw value in smallest unit
+  decimals: number;
+}
 ```
 
 ## Token resolution
 
-If your token matches a known token in the Nomo App, you can pass `contractAddress` and `chainID` to `nomoProvideBalance`, `nomoProvidePrice`, and `nomoProvideTransactions`.
-The app will try to resolve the token against its known token list. If no match is found, a synthetic token entry is created.
+Assets are matched by `contractAddress` + `network` (strongest), or by `symbol` + `network`.
+If a token matches a known token in the Nomo App, it will use the app's metadata (icon, name, etc.).
+If no match is found, the app creates a synthetic token entry from the data pushed by the WebOn.
 
 # Deploying WebOns
 

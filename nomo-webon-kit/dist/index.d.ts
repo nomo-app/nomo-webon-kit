@@ -5,5 +5,6 @@ export * from "./nomo_media";
 export * from "./nomo_platform";
 export * from "./nomo_theming";
 export * from "./nomo_auth";
+export * from "./nomo_webon_wallet";
 export * from "./dart_interface";
 export * from "./util";

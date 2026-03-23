@@ -112,6 +112,44 @@ See the [EVM docs](https://github.com/nomo-app/nomo-webon-kit/tree/main/advanced
 There are multiple ways of debugging WebOns, but our preferred way is to connect Chrome DevTools to a WebOn.
 See the [debugging docs](https://github.com/nomo-app/nomo-webon-kit/tree/main/advanced-docs/debugging.md) for more details.
 
+## Debug Logs via `nomo.getDebugLogs`
+
+The Nomo App captures debug logs for all WebOn interactions, including:
+
+- All `invokeNomo` function calls (with return values and errors)
+- `window.ethereum` EIP-1193 RPC calls (with method names)
+- `console.log`, `console.warn`, and `console.error` from WebViews
+- Internal Nomo App logs (wallet, network, system)
+
+WebOns can fetch these logs at any time using `nomo.getDebugLogs()` — this works regardless of whether dev mode is enabled.
+
+```typescript
+import { nomo } from "nomo-webon-kit";
+
+const { logs } = await nomo.getDebugLogs();
+// logs is a Record<string, DebugLogEntry[]>
+// Keys are WebOn names (e.g. "My WebOn", "Nomo App", "Injected DApp")
+
+for (const [webonName, entries] of Object.entries(logs)) {
+  console.log(`--- ${webonName} ---`);
+  for (const entry of entries) {
+    console.log(`[${entry.timestamp}] [${entry.level}] [${entry.source}] ${entry.message}`);
+  }
+}
+```
+
+Each `DebugLogEntry` has the following fields:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `timestamp` | `string` | Time of the log entry (HH:MM:SS) |
+| `level` | `"call" \| "info" \| "warn" \| "error"` | Log level |
+| `source` | `string` | Origin (e.g. `invokeNomo`, `window.ethereum`, `console.error`, `app`) |
+| `functionName` | `string \| null` | The function that was called (e.g. `nomoGetBalance`, `nomoSendAssets`, `eip1193:eth_call`) |
+| `message` | `string` | Return value, error message, or console output |
+
+In dev mode, the Nomo App also provides a built-in Debug Console accessible from the home screen with real-time log viewing, filtering by WebOn, log level filters, and search.
+
 # Authenticating WebOns
 
 For fullstack-WebOns, the Nomo App offers the following protocols:

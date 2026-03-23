@@ -74,6 +74,7 @@ export const nomo = {
   getClipboard: platform.nomoGetClipboard,
   setClipboard: platform.nomoSetClipboard,
   close: platform.nomoClose,
+  getDebugLogs: platform.nomoGetDebugLogs,
 
   injectNomoCSSVariables: theming.injectNomoCSSVariables,
   switchNomoTheme: theming.switchNomoTheme,

@@ -214,3 +214,27 @@ export async function nomoClose(args: {
 }): Promise<void> {
   await invokeNomoFunction("nomoClose", args);
 }
+
+export interface DebugLogEntry {
+  timestamp: string;
+  level: "call" | "info" | "warn" | "error";
+  source: string;
+  functionName: string | null;
+  message: string;
+}
+
+/**
+ * Returns all debug logs from the Nomo App, grouped by WebOn name.
+ * The first call activates logging — subsequent calls return accumulated logs.
+ * Works in both dev mode and production. Useful for debugging WebOn issues.
+ *
+ * @since 0.10.0
+ */
+export async function nomoGetDebugLogs(): Promise<{
+  logs: Record<string, DebugLogEntry[]>;
+}> {
+  if (isFallbackModeActive()) {
+    return { logs: {} };
+  }
+  return await invokeNomoFunction("nomoGetDebugLogs", {});
+}
